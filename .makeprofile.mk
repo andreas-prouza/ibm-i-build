@@ -1,8 +1,8 @@
 # Source directory
-SRC_DIR=/home/prouza/myapp
+SRC_DIR=/home/prouza/myproject
 
 # Include DIR (e.g. to search for /copy members in RPG sources)
-INC_DIR=/home/prouza/myapp
+INC_DIR=/home/prouza/myproject
 
 # Directory for compile logs
 LOG_DIR=$(SRC_DIR)/logs

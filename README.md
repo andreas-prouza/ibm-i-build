@@ -67,6 +67,38 @@ I split it up into 5 makefiles
 
     For all type of objects the build command is defined (RPG, CL, DSPF, SQL Tables, ...)<br/>
 
+## Run GNU Make
+
+### Build directories
+This Makefiles uses 2 directories in the IFS for the build output
+
+* build
+  
+    For each compiled/created object a dummy file will be created in the ```build```.<br/>
+    The creation timestamp of these files will be used to compare it with the last changed timestamp of the source of the object.<br/>
+    If the source is yunger then the compile process of the object will be started.<br/>
+    Otherwise it will be ignored.
+
+* logs
+
+    Contains compile output: spooled files and job log
+
+### Preperation
+
+If you don't want to build all from scretch but only build changed sources, you can use the following:
+```sh
+gmake init # to create all necessary directories for build
+gmake all --touch --directory=build --makefile=/home/prouza/myapp/makefile
+```
+This only creates the dummy build object files in the ```build``` directory.
+
+### Run build
+
+After all this is done you can use ```gmake``` to build you applications.
+```sh
+gmake all
+```
+
 
 ## Summary
 
@@ -93,6 +125,7 @@ I also use ```BASH``` as shell. It makes life much easier.
     gmake all
     ```
 
+
 # Integration in your IDE
 
 ## VSCode
@@ -108,6 +141,52 @@ After our project was set up successfully we can now focus on our favourite IDE.
 
 In both IDEs you can use external commands like ```rsync``` to automatically synchronise your code with your working directory in the IFS.<br/>
 You can set up both IDEs to do this automatically after saving.
+
+Therefore I am using 2 extensions:
+
+* Run on Save
+  
+    Automatically sync when source is saved.<br/>
+    So no need to do some extra sync.
+* Command Runner
+  
+    To trigger the sync manually (e.g. if I switch branch) using:<br/> 
+    STRG+P --> Select: Run Command --> Select: Sync project
+
+```.vscode/settings.json```
+
+```json
+{
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": ".*/myapp.*/.*$",
+                "isAsync": true,
+                "cmd": "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} /home/andreas/projects/myapp/ ibmi:/home/prouza/myapp/"
+            }
+        ]
+    },
+    "command-runner.terminal.name": "Sync project",
+    "command-runner.terminal.autoClear": true,
+    "command-runner.terminal.autoFocus": true,
+    "command-runner.commands": {
+        "Sync source to IBM i": "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} /home/andreas/projects/myapp/ ibmi:/home/prouza/myapp/",
+        "Sync logs back": "rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' ibmi:/home/prouza/myapp/ /home/andreas/projekte/projects/myapp/",
+    }
+}
+```
+
+In addition I also use the "Work with Actions" possibility in the ```Code for IBM i``` extension to build the application with gmake.<br/>
+In "Command to run" field I use:
+
+```sh
+/QOpenSys/pkgs/bin/bash -c "error=*EVENTF lib1=&CURLIB cd ~/myapp; gmake all"
+```
+The advantage of this is, that I get the compile information directly in my currently opened source.<br/>
+So if I am trouble shooting with a source change, this is my choise.<br/>
+As far as I know it even works if my opened source is a local one and not opened from IBM i IFS.
+
+I also use the "Work with Actions" to show a list of changed sources which would be compiled
 
 ## VSCode or RDi & GNU Make
 

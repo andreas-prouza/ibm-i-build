@@ -21,30 +21,34 @@ CHECK_ERROR=(((! $$(stat -c %s "$(CL_LOG_ERROR)") )) )
 PRINT_JOBLOG=$(EXC) $(CL_FLAG) "DSPJOBLOG OUTPUT(*PRINT)" $(CCSID_CONV) > $(LOG_DIR)/$@.joblog.log
 
 # Combine all to one
-POST_COMPILE=$(CL_LOG) && $(CHECK_ERROR) && $(TOUCH) || ($(PRINT_JOBLOG) && false)
+POST_COMPILE=$(CL_LOG) && $(CHECK_ERROR) || ($(PRINT_JOBLOG) && false)
+POST_COMPILE_FINAL=$(CL_LOG) && $(CHECK_ERROR) && $(TOUCH) || ($(PRINT_JOBLOG) && false)
 
 
 # Delete build file if exist
 #PRE_COMPILE=rm -f $(TGT_DIR)/$@; 
-SET_LIBL=$(patsubst %,liblist -a % > /dev/null;,$(LIBLIST_UNIQUE))
+SET_LIBL=$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST_UNIQUE))
 PRE_COMPILE=$(SET_LIBL)
 
 HASH_VALUE=$(shell echo "\#")
 
 
-CRTSRVPGM=  $(patsubst %,liblist -a %;,$(LIBLIST)) \
-	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) "CRTSRVPGM SRVPGM($(TGTLIB_PGM)/$*) MODULE($(TGTLIB_PGM)/$*) EXPORT(*ALL) " \
-		"ACTGRP($(ACTGRP)) BNDDIR($(BND_DIR)) REPLACE(*YES) TGTRLS($(TGTRLS)) STGMDL($(STGMDL))"  $(POST_COMPILE)
-
-ADDBNDDIR=	$(patsubst %,liblist -a %;,$(LIBLIST)) \
-	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) -q "ADDBNDDIRE BNDDIR($(TGTLIB_PGM)/$(BND_DIR)) OBJ($(TGTLIB_PGM)/$*)" $(POST_COMPILE)
-
-RMVBNDDIR=	$(patsubst %,liblist -a %;,$(LIBLIST)) \
-	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) -q "RMVBNDDIRE BNDDIR($(TGTLIB_PGM)/$(BND_DIR)) OBJ($(TGTLIB_PGM)/$*)" $(POST_COMPILE)
 
 
-# Soll immer als aller erstes laufen, damit die logs gelöscht werden
-run_first_of_all=init
+CRTSRVPGM_CMD= CRTSRVPGM SRVPGM($(TGTLIB_PGM)/$*) MODULE($(TGTLIB_PGM)/$*) EXPORT(*ALL) ACTGRP($(ACTGRP)) $(bnddirs) \
+			REPLACE(*YES) TGTRLS($(TGTRLS)) STGMDL($(STGMDL))
+CRTSRVPGM=  $(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
+	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(CRTSRVPGM_CMD)"  $(POST_COMPILE)
+
+ADDBNDDIR_CMD=ADDBNDDIRE BNDDIR($(frist_bnddir)) OBJ($(TGTLIB_PGM)/$*)
+ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
+	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) -q "$(ADDBNDDIR_CMD)" $(POST_COMPILE_FINAL)
+
+RMVBNDDIR_CMD=RMVBNDDIRE BNDDIR($(frist_bnddir)) OBJ($(TGTLIB_PGM)/$*)
+RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
+	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) -q "$(RMVBNDDIR_CMD)" $(POST_COMPILE)
+
+
 
 
 #########################################################
@@ -57,7 +61,15 @@ run_first_of_all=init
 #
 # touch ... will create a dummy file for each object (bnddir, module, program)
 #   Make uses these dummy files to compare the timestamp to the related sources
+########################################################
+# BNDDIR!!
+# The first binding directory of the dependency list is the target where the service programm will be added.
+# All additional binding directories will be used to create the service programm.
+# Example:
+#   mysrvpgm.sqlrpglemod:   mod1.rpglemod mybnddir.bnddir anotherdir.bnddir testdir.bnddir
+#   #### The service program will be added in MYBNDDIR.
 
+########################################################
 # Example:
 #   If object setuphip.cllemod needs to be build (because it's necessary for setuphip.pgm),
 #   it first checks if the source setuphip.clle has a different timstamp then the 
@@ -75,6 +87,18 @@ run_first_of_all=init
 #	$(info @ $@)
 #########################################################
 
+%.bnddir:
+#	-$(PRE_COMPILE) $(EXC)  $(CL_FLAG) -v "CRTBNDDIR ($(TGTLIB_PGM)/$*)" $(POST_COMPILE_FINAL)
+	touch $(TGT_DIR)/$@
+
+
+
+%.bnddirtarget:
+	touch $(TGT_DIR)/$@
+
+%.bnddirinclude:
+	touch $(TGT_DIR)/$@
+
 
 %.rpglecpy: %.rpgle
 	echo "Not necessary"
@@ -82,88 +106,177 @@ run_first_of_all=init
 
 
 
-%.sqlrpglemod: %.sqlrpgle $(run_first_of_all)
-	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) "CRTSQLRPGI OBJ($(TGTLIB_PGM)/$*) SRCSTMF('$(SQLRPGLE_SRCF)/$*.sqlrpgle') " \
-							"OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS($(TGTRLS)) DBGVIEW($(DBGVIEW)) REPLACE(*YES) " \
-							"COMPILEOPT(' INCDIR(''$(INC_DIR)'')')" $(POST_COMPILE)
+%.sqlrpglemod: %.sqlrpgle
 
-	$(RMVBNDDIR)
-	$(CRTSRVPGM)
-	$(ADDBNDDIR)
+    # Get list of all binding directories (*.bnddir)
+	$(eval bnddirs := $(filter %.bnddirinclude,$(notdir $^)))
+	$(eval frist_bnddir := $(basename $(filter %.bnddirtarget,$(notdir $^))))
+	$(eval bnddirs := $(patsubst %.bnddirinclude,*LIBL/%,$(bnddirs)))
+	$(eval bnddirs := $(bnddirs:%=BNDDIR($(bnddirs))))
 
-
-
-%.rpglemod: %.rpgle $(run_first_of_all)
-	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "CRTRPGMOD MODULE($(TGTLIB_PGM)/$*) SRCSTMF('$(RPGLE_SRCF)/$*.rpgle') " \
-							"DBGVIEW($(DBGVIEW)) REPLACE(*YES) INCDIR('$(INC_DIR)')"  $(POST_COMPILE)
-
-	$(RMVBNDDIR)
-	$(CRTSRVPGM)
-	$(ADDBNDDIR)
-
-
-
-%.cllemod: %.clle $(run_first_of_all)
-	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) "CRTCLMOD MODULE($(TGTLIB_PGM)/$*) SRCSTMF('$(CLLE_SRCF)/$*.clle') DBGVIEW($(DBGVIEW))"  $(POST_COMPILE)
-
-	$(RMVBNDDIR)
-	$(CRTSRVPGM)
-	$(ADDBNDDIR)
-	
-
-
-%.cllepgm: %.clle $(run_first_of_all)
-# Create command string
-	$(eval cmd :=CRTCLPGM PGM($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) MODULE($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) ENTMOD($(subst $(HASH_VALUE),\#,$*)) ACTGRP($(ACTGRP)) " \
-					"REPLACE(*YES) TGTRLS($(TGTRLS)) STGMDL($(STGMDL)) DETAIL(*BASIC) $(bnddirs))
+	$(eval cmd :=CRTSQLRPGI OBJ($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) SRCSTMF('$(SQLRPGLE_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqlrpgle') \
+							OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS($(TGTRLS)) DBGVIEW($(DBGVIEW)) REPLACE(*YES) \
+							COMPILEOPT('TGTCCSID($(TGTCCSID)) INCDIR(''$(INC_DIR)'')'))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 
 	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE)
-	$(eval COUNTER_CL=$(shell echo $$(($(COUNTER_CL)+1))))
 
 
 
-%.rpgpgm: %.rpgle $(run_first_of_all)
+	$(info crtcmd|$@|$(RMVBNDDIR_CMD))
+	$(RMVBNDDIR)
+	$(info crtcmd|$@|$(CRTSRVPGM_CMD))
+	$(CRTSRVPGM)
+	$(info crtcmd|$@|$(ADDBNDDIR_CMD))
+	$(ADDBNDDIR)
+	
+	$(eval COUNTER_SRVPGM=$(shell echo $$(($(COUNTER_SRVPGM)+1))))
+	$(eval BUILD_SRVPGM := $(BUILD_SRVPGM) $(subst $(HASH_VALUE),\#,$@))
 
-	$(eval cmd :=CRTBNDRPG PGM($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) SRCSTMF('$(RPGLE_SRCF)/$(subst $(HASH_VALUE),\#,$*).rpgle') \
-		DBGVIEW($(DBGVIEW)) TGTCCSID($(TGTCCSID)) REPLACE(*YES) TGTRLS($(TGTRLS)) INCDIR('$(INC_DIR)'))
+
+
+%.rpglemod: %.rpgle
+
+    # Get list of all binding directories (*.bnddir)
+	$(eval bnddirs := $(filter %.bnddirinclude,$(notdir $^)))
+	$(eval frist_bnddir := $(basename $(filter %.bnddirtarget,$(notdir $^))))
+	$(eval bnddirs := $(patsubst %.bnddirinclude,*LIBL/%,$(bnddirs)))
+	$(eval bnddirs := $(bnddirs:%=BNDDIR($(bnddirs))))
+
+	$(eval cmd :=CRTRPGMOD MODULE($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) SRCSTMF('$(RPGLE_SRCF)/$(subst $(HASH_VALUE),\#,$*).rpgle') \
+							DBGVIEW($(DBGVIEW)) REPLACE(*YES) TGTCCSID($(TGTCCSID)) INCDIR('$(INC_DIR)'))
 	$(info crtcmd|$@|$(cmd))
+	$(eval cmd:=$(subst \,,$(cmd)))
 
-	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)" $(POST_COMPILE)
-	$(eval COUNTER_RPG=$(shell echo $$(($(COUNTER_RPG)+1))))
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE)
+
+
+	$(info crtcmd|$@|$(RMVBNDDIR_CMD))
+	$(RMVBNDDIR)
+	$(info crtcmd|$@|$(CRTSRVPGM_CMD))
+	$(CRTSRVPGM)
+	$(info crtcmd|$@|$(ADDBNDDIR_CMD))
+	$(ADDBNDDIR)
+	
+	$(eval COUNTER_SRVPGM=$(shell echo $$(($(COUNTER_SRVPGM)+1))))
+	$(eval BUILD_SRVPGM := $(BUILD_SRVPGM) $(subst $(HASH_VALUE),\#,$@))
 
 
 
-%.sqlrpgpgm: %.sqlrpgle $(run_first_of_all)
-	$(info ^ $(notdir $^))
-	$(info * $*)
-	$(info % $%)
-	$(info ? $?)
-	$(info @ $@)
-# Get list of all modules (*.*LE ... CLLE, RPGLE, SQLRPGLE, etc.)
+%.cllemod: %.clle
+
+    # Get list of all binding directories (*.bnddir)
+	$(eval bnddirs := $(filter %.bnddirinclude,$(notdir $^)))
+	$(eval frist_bnddir := $(basename $(filter %.bnddirtarget,$(notdir $^))))
+	$(eval bnddirs := $(patsubst %.bnddirinclude,*LIBL/%,$(bnddirs)))
+	$(eval bnddirs := $(bnddirs:%=BNDDIR($(bnddirs))))
+
+	$(eval cmd :=CRTCLMOD MODULE($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) SRCSTMF('$(CLLE_SRCF)/$(subst $(HASH_VALUE),\#,$*).clle') DBGVIEW($(DBGVIEW)))
+	$(info crtcmd|$@|$(cmd))
+	$(eval cmd:=$(subst \,,$(cmd)))
+
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE)
+
+
+	$(info crtcmd|$@|$(RMVBNDDIR_CMD))
+	$(RMVBNDDIR)
+	$(info crtcmd|$@|$(CRTSRVPGM_CMD))
+	$(CRTSRVPGM)
+	$(info crtcmd|$@|$(ADDBNDDIR_CMD))
+	$(ADDBNDDIR)
+	
+	$(eval COUNTER_SRVPGM=$(shell echo $$(($(COUNTER_SRVPGM)+1))))
+	$(eval BUILD_SRVPGM := $(BUILD_SRVPGM) $(subst $(HASH_VALUE),\#,$@))
+
+
+
+%.cllepgm: %.clle
+
+    # Get list of all binding directories (*.bnddir)
+	$(eval bnddirs := $(filter %.bnddirinclude,$(notdir $^)))
+	$(eval frist_bnddir := $(basename $(filter %.bnddirtarget,$(notdir $^))))
+	$(eval bnddirs := $(patsubst %.bnddirinclude,*LIBL/%,$(bnddirs)))
+	$(eval bnddirs := $(bnddirs:%=BNDDIR($(bnddirs))))
+
+# Create command string
+	$(eval cmd :=CRTCLPGM PGM($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) MODULE($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) ENTMOD($(subst $(HASH_VALUE),\#,$*)) ACTGRP($(ACTGRP)) " \
+					"REPLACE(*YES) TGTRLS($(TGTRLS)) ACTGRP($(ACTGRP)) STGMDL($(STGMDL)) DETAIL(*BASIC))
+	$(info crtcmd|$@|$(cmd))
+	$(eval cmd:=$(subst \,,$(cmd)))
+
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
+	$(eval COUNTER_CL=$(shell echo $$(($(COUNTER_CL)+1))))
+	$(eval BUILD_CL := $(BUILD_CL) $(subst $(HASH_VALUE),\#,$@))
+
+
+
+%.rpglepgm: %.rpgle
+
+    # Get list of all modules (*.*LE ... CLLE, RPGLE, SQLRPGLE, etc.)
 	$(eval modules := $(filter %mod,$(notdir $^)))
-	$(eval modules := $(patsubst %,$(TGTLIB_PGM)/%,$(basename $(modules))))
-	$(eval modules := $(modules:%=$(modules)))
+	$(eval modules := $(patsubst %,(*LIBL/%),$(basename $(modules))))
+	$(eval modules := BNDSRVPGM($(modules)))
 
     # Get list of all binding directories (*.bnddir)
 	$(eval bnddirs := $(filter %.bnddir,$(notdir $^)))
+	$(eval frist_bnddir := $(basename $(filter %.bnddirtarget,$(notdir $^))))
 	$(eval bnddirs := $(patsubst %.bnddir,*LIBL/%,$(bnddirs)))
 	$(eval bnddirs := $(bnddirs:%=BNDDIR($(bnddirs))))
 
-	$(eval cmd :=CRTSQLRPGI OBJ($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) SRCSTMF('$(SQLRPGLE_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqlrpgle') \
-		OBJTYPE(*PGM) RPGPPOPT(*LVL2) TGTRLS($(TGTRLS)) DBGVIEW($(DBGVIEW)) REPLACE(*YES) \
-		COMPILEOPT('TGTCCSID($(TGTCCSID)) INCDIR(''$(INC_DIR)'')'))
+	$(eval cmd :=CRTRPGMOD MODULE($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) SRCSTMF('$(RPGLE_SRCF)/$(subst $(HASH_VALUE),\#,$*).rpgle') \
+							DBGVIEW($(DBGVIEW)) REPLACE(*YES) TGTCCSID($(TGTCCSID)) INCDIR('$(INC_DIR)'))
 	$(info crtcmd|$@|$(cmd))
+	$(eval cmd:=$(subst \,,$(cmd)))
 
-	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)" $(POST_COMPILE)
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE)
+
+    # Create command string
+	$(eval cmd := CRTPGM PGM($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) ACTGRP($(ACTGRP)) REPLACE(*YES) TGTRLS($(TGTRLS)) \
+					STGMDL($(STGMDL)) DETAIL(*BASIC) $(modules) $(bnddirs))
+	$(info crtcmd|$@|$(cmd))
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
+
 	$(eval COUNTER_RPG=$(shell echo $$(($(COUNTER_RPG)+1))))
+	$(eval BUILD_RPG := $(BUILD_RPG) $(subst $(HASH_VALUE),\#,$@))
+
+
+
+%.sqlrpglepgm: %.sqlrpgle
+
+    # Get list of all modules (*.*LE ... CLLE, RPGLE, SQLRPGLE, etc.)
+	$(eval modules := $(filter %mod,$(notdir $^)))
+	$(eval modules := $(patsubst %,(*LIBL/%),$(basename $(modules))))
+	$(eval modules := BNDSRVPGM($(modules)))
+
+    # Get list of all binding directories (*.bnddir)
+	$(eval bnddirs := $(filter %.bnddir,$(notdir $^)))
+	$(eval frist_bnddir := $(basename $(filter %.bnddirtarget,$(notdir $^))))
+	$(eval bnddirs := $(patsubst %.bnddir,*LIBL/%,$(bnddirs)))
+	$(eval bnddirs := $(bnddirs:%=BNDDIR($(bnddirs))))
+
+
+	$(eval cmd :=CRTSQLRPGI OBJ($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) SRCSTMF('$(SQLRPGLE_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqlrpgle') \
+							OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS($(TGTRLS)) DBGVIEW($(DBGVIEW)) REPLACE(*YES) \
+							COMPILEOPT('TGTCCSID($(TGTCCSID)) INCDIR(''$(INC_DIR)'')'))
+	$(info crtcmd|$@|$(cmd))
+	$(eval cmd:=$(subst \,,$(cmd)))
+
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE)
+
+    # Create command string
+	$(eval cmd := CRTPGM PGM($(TGTLIB_PGM)/$(subst $(HASH_VALUE),\#,$*)) ACTGRP($(ACTGRP)) REPLACE(*YES) TGTRLS($(TGTRLS)) STGMDL($(STGMDL)) DETAIL(*BASIC) $(modules) $(bnddirs))
+	$(info crtcmd|$@|$(cmd))
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
+
+	$(eval COUNTER_RPG=$(shell echo $$(($(COUNTER_RPG)+1))))
+	$(eval BUILD_RPG := $(BUILD_RPG) $(subst $(HASH_VALUE),\#,$@))
 
 
 
 
 # Create and change physical file
-%.pfobj: %.pf $(run_first_of_all)
+%.pfobj: %.pf
 	$(eval cpystmf = $(EXC) $(CL_FLAG) "CRTSRCPF FILE(QTEMP/QSRC) RCDLEN(112)"; \
 		$(EXC) $(CL_FLAG) "CPYFRMSTMF FROMSTMF('$(PF_SRCF)/$*.pf') TOMBR('/QSYS.lib/QTEMP.lib/QSRC.file/$*.mbr') MBROPT(*replace)";)
 	$(info crtcmd|$@|$(cpystmf))
@@ -173,14 +286,15 @@ run_first_of_all=init
 		$(EXC) $(CL_FLAG) -v "CHGPF FILE($(TGTLIB_DBF)/$(subst $(HASH_VALUE),\#,$*)) SRCFILE(QTEMP/QSRC) SRCMBR($(subst $(HASH_VALUE),\#,$*))")
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
-	$(cpystmf) $(PRE_COMPILE) $(cmd)  $(POST_COMPILE)
+	$(cpystmf) $(PRE_COMPILE) $(cmd)  $(POST_COMPILE_FINAL)
 
 	$(eval COUNTER_DB=$(shell echo $$(($(COUNTER_DB)+1))))
+	$(eval BUILD_DB := $(BUILD_DB) $(subst $(HASH_VALUE),\#,$@))
 
 
 
 # Delete and create logical file
-%.lfobj: %.lf $(run_first_of_all)
+%.lfobj: %.lf
 	$(eval cpystmf = cl "CRTSRCPF FILE(QTEMP/QSRC) RCDLEN(112)"; \
 	cl "CPYFRMSTMF FROMSTMF('$(LF_SRCF)/$*.lf') TOMBR('/QSYS.lib/QTEMP.lib/QSRC.file/$*.mbr') MBROPT(*replace)";)
 
@@ -193,60 +307,67 @@ run_first_of_all=init
 	$(eval cmd :=CRTLF FILE($(TGTLIB_DBF)/$(subst $(HASH_VALUE),\#,$*)) SRCFILE(QTEMP/QSRC) SRCMBR($(subst $(HASH_VALUE),\#,$*)))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
-	$(cpystmf) $(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE)
+	$(cpystmf) $(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
 	$(eval COUNTER_DB=$(shell echo $$(($(COUNTER_DB)+1))))
+	$(eval BUILD_DB := $(BUILD_DB) $(subst $(HASH_VALUE),\#,$@))
 
 
 
 # SQL Table
-%.sqltableobj: %.sqltable $(run_first_of_all)
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqltable') COMMIT(*NONE) ERRLVL(21))
+%.sqltableobj: %.sqltable
+	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqltable') DFTRDBCOL($(TGTLIB_DBF)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
-	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE)
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
 	$(eval COUNTER_DB=$(shell echo $$(($(COUNTER_DB)+1))))
+	$(eval BUILD_DB := $(BUILD_DB) $(subst $(HASH_VALUE),\#,$@))
 
 
 # SQL View
-%.sqlviewobj: %.sqlview $(run_first_of_all)
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqlview') COMMIT(*NONE) ERRLVL(21))
+%.sqlviewobj: %.sqlview
+	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqlview') DFTRDBCOL($(TGTLIB_DBF)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
-	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE)
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
 	$(eval COUNTER_DB=$(shell echo $$(($(COUNTER_DB)+1))))
+	$(eval BUILD_DB := $(BUILD_DB) $(subst $(HASH_VALUE),\#,$@))
 
 
 # SQL Index
-%.sqlindexobj: %.sqlindex $(run_first_of_all)
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqlindex') COMMIT(*NONE) ERRLVL(21))
+%.sqlindexobj: %.sqlindex
+	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqlindex') DFTRDBCOL($(TGTLIB_DBF)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
-	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE)
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
 	$(eval COUNTER_DB=$(shell echo $$(($(COUNTER_DB)+1))))
+	$(eval BUILD_DB := $(BUILD_DB) $(subst $(HASH_VALUE),\#,$@))
 
 
 # SQL Function
-%.sqlfuncobj: %.sqlfunc $(run_first_of_all)
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqlfunc') COMMIT(*NONE) ERRLVL(21))
+%.sqlfuncobj: %.sqlfunc
+	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqlfunc') DFTRDBCOL($(TGTLIB_DBF)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
-	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE)
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
 	$(eval COUNTER_DB=$(shell echo $$(($(COUNTER_DB)+1))))
+	$(eval BUILD_DB := $(BUILD_DB) $(subst $(HASH_VALUE),\#,$@))
 
 
 # SQL Procedure
-%.sqlprocobj: %.sqlproc $(run_first_of_all)
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqlproc') COMMIT(*NONE) ERRLVL(21))
+%.sqlprocobj: %.sqlproc
+	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqlproc') DFTRDBCOL($(TGTLIB_DBF)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
-	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE)
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
 	$(eval COUNTER_DB=$(shell echo $$(($(COUNTER_DB)+1))))
+	$(eval BUILD_DB := $(BUILD_DB) $(subst $(HASH_VALUE),\#,$@))
 
 
 # SQL Trigger
-%.sqltrigobj: %.sqltrig $(run_first_of_all)
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqltrig') COMMIT(*NONE) ERRLVL(21))
+%.sqltrigobj: %.sqltrig
+	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/$(subst $(HASH_VALUE),\#,$*).sqltrig') DFTRDBCOL($(TGTLIB_DBF)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
-	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE)
+	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
 	$(eval COUNTER_DB=$(shell echo $$(($(COUNTER_DB)+1))))
+	$(eval BUILD_DB := $(BUILD_DB) $(subst $(HASH_VALUE),\#,$@))

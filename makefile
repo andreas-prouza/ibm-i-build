@@ -6,28 +6,25 @@
 #########################################################
 # our configuration
 #########################################################
-SHELL=/QOpenSys/pkgs/bin/bash
-#SHELL=/QOpenSys/usr/bin/qsh
 
 # Source directory (!full path!)
-SRC_DIR=~/myapp
+SRC_DIR=/home/prouza/myproject
 
 # Include DIR (e.g. to search for /copy members in RPG sources) (!full path!)
-INC_DIR=~/myapp
+INC_DIR=/home/prouza/myproject
 
-MAKEFILE_DIR=$(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
 
 # Our Default Binding Directory
 BND_DIR=prouzadir
 
 # Target libraries
-TGTLIB_PGM=PROUZAPGM
-TGTLIB_DBF=PROUZADB
+TGTLIB_PGM=PROUZALIB
+TGTLIB_DBF=PROUZALIB
 
 ACTGRP=PROUZAGRP
 STGMDL=*SNGLVL
 
-# You can also set other libs if necessary
+# You can also add other libs if necessary (separated by blanks)
 LIBLIST=$(TGTLIB_PGM) $(TGTLIB_DBF)
 
 DBGVIEW=*SOURCE
@@ -52,17 +49,22 @@ SQL_SRCF=$(SRC_DIR)/qsqlsrc
 # Import related makefiles
 #########################################################
 
+MAKEFILE_DIR=$(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
+SHELL=/QOpenSys/pkgs/bin/bash
+#SHELL=/QOpenSys/usr/bin/qsh
+
+
 # Set environment setting
-include $(MAKEFILE_DIR)/make_env.mk
+include $(MAKEFILE_DIR)/env.mk
 
 # Override settings individually
 -include $(MAKEFILE_DIR)/.makeprofile.mk
 
 # Object list and their dependencies
-include $(MAKEFILE_DIR)/make_object_list.mk
+include $(MAKEFILE_DIR)/object_list.mk
 
 # Compile rules for each source type
-include $(MAKEFILE_DIR)/make_compile_rules.mk
+include $(MAKEFILE_DIR)/compile_rules.mk
 
 
 LIBLIST_UNIQUE=$(call uniq,$(LIBLIST))
@@ -70,7 +72,14 @@ LIBLIST_UNIQUE=$(call uniq,$(LIBLIST))
 COUNTER_CL=0
 COUNTER_RPG=0
 COUNTER_DSPF=0
+COUNTER_SRVPGM=0
 COUNTER_DB=0
+
+BUILD_RPG=
+BUILD_CL=
+BUILD_DSPF=
+BUILD_SRVPGM=
+BUILD_DB=
 
 # Default rule (because it's the first one)
 # Help output
@@ -92,10 +101,14 @@ help:
 # When {init} and all objects are completed:
 .PHONY: all
 all: init $(OBJS)
-	-cat $(LOG_DIR)/*.error.log 2> /dev/null
-	$(info ===============================================================)
-	$(info Build: RPG($(COUNTER_RPG)), CL($(COUNTER_CL)), DB($(COUNTER_DB)))
-	$(info ===============================================================)
+	-cat $(LOG_DIR)/*.error.log 2> /dev/null | true
+	$(info crtcmd|summary ===============================================================)
+	$(info crtcmd|summary Build RPG: $(COUNTER_RPG) $(BUILD_RPG))
+	$(info crtcmd|summary Build CL: $(COUNTER_CL) $(BUILD_CL))
+	$(info crtcmd|summary Build DSPF: $(COUNTER_DSPF) $(BUILD_DSPF))
+	$(info crtcmd|summary Build SRVPGM: $(COUNTER_SRVPGM) $(BUILD_SRVPGM))
+	$(info crtcmd|summary Build DB: $(COUNTER_DB) $(BUILD_DB))
+	$(info crtcmd|summary ===============================================================)
 	echo "Compile complete"
 
 

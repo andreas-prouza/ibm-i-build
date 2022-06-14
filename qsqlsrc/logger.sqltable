@@ -1,0 +1,12 @@
+Create or replace table logger (
+      id        bigint generated always as identity (cycle),
+      loglevel  char(10),
+      text      varchar(1000),
+      extref    varchar(200),
+      program   varchar(200) allocate (10),
+      chgtime   timestamp for each row on update as row change timestamp
+                not null,
+      job       varchar(28) generated always as (qsys2.job_name),
+      primary key (id)
+     );
+
