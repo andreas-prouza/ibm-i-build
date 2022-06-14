@@ -88,7 +88,7 @@ This Makefiles uses 2 directories in the IFS for the build output
 If you don't want to build all from scretch but only build changed sources, you can use the following:
 ```sh
 gmake init # to create all necessary directories for build
-gmake all --touch --directory=build --makefile=/home/prouza/myapp/makefile
+gmake all --touch --directory=build --makefile=/home/prouza/myproject/makefile
 ```
 This only creates the dummy build object files in the ```build``` directory.
 
@@ -103,9 +103,9 @@ gmake all
 ## Summary
 
 1. Install GNU Make
-2. Create a project directory in you working IFS path (e.g. /home/prouza/myapp)
+2. Create a project directory in you working IFS path (e.g. /home/prouza/myproject)
 3. Copy all sources into this directory.<br/>
-All source files are subdirectories (e.g. /home/prouza/myapp/qrpglesrc/test.rpgle)
+All source files are subdirectories (e.g. /home/prouza/myproject/qrpglesrc/logtest.rpgle)
 4. Copy all make-config-files
 5. Modify the makefiles
    * makefile
@@ -117,7 +117,7 @@ I also use ```BASH``` as shell. It makes life much easier.
 8. Go into your directory
 
     ```sh
-    cd /home/prouza/myapp
+    cd /home/prouza/myproject
     ```
 9.  Run the build
 
@@ -135,7 +135,7 @@ With this you can work with your sources directly in the IFS of your IBM i.
 
 If you use GIT I recommend to install the ```Git Graph``` extension.
 
-## VSCode or RDi & RSYNC
+## VSCode & RSYNC
 
 After our project was set up successfully we can now focus on our favourite IDE.
 
@@ -151,28 +151,34 @@ Therefore I am using 2 extensions:
 * Command Runner
   
     To trigger the sync manually (e.g. if I switch branch) using:<br/> 
-    STRG+P --> Select: Run Command --> Select: Sync project
+    STRG+P --> Select: Run Command --> Select: Run Build (summary output)
 
-```.vscode/settings.json```
+You can just use the ```.vscode/settings.json``` in this project
 
 ```json
 {
+    "makefile.extensionOutputFolder": "./.vscode",
+
     "emeraldwalk.runonsave": {
         "commands": [
             {
-                "match": ".*/myapp.*/.*$",
+                "match": ".*/ibm-i-build.*/.*$",
                 "isAsync": true,
-                "cmd": "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} /home/andreas/projects/myapp/ ibmi:/home/prouza/myapp/"
+                "cmd": "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} ${workspaceFolder}/ academy:/home/prouza/myproject/"
             }
         ]
     },
+
     "command-runner.terminal.name": "Sync project",
     "command-runner.terminal.autoClear": true,
     "command-runner.terminal.autoFocus": true,
     "command-runner.commands": {
-        "Sync source to IBM i": "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} /home/andreas/projects/myapp/ ibmi:/home/prouza/myapp/",
-        "Sync logs back": "rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' ibmi:/home/prouza/myapp/ /home/andreas/projekte/projects/myapp/",
+        "Sync source to IBM i": "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'}  ${workspaceFolder} academy:/home/prouza/myproject/",
+        "Sync logs back": "rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' academy:/home/prouza/myproject/  ${workspaceFolder}",
+        "Run Build (detailed output)": "rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' academy:/home/prouza/myproject/  ${workspaceFolder}; ssh academy \"source .profile; cd /home/prouza/myproject; gmake all | grep crtcmd | cut -d '|' --output-delimiter ': ' -f 2,3\"; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --delete --include={'logs/***','build/***'} --exclude='*' academy:/home/prouza/myproject/  ${workspaceFolder}",
+        "Run Build (summary output)": "rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' academy:/home/prouza/myproject/  ${workspaceFolder}; ssh academy \"source .profile; cd /home/prouza/myproject; gmake all | grep crtcmd\\|summary | cut -d '|' --output-delimiter ': ' -f 2\"; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --delete --include={'logs/***','build/***'} --exclude='*' academy:/home/prouza/myproject/  ${workspaceFolder}",
     }
+
 }
 ```
 
@@ -180,7 +186,7 @@ In addition I also use the "Work with Actions" possibility in the ```Code for IB
 In "Command to run" field I use:
 
 ```sh
-/QOpenSys/pkgs/bin/bash -c "error=*EVENTF lib1=&CURLIB cd ~/myapp; gmake all"
+/QOpenSys/pkgs/bin/bash -c "error=*EVENTF lib1=&CURLIB cd ~/myproject; gmake all"
 ```
 The advantage of this is, that I get the compile information directly in my currently opened source.<br/>
 So if I am trouble shooting with a source change, this is my choise.<br/>
@@ -188,7 +194,13 @@ As far as I know it even works if my opened source is a local one and not opened
 
 I also use the "Work with Actions" to show a list of changed sources which would be compiled
 
+## RDi & RSYNC
+Like in vscode you can also define in RDi (Menu: Run --> External Tools --> External Tools Configurations --> create a new "Program" konfiguration).
+
+Detailed information will follow.
+
 ## VSCode or RDi & GNU Make
 
 Also in both IDEs you can define own build commands where I put the ```gmake all``` command in it.
+
 
