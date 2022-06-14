@@ -153,34 +153,7 @@ Therefore I am using 2 extensions:
     To trigger the sync manually (e.g. if I switch branch) using:<br/> 
     STRG+P --> Select: Run Command --> Select: Run Build (summary output)
 
-You can just use the ```.vscode/settings.json``` in this project
-
-```json
-{
-    "makefile.extensionOutputFolder": "./.vscode",
-
-    "emeraldwalk.runonsave": {
-        "commands": [
-            {
-                "match": ".*/ibm-i-build.*/.*$",
-                "isAsync": true,
-                "cmd": "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} ${workspaceFolder}/ academy:/home/prouza/myproject/"
-            }
-        ]
-    },
-
-    "command-runner.terminal.name": "Sync project",
-    "command-runner.terminal.autoClear": true,
-    "command-runner.terminal.autoFocus": true,
-    "command-runner.commands": {
-        "Sync source to IBM i": "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'}  ${workspaceFolder} academy:/home/prouza/myproject/",
-        "Sync logs back": "rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' academy:/home/prouza/myproject/  ${workspaceFolder}",
-        "Run Build (detailed output)": "rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' academy:/home/prouza/myproject/  ${workspaceFolder}; ssh academy \"source .profile; cd /home/prouza/myproject; gmake all | grep crtcmd | cut -d '|' --output-delimiter ': ' -f 2,3\"; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --delete --include={'logs/***','build/***'} --exclude='*' academy:/home/prouza/myproject/  ${workspaceFolder}",
-        "Run Build (summary output)": "rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' academy:/home/prouza/myproject/  ${workspaceFolder}; ssh academy \"source .profile; cd /home/prouza/myproject; gmake all | grep crtcmd\\|summary | cut -d '|' --output-delimiter ': ' -f 2\"; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --delete --include={'logs/***','build/***'} --exclude='*' academy:/home/prouza/myproject/  ${workspaceFolder}",
-    }
-
-}
-```
+You can just use the ```.vscode/settings.json``` from this project.
 
 In addition I also use the "Work with Actions" possibility in the ```Code for IBM i``` extension to build the application with gmake.<br/>
 In "Command to run" field I use:
