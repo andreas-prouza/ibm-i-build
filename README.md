@@ -17,6 +17,61 @@ For all IBM i builds I use 2 components:
   
   To synchronise your sources to the build server (IBM i)
 
+# SSH
+Sicne we use the SSH protocoll to communicate with IBM i we need:
+* SSH Deamon is up and running
+
+    ```STRTCPSVR *SSHD```
+
+* The open source package manager (YUM) is installed on IBM i
+
+    You can do this in ACS
+
+* Recommended: BASH is installed and set to your profile
+    
+    In shell:
+    ```sh
+    yum install bash
+    ```
+    SQL:
+    ```sql
+    CALL QSYS2.SET_PASE_SHELL_INFO('*CURRENT', '/QOpenSys/pkgs/bin/bash');
+    ```
+
+* Define ```~/.profile``` file:
+  
+    ```sh
+    export PATH="/QOpenSys/pkgs/bin:$PATH"
+    ```
+    This is neseccary to have the correct ```PATH``` in the IBM i shell.
+
+* Use key authentication
+  
+    ```sh
+    ssh-keygen -b 4096
+    ssh-copy-id -i ~/.ssh/academy_rsa prouza@academy
+    ```
+    On your local machine create the ```~/.ssh/config``` file:
+    ```
+    Host academy
+    HostName academy
+    IdentitiesOnly=yes
+    User prouza
+    IdentityFile ~/.ssh/academy_rsa
+    ```
+
+    Now you should be able to login without a prompt: 
+    ```ssh
+    [andreas@Andreas-Linux ~]$ ssh academy 
+    -bash-5.1$ 
+    ```
+
+  * Most problems here are
+    * Home directory does not exist
+    * Home directory does not match with user profile name
+    * Owner of home directory is someone else
+    * Permission of the home directory is not strict enough
+
 # GNU Make
 
 ## Installation
@@ -152,7 +207,12 @@ In both IDEs you can use external commands like ```rsync``` to automatically syn
 You can set up in both IDEs (RDi and VSCode) to do this automatically after saving your changes in the source.
 
 ### Prerequisites
-You need to install ```rsync```.
+You need to install ```rsync``` on your local machine and on IBM i.
+
+#### IBM i
+```sh
+yum install rsync
+```
 
 #### Linux
 On Linux this is very easy. It only depends which package manager you are using:
@@ -204,7 +264,7 @@ Now the command will be issued:
 2. Run build
 3. Sync back the logs
 
-You may get asked for your password.</br/>
+You may get asked for your password.<br/>
 I use key authentication, so I will get signed in automatically.<br/>
 (This is btw the most secure way to connect to servers. Some admins only allow key authentication.)
 
