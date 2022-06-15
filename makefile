@@ -14,9 +14,6 @@ SRC_DIR=/home/prouza/myproject
 INC_DIR=/home/prouza/myproject
 
 
-# Our Default Binding Directory
-BND_DIR=prouzadir
-
 # Target libraries
 TGTLIB_PGM=PROUZALIB
 TGTLIB_DBF=PROUZALIB
@@ -29,7 +26,7 @@ LIBLIST=$(TGTLIB_PGM) $(TGTLIB_DBF)
 
 DBGVIEW=*SOURCE
 TGTRLS=*CURRENT
-TGTCCSID=1141
+TGTCCSID=*JOB
 
 # Directory for compile logs
 LOG_DIR=$(SRC_DIR)/logs

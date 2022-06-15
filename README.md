@@ -42,7 +42,7 @@ I split it up into 5 makefiles
 
 1. makefile
 
-    The basic config file to start the build
+    The basic config file to start the build (source location in IFS, target lib)
 
 2. env.mk
 
@@ -58,14 +58,17 @@ I split it up into 5 makefiles
 
 4. objecte_list.mk
 
-    A list of all objects and their dependencies<br/>
-    First all objects are stored in a variable with a blank as separator
+    A list of all objects and their dependencies.<br/>
+    First all objects are stored in a variable with a blank as separator.
 
-    Then all objects with dependencies are listed including all dependiencies which ```make``` should consider
+    Then all objects with dependencies are listed including all dependiencies which ```make``` should consider.<br/>
+    You can find a detailed description in this file.
 
 5. make_compile_rules.mk
 
-    For all type of objects the build command is defined (RPG, CL, DSPF, SQL Tables, ...)<br/>
+    For all type of objects you want to create the build command needs to be defined here (RPG, CL, DSPF, SQL Tables, ...)<br/>
+    I already set up the compile rules, so it should be able to handle most of your (ILE) builds.<br/>
+    If you also want to build objects like menues or printer files, you can simple add the command at the end of this file.
 
 ## Run GNU Make
 
@@ -102,15 +105,21 @@ gmake all
 
 ## Summary
 
-1. Install GNU Make
+1. Install GNU Make on IBM i
 2. Create a project directory in you working IFS path (e.g. /home/prouza/myproject)
 3. Copy all sources into this directory.<br/>
 All source files are subdirectories (e.g. /home/prouza/myproject/qrpglesrc/logtest.rpgle)
 4. Copy all make-config-files
-5. Modify the makefiles
+5. Modify the makefiles to your own settings
    * makefile
+     * IFS Path
+     * Target lib (PGM & DB)
+     * ACTGRP
+     * LIBLIST
    * object_list.mk
+     * If you want to add additional objects to be build
    * .makeprofile.mk
+     * If you want to override some settings for your own environment
 6. Open a terminal (QSH, Putty, ...)
 7. Make sure you have the ```$PATH``` variable set correct (```/QOpenSys/pkgs/bin``` needs to be in the list)<br/>
 I also use ```BASH``` as shell. It makes life much easier.
@@ -153,8 +162,87 @@ Therefore I am using 2 extensions:
     To trigger the sync manually (e.g. if I switch branch) using:<br/> 
     STRG+P --> Select: Run Command --> Select: Run Build (summary output)
 
-You can just use the ```.vscode/settings.json``` from this project.
+You can just use the ```.vscode/settings.json``` from this project.<br/>
+Change the hostname and IFS location where the project is located (local and IBM i)
 
+### Let's run the build
+Use STRG+P. When you start typing "run command" you should get correct list to select the "Run Command" extension.
+![run-command](docs/assets/run-command.png)
+
+Now you will get a list of commands, which are defined in the ```.vscode/settings.json```.
+![build-command](docs/assets/build-cmd.png)
+
+Now the command will be issued:
+1. Sync sources to the IBM i
+2. Run build
+3. Sync back the logs
+
+You may get asked for your password.</br/>
+I use key authentication, so I will get signed in automatically.<br/>
+(This is btw the most secure way to connect to servers. Some admins only allow key authentication.)
+
+```sh
+[andreas@Andreas-Linux ibm-i-build]$ rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'}  /home/andreas/projekte/common/ibm-i-build/ prouza@academy:/home/prouza/myproject/; ssh prouza@academy "source .profile; cd /home/prouza/myproject; gmake all | grep crtcmd\|summary | cut -d '|' --output-delimiter ': ' -f 2"; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' prouza@academy:/home/prouza/myproject/  /home/andreas/projekte/common/ibm-i-build 
+sending incremental file list
+
+sent 737 bytes  received 17 bytes  502,67 bytes/sec
+total size is 138.482  speedup is 183,66
+summary ===============================================================
+summary Build RPG: 2 testlog.rpglepgm testlog2.sqlrpglepgm
+summary Build CL: 0 
+summary Build DSPF: 0 
+summary Build SRVPGM: 2 loggerm.sqlrpglemod testmod.rpglemod
+summary Build DB: 1 logger.sqltableobj
+summary ===============================================================
+receiving incremental file list
+build/
+build/logger.sqltableobj
+build/loggerm.sqlrpglemod
+build/prouzadir.bnddir
+build/prouzadir.bnddirinclude
+build/prouzadir.bnddirtarget
+build/testlog.rpglepgm
+build/testlog2.sqlrpglepgm
+build/testmod.rpglemod
+logs/
+logs/logger.sqltableobj.error.log
+logs/logger.sqltableobj.log
+logs/loggerm.sqlrpglemod.error.log
+logs/loggerm.sqlrpglemod.log
+logs/testlog.rpglepgm.error.log
+logs/testlog.rpglepgm.log
+logs/testlog2.sqlrpglepgm.error.log
+logs/testlog2.sqlrpglepgm.log
+logs/testmod.rpglemod.error.log
+logs/testmod.rpglemod.log
+
+sent 2.636 bytes  received 11.154 bytes  9.193,33 bytes/sec
+total size is 258.516  speedup is 18,75
+[andreas@Andreas-Linux ibm-i-build]$ 
+```
+
+You should have a logs directory containing the spools of the compiled object and the joblog for each object.
+
+![logs](docs/assets/logs.png)
+
+### Sync automatically after code changing
+Since we also have configured the ```Run On Save``` extension, everytime a source get saved, the project folder will be synced with the IBM i.
+
+For example: I changed a line of code in the ```testlog2.sqlrpgle``` source.<br/>
+In the ```Output``` view of vscode you can see the output:
+
+```sh
+Running on save commands...
+*** cmd start: rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} /home/andreas/projekte/common/ibm-i-build/ prouza@academy:/home/prouza/myproject/
+Run on Save done.
+sending incremental file list
+qrpglesrc/testlog2.sqlrpgle
+
+sent 1.201 bytes  received 46 bytes  831,33 bytes/sec
+total size is 158.956  speedup is 127,47
+```
+
+### Using ```Code for IBM i```
 In addition I also use the "Work with Actions" possibility in the ```Code for IBM i``` extension to build the application with gmake.<br/>
 In "Command to run" field I use:
 
