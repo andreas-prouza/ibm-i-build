@@ -149,7 +149,33 @@ If you use GIT I recommend to install the ```Git Graph``` extension.
 After our project was set up successfully we can now focus on our favourite IDE.
 
 In both IDEs you can use external commands like ```rsync``` to automatically synchronise your code with your working directory in the IFS.<br/>
-You can set up both IDEs to do this automatically after saving.
+You can set up in both IDEs (RDi and VSCode) to do this automatically after saving your changes in the source.
+
+### Prerequisites
+You need to install ```rsync```.
+
+#### Linux
+On Linux this is very easy. It only depends which package manager you are using:
+```sh
+yum install rsync
+```
+```sh
+apt-get install rsync
+```
+```sh
+pacman -S rsync
+```
+
+#### Windows
+```rsync``` is a Unix based utility. So you can't just easily install it on Windows.
+
+There exists different ways to get it anyway on your machine.
+* Install ```Git for Windows```
+* Install ```Cygwin```
+
+You need to be sure the location of ```rsync``` is in your ```PATH``` variable.
+
+### VSCode extensions
 
 Therefore I am using 2 extensions:
 
@@ -163,7 +189,8 @@ Therefore I am using 2 extensions:
     STRG+P --> Select: Run Command --> Select: Run Build (summary output)
 
 You can just use the ```.vscode/settings.json``` from this project.<br/>
-Change the hostname and IFS location where the project is located (local and IBM i)
+Don't forget to change hostname and user.
+
 
 ### Let's run the build
 Use STRG+P. When you start typing "run command" you should get correct list to select the "Run Command" extension.
