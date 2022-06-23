@@ -49,9 +49,11 @@ Sicne we use the SSH protocoll to communicate with IBM i we need:
   
     ```sh
     ssh-keygen -b 4096
+    # Enter your key name full qualified (e.g. /home/prouza/.ssh/academy_rsa)
+    # Then you will be asked for a password. If you set one, you will be asked for it on each Login. If not you will be logged in without any prompt.
     ssh-copy-id -i ~/.ssh/academy_rsa prouza@academy
     ```
-    On your local machine create the ```~/.ssh/config``` file:
+    On your local machine create the ```~/.ssh/config``` file (and directory) if not exist and add the following:
     ```
     Host academy
     HostName academy

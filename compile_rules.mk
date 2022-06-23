@@ -1,8 +1,9 @@
 # No flags necessary
 EXC=cl
-#CL_FLAG=-p
+#CL_FLAG=-v # Print command
 
-#CCSID_CONV= | iconv -f IBM-1252 -t utf-8
+# Only if you need to convert the output to UTF-8 ... problems with special characters on output
+#CCSID_CONV= | iconv -f IBM-1252 -t utf-8 
 
 CL_LOG_ERROR=$(LOG_DIR)/$@.error.log
 
@@ -18,11 +19,11 @@ TOUCH=touch $(TGT_DIR)/$@
 # 	Not empty:	Error
 CHECK_ERROR=(((! $$(stat -c %s "$(CL_LOG_ERROR)") )) )
 
-PRINT_JOBLOG=$(EXC) $(CL_FLAG) "DSPJOBLOG OUTPUT(*PRINT)" $(CCSID_CONV) > $(LOG_DIR)/$@.joblog.log
+PRINT_JOBLOG=$(EXC) $(CL_FLAG) "DSPJOBLOG" $(CCSID_CONV) > $(LOG_DIR)/$@.joblog.log
 
 # Combine all to one
-POST_COMPILE=$(CL_LOG) && $(CHECK_ERROR) || ($(PRINT_JOBLOG) && false)
-POST_COMPILE_FINAL=$(CL_LOG) && $(CHECK_ERROR) && $(TOUCH) || ($(PRINT_JOBLOG) && false)
+POST_COMPILE=$(CL_LOG); $(PRINT_JOBLOG); $(CHECK_ERROR)
+POST_COMPILE_FINAL=$(CL_LOG); $(PRINT_JOBLOG); $(CHECK_ERROR) && $(TOUCH)
 
 
 # Delete build file if exist
