@@ -51,9 +51,27 @@ Sicne we use the SSH protocoll to communicate with IBM i we need:
     ssh-keygen -b 4096
     # Enter your key name full qualified (e.g. /home/prouza/.ssh/academy_rsa)
     # Then you will be asked for a password. If you set one, you will be asked for it on each Login. If not you will be logged in without any prompt.
-    ssh-copy-id -i ~/.ssh/academy_rsa prouza@academy
     ```
+
+    * Linux
+  
+        On Linux you can simple use ```ssh-copy-id``` to copy the public key to your remote system.
+        ```sh
+        ssh-copy-id -i ~/.ssh/academy_rsa prouza@academy
+        ```
+
+    * Windows
+    
+        Copy the content of the generated public key (e.g. ```academy_rsa.pub```) on the remote system to the file ```~/.ssh/authorized_keys```. (You also need to create the directory if not exist.)<br/>
+        Be aware that the directory ```.ssh``` and the file ```authorized_keys``` are not allowed to be readable by anyone except of you.
+
+        ```sh
+        chmod 600 .ssh/authorized_keys
+        ```
+
+
     On your local machine create the ```~/.ssh/config``` file (and directory) if not exist and add the following:
+
     ```
     Host academy
     HostName academy
