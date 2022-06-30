@@ -228,14 +228,36 @@ apt-get install rsync
 pacman -S rsync
 ```
 
+Rename the ```settings.json - for linux``` to ```settings.json``` to get the Linux settings.
+
 #### Windows
 ```rsync``` is a Unix based utility. So you can't just easily install it on Windows.
 
-There exists different ways to get it anyway on your machine.
-* Install ```Git for Windows```
-* Install ```Cygwin```
+I did this job by using WSL (Windows Subsystem for Linux).
 
-You need to be sure the location of ```rsync``` is in your ```PATH``` variable.
+1. Open the "Turn Windows features on or off"
+2. Choose "Windows Subsystem for Linux" and select "OK"
+   
+    ![build-command](docs/assets/windows-features.png)
+
+3. Open the Microsoft Store and search for "Linux Ubuntu" and install it
+   
+    ![build-command](docs/assets/install-ubuntu.png)
+
+4. After installing the Linux distribution "Launch" it.
+   
+   The first time you may will be asked to set up a user/password for this environment.
+
+
+You can also do this via PowerShell. You will find a good documentation in the internet for this process if you want to do it in that way.
+
+After this is done you can use ```rsync``` using WSL in the Windows CMD:
+```sh
+wsl rsync ...
+```
+
+Rename the ```settings.json - for windows``` to ```settings.json``` to get the Windows settings.
+
 
 ### VSCode extensions
 
@@ -256,9 +278,11 @@ Don't forget to change hostname and user.
 
 ### Let's run the build
 Use STRG+P. When you start typing "run command" you should get correct list to select the "Run Command" extension.
+
 ![run-command](docs/assets/run-command.png)
 
 Now you will get a list of commands, which are defined in the ```.vscode/settings.json```.
+
 ![build-command](docs/assets/build-cmd.png)
 
 Now the command will be issued:
