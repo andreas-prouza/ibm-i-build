@@ -1,3 +1,33 @@
+- [Overview](#overview)
+- [Quick Start](#quick-start)
+    - [Prerequesits](#prerequesits)
+    - [Without IDE](#without-ide)
+    - [With VSCode as IDE](#with-vscode-as-ide)
+- [SSH](#ssh)
+- [GNU Make](#gnu-make)
+  - [Installation](#installation)
+  - [Set up our Makefile(s)](#set-up-our-makefiles)
+  - [Run GNU Make](#run-gnu-make)
+    - [Build directories](#build-directories)
+    - [Preperation](#preperation)
+    - [Run build](#run-build)
+  - [Summary](#summary)
+- [Integration in your IDE](#integration-in-your-ide)
+  - [VSCode](#vscode)
+  - [VSCode & RSYNC](#vscode--rsync)
+    - [Prerequisites](#prerequisites)
+      - [IBM i](#ibm-i)
+      - [Linux](#linux)
+      - [Windows](#windows)
+    - [VSCode extensions](#vscode-extensions)
+    - [Let's run the build](#lets-run-the-build)
+    - [Sync automatically after code changing](#sync-automatically-after-code-changing)
+    - [Using ```Code for IBM i```](#using-code-for-ibm-i)
+  - [RDi & RSYNC](#rdi--rsync)
+  - [VSCode or RDi & GNU Make](#vscode-or-rdi--gnu-make)
+
+
+
 # Overview
 
 My DevOps concept includes multiple components like GIT as a basis for source management.
@@ -16,6 +46,34 @@ For all IBM i builds I use 2 components:
 * VSCode or RDi with RSYNC
   
   To synchronise your sources to the build server (IBM i)
+
+# Quick Start
+
+### Prerequesits
+* To be able to compile the source on IBM i
+  * [GNU Make](#gnu-make) is installed
+* To be able to work with your local IDE
+  * [SSH](#ssh) is working well
+  * [Windows](#windows)
+    * Windows Subsystem for Linus (WSL) is installed
+  * [Linux](#linux)
+    * ```rsync``` is installed
+  * [VSCode extensions](#vscode-extensions) if you use vscode
+  * RDi is installed
+
+### Without IDE
+If you only want to compile on your machine without any IDE:<br/>
+Proceed the [Summary](#summary)
+
+### With VSCode as IDE
+* Rename the ```settings.json``` from the Windows or Linux template
+* [Adapt the makefiles](#set-up-our-makefiles) to your environment
+  * source location
+  * target lib
+  * LIBLIST
+  * ACTGRP
+  * etc.
+* [Just run the build](#lets-run-the-build)
 
 # SSH
 Sicne we use the SSH protocoll to communicate with IBM i we need:
@@ -109,7 +167,7 @@ Installing:
 
 ## Set up our Makefile(s)
 
-```make``` uses ```makefile```s in which the plan is set up how to build your application.
+```gmake``` uses ```makefile```s in which the plan is set up how to build your application.
 
 For more details about makefiles you can find a lot of stuff in the internet.
 
@@ -161,9 +219,11 @@ This Makefiles uses 2 directories in the IFS for the build output
 
     Contains compile output: spooled files and job log
 
-### Preperation
 
-If you don't want to build all from scretch but only build changed sources, you can use the following:
+### Preperation
+Since the ```gmake all``` checks if a source has been changed since last build, gmake would compile all sources on very first run.
+
+If you don't want to build all from scretch and only wants to build new changed sources from now, you can use the following:
 ```sh
 gmake init # to create all necessary directories for build
 gmake all --touch --directory=build --makefile=/home/prouza/myproject/makefile
@@ -172,7 +232,7 @@ This only creates the dummy build object files in the ```build``` directory.
 
 ### Run build
 
-After all this is done you can use ```gmake``` to build you applications.
+After all this is done you can use ```gmake``` to build all changes in your application.
 ```sh
 gmake all
 ```
