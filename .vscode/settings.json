@@ -1,0 +1,35 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": ".*/ibm-i-build.*/.*$",
+                "isAsync": true,
+                "cmd": "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} ${workspaceFolder}/ prouza@academy:/home/prouza/myproject4/"
+            }
+        ]
+    },
+    "command-runner.terminal.name": "Sync project",
+    "command-runner.terminal.autoClear": true,
+    "command-runner.terminal.autoFocus": true,
+    "command-runner.commands": {
+        "Sync source to IBM i": "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'}  ${workspaceFolder}/ prouza@academy:/home/prouza/myproject4/",
+        "Sync logs back": "rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete prouza@academy:/home/prouza/myproject4/  ${workspaceFolder}/",
+        "Run build (summary output)": [
+            "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} ${workspaceFolder}/ prouza@academy:/home/prouza/myproject4/; : '",
+            "'; ssh prouza@academy \"source .profile; cd /home/prouza/myproject4; gmake all 2> >(sed $'s,.*,\\e[01;31m&\\e[m,'>&2) | grep crtcmd\\|summary | cut -d '|' --output-delimiter ': ' -f 2 \"; : '",
+            "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete prouza@academy:/home/prouza/myproject4/  ${workspaceFolder}/ | grep -v \"^deleting\" | grep joblog"
+        ],
+        "Run build (detailed output)": [
+            "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} ${workspaceFolder}/ prouza@academy:/home/prouza/myproject4/; : '",
+            "'; ssh prouza@academy \"source .profile; cd /home/prouza/myproject4; gmake all 2> >(sed $'s,.*,\\e[01;31m&\\e[m,'>&2) | grep crtcmd | cut -d '|' --output-delimiter ': ' -f 2,3 \"; : '",
+            "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete prouza@academy:/home/prouza/myproject4/  ${workspaceFolder}/ | grep -v \"^deleting\" | grep joblog"
+        ],
+        "Run build (debug)": [
+            "rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} ${workspaceFolder}/ prouza@academy:/home/prouza/myproject4/; : '",
+            "'; ssh prouza@academy \"source .profile; cd /home/prouza/myproject4; gmake all 2> >(sed $'s,.*,\\e[01;31m&\\e[m,'>&2) \"; : '",
+            "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete prouza@academy:/home/prouza/myproject4/  ${workspaceFolder}/ | grep -v \"^deleting\" | grep joblog"
+        ],
+        "Reset ALL": "ssh prouza@academy \"source .profile; cd /home/prouza/myproject4; gmake clean \"",
+    }
+}

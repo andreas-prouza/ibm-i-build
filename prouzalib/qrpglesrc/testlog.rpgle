@@ -1,6 +1,6 @@
 **free
 
-/include 'qcpysrc/c_logger'
+/include 'qcpysrc/logger'
 
 logdebug('Great it works!');
 

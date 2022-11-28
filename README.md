@@ -382,13 +382,13 @@ summary ===============================================================
 summary Build RPG: 2 testlog.rpglepgm testlog2.sqlrpglepgm
 summary Build CL: 0 
 summary Build DSPF: 0 
-summary Build SRVPGM: 2 loggerm.sqlrpglemod testmod.rpglemod
+summary Build SRVPGM: 2 logger.sqlrpglemod testmod.rpglemod
 summary Build DB: 1 logger.sqltableobj
 summary ===============================================================
 receiving incremental file list
 build/
 build/logger.sqltableobj
-build/loggerm.sqlrpglemod
+build/logger.sqlrpglemod
 build/prouzadir.bnddir
 build/prouzadir.bnddirinclude
 build/prouzadir.bnddirtarget
@@ -398,8 +398,8 @@ build/testmod.rpglemod
 logs/
 logs/logger.sqltableobj.error.log
 logs/logger.sqltableobj.log
-logs/loggerm.sqlrpglemod.error.log
-logs/loggerm.sqlrpglemod.log
+logs/logger.sqlrpglemod.error.log
+logs/logger.sqlrpglemod.log
 logs/testlog.rpglepgm.error.log
 logs/testlog.rpglepgm.log
 logs/testlog2.sqlrpglepgm.error.log

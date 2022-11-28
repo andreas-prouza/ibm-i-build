@@ -3,7 +3,7 @@
 /IF NOT DEFINED(PROUZA_STD_COPY)
 /DEFINE PROUZA_STD_COPY
 
-// Job-Log Ausgabe
+// Job-Log output
 dcl-pr writeJobLog    int(10)     extproc('Qp0zLprintf');
   message                         pointer value options(*string);
 end-pr;
@@ -13,7 +13,7 @@ Dcl-C log_ende                    CONST(X'25');
 
 
 
-// System-Befehl absetzen
+// Run a system command
 Dcl-pr system         int(10)     extproc('system');
   cmd                             pointer value options(*string);
 End-pr;
@@ -38,3 +38,4 @@ END-DS;
 
 
 /ENDIF
+

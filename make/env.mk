@@ -7,13 +7,14 @@ vpath %.sqlrpgle  $(RPGLE_SRCF):$(CPY_SRCF):$(CPYLE_SRCF)
 vpath %.rpgle     $(RPGLE_SRCF):$(CPY_SRCF):$(CPYLE_SRCF)
 vpath %.clle      $(CLLE_SRCF)
 vpath %.pf        $(PF_SRCF)
-vpath %.lf        $(PF_SRCF)
+vpath %.lf        $(LF_SRCF)
 vpath %.sqltable  $(SQL_SRCF)
 vpath %.sqlview   $(SQL_SRCF)
 vpath %.sqlindex  $(SQL_SRCF)
 vpath %.sqlfunc   $(SQL_SRCF)
 vpath %.sqlproc   $(SQL_SRCF)
 vpath %.sqltrig   $(SQL_SRCF)
+vpath %.bnddir    $(TGT_DIR)
 
 
 VPATH=$(TGT_DIR):$\
@@ -33,9 +34,8 @@ VPATH=$(TGT_DIR):$\
 QIBM_CCSID=1208
 
 # All SHELL commands run in same process
-# !!! Achtung verhindert Fehler Abbruch!!!
+# Will not end if an exception occurs!!
 #.ONESHELL:
-
 
 
 define uniq =
@@ -43,3 +43,5 @@ define uniq =
   $(foreach _,$1,$(if $(filter $_,${seen}),,$(eval seen += $_)))
   ${seen}
 endef
+
+upper_case = $(shell echo '$1' | tr '[:lower:]' '[:upper:]')

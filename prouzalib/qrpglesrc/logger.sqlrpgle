@@ -1,11 +1,17 @@
 **free
 ctl-opt nomain;
 
-/include 'QCPYSRC/C_STD'
-/include 'qcpysrc/c_logger'
-
 // No commitment control because we never want to ROLLBACK anything in a Logger!
 exec sql Set Option COMMIT=*none;
+
+
+/include 'qcpysrc/std'
+/include 'qcpysrc/logger'
+
+// No 'c_sqlerror' here, because of loop
+// If the logger fails, then the calling program schould not interrupt
+
+
 
 
 //--------------------------------------------------------------
@@ -42,7 +48,6 @@ dcl-proc logging export;
 
   dcl-s l_program                 like(logger_ds_tmp.program) inz;
 
-
   l_text = %trim(p_text);
 
   if (%parms >= %Parmnum(p_extref));
@@ -59,7 +64,7 @@ dcl-proc logging export;
           Into :l_program
           From table(qsys2.stack_info()) t1
           Where Program_library_name not like 'Q%'
-          and   Program_name <> 'LOGGERM'
+          and   Program_name not in ('LOGGER', 'SQLERROR', '')
           Order by ordinal_position desc
           Fetch first Row Only;
   ENDIF;
@@ -84,9 +89,11 @@ dcl-proc log export;
   END-PI;
 
   if (%parms >= %Parmnum(p_print2Joblog));
-    logging(C_LOG_INFO : p_text : p_program : p_print2Joblog);
+    logging(C_LOG_INFO : p_text : p_extref : p_program : p_print2Joblog);
   elseif (%parms >= %Parmnum(p_program));
-    logging(C_LOG_INFO : p_text : p_program);
+    logging(C_LOG_INFO : p_text : p_extref : p_program);
+  elseif (%parms >= %Parmnum(p_extref));
+    logging(C_LOG_INFO : p_text : p_extref );
   else;
     logging(C_LOG_INFO : p_text);
   endif;
@@ -200,19 +207,45 @@ END-PROC;
 
 dcl-proc Send_Program_Message export;
   dcl-pi *n;
-    p_msg      varchar(1000) const;
-    p_type     varchar(10)   const;
-    p_log      ind           const options(*nopass);
+    p_msg                         varchar(1000) const;
+    p_type                        varchar(10)   const;
+    p_msgid                       char(7)       const options(*nopass);
+    p_msgf                        char(10)      const options(*nopass);
+    p_msgf_lib                    char(10)      const options(*nopass);
+    p_log                         ind           const options(*nopass);
   END-PI;
+
+  dcl-s l_msgid                   like(p_msgid);
+  dcl-ds l_msgf_ds                qualified;
+     file                         char(10);
+     lib                          char(10);
+  end-ds;
+
+  l_msgid = 'CPF9897';
+  l_msgf_ds.file = 'QCPFMSG';
+  l_msgf_ds.lib = '*LIBL';
+
+  if (%parms < %parmnum(p_msgid) and p_msgid <> *blank);
+    l_msgid = p_msgid;
+  endif;
+
+  if (%parms < %parmnum(p_msgf) and p_msgf <> *blank);
+    l_msgf_ds.file = p_msgf;
+  endif;
+
+  if (%parms < %parmnum(p_msgf_lib) and p_msgf_lib <> *blank);
+    l_msgf_ds.lib = p_msgf_lib;
+  endif;
+
 
   if (%parms < %parmnum(p_log) Or p_log = *on);
     log('Send_Program_Message (' + %trim(p_type) + '): ' +
          %trim(p_msg));
   endif;
 
-  IBMAPI_Send_Program_Message('CPF9897' : 'QCPFMSG   *LIBL' :
+  IBMAPI_Send_Program_Message(l_msgid : l_msgf_ds :
                      p_msg : %len(%trim(p_msg)) :
                      p_type : '*PGMBDY' :
-                     1 : ProgramMsgKey : ErrorDS );
+                     2 : ProgramMsgKey : ErrorDS );
 
 END-PROC;

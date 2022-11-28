@@ -2,10 +2,11 @@
 
 ctl-opt nomain;
  
-/include 'qcpysrc/c_testmod'
-/include 'qcpysrc/c_logger'
+/include 'qcpysrc/testmod'
+/include 'qcpysrc/logger'
 
 // Only a dummy procedure for testing
+
 
 dcl-proc testmod export;
 

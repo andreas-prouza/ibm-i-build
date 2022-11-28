@@ -1,0 +1,5 @@
+PGM
+
+  SNDMSG MSG('It works also for CL Sources') TOUSR(*REQUESTER)
+
+ENDPGM
