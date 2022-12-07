@@ -14,7 +14,7 @@
   - [Summary](#summary)
 - [Integration in your IDE](#integration-in-your-ide)
   - [VSCode](#vscode)
-  - [VSCode & RSYNC](#vscode--rsync)
+  - [VSCode \& RSYNC](#vscode--rsync)
     - [Prerequisites](#prerequisites)
       - [IBM i](#ibm-i)
       - [Linux](#linux)
@@ -23,8 +23,8 @@
     - [Let's run the build](#lets-run-the-build)
     - [Sync automatically after code changing](#sync-automatically-after-code-changing)
     - [Using ```Code for IBM i```](#using-code-for-ibm-i)
-  - [RDi & RSYNC](#rdi--rsync)
-  - [VSCode or RDi & GNU Make](#vscode-or-rdi--gnu-make)
+  - [RDi \& RSYNC](#rdi--rsync)
+  - [VSCode or RDi \& GNU Make](#vscode-or-rdi--gnu-make)
 
 
 
@@ -94,6 +94,14 @@ Sicne we use the SSH protocoll to communicate with IBM i we need:
     SQL:
     ```sql
     CALL QSYS2.SET_PASE_SHELL_INFO('*CURRENT', '/QOpenSys/pkgs/bin/bash');
+    ```
+* Home- & ```.ssh``` directory for your user profile should exist
+    You also need the correct permission set for both directories
+
+    ```sh
+    mkdir -p /home/prouza/.ssh
+    chmod 755 /home/prouza
+    chmod 600 /home/prouza/.ssh
     ```
 
 * Define ```~/.profile``` file:
