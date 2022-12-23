@@ -101,7 +101,7 @@ Sicne we use the SSH protocoll to communicate with IBM i we need:
     ```sh
     mkdir -p /home/prouza/.ssh
     chmod 755 /home/prouza
-    chmod 600 /home/prouza/.ssh
+    chmod 700 /home/prouza/.ssh
     ```
 
 * Define ```~/.profile``` file:
@@ -123,7 +123,7 @@ Sicne we use the SSH protocoll to communicate with IBM i we need:
   
         On Linux you can simple use ```ssh-copy-id``` to copy the public key to your remote system.
         ```sh
-        ssh-copy-id -i ~/.ssh/academy_rsa prouza@academy
+        ssh-copy-id -i ~/.ssh/academy_rsa.pub prouza@academy
         ```
 
     * Windows
