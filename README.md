@@ -140,10 +140,10 @@ Sicne we use the SSH protocoll to communicate with IBM i we need:
 
     ```
     Host academy
-    HostName academy
-    IdentitiesOnly=yes
-    User prouza
-    IdentityFile ~/.ssh/academy_rsa
+      HostName academy
+      IdentitiesOnly=yes
+      User prouza
+      IdentityFile ~/.ssh/academy_rsa
     ```
 
     Now you should be able to login without a prompt: 
@@ -353,17 +353,27 @@ Therefore I am using 2 extensions:
   
     Automatically sync when source is saved.<br/>
     So no need to do some extra sync.
+
 * Command Runner
   
     To trigger the sync manually (e.g. if I switch branch) using:<br/> 
     STRG+P --> Select: Run Command --> Select: Run Build (summary output)
 
+* WSL (for Windows only)
+
+    Since we use the Windows Subsystem for Linux (WSL) to synchronize the source to our IBM i, we need this extension to make our Windows path linux like.
+
 You can just use the ```.vscode/settings.json``` from this project.<br/>
-Don't forget to change hostname and user.
+Don't forget to change: 
+* hostname
+* (user ... not necessary if you use the ```~/.ssh/config```)
+* IFS target directory
+
+Notice: Tthe standard terminal is set to ```Command Prompt``` for this project in the ```.vscode/settings.json```.
 
 
 ### Let's run the build
-Use STRG+P. When you start typing "run command" you should get correct list to select the "Run Command" extension.
+Use CTRL+SHIFT+P. When you start typing "run command" you should get correct list to select the "Run Command" extension.
 
 ![run-command](docs/assets/run-command.png)
 

@@ -2,3 +2,4 @@ logs/**
 build/**
 .vscode/*.log
 # make/.makeprofile.mk
+.vscode/settings.json
