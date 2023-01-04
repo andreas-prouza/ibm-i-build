@@ -357,7 +357,7 @@ Therefore I am using 2 extensions:
 * Command Runner
   
     To trigger the sync manually (e.g. if I switch branch) using:<br/> 
-    STRG+P --> Select: Run Command --> Select: Run Build (summary output)
+    CTRL+SHIFT+P --> Select: Run Command --> Select: Run Build (summary output)
 
 * WSL (for Windows only)
 

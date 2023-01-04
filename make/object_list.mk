@@ -1,45 +1,47 @@
 #########################################################
 # List obj all objects to build
+#
+# The target is based on {source-type}.{object-type}
 # 
 # Extensions:
-# |----------------------------------------------------------|
-# | Source   | Target      | Description                     |
-# | type     | object      |                                 |
-# |----------------------------------------------------------|
-# | clle     | cllemod     | CLLE service program object     |
-# | clle     | cllepgm     | CLLE program object             |
-# | rpgle    | rpglepgm    | RPGLE program object            |
-# | rpgle    | rpglemod    | RPGLE program object            |
-# | rpgle    | rpglecpy    | RPGLE copy source (no compile)  |
-# | sqlrpgle | sqlrpglepgm | SQLRPGLE service program object |
-# | sqlrpgle | sqlrpglemod | SQLRPGLE service program object |
-# | pf       | pfobj       | Physical file                   |
-# | lf       | lfobj       | Logical file                    |
-# | sqltable | sqltableobj | SQL table                       |
-# | sqlview  | sqlviewobj  | SQL view                        |
-# | sqlindex | sqlindexobj | SQL index                       |
-# | sqlfunc  | sqlfuncobj  | SQL function                    |
-# | sqlproc  | sqlprocobj  | SQL procedure                   |
-# | sqltrig  | sqltrigobj  | SQL trigger                     |
-# |----------------------------------------------------------|
+# |--------------------------------------------------------------|
+# | Source   | Target          | Description                     |
+# | type     | object          |                                 |
+# |--------------------------------------------------------------|
+# | clle     | clle.srvpgm     | CLLE service program object     |
+# | clle     | clle.pgm        | CLLE program object             |
+# | rpgle    | rpgle.pgm       | RPGLE program object            |
+# | rpgle    | rpgle.srvpgm    | RPGLE program object            |
+# | rpgle    | rpgle.cpy       | RPGLE copy source (no compile)  |
+# | sqlrpgle | sqlrpgle.pgm    | SQLRPGLE service program object |
+# | sqlrpgle | sqlrpgle.srvpgm | SQLRPGLE service program object |
+# | pf       | pf.file         | Physical file                   |
+# | lf       | lf.file         | Logical file                    |
+# | sqltable | sqltable.file   | SQL table                       |
+# | sqlview  | sqlview.file    | SQL view                        |
+# | sqlindex | sqlindex.file   | SQL index                       |
+# | sqlfunc  | sqlfunc.srvpgm  | SQL function                    |
+# | sqlproc  | sqlproc.pgm     | SQL procedure                   |
+# | sqltrig  | sqltrig.pgm     | SQL trigger                     |
+# |--------------------------------------------------------------|
 # 
 #########################################################
 
 # Summary of all objects to be build
-OBJS:= prouzalib/cpysrc2ifs.sqlrpglepgm \
-			 prouzalib/date.sqlrpglemod \
-			 prouzalib/errhdlrpg.rpglemod \
-			 prouzalib/errhdlsql.sqlrpglemod \
-			 prouzalib/logger.sqlrpglemod \
-			 prouzalib/testlog.rpglepgm \
-			 prouzalib/testlog2.sqlrpglepgm \
-			 prouzalib/testmod.rpglemod \
-			 prouzalib/testsqlerr.sqlrpglepgm \
-			 prouzalib/prouzadir.bnddir \
-			 prouzalib/testcl.cllepgm \
-			 \
-			 prouzalib2/test1.rpglepgm
 
+			 
+OBJS:= prouzalib/cpysrc2ifs.sqlrpgle.pgm \
+			 prouzalib/date.sqlrpgle.srvpgm \
+			 prouzalib/errhdlrpg.rpgle.srvpgm \
+			 prouzalib/errhdlsql.sqlrpgle.srvpgm \
+			 prouzalib/logger.sqlrpgle.srvpgm \
+			 prouzalib/logger.sqltable.file \
+			 prouzalib/testlog.rpgle.pgm \
+			 prouzalib/testlog2.sqlrpgle.pgm \
+			 prouzalib/testmod.rpgle.srvpgm \
+			 prouzalib/testsqlerr.sqlrpgle.pgm \
+			 prouzalib/prouzadir.bnddir \
+			 prouzalib/testcl.clle.pgm \
 
 
 #########################################################
@@ -51,15 +53,21 @@ OBJS:= prouzalib/cpysrc2ifs.sqlrpglepgm \
 # Also which object depends on each other.
 #
 # Example:
-# prouzalib/test1.rpglepgm: prouzalib/testmod.rpglemod
+# prouzalib/test1.rpgle.pgm: prouzalib/testmod.rpgle.srvpgm
 #
 # testmod needs to be build first.
-# Also if testmod.rpglemod will be changed, GNU make automatically builds test1.rpglepgm to.
+# Also if testmod.rpgle.srvpgm will be changed, GNU make automatically builds test1.rpgle.pgm to.
 #########################################################
 
-prouzalib/prouzadir.bnddir: prouzalib/logger.sqlrpglemod prouzalib/errhdlsql.sqlrpglemod prouzalib/errhdlrpg.rpglemod prouzalib/testmod.rpglemod prouzalib/date.sqlrpglemod
+prouzalib/prouzadir.bnddir: \
+		prouzalib/logger.sqlrpgle.srvpgm \
+		prouzalib/errhdlsql.sqlrpgle.srvpgm \
+		prouzalib/errhdlrpg.rpgle.srvpgm \
+		prouzalib/testmod.rpgle.srvpgm \
+		prouzalib/date.sqlrpgle.srvpgm
 
-prouzalib/testsqlerr.sqlrpglepgm:	prouzalib/errhdlsql.sqlrpglemod
+prouzalib/testsqlerr.sqlrpgle.pgm: \
+		prouzalib/errhdlsql.sqlrpgle.srvpgm
 
 #########################################################
 # Dependency to BNDDIR or single SRVPGM?
@@ -69,11 +77,15 @@ prouzalib/testsqlerr.sqlrpglepgm:	prouzalib/errhdlsql.sqlrpglemod
 # Because GNU Make doesn't know which module is necessary
 # Pro: No need to check detailed dependencies, can't forget it if they are all in the same BNDDIR
 # Cons: If you change a single SRVPGM in BNDDIR, all programs which depend on the BNDDIR will be compiled
-prouzalib/testlog.rpglepgm:			prouzalib/prouzadir.bnddir
+prouzalib/testlog.rpgle.pgm: \
+		prouzalib/prouzadir.bnddir
 #
 # You can also define all used modules (=srvpgm) you are using.
 # This brings better performance for compiling because of direct dependency
-prouzalib/testlog2.sqlrpglepgm:	prouzalib/testmod.rpglemod prouzalib/logger.sqlrpglemod prouzalib/errhdlsql.sqlrpglemod
+prouzalib/testlog2.sqlrpgle.pgm: \
+		prouzalib/testmod.rpgle.srvpgm \
+		prouzalib/logger.sqlrpgle.srvpgm \
+		prouzalib/errhdlsql.sqlrpgle.srvpgm
 #
 #########################################################
 
@@ -82,25 +94,36 @@ prouzalib/testlog2.sqlrpglepgm:	prouzalib/testmod.rpglemod prouzalib/logger.sqlr
 # Individual compile settings
 #########################################################
 #
-prouzalib/errhdlsql.sqlrpglemod:	prouzalib/logger.sqlrpglemod
+prouzalib/errhdlsql.sqlrpgle.srvpgm:	prouzalib/logger.sqlrpgle.srvpgm
 # You can also define custom parameters for an object
-prouzalib/errhdlsql.sqlrpglemod:	private INCLUDE_BNDDIR=*LIBL/PROUZADIR
-prouzalib/errhdlsql.sqlrpglemod:	private TGT_BNDDIR=*LIBL/PROUZADIR
+prouzalib/errhdlsql.sqlrpgle.srvpgm:	private INCLUDE_BNDDIR=*LIBL/PROUZADIR
+prouzalib/errhdlsql.sqlrpgle.srvpgm:	private TGT_BNDDIR=*LIBL/PROUZADIR
 #
 #########################################################
 
-prouzalib/logger.sqlrpglemod:	prouzalib/logger.sqltableobj
-prouzalib/logger.sqlrpglemod:	private BNDDIR=*LIBL/PROUZADIR
-prouzalib/logger.sqlrpglemod:	private TGT_BNDDIR=*LIBL/PROUZADIR
+prouzalib/logger.sqlrpgle.srvpgm:	\
+		prouzalib/logger.sqltable.file
+prouzalib/logger.sqlrpgle.srvpgm:	private BNDDIR=*LIBL/PROUZADIR
+prouzalib/logger.sqlrpgle.srvpgm:	private TGT_BNDDIR=*LIBL/PROUZADIR
 
-prouzalib/cpysrc2ifs.sqlrpglepgm: prouzalib/errhdlsql.sqlrpglemod
+prouzalib/cpysrc2ifs.sqlrpgle.pgm: \
+		prouzalib/errhdlsql.sqlrpgle.srvpgm
 
-prouzalib/date.sqlrpglemod:				prouzalib/logger.sqlrpglemod prouzalib/errhdlsql.sqlrpglemod
+prouzalib/date.sqlrpgle.srvpgm: \
+		prouzalib/logger.sqlrpgle.srvpgm \
+		prouzalib/errhdlsql.sqlrpgle.srvpgm
 
-prouzalib/testlog.rpglepgm:				prouzalib/logger.sqlrpglemod
+prouzalib/testlog.rpgle.pgm: \
+		prouzalib/logger.sqlrpgle.srvpgm
 
-prouzalib/testlog2.sqlrpglepgm:		prouzalib/logger.sqlrpglemod prouzalib/errhdlsql.sqlrpglemod prouzalib/testmod.rpglemod
+prouzalib/testlog2.sqlrpgle.pgm: \
+		prouzalib/logger.sqlrpgle.srvpgm \
+		prouzalib/errhdlsql.sqlrpgle.srvpgm \
+		prouzalib/testmod.rpgle.srvpgm
 
-prouzalib/testmod.rpglemod:				prouzalib/logger.sqlrpglemod
+prouzalib/testmod.rpgle.srvpgm: \
+		prouzalib/logger.sqlrpgle.srvpgm
 
-prouzalib/testsqlerr.sqlrpglepgm:	prouzalib/logger.sqlrpglemod prouzalib/errhdlsql.sqlrpglemod
+prouzalib/testsqlerr.sqlrpgle.pgm: \
+		prouzalib/logger.sqlrpgle.srvpgm \
+		prouzalib/errhdlsql.sqlrpgle.srvpgm

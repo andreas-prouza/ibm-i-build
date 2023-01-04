@@ -31,7 +31,8 @@ VPATH=$(TGT_DIR):$\
 .EXPORT_ALL_VARIABLES:
 
 # All created files in IFS schould have CCSID 1208 (UTF-8)
-QIBM_CCSID=1208
+# ... has no effekt
+#QIBM_CCSID=1208
 
 # All SHELL commands run in same process
 # Will not end if an exception occurs!!

@@ -3,7 +3,6 @@
 # Tabs: for processing of all targets
 # Blanks executing at very first (preprocessing)
 SHELL=/QOpenSys/pkgs/bin/bash
-#SHELL=/QOpenSys/usr/bin/qsh
 
 #########################################################
 # our configuration
@@ -19,8 +18,8 @@ INC_DIR=$(SRC_DIR)/prouzalib
 # Target libraries
 # Will be taken from qualified source name (can be overwritten in .makeprofile.mk)
 #TGTLIB_PGM=PROUZALIB
-TGTLIB_PGM=$(dir $@)
-TGTLIB_DBF=$(dir $@)
+TGTLIB_PGM=$(subst /,,$(dir $@))
+TGTLIB_DBF=$(subst /,,$(dir $@))
 
 TGT_BNDDIR=*LIBL/PROUZADIR
 INCLUDE_BNDDIR=*LIBL/PROUZADIR
@@ -49,6 +48,15 @@ SQLRPGLE_SRCF=$(SRC_DIR)/$$(dir $$@)/qrpglesrc
 CPYLE_SRCF=$(SRC_DIR)/$$(dir $$@)/qcpylesrc
 SQL_SRCF=$(SRC_DIR)/$$(dir $$@)/qsqlsrc
 
+# The same as above, but with source name and without extenstions
+RPGLE_PREREQ=$(RPGLE_SRCF)/$$(basename $$(basename $$(notdir $$@)))
+SQLRPGLE_PREREQ=$(SQLRPGLE_SRCF)/$$(basename $$(basename $$(notdir $$@)))
+CLLE_PREREQ=$(CLLE_SRCF)/$$(basename $$(basename $$(notdir $$@)))
+LF_PREREQ=$(LF_SRCF)/$$(basename $$(basename $$(notdir $$@)))
+PF_PREREQ=$(PF_SRCF)/$$(basename $$(basename $$(notdir $$@)))
+CPYLE_PREREQ=$(CPYLE_SRCF)/$$(basename $$(basename $$(notdir $$@)))
+SQL_PREREQ=$(SQL_SRCF)/$$(basename $$(basename $$(notdir $$@)))
+
 #########################################################
 # Import related makefiles
 #########################################################
@@ -56,16 +64,14 @@ SQL_SRCF=$(SRC_DIR)/$$(dir $$@)/qsqlsrc
 MAKEFILE_DIR=$(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
 MAKEFILE_DIR:=$(MAKEFILE_DIR)/make
 
-
 # Set environment setting
-
 include $(MAKEFILE_DIR)/env.mk
-
-# Override settings individually
--include $(MAKEFILE_DIR)/.makeprofile.mk
 
 # Object list and their dependencies
 include $(MAKEFILE_DIR)/object_list.mk
+
+# Override settings individually
+-include $(MAKEFILE_DIR)/.makeprofile.mk
 
 # Compile rules for each source type
 include $(MAKEFILE_DIR)/compile_rules.mk
@@ -113,26 +119,33 @@ all: init $(OBJS)
 	$(info crtcmd|summary Build DB: $(COUNTER_DB) $(BUILD_DB))
 	$(info crtcmd|summary ===============================================================)
 	echo "Compile complete"
+	
+	$(info crtcmd|summary time end $(shell date +"%T.%3N"))
 
-
-
+#.ONESHELL:
 .PHONY: init
 init:
+	$(info crtcmd|summary time start $(shell date +"%T.%3N"))
 #	>| true: returns always success of this command
 	-rm -rf $(LOG_DIR)/*
 
 # Create subdirectory for each library we use for logs
-	-mkdir -p $(LOG_DIR)/prouzalib
-	-mkdir -p $(LOG_DIR)/prouzalib2
+	-mkdir -p $(LOG_DIR)/prouzalib; \
+	mkdir -p $(LOG_DIR)/prouzalib2
 
 # Create subdirectory for each library we use for builds
-	-mkdir -p $(TGT_DIR)/prouzalib
-	-mkdir -p $(TGT_DIR)/prouzalib2
-	
-	cl -i "CHGJOB CCSID(1141)"
-	cl -i "CHGENVVAR ENVVAR(QIBM_PASE_CCSID) VALUE(1208) CCSID(1141)"
+	-mkdir -p $(TGT_DIR)/prouzalib; \
+	mkdir -p $(TGT_DIR)/prouzalib2
+
+# Be sure that all sources are UTF-8 ...  But quite slow for huge amount of sources
+#	cl -i "CHGATR OBJ('$(SRC_DIR)') ATR(*CCSID) VALUE(1208) SUBTREE(*ALL)"
+
+#	cl -i "CHGJOB CCSID(1141)"
+#	cl -i "CHGENVVAR ENVVAR(QIBM_PASE_CCSID) VALUE(1208) CCSID(1141)"
 #	cl -i "ADDENVVAR ENVVAR(QIBM_CCSID) VALUE(1208) CCSID(1208)"
 
+	
+#.ONESHELL:
 .PHONY: clean
 clean:
 	rm -rf $(TGT_DIR)/*
@@ -143,4 +156,3 @@ clean:
 %.cleanBuildFile:
 	rm $(TGT_DIR)/$* | true
 	rm $(LOG_DIR)/$*.*.log | true
-
