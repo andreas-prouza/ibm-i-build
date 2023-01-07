@@ -28,7 +28,7 @@ VPATH=$(TGT_DIR):$\
 #########################################################
 
 # Set environments variables
-.EXPORT_ALL_VARIABLES:
+#.EXPORT_ALL_VARIABLES:
 
 # All created files in IFS schould have CCSID 1208 (UTF-8)
 # ... has no effekt

@@ -2,24 +2,24 @@
 #	- Using TABs instead of Blanks is necessary!
 # Tabs: for processing of all targets
 # Blanks executing at very first (preprocessing)
-SHELL=/QOpenSys/pkgs/bin/bash
+#SHELL=/QOpenSys/pkgs/bin/bash
 
 #########################################################
 # our configuration
 #########################################################
 
 # Source directory (!full path!)
-SRC_DIR=/home/prouza/myproject4
+SRC_DIR=.
 
 # Include DIR (e.g. to search for /copy members in RPG sources) (!full path!)
-INC_DIR=$(SRC_DIR)/prouzalib
+INC_DIR=$(SRC_DIR)/$$(dir $$@)
 
 
 # Target libraries
 # Will be taken from qualified source name (can be overwritten in .makeprofile.mk)
 #TGTLIB_PGM=PROUZALIB
-TGTLIB_PGM=$(subst /,,$(dir $@))
-TGTLIB_DBF=$(subst /,,$(dir $@))
+TGTLIB_PGM=$(dir $$@)
+TGTLIB_DBF=PROUZALIB
 
 TGT_BNDDIR=*LIBL/PROUZADIR
 INCLUDE_BNDDIR=*LIBL/PROUZADIR
@@ -33,6 +33,18 @@ LIBLIST=$(TGTLIB_PGM) $(TGTLIB_DBF)
 DBGVIEW=*SOURCE
 TGTRLS=*CURRENT
 TGTCCSID=*JOB
+
+#########################################################
+MAKEFILE_DIR=$(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
+MAKEFILE_DIR:=$(MAKEFILE_DIR)/make
+
+# Object list and their dependencies
+include $(MAKEFILE_DIR)/object_list.mk
+
+# Override settings individually
+-include $(MAKEFILE_DIR)/.makeprofile.mk
+#########################################################
+
 
 # Directory for compile logs
 LOG_DIR=$(SRC_DIR)/logs
@@ -61,17 +73,9 @@ SQL_PREREQ=$(SQL_SRCF)/$$(basename $$(basename $$(notdir $$@)))
 # Import related makefiles
 #########################################################
 
-MAKEFILE_DIR=$(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
-MAKEFILE_DIR:=$(MAKEFILE_DIR)/make
 
 # Set environment setting
 include $(MAKEFILE_DIR)/env.mk
-
-# Object list and their dependencies
-include $(MAKEFILE_DIR)/object_list.mk
-
-# Override settings individually
--include $(MAKEFILE_DIR)/.makeprofile.mk
 
 # Compile rules for each source type
 include $(MAKEFILE_DIR)/compile_rules.mk
