@@ -6,7 +6,7 @@
             {
                 "match": ".*/ibm-i-build.*/.*$",
                 "isAsync": true,
-                "cmd": "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete $(wslpath \"${workspaceFolder}\")/ academy:~/myproject/"
+                "cmd": "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete $(wslpath \"${workspaceFolder}\")/ academy:~/myproject/ \nfi"
             }
         ]
     },
@@ -14,28 +14,28 @@
     "command-runner.terminal.autoClear": true,
     "command-runner.terminal.autoFocus": true,
     "command-runner.commands": {
-        "Sync source to IBM i": "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete $(wslpath \"${workspaceFolder}\")/ academy:~/myproject/ ",
-        "Sync logs back": "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject/  $(wslpath \"${workspaceFolder}\")/ ",
+        "Sync source to IBM i": "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete $(wslpath \"${workspaceFolder}\")/ academy:~/myproject/  \nfi",
+        "Sync logs back": "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject/  $(wslpath \"${workspaceFolder}\")/  \nfi",
         "Run build (summary output)": [
             "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n printf '#!/QOpenSys/pkgs/bin/bash'\"\\n\\n\" > compile.sh ; : '",
             "'; make all -n | tee >(grep -iv crtcmd >> compile.sh) | grep -i crtcmd\\|summary | cut -d '|' --output-delimiter ': ' -f 2 ; : '",
             "'; rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete $(wslpath \"${workspaceFolder}/\") academy:~/myproject/; : '",
             "'; ssh academy \"source .profile; cd ~/myproject; ./compile.sh || true \" ; : '",
-            "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject/  $(wslpath \"${workspaceFolder}/\") | grep -v \"^deleting\" | grep joblog "
+            "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject/  $(wslpath \"${workspaceFolder}/\") | grep -v \"^deleting\" | grep joblog  \nfi"
         ],
         "Run build (detailed output)": [
             "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n printf '#!/QOpenSys/pkgs/bin/bash'\"\\n\\n\" > compile.sh ; : '",
             "'; make all -n | tee >(grep -iv crtcmd >> compile.sh) | grep -i crtcmd | cut -d '|' --output-delimiter ': ' -f 2,3 ; : '",
             "'; rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete $(wslpath \"${workspaceFolder}/\") academy:~/myproject/; : '",
             "'; ssh academy \"source .profile; cd ~/myproject; ./compile.sh || true \" ; : '",
-            "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject/  $(wslpath \"${workspaceFolder}/\") | grep -v \"^deleting\" | grep joblog "
+            "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject/  $(wslpath \"${workspaceFolder}/\") | grep -v \"^deleting\" | grep joblog  \nfi"
         ],
         "Run build (debug)": [
             "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n printf '#!/QOpenSys/pkgs/bin/bash'\"\\n\\n\" > compile.sh ; : '",
             "'; make all -n | tee >(grep -iv crtcmd >> compile.sh) ; : '",
             "'; rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete $(wslpath \"${workspaceFolder}/\") academy:~/myproject/; : '",
             "'; ssh academy \"source .profile; cd ~/myproject; ./compile.sh || true \" ; : '",
-            "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject/  $(wslpath \"${workspaceFolder}/\") | grep -v \"^deleting\" | grep joblog "
+            "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject/  $(wslpath \"${workspaceFolder}/\") | grep -v \"^deleting\" | grep joblog  \nfi"
         ],
         "Reset ALL": "make clean ",
         "Show Change Debug": "make all -n |grep crtcmd  ",
