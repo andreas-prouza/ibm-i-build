@@ -6,13 +6,17 @@ CL_FLAG=-v # Print command
 #########################################################
 # Find the correct target lib for the source
 #########################################################
+TGTLIB_SRC = $(call upper_case,$(patsubst %/,%,$(dir $@)))
+
 # 1. specific lib
 # 2. global target lib
-NEW_LIB_TMP = $(if $(TGTLIB_$(TGTLIB_PGM)),$(TGTLIB_$(TGTLIB_PGM)),$(TGTLIB_PGM))
+OBJLIB=$(call upper_case,$(OBJLIB))
+NEW_LIB_TMP = $(call upper_case,$(if $(TGTLIB_$(OBJLIB)),$(TGTLIB_$(OBJLIB)),$(OBJLIB)))
 # 3. If *SOURCE is defined ==> source lib
 NEW_LIB_TMP2 = $(if $(findstring *SOURCE,$(NEW_LIB_TMP)),$(TGTLIB_SRC),$(NEW_LIB_TMP))
 # 4. source lib
-NEW_LIB = $(if $(NEW_LIB_TMP2),$(NEW_LIB_TMP2),$(TGTLIB_PGM))
+NEW_LIB_TMP3 = $(call upper_case,$(if $(TGTLIB_OBJ),$(TGTLIB_OBJ),$(NEW_LIB_TMP2)))
+NEW_LIB = $(if $(findstring *SOURCE,$(NEW_LIB_TMP3)),$(TGTLIB_SRC),$(NEW_LIB_TMP3))
 
 
 #########################################################
@@ -97,8 +101,6 @@ endef
 
 # Set Library List
 # Make library needs to be unique in the list
-TGTLIB_SRC = $(call upper_case,$(patsubst %/,%,$(dir $@)))
-
 LIBLIST_UNIQUE=$(call uniq,$(LIBLIST))
 
 SET_LIBL=$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST_UNIQUE))
@@ -432,7 +434,7 @@ RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(DOLLAR_SH_REPLACE)
 
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqltable') DFTRDBCOL($(TGTLIB_DBF)) COMMIT(*NONE) ERRLVL(21))
+	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqltable') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
@@ -445,7 +447,7 @@ RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(DOLLAR_SH_REPLACE)
 
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqlview') DFTRDBCOL($(TGTLIB_DBF)) COMMIT(*NONE) ERRLVL(21))
+	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqlview') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
@@ -458,7 +460,7 @@ RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(DOLLAR_SH_REPLACE)
 
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqlindex') DFTRDBCOL($(TGTLIB_DBF)) COMMIT(*NONE) ERRLVL(21))
+	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqlindex') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
@@ -471,7 +473,7 @@ RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(DOLLAR_SH_REPLACE)
 
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqlfunc') DFTRDBCOL($(TGTLIB_DBF)) COMMIT(*NONE) ERRLVL(21))
+	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqlfunc') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
@@ -484,7 +486,7 @@ RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(DOLLAR_SH_REPLACE)
 
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqlproc') DFTRDBCOL($(TGTLIB_DBF)) COMMIT(*NONE) ERRLVL(21))
+	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqlproc') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
@@ -497,7 +499,7 @@ RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(DOLLAR_SH_REPLACE)
 
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqltrig') DFTRDBCOL($(TGTLIB_DBF)) COMMIT(*NONE) ERRLVL(21))
+	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqltrig') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)

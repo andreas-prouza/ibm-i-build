@@ -17,9 +17,7 @@ INC_DIR=$(SRC_DIR)/$$(dir $$@)
 
 # Target libraries
 # Will be taken from qualified source name (can be overwritten in .makeprofile.mk)
-#TGTLIB_PGM=PROUZALIB
-TGTLIB_PGM=$(dir $$@)
-TGTLIB_DBF=PROUZALIB
+#TGTLIB_OBJ=PROUZALIB
 
 TGT_BNDDIR=*LIBL/PROUZADIR
 INCLUDE_BNDDIR=*LIBL/PROUZADIR
@@ -28,7 +26,7 @@ ACTGRP=PROUZAGRP
 STGMDL=*SNGLVL
 
 # You can also add other libs if necessary (separated by blanks)
-LIBLIST=$(TGTLIB_PGM) $(TGTLIB_DBF)
+LIBLIST=$(TGTLIB_OBJ)
 
 DBGVIEW=*SOURCE
 TGTRLS=*CURRENT
@@ -101,10 +99,10 @@ help:
 	echo "$(ALL_SRCS)"
 	echo "Build help."
 	echo ""
-	echo "\tgmake all                 - Build all objects into $(TGTLIB_PGM)"
-	echo "\tgmake clean               - Clear $(TGTLIB_PGM) library and clean temp files"
+	echo "\tgmake all                 - Build all objects into $(TGTLIB_OBJ)"
+	echo "\tgmake clean               - Clear $(TGTLIB_OBJ) library and clean temp files"
 	echo ""
-	echo "\tgmake all TGTLIB_PGM=MYLIB    - Build IBMiUNIT into MYLIB library"
+	echo "\tgmake all TGTLIB_OBJ=MYLIB    - Build IBMiUNIT into MYLIB library"
 	echo "\tgmake all TARGET=V7R4M0   - Specifify target object version."
 	echo ""
 	echo "MAKEFILE_LIST: $(MAKEFILE_LIST)"
