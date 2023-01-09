@@ -173,17 +173,19 @@ Installing:
 ### On you PC
 
 * Linux
-        ```sh
-        sudo apt install make
-        sudo pacman -S make
-        sudo yum install make
-        ```
+  
+```sh
+    sudo apt install make
+    sudo pacman -S make
+    sudo yum install make
+```
 
 * In Windows (WSL)
-        ```sh
-        sudo apt update
-        sudo apt install make
-        ```
+  
+```sh
+    sudo apt update
+    sudo apt install make
+```
 
 You may already noticed that we have 2 different type of make commands ```make``` and ```gmake```.<br/>
 This depends on the installation of gnu make (PC or IBM i, Windows WSL or Linux). But it's always the same.
