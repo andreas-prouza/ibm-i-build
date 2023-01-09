@@ -6,6 +6,8 @@
 - [SSH](#ssh)
 - [GNU Make](#gnu-make)
   - [Installation](#installation)
+    - [On IBM i](#on-ibm-i)
+    - [On you PC](#on-you-pc)
   - [Set up our Makefile(s)](#set-up-our-makefiles)
   - [Run GNU Make](#run-gnu-make)
     - [Build directories](#build-directories)
@@ -51,29 +53,28 @@ For all IBM i builds I use 2 components:
 
 ### Prerequesits
 * To be able to compile the source on IBM i
-  * [GNU Make](#gnu-make) is installed
-* To be able to work with your local IDE
-  * [SSH](#ssh) is working well
-  * [Windows](#windows)
+  * [GNU Make](#gnu-make) is installed on IBM i
+* To be able to work with your prefered IDE
+  * [SSH](#ssh) is working well on you local computer
+  * for [Windows](#windows)
     * Windows Subsystem for Linus (WSL) is installed
-  * [Linux](#linux)
+  * for [Linux](#linux)
     * ```rsync``` is installed
   * [VSCode extensions](#vscode-extensions) if you use vscode
-  * RDi is installed
 
 ### Without IDE
 If you only want to compile on your machine without any IDE:<br/>
 Proceed the [Summary](#summary)
 
 ### With VSCode as IDE
-* Rename the ```settings.json``` from the Windows or Linux template
-* [Adapt the makefiles](#set-up-our-makefiles) to your environment
+1. Rename the ```.vscode/settings.json``` from the Windows or Linux template
+2. [Adapt the makefiles](#set-up-our-makefiles) to your environment
   * source location
-  * target lib
+  * target object lib
   * LIBLIST
   * ACTGRP
   * etc.
-* [Just run the build](#lets-run-the-build)
+3. [Just run the build](#lets-run-the-build)
 
 # SSH
 Sicne we use the SSH protocoll to communicate with IBM i we need:
@@ -83,7 +84,7 @@ Sicne we use the SSH protocoll to communicate with IBM i we need:
 
 * The open source package manager (YUM) is installed on IBM i
 
-    You can do this in ACS
+    You can do this using ACS
 
 * Recommended: BASH is installed and set to your profile
     
@@ -91,12 +92,12 @@ Sicne we use the SSH protocoll to communicate with IBM i we need:
     ```sh
     yum install bash
     ```
-    SQL:
+    Set BASH as default shell to your profile via SQL (instead of ```*CURRENT``` you can also provide the profile name):
     ```sql
     CALL QSYS2.SET_PASE_SHELL_INFO('*CURRENT', '/QOpenSys/pkgs/bin/bash');
     ```
 * Home- & ```.ssh``` directory for your user profile should exist
-    You also need the correct permission set for both directories
+    You also need the correct permission set for both directories because of security reasons
 
     ```sh
     mkdir -p /home/prouza/.ssh
@@ -107,19 +108,19 @@ Sicne we use the SSH protocoll to communicate with IBM i we need:
 * Define ```~/.profile``` file:
   
     ```sh
-    export PATH="/QOpenSys/pkgs/bin:$PATH"
+    echo 'export PATH="/QOpenSys/pkgs/bin:$PATH"' > ~/.profile
     ```
     This is neseccary to have the correct ```PATH``` in the IBM i shell.
 
 * Use key authentication
   
-    ```sh
-    ssh-keygen -b 4096
-    # Enter your key name full qualified (e.g. /home/prouza/.ssh/academy_rsa)
-    # Then you will be asked for a password. If you set one, you will be asked for it on each Login. If not you will be logged in without any prompt.
-    ```
-
     * Linux
+
+        ```sh
+        ssh-keygen -b 4096
+        # Enter your key name full qualified (e.g. /home/prouza/.ssh/academy_rsa)
+        # Then you will be asked for a password. If you set one, you will be asked for it on each Login. If not you will be logged in without any prompt.
+        ```
   
         On Linux you can simple use ```ssh-copy-id``` to copy the public key to your remote system.
         ```sh
@@ -127,14 +128,8 @@ Sicne we use the SSH protocoll to communicate with IBM i we need:
         ```
 
     * Windows
-    
-        Copy the content of the generated public key (e.g. ```academy_rsa.pub```) on the remote system to the file ```~/.ssh/authorized_keys```. (You also need to create the directory if not exist.)<br/>
-        Be aware that the directory ```.ssh``` and the file ```authorized_keys``` are not allowed to be readable by anyone except of you.
-
-        ```sh
-        chmod 600 .ssh/authorized_keys
-        ```
-
+        Do the same as for Linux, but open a WSL session for that, because this needs to be done in your WSL environment
+        
 
     On your local machine create the ```~/.ssh/config``` file (and directory) if not exist and add the following:
 
@@ -160,11 +155,13 @@ Sicne we use the SSH protocoll to communicate with IBM i we need:
 
 # GNU Make
 
-## Installation
+## Installation 
+
+### On IBM i
 
 You can install ist via ACS OpenSource-Package-Mangager or via YUM in the console
 ```sh
-yum install git
+yum install make-gnu
 
 ===================================================================
  Package        Arch          Version       Repository        Size
@@ -173,59 +170,83 @@ Installing:
  make-gnu       ppc64         4.2-2         ibmi-base        520 k
 ```
 
+### On you PC
+
+* Linux
+        ```sh
+        sudo apt install make
+        sudo pacman -S make
+        sudo yum install make
+        ```
+
+* In Windows (WSL)
+        ```sh
+        sudo apt update
+        sudo apt install make
+        ```
+
+You may already noticed that we have 2 different type of make commands ```make``` and ```gmake```.<br/>
+This depends on the installation of gnu make (PC or IBM i, Windows WSL or Linux). But it's always the same.
+
 ## Set up our Makefile(s)
 
-```gmake``` uses ```makefile```s in which the plan is set up how to build your application.
+```gmake``` uses ```makefile``` in which the plan is set up how to build your application.
 
 For more details about makefiles you can find a lot of stuff in the internet.
 
 I split it up into 5 makefiles
 
-1. makefile
+1. ```makefile```
 
-    The basic config file to start the build (source location in IFS, target lib)
+    The main config file to start the build<br\> 
+    (source location in IFS, target lib, activation group, ...)
 
-2. env.mk
+2. ```env.mk```
 
-    This I use to define search paths and environment variables
+    This I use to define search paths and environment variables.
 
-3. .makeprofile.mk
+3. ```.makeprofile.mk```
 
     This file shouldn't be synchronised to the GIT project since this is individually for each user.<br/>
-    If you are using GIT (and you should), this files is in the ```.gitignore``` list.<br/>
-    Here you can overwrite for example the source directory to you own working directory in the IFS.
+    If you are using GIT (and you should), this files is added to the ```.gitignore``` list.<br/>
+    Here you can overwrite for example the source directory to your own working directory in the IFS.<br/>
+    Or you can override the target library for compiling to your own library
 
     If you are not using GIT and you only have one directory where all developers are working with, you can just delete the ```.makeprofile.mk``` file.
 
-4. objecte_list.mk
+4. ```objecte_list.mk```
 
     A list of all objects and their dependencies.<br/>
     First all objects are stored in a variable with a blank as separator.
 
     Then all objects with dependencies are listed including all dependiencies which ```make``` should consider.<br/>
-    You can find a detailed description in this file.
+    You can find a detailed description in this file.<br/>
+    If you have special definitions for an object, you can also define it there (e.g. activation group, binding directory, target library, ...)
 
-5. make_compile_rules.mk
+5. ```compile_rules.mk```
 
     For all type of objects you want to create the build command needs to be defined here (RPG, CL, DSPF, SQL Tables, ...)<br/>
     I already set up the compile rules, so it should be able to handle most of your (ILE) builds.<br/>
-    If you also want to build objects like menues or printer files, you can simple add the command at the end of this file.
+    If you also want to build objects like menues or printer files (or whatever you want), you can simple add the command at the end of this file.
 
 ## Run GNU Make
 
-### Build directories
-This Makefiles uses 2 directories in the IFS for the build output
+From here, we haven't set up our IDE, but we are able to login to our IBM i via SSH and run the build directly on the server.<br/>
+So, login via SSH to your IBM i and go to your project directory.
 
-* build
+### Build directories
+The build uses 2 directories in the IFS for the build output
+
+* ```./build```
   
-    For each compiled/created object a dummy file will be created in the ```build```.<br/>
-    The creation timestamp of these files will be used to compare it with the last changed timestamp of the source of the object.<br/>
-    If the source is yunger then the compile process of the object will be started.<br/>
+    For each compiled/created object a dummy file will be created in the ```./build``` directory.<br/>
+    The creation timestamp of these files will be used to compare the "compiled object" with the last changed timestamp of the source.<br/>
+    If the source is yunger then the compiled object (the dummy file) the compile will be started for this object.<br/>
     Otherwise it will be ignored.
 
-* logs
+* ```./logs```
 
-    Contains compile output: spooled files and job log
+    Contains compile output: spooled files and job log of each object
 
 
 ### Preperation
@@ -234,9 +255,9 @@ Since the ```gmake all``` checks if a source has been changed since last build, 
 If you don't want to build all from scretch and only wants to build new changed sources from now, you can use the following:
 ```sh
 gmake init # to create all necessary directories for build
-gmake all --touch --directory=build --makefile=/home/prouza/myproject/makefile
+gmake all --touch --directory=/home/prouza/myproject/build --makefile=/home/prouza/myproject/makefile
 ```
-This only creates the dummy build object files in the ```build``` directory.
+This only creates the dummy build object files in the ```./build``` directory.
 
 ### Run build
 
@@ -303,18 +324,14 @@ yum install rsync
 ```
 
 #### Linux
-On Linux this is very easy. It only depends which package manager you are using:
+On Linux this is very easy. It only depends which package manager you are using (maybe it's already installed):
 ```sh
-yum install rsync
-```
-```sh
-apt-get install rsync
-```
-```sh
-pacman -S rsync
+sudo yum install rsync
+sudo apt-get install rsync
+sudo pacman -S rsync
 ```
 
-Rename the ```settings.json - for linux``` to ```settings.json``` to get the Linux settings.
+Rename the ```linux.settings.json``` to ```settings.json``` to get the Linux settings.
 
 #### Windows
 ```rsync``` is a Unix based utility. So you can't just easily install it on Windows.
@@ -342,12 +359,16 @@ After this is done you can use ```rsync``` using WSL in the Windows CMD:
 wsl rsync ...
 ```
 
-Rename the ```settings.json - for windows``` to ```settings.json``` to get the Windows settings.
+Rename the ```windows.settings.json``` to ```settings.json``` to get the Windows settings.
 
 
 ### VSCode extensions
 
-Therefore I am using 2 extensions:
+Therefore I am using the following extensions:
+
+* IBM i Development Pack
+
+    This contains all IBM i extensions, which we want to use for development
 
 * Run on Save
   
@@ -359,6 +380,8 @@ Therefore I am using 2 extensions:
     To trigger the sync manually (e.g. if I switch branch) using:<br/> 
     CTRL+SHIFT+P --> Select: Run Command --> Select: Run Build (summary output)
 
+* GitLens and Git Graph (if you are using Git)
+  
 * WSL (for Windows only)
 
     Since we use the Windows Subsystem for Linux (WSL) to synchronize the source to our IBM i, we need this extension to make our Windows path linux like.
@@ -366,10 +389,12 @@ Therefore I am using 2 extensions:
 You can just use the ```.vscode/settings.json``` from this project.<br/>
 Don't forget to change: 
 * hostname
-* (user ... not necessary if you use the ```~/.ssh/config```)
+* user (but not necessary if you use the ```~/.ssh/config```)
 * IFS target directory
 
-Notice: Tthe standard terminal is set to ```Command Prompt``` for this project in the ```.vscode/settings.json```.
+Notice for Windows:<br/>
+The standard terminal is set to ```Ubuntu (WSL)``` for this project in the ```.vscode/settings.json```.<br/>
+You may need to exit the current Windows terminal in vscode to get the config in action.
 
 
 ### Let's run the build
@@ -388,10 +413,10 @@ Now the command will be issued:
 
 You may get asked for your password.<br/>
 I use key authentication, so I will get signed in automatically.<br/>
-(This is btw the most secure way to connect to servers. Some admins only allow key authentication.)
+(This is btw the most secure way to connect to servers. Some Linux admins only allow key authentication.)
 
 ```sh
-[andreas@Andreas-Linux ibm-i-build]$ rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'}  /home/andreas/projekte/common/ibm-i-build/ prouza@academy:/home/prouza/myproject/; ssh prouza@academy "source .profile; cd /home/prouza/myproject; gmake all | grep crtcmd\|summary | cut -d '|' --output-delimiter ': ' -f 2"; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' prouza@academy:/home/prouza/myproject/  /home/andreas/projekte/common/ibm-i-build 
+[andreas@Andreas-Linux ibm-i-build]$ rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','logs','.vscode','.project','.gitignore'}  /home/andreas/projekte/common/ibm-i-build/ prouza@academy:/home/prouza/myproject/; ssh prouza@academy "source .profile; cd /home/prouza/myproject; gmake all | grep crtcmd\|summary | cut -d '|' --output-delimiter ': ' -f 2"; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' prouza@academy:/home/prouza/myproject/  /home/andreas/projekte/common/ibm-i-build 
 sending incremental file list
 
 sent 737 bytes  received 17 bytes  502,67 bytes/sec
@@ -434,6 +459,12 @@ You should have a logs directory containing the spools of the compiled object an
 
 ![logs](docs/assets/logs.png)
 
+Notice:<br/>
+In this project I am using ```make``` only on the PC.<br/>
+```make``` generates all the compile commands (in the correct order) which will be written to a script.<br/>
+The script will be transfered to the IBM i and executed.<br/>
+This is much faster then doing it all on the IBM i.
+
 ### Sync automatically after code changing
 Since we also have configured the ```Run On Save``` extension, everytime a source get saved, the project folder will be synced with the IBM i.
 
@@ -442,7 +473,7 @@ In the ```Output``` view of vscode you can see the output:
 
 ```sh
 Running on save commands...
-*** cmd start: rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} /home/andreas/projekte/common/ibm-i-build/ prouza@academy:/home/prouza/myproject/
+*** cmd start: rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','build','logs','.vscode','.project','.gitignore'} /home/andreas/projekte/common/ibm-i-build/ prouza@academy:~/myproject/
 Run on Save done.
 sending incremental file list
 qrpglesrc/testlog2.sqlrpgle
