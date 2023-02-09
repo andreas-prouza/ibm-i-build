@@ -8,16 +8,33 @@ CL_FLAG=-v # Print command
 #########################################################
 TGTLIB_SRC = $(call upper_case,$(patsubst %/,%,$(dir $@)))
 
-# 1. specific lib
-# 2. global target lib
-OBJLIB=$(call upper_case,$(OBJLIB))
-NEW_LIB_TMP = $(call upper_case,$(if $(TGTLIB_$(OBJLIB)),$(TGTLIB_$(OBJLIB)),$(OBJLIB)))
-# 3. If *SOURCE is defined ==> source lib
-NEW_LIB_TMP2 = $(if $(findstring *SOURCE,$(NEW_LIB_TMP)),$(TGTLIB_SRC),$(NEW_LIB_TMP))
-# 4. source lib
-NEW_LIB_TMP3 = $(call upper_case,$(if $(TGTLIB_OBJ),$(TGTLIB_OBJ),$(NEW_LIB_TMP2)))
-NEW_LIB = $(if $(findstring *SOURCE,$(NEW_LIB_TMP3)),$(TGTLIB_SRC),$(NEW_LIB_TMP3))
+OBJLIB_UPPER=$(call upper_case,$(OBJLIB))
 
+# 1. specific lib:			OBJLIB
+NEW_LIB_TMP1 = $(if $(OBJLIB_UPPER),$(OBJLIB_UPPER),$(TGTLIB_SRC))
+
+# 2. Lib-Mapping:				TGTLIB_{source-lib} exist ==> take it
+NEW_LIB_TMP2 = $(if $(TGTLIB_$(NEW_LIB_TMP1)),$(TGTLIB_$(NEW_LIB_TMP1)),$(NEW_LIB_TMP1))
+
+# 3. global target lib:	TGTLIB_OBJ_GLOBAL
+NEW_LIB_TMP3 = $(if $(TGTLIB_OBJ_GLOBAL),$(TGTLIB_OBJ_GLOBAL),$(NEW_LIB_TMP2))
+
+# 4. If *SOURCE is defined ==> source lib
+NEW_LIB_TMP4 = $(if $(findstring *SOURCE,$(NEW_LIB_TMP3)),$(TGTLIB_SRC),$(NEW_LIB_TMP3))
+
+# Final Lib for this object
+NEW_LIB = $(NEW_LIB_TMP4)
+
+
+# Specified target library + character convertion
+LIBOBJ_NEW= $(NEW_LIB)/$(notdir $(subst §,$$$$'\247',$(subst $$,'$$$$',$(subst #,\#,$*))))
+
+# character convertion
+PGM_NEW=$(notdir $(subst §,$$$$'\247',$(subst $,'$$$$',$(subst #,\#,$*))))
+
+SOURCE_NAME_NEW=$$(notdir $$(subst §,$$$$'\247',$$(subst $$,'$$$$',$$(subst \#,\\\#,$$*))))
+
+LOG_FILE_NAME=$@
 
 #########################################################
 # Special characters in source name
@@ -46,16 +63,6 @@ define DOLLAR_SH_REPLACE
 	)
 endef
 
-
-# Specified target library + character convertion
-LIBOBJ_NEW= $(NEW_LIB)/$(notdir $(subst §,$$$$'\247',$(subst $$,'$$$$',$(subst #,\#,$*))))
-
-# character convertion
-PGM_NEW=$(notdir $(subst §,$$$$'\247',$(subst $,'$$$$',$(subst #,\#,$*))))
-
-SOURCE_NAME_NEW=$$(notdir $$(subst §,$$$$'\247',$$(subst $$,'$$$$',$$(subst \#,\\\#,$$*))))
-
-LOG_FILE_NAME=$@
 
 
 #########################################################
@@ -190,7 +197,7 @@ RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 	$(ADDBNDDIR)
 	
 	$(eval COUNTER_SRVPGM=$(shell echo $$(($(COUNTER_SRVPGM)+1))))
-	$(eval BUILD_SRVPGM := $(BUILD_SRVPGM) $(subst #,\#,$@))
+	$(eval BUILD_SRVPGM := $(subst #,\#,$(BUILD_SRVPGM)) $(LIBOBJ_NEW))
 
 
 
@@ -214,7 +221,7 @@ RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 	$(ADDBNDDIR)
 	
 	$(eval COUNTER_SRVPGM=$(shell echo $$(($(COUNTER_SRVPGM)+1))))
-	$(eval BUILD_SRVPGM := $(BUILD_SRVPGM) $(subst #,\#,$@))
+	$(eval BUILD_SRVPGM := $(subst #,\#,$(BUILD_SRVPGM)) $(LIBOBJ_NEW))
 
 
 
@@ -237,7 +244,7 @@ RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 	$(ADDBNDDIR)
 	
 	$(eval COUNTER_SRVPGM=$(shell echo $$(($(COUNTER_SRVPGM)+1))))
-	$(eval BUILD_SRVPGM := $(BUILD_SRVPGM) $(subst #,\#,$@))
+	$(eval BUILD_SRVPGM := $(subst #,\#,$(BUILD_SRVPGM)) $(LIBOBJ_NEW))
 
 
 
@@ -254,7 +261,7 @@ RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
 	$(eval COUNTER_CL=$(shell echo $$(($(COUNTER_CL)+1))))
-	$(eval BUILD_CL := $(BUILD_CL) $(subst #,\#,$@))
+	$(eval BUILD_CL := $(subst #,\#,$(BUILD_CL)) $(LIBOBJ_NEW))
 
 
 
@@ -284,7 +291,7 @@ RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 	$(cpystmf) $(PRE_COMPILE) $(cmd)  $(POST_COMPILE_FINAL)
 
 	$(eval COUNTER_CL=$(shell echo $$(($(COUNTER_CL)+1))))
-	$(eval BUILD_CL := $(BUILD_CL) $(subst #,\#,$@))
+	$(eval BUILD_CL := $(subst #,\#,$(BUILD_CL)) $(LIBOBJ_NEW))
 
 
 

@@ -17,7 +17,7 @@ INC_DIR=$(SRC_DIR)/$$(dir $$@)
 
 # Target libraries
 # Will be taken from qualified source name (can be overwritten in .makeprofile.mk)
-#TGTLIB_OBJ=PROUZALIB
+#TGTLIB_OBJ_GLOBAL=PROUZALIB
 
 TGT_BNDDIR=*LIBL/PROUZADIR
 INCLUDE_BNDDIR=*LIBL/PROUZADIR
@@ -26,7 +26,7 @@ ACTGRP=PROUZAGRP
 STGMDL=*SNGLVL
 
 # You can also add other libs if necessary (separated by blanks)
-LIBLIST=$(TGTLIB_OBJ)
+LIBLIST=$(TGTLIB_OBJ_GLOBAL)
 
 DBGVIEW=*SOURCE
 TGTRLS=*CURRENT
@@ -78,6 +78,8 @@ include $(MAKEFILE_DIR)/env.mk
 # Compile rules for each source type
 include $(MAKEFILE_DIR)/compile_rules.mk
 
+OBJECT_LIST_FILE=objects.txt
+
 COUNTER_CL=0
 COUNTER_RPG=0
 COUNTER_DSPF=0
@@ -99,10 +101,10 @@ help:
 	echo "$(ALL_SRCS)"
 	echo "Build help."
 	echo ""
-	echo "\tgmake all                 - Build all objects into $(TGTLIB_OBJ)"
-	echo "\tgmake clean               - Clear $(TGTLIB_OBJ) library and clean temp files"
+	echo "\tgmake all                 - Build all objects into $(TGTLIB_OBJ_GLOBAL)"
+	echo "\tgmake clean               - Clear $(TGTLIB_OBJ_GLOBAL) library and clean temp files"
 	echo ""
-	echo "\tgmake all TGTLIB_OBJ=MYLIB    - Build IBMiUNIT into MYLIB library"
+	echo "\tgmake all TGTLIB_OBJ_GLOBAL=MYLIB    - Build IBMiUNIT into MYLIB library"
 	echo "\tgmake all TARGET=V7R4M0   - Specifify target object version."
 	echo ""
 	echo "MAKEFILE_LIST: $(MAKEFILE_LIST)"
@@ -120,6 +122,16 @@ all: init $(OBJS)
 	$(info crtcmd|summary Build SRVPGM: $(COUNTER_SRVPGM) $(BUILD_SRVPGM))
 	$(info crtcmd|summary Build DB: $(COUNTER_DB) $(BUILD_DB))
 	$(info crtcmd|summary ===============================================================)
+
+	$(file >> $(OBJECT_LIST_FILE),[*PGM])
+	$(file >> $(OBJECT_LIST_FILE),$(BUILD_RPG) $(BUILD_CL))
+	$(file >> $(OBJECT_LIST_FILE),[*SRVPGM])
+	$(file >> $(OBJECT_LIST_FILE),$(BUILD_SRVPGM))
+	$(file >> $(OBJECT_LIST_FILE),[*DSPF])
+	$(file >> $(OBJECT_LIST_FILE),$(BUILD_DSPF))
+	$(file >> $(OBJECT_LIST_FILE),[*FILE])
+	$(file >> $(OBJECT_LIST_FILE),$(BUILD_DB))
+
 	echo "Compile complete"
 	
 	$(info crtcmd|summary time end $(shell date +"%T.%3N"))
@@ -138,6 +150,8 @@ init:
 # Create subdirectory for each library we use for builds
 	-mkdir -p $(TGT_DIR)/prouzalib; \
 	mkdir -p $(TGT_DIR)/prouzalib2
+
+	$(file > $(OBJECT_LIST_FILE))
 
 # Be sure that all sources are UTF-8 ...  But quite slow for huge amount of sources
 #	cl -i "CHGATR OBJ('$(SRC_DIR)') ATR(*CCSID) VALUE(1208) SUBTREE(*ALL)"
