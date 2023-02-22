@@ -38,6 +38,11 @@ VPATH=$(TGT_DIR):$\
 # Will not end if an exception occurs!!
 #.ONESHELL:
 
+# Colors for terminal
+COLOR_GREEN=\033[102;97m
+COLOR_RED=\033[101;31m
+COLOR_END=\033[0m
+
 
 define uniq =
   $(eval seen :=)
@@ -46,3 +51,7 @@ define uniq =
 endef
 
 upper_case = $(shell echo '$1' | tr '[:lower:]' '[:upper:]')
+
+define bash_call
+  ($1)
+endef

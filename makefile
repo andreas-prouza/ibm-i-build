@@ -1,8 +1,11 @@
 # General infos
 #	- Using TABs instead of Blanks is necessary!
 # Tabs: for processing of all targets
-# Blanks executing at very first (preprocessing)
+# Blanks executing at very first (preprocessing)d
+
+# /usr/bin/bash is valid for IBM i and also Linux
 #SHELL=/QOpenSys/pkgs/bin/bash
+SHELL=/usr/bin/bash
 
 #########################################################
 # our configuration
@@ -115,6 +118,13 @@ help:
 .PHONY: all
 all: init $(OBJS)
 	-cat $(LOG_DIR)/*.error.log 2> /dev/null | true
+
+	$(file >> $(OBJECT_LIST_FILE),[OBJECTS])
+	$(file >> $(OBJECT_LIST_FILE),*PGM=$(BUILD_RPG) $(BUILD_CL))
+	$(file >> $(OBJECT_LIST_FILE),*SRVPGM=$(BUILD_SRVPGM))
+	$(file >> $(OBJECT_LIST_FILE),*DSPF=$(BUILD_DSPF))
+	$(file >> $(OBJECT_LIST_FILE),*FILE=$(BUILD_DB))
+
 	$(info crtcmd|summary ===============================================================)
 	$(info crtcmd|summary Build RPG: $(COUNTER_RPG) $(BUILD_RPG))
 	$(info crtcmd|summary Build CL: $(COUNTER_CL) $(BUILD_CL))
@@ -123,16 +133,7 @@ all: init $(OBJS)
 	$(info crtcmd|summary Build DB: $(COUNTER_DB) $(BUILD_DB))
 	$(info crtcmd|summary ===============================================================)
 
-	$(file >> $(OBJECT_LIST_FILE),[*PGM])
-	$(file >> $(OBJECT_LIST_FILE),$(BUILD_RPG) $(BUILD_CL))
-	$(file >> $(OBJECT_LIST_FILE),[*SRVPGM])
-	$(file >> $(OBJECT_LIST_FILE),$(BUILD_SRVPGM))
-	$(file >> $(OBJECT_LIST_FILE),[*DSPF])
-	$(file >> $(OBJECT_LIST_FILE),$(BUILD_DSPF))
-	$(file >> $(OBJECT_LIST_FILE),[*FILE])
-	$(file >> $(OBJECT_LIST_FILE),$(BUILD_DB))
-
-	echo "Compile complete"
+	echo -e "$(COLOR_GREEN)Compile complete$(COLOR_END)"
 	
 	$(info crtcmd|summary time end $(shell date +"%T.%3N"))
 
