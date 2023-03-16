@@ -18,28 +18,37 @@
         "Sync logs back": "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject4/  \"${workspaceFolder}/\" \nfi",
         "Run build (summary output)": [
             "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n printf '#!/QOpenSys/pkgs/bin/bash'\"\\n\\n\" > compile.sh ; : '",
-            "'; make all -n | tee >(grep -iv crtcmd >> compile.sh) | grep -i crtcmd\\|summary | cut -d '|' --output-delimiter ': ' -f 2 ; : '",
+            "'; make all -n | grep prod_obj | tee prod_obj.txt ; : '",
+            "'; make all -n | tee >(grep -ivE 'crtcmd|prod_obj' >> compile.sh) | grep -i crtcmd\\|summary | cut -d '|' --output-delimiter ': ' -f 2 ; : '",
             "'; rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete \"${workspaceFolder}/\" academy:~/myproject4/; : '",
             "'; ssh academy \"source .profile; cd ~/myproject4; ./compile.sh || true \" ; : '",
             "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject4/  \"${workspaceFolder}/\" | grep -v \"^deleting\" | grep joblog \nfi"
         ],
         "Run build (detailed output)": [
             "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n printf '#!/QOpenSys/pkgs/bin/bash'\"\\n\\n\" > compile.sh ; : '",
-            "'; make all -n | tee >(grep -iv crtcmd >> compile.sh) | grep -i crtcmd | cut -d '|' --output-delimiter ': ' -f 2,3 ; : '",
+            "'; make all -n | grep prod_obj | tee prod_obj.txt ; : '",
+            "'; make all -n | tee >(grep -ivE 'crtcmd|prod_obj' >> compile.sh) | grep -i crtcmd | cut -d '|' --output-delimiter ': ' -f 2,3 ; : '",
             "'; rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete \"${workspaceFolder}/\" academy:~/myproject4/; : '",
             "'; ssh academy \"source .profile; cd ~/myproject4; ./compile.sh || true \" ; : '",
             "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject4/  \"${workspaceFolder}/\" | grep -v \"^deleting\" | grep joblog \nfi"
         ],
         "Run build (debug)": [
             "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n printf '#!/QOpenSys/pkgs/bin/bash'\"\\n\\nset -x\\n\\n\" > compile.sh ; : '",
-            "'; make all -n | tee >(grep -iv crtcmd >> compile.sh) ; : '",
+            "'; make all -n | grep prod_obj | tee prod_obj.txt ; : '",
+            "'; make all -n | tee >(grep -ivE 'crtcmd|prod_obj' >> compile.sh) ; : '",
             "'; rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete \"${workspaceFolder}/\" academy:~/myproject4/; : '",
             "'; ssh academy \"source .profile; cd ~/myproject4; ./compile.sh || true \" ; : '",
             "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject4/  \"${workspaceFolder}/\" | grep -v \"^deleting\" | grep joblog \nfi"
         ],
+        "Simulate build": [
+            "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n printf '#!/QOpenSys/pkgs/bin/bash'\"\\n\\nset -x\\n\\n\" > compile.sh ; : '",
+            "'; make all -n | grep prod_obj | tee prod_obj.txt ; : '",
+            "'; make all -n | tee >(grep -ivE 'crtcmd|prod_obj' >> compile.sh) | grep -i crtcmd\\|summary | cut -d '|' --output-delimiter ': ' -f 2 \nfi"
+        ],
         "Reset ALL": "make clean",
         "Show Change Debug": "make all -n |grep crtcmd  ",
         "Show Change Compile": "make all -n |grep crtcmd | cut -d '|' --output-delimiter ': ' -f 2,3 ",
-        "Show Change Object":  "make all -n |grep crtcmd | cut -d '|' --output-delimiter ': ' -f 2 "
+        "Show Change Object":  "make all -n |grep crtcmd | cut -d '|' --output-delimiter ': ' -f 2 ",
+        "Create Prod Object List": "make all -n | grep prod_obj | tee prod_obj.txt ",
     }
 }

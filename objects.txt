@@ -1,0 +1,5 @@
+[OBJECTS]
+*PGM=T1/cpysrc2ifs T3/testlog T1/testlog2 T1/testsqlerr 
+*SRVPGM=T1/logger T1/errhdlsql T1/date T1/testmod
+*DSPF=
+*FILE=T1/logger

@@ -37,14 +37,50 @@
 ### Target library - Global
 ## Global target lib
 #############################################################
-TGTLIB_PGM=PROUZALIB
+#TGTLIB_OBJ_GLOBAL=PROUZALIB
 ## If global target lib is empty ==> Source-Lib will be used
-#TGTLIB_PGM=
+#TGTLIB_OBJ_GLOBAL=
 
 #############################################################
 ### Target library - Specific
 ## Replace map specific libs to a separate target
 ## TGTLIB_{SRC-LIB} := {new-compile-lib}
 #############################################################
-TGTLIB_PROUZALIB := *SOURCE
-#TGTLIB_PROUZALIB2 := PROUZATEST2
+TGTLIB_PROUZALIB := T1
+TGTLIB_PROUZALIB2 := T2
+TGTLIB_PROUZA4 := T3
+TGTLIB_PROUZA2 := T3
+#TGTLIB_PROUZA4 := *source
+#TGTLIB_OBJ_GLOBAL=Hansi
+
+
+OBJS:= prouzalib/file1.pf.file \
+			 prouzalib/$$$$test.rpgle.pgm \
+			 prouzalib2/test1.rpgle.pgm \
+			 prouzalib/\#test.rpgle.pgm \
+			 prouzalib/\#test2.rpgle.pgm \
+			 prouzalib/test.rpgle.pgm \
+			 prouzalib/§test.rpgle.pgm \
+			 prouzalib/$$$$t§§x\#y.rpgle.pgm \
+			 \
+			 prouzalib2/test1.rpgle.pgm \
+			 \
+			 prouzalib/cpysrc2ifs.sqlrpgle.pgm \
+			 prouzalib/date.sqlrpgle.srvpgm \
+			 prouzalib/errhdlrpg.rpgle.srvpgm \
+			 prouzalib/errhdlsql.sqlrpgle.srvpgm \
+			 prouzalib/logger.sqlrpgle.srvpgm \
+			 prouzalib/logger.sqltable.file \
+			 prouzalib/testlog.rpgle.pgm \
+			 prouzalib/testlog2.sqlrpgle.pgm \
+			 prouzalib/testmod.rpgle.srvpgm \
+			 prouzalib/testsqlerr.sqlrpgle.pgm \
+			 prouzalib/prouzadir.bnddir \
+			 prouzalib/testcl.clle.pgm \
+
+prouzalib/testlog.rpgle.pgm: private OBJLIB=prouza2
+
+prouzalib/\#test.rpgle.pgm:	private OBJLIB=*SOURCE
+prouzalib/\#test2.rpgle.pgm:	private OBJLIB=PROUZA4
+prouzalib/§test.rpgle.pgm:	private OBJLIB=PROUZA2
+

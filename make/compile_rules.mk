@@ -12,12 +12,14 @@ OBJLIB_UPPER=$(call upper_case,$(OBJLIB))
 
 # 1. specific lib:			OBJLIB
 NEW_LIB_TMP1 = $(if $(OBJLIB_UPPER),$(OBJLIB_UPPER),$(TGTLIB_SRC))
+NEW_LIB_PROD = $(if $(findstring *SOURCE,$(NEW_LIB_TMP1)),$(TGTLIB_SRC),$(NEW_LIB_TMP1))
+PROD_LIBOBJ = $(NEW_LIB_PROD)/$(notdir $(subst §,$$$$'\247',$(subst $$,'$$$$',$(subst #,\#,$*))))
 
 # 2. Lib-Mapping:				TGTLIB_{source-lib} exist ==> take it
-NEW_LIB_TMP2 = $(if $(TGTLIB_$(NEW_LIB_TMP1)),$(TGTLIB_$(NEW_LIB_TMP1)),$(NEW_LIB_TMP1))
+NEW_LIB_TMP2 = $(call upper_case,$(if $(TGTLIB_$(NEW_LIB_PROD)),$(TGTLIB_$(NEW_LIB_PROD)),$(NEW_LIB_PROD)))
 
 # 3. global target lib:	TGTLIB_OBJ_GLOBAL
-NEW_LIB_TMP3 = $(if $(TGTLIB_OBJ_GLOBAL),$(TGTLIB_OBJ_GLOBAL),$(NEW_LIB_TMP2))
+NEW_LIB_TMP3 = $(call upper_case,$(if $(TGTLIB_OBJ_GLOBAL),$(TGTLIB_OBJ_GLOBAL),$(NEW_LIB_TMP2)))
 
 # 4. If *SOURCE is defined ==> source lib
 NEW_LIB_TMP4 = $(if $(findstring *SOURCE,$(NEW_LIB_TMP3)),$(TGTLIB_SRC),$(NEW_LIB_TMP3))
@@ -26,11 +28,12 @@ NEW_LIB_TMP4 = $(if $(findstring *SOURCE,$(NEW_LIB_TMP3)),$(TGTLIB_SRC),$(NEW_LI
 NEW_LIB = $(NEW_LIB_TMP4)
 
 
-# Specified target library + character convertion
-LIBOBJ_NEW= $(NEW_LIB)/$(notdir $(subst §,$$$$'\247',$(subst $$,'$$$$',$(subst #,\#,$*))))
-
 # character convertion
-PGM_NEW=$(notdir $(subst §,$$$$'\247',$(subst $,'$$$$',$(subst #,\#,$*))))
+PGM_NEW=$(notdir $(subst §,$$$$'\247',$(subst $$,'$$$$',$(subst #,\#,$*))))
+
+# Specified target library + character convertion
+LIBOBJ_NEW= $(NEW_LIB)/$(PGM_NEW)
+
 
 SOURCE_NAME_NEW=$$(notdir $$(subst §,$$$$'\247',$$(subst $$,'$$$$',$$(subst \#,\\\#,$$*))))
 
@@ -109,6 +112,7 @@ define POST_COMPILE_FINAL
 endef
 define FINALY
   $(CONVERT_STDERR_LOG) ; $(CONVERT_STDOUT_LOG) ; $(CONVERT_JOBLOG_LOG) ; $(CHECK_ERROR) && $(TOUCH)
+	$(info prod_obj|$@|$(LIBOBJ_NEW)|$(PROD_LIBOBJ))
 endef
 
 # Set Library List
@@ -124,20 +128,20 @@ PRE_COMPILE=$(SET_LIBL)
 #########################################################
 
 .SECONDEXPANSION:
+RMVBNDDIR_CMD=RMVBNDDIRE BNDDIR($(TGT_BNDDIR)) OBJ("*LIBL/$(PGM_NEW)")
+RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
+	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) -q "$(RMVBNDDIR_CMD)" $(POST_COMPILE)
+
+.SECONDEXPANSION:
 CRTSRVPGM_CMD= CRTSRVPGM SRVPGM("$(LIBOBJ_NEW)") MODULE("$(LIBOBJ_NEW)") EXPORT(*ALL) ACTGRP($(ACTGRP)) \
 			BNDDIR($(INCLUDE_BNDDIR)) REPLACE(*YES) TGTRLS($(TGTRLS)) STGMDL($(STGMDL))
 CRTSRVPGM=  $(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(CRTSRVPGM_CMD)"  $(POST_COMPILE)
 
 .SECONDEXPANSION:
-ADDBNDDIR_CMD=ADDBNDDIRE BNDDIR($(TGT_BNDDIR)) OBJ("$(LIBOBJ_NEW)")
+ADDBNDDIR_CMD=ADDBNDDIRE BNDDIR($(TGT_BNDDIR)) OBJ("*LIBL/$(PGM_NEW)")
 ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(ADDBNDDIR_CMD)" $(POST_COMPILE_FINAL)
-
-.SECONDEXPANSION:
-RMVBNDDIR_CMD=RMVBNDDIRE BNDDIR($(TGT_BNDDIR)) OBJ("$(LIBOBJ_NEW)")
-RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
-	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) -q "$(RMVBNDDIR_CMD)" $(POST_COMPILE)
 
 
 
