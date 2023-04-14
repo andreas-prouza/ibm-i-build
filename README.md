@@ -42,11 +42,11 @@
 * Compile in correct order (tables before programs)
 * All actions can be done in you IDE (RDi or vscode)
 
-  <img src="docs/assets/run-command-2.jpg" width="60%" height="60%">
+  ![run-command-2.jpg](docs/assets/run-command-2.jpg)
 
 * All compile informations seperated by each source: joblog, spool file, error output
 
-  <img src="docs/assets/compile-logs.jpg" width="20%" height="20%">
+  ![compile-logs](docs/assets/compile-logs.jpg)
 
 
 **If you also want to use git with that you will benefit of all it advantages:**
@@ -54,7 +54,7 @@
 * Work with branches
 * Version control
 
-  <img src="docs/assets/git-commit.jpg" width="60%" height="60%">
+  ![git-commit](docs/assets/git-commit.jpg)
 
 * Integration in other tools like Atlassian JIRA
 * Compare between different versions
