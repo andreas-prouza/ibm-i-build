@@ -81,7 +81,7 @@ include $(MAKEFILE_DIR)/env.mk
 # Compile rules for each source type
 include $(MAKEFILE_DIR)/compile_rules.mk
 
-OBJECT_LIST_FILE=objects.txt
+OBJECT_LIST_FILE=$(TGT_DIR)/objects.txt
 
 COUNTER_CL=0
 COUNTER_RPG=0

@@ -5,7 +5,7 @@
             {
                 "match": ".*$",
                 "isAsync": true,
-                "cmd": "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete \"${workspaceFolder}/\" academy:~/myproject4/ \nfi"
+                "cmd": "make/scripts/sync2ibmi.sh"
             }
         ]
     },
@@ -13,33 +13,16 @@
     "command-runner.terminal.autoClear": true,
     "command-runner.terminal.autoFocus": true,
     "command-runner.commands": {
-        "test": "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n echo OK\nfi",
-        "Sync source to IBM i": "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete \"${workspaceFolder}/\" academy:~/myproject4/ \nfi",
-        "Sync logs back": "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject4/  \"${workspaceFolder}/\" \nfi",
-        "Run build (summary output)": [
-            "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n printf '#!/QOpenSys/pkgs/bin/bash'\"\\n\\n\" > compile.sh ; : '",
-            "'; make all -n | tee >(grep -iv crtcmd >> compile.sh) | grep -i crtcmd\\|summary | cut -d '|' --output-delimiter ': ' -f 2 ; : '",
-            "'; rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete \"${workspaceFolder}/\" academy:~/myproject4/; : '",
-            "'; ssh academy \"source .profile; cd ~/myproject4; ./compile.sh || true \" ; : '",
-            "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject4/  \"${workspaceFolder}/\" | grep -v \"^deleting\" | grep joblog \nfi"
-        ],
-        "Run build (detailed output)": [
-            "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n printf '#!/QOpenSys/pkgs/bin/bash'\"\\n\\n\" > compile.sh ; : '",
-            "'; make all -n | tee >(grep -iv crtcmd >> compile.sh) | grep -i crtcmd | cut -d '|' --output-delimiter ': ' -f 2,3 ; : '",
-            "'; rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete \"${workspaceFolder}/\" academy:~/myproject4/; : '",
-            "'; ssh academy \"source .profile; cd ~/myproject4; ./compile.sh || true \" ; : '",
-            "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject4/  \"${workspaceFolder}/\" | grep -v \"^deleting\" | grep joblog \nfi"
-        ],
-        "Run build (debug)": [
-            "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n printf '#!/QOpenSys/pkgs/bin/bash'\"\\n\\nset -x\\n\\n\" > compile.sh ; : '",
-            "'; make all -n | tee >(grep -iv crtcmd >> compile.sh) ; : '",
-            "'; rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete \"${workspaceFolder}/\" academy:~/myproject4/; : '",
-            "'; ssh academy \"source .profile; cd ~/myproject4; ./compile.sh || true \" ; : '",
-            "'; rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject4/  \"${workspaceFolder}/\" | grep -v \"^deleting\" | grep joblog \nfi"
-        ],
+        "Sync source to IBM i": "make/scripts/sync2ibmi.sh debug",
+        "Sync logs back": "make/scripts/sync_back_from_ibmi.sh debug",
+        "Run build (summary output)": "make/scripts/create_build_script.sh summary; make/scripts/sync2ibmi.sh; make/scripts/run_build.sh; make/scripts/sync_back_from_ibmi.sh",
+        "Run build (detailed output)": "make/scripts/create_build_script.sh detailed; make/scripts/sync2ibmi.sh; make/scripts/run_build.sh; make/scripts/sync_back_from_ibmi.sh",
+        "Run build (debug)": "make/scripts/create_build_script.sh debug; make/scripts/sync2ibmi.sh debug; make/scripts/run_build.sh debug; make/scripts/sync_back_from_ibmi.sh debug",
+        "Simulate build": "make/scripts/create_build_script.sh simulate",
         "Reset ALL": "make clean",
-        "Show Change Debug": "make all -n |grep crtcmd  ",
-        "Show Change Compile": "make all -n |grep crtcmd | cut -d '|' --output-delimiter ': ' -f 2,3 ",
-        "Show Change Object":  "make all -n |grep crtcmd | cut -d '|' --output-delimiter ': ' -f 2 "
+        "Show Change Debug": "make/scripts/create_build_script.sh show-change-debug  ",
+        "Show Change Compile": "make/scripts/create_build_script.sh schow-change-compile ",
+        "Show Change Object":  "make/scripts/create_build_script.sh show-change-object",
+        "Create Prod Object List": "make/scripts/create_build_script.sh create-object-list "
     }
 }
