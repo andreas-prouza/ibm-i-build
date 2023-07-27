@@ -17,7 +17,8 @@ then
   set -x
 fi
 
-rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete "$workspaceFolder"/ academy:~/myproject4/ > $sync_log
+rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete "$workspaceFolder"/ academy:~/myproject4/ > "$temp_dir/sync_log.log"
+mv $temp_dir/sync_log.log "$sync_log"
 
 if [ $mode == 'debug' ]
 then

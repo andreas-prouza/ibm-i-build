@@ -16,10 +16,11 @@ then
 fi
 
 
-rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject4/  "$workspaceFolder" > $sync_back_log
+rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject4/  "$workspaceFolder" > "$temp_dir/sync_back_log.log"
+mv $temp_dir/sync_back_log.log "$sync_back_log"
 
 
 if [ $mode == 'debug' ]
 then
-  cat $sync_log
+  cat $sync_back_log
 fi
