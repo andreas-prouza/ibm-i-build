@@ -3,6 +3,7 @@
 # Import global config
 source $(dirname $(realpath "$0"))/script.cfg
 
+printf '#!/QOpenSys/pkgs/bin/bash'"\\n\\n" > $compile_script
 
 if [ $mode == 'debug' -o $mode == 'show-change-debug' ]
 then
@@ -13,10 +14,11 @@ then
   echo "Mode: $mode"
 
   set -x
+
+  printf 'set -x'"\\n\\n" >> $compile_script
 fi
 
 
-printf '#!/QOpenSys/pkgs/bin/bash'"\\n\\n" > $compile_script
 
 create_object_list() {
   make all -n | grep prod_obj | tee $compile_object_list

@@ -273,10 +273,10 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 							ACTGRP($(ACTGRP)) REPLACE(*YES) TGTRLS($(TGTRLS)) STGMDL($(STGMDL)) DFTACTGRP(*NO))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
+	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL))
 
 	$(FINALY)
 	
-	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL))
 	$(eval COUNTER_CL=$(shell echo $$(($(COUNTER_CL)+1))))
 	$(eval BUILD_CL := $(subst #,\#,$(BUILD_CL)) $(LIBOBJ_NEW))
 

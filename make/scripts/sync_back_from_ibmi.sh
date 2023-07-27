@@ -16,7 +16,7 @@ then
 fi
 
 
-rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'log/***','build/***'} --exclude='*' --delete academy:~/myproject4/  "$workspaceFolder" > $sync_back_log
+rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject4/  "$workspaceFolder" > $sync_back_log
 
 
 if [ $mode == 'debug' ]

@@ -42,6 +42,7 @@ OBJS:= prouzalib/cpysrc2ifs.sqlrpgle.pgm \
 			 prouzalib/testsqlerr.sqlrpgle.pgm \
 			 prouzalib/prouzadir.bnddir \
 			 prouzalib/testcl.clle.pgm \
+			 prouzalib2/test.rpgle
 
 
 #########################################################
