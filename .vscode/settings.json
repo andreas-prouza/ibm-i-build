@@ -15,9 +15,9 @@
     "command-runner.commands": {
         "Sync source to IBM i": "make/scripts/sync2ibmi.sh debug",
         "Sync logs back": "make/scripts/sync_back_from_ibmi.sh debug",
-        "Run build (summary output)": "make/scripts/create_build_script.sh summary; make/scripts/sync2ibmi.sh; make/scripts/run_build.sh; make/scripts/sync_back_from_ibmi.sh",
-        "Run build (detailed output)": "make/scripts/create_build_script.sh detailed; make/scripts/sync2ibmi.sh; make/scripts/run_build.sh; make/scripts/sync_back_from_ibmi.sh",
-        "Run build (debug)": "make/scripts/create_build_script.sh debug; make/scripts/sync2ibmi.sh debug; make/scripts/run_build.sh debug; make/scripts/sync_back_from_ibmi.sh debug",
+        "Run build (summary output)": "make/scripts/create_build_script.sh summary   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh   &&   make/scripts/sync_back_from_ibmi.sh",
+        "Run build (detailed output)": "make/scripts/create_build_script.sh detailed   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh   &&   make/scripts/sync_back_from_ibmi.sh",
+        "Run build (debug)": "make/scripts/create_build_script.sh debug   &&   make/scripts/sync2ibmi.sh debug   &&   make/scripts/run_build.sh debug   &&   make/scripts/sync_back_from_ibmi.sh debug",
         "Simulate build": "make/scripts/create_build_script.sh simulate",
         "Reset ALL": "make clean",
         "Show Change Debug": "make/scripts/create_build_script.sh show-change-debug  ",

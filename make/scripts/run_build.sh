@@ -14,4 +14,4 @@ then
 
 fi
 
-ssh "$REMOTE_HOST" "source .profile; cd $REMOTE_WORKSPACE_FOLDER_NAME; ./$COMPILE_SCRIPT || true"
+ssh "$REMOTE_HOST" "source .profile; mkdir -p $REMOTE_WORKSPACE_FOLDER_NAME; cd $REMOTE_WORKSPACE_FOLDER_NAME; ./$COMPILE_SCRIPT || true"

@@ -13,7 +13,7 @@ then
 
 fi
 
-rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete "$WORKSPACE_FOLDER"/ "$REMOTE_HOST":~/myproject4/ > "$TEMP_DIR/SYNC_LOG.log"
+rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete "$WORKSPACE_FOLDER"/ "$REMOTE_HOST":"$REMOTE_WORKSPACE_FOLDER_NAME"/ > "$TEMP_DIR/SYNC_LOG.log"
 mv $TEMP_DIR/SYNC_LOG.log "$SYNC_LOG"
 
 if [ $MODE == 'debug' ]
