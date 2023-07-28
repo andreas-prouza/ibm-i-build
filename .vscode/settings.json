@@ -23,6 +23,7 @@
         "Show Change Debug": "make/scripts/create_build_script.sh show-change-debug  ",
         "Show Change Compile": "make/scripts/create_build_script.sh schow-change-compile ",
         "Show Change Object":  "make/scripts/create_build_script.sh show-change-object",
-        "Create Prod Object List": "make/scripts/create_build_script.sh create-object-list "
+        "Create Prod Object List": "make/scripts/create_build_script.sh create-object-list ",
+        "Test": "make/scripts/test.sh"
     }
 }

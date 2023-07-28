@@ -1,20 +1,17 @@
 #!/bin/bash 
 
 # Import global config
-source $(dirname $(realpath "$0"))/script.cfg
+source $(dirname $(realpath "$0"))/init.sh
 
-if [ $mode == 'debug' ]
+if [ $MODE == 'debug' ]
 then
 
-  echo -e "\n\n###################################################"
-  echo -e "Run ... $SCRIPT"
-  echo -e "###################################################\n"
-
-  echo "Mode: $mode"
-  echo "workspaceFolder: $workspaceFolder"
-
-  set -x
+  echo "MODE: $MODE"
+  echo "REMOTE_HOST: $REMOTE_HOST"
+  echo "WORKSPACE_FOLDER: $WORKSPACE_FOLDER"
+  echo "REMOTE_WORKSPACE_FOLDER_NAME: $REMOTE_WORKSPACE_FOLDER_NAME"
+  echo "COMPILE_SCRIPT: $COMPILE_SCRIPT"
 
 fi
 
-ssh academy "source .profile; cd ~/myproject4; ./$compile_script || true"
+ssh "$REMOTE_HOST" "source .profile; cd $REMOTE_WORKSPACE_FOLDER_NAME; ./$COMPILE_SCRIPT || true"

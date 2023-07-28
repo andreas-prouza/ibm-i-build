@@ -1,26 +1,14 @@
 #!/bin/bash 
 
 # Import global config
-source $(dirname $(realpath "$0"))/script.cfg
+source $(dirname $(realpath "$0"))/init.sh
 
 
-if [ $mode == 'debug' ]
+rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete "$REMOTE_HOST":"$REMOTE_WORKSPACE_FOLDER_NAME"  "$WORKSPACE_FOLDER" > "$TEMP_DIR/SYNC_BACK_LOG.log"
+mv $TEMP_DIR/SYNC_BACK_LOG.log "$SYNC_BACK_LOG"
+
+
+if [ $MODE == 'debug' ]
 then
-
-  echo -e "\n\n###################################################"
-  echo -e "Run ... $SCRIPT"
-  echo -e "###################################################\n"
-
-  set -x
-
-fi
-
-
-rsync -avz --rsync-path=/QOpenSys/pkgs/bin/rsync --include={'logs/***','build/***'} --exclude='*' --delete academy:~/myproject4/  "$workspaceFolder" > "$temp_dir/sync_back_log.log"
-mv $temp_dir/sync_back_log.log "$sync_back_log"
-
-
-if [ $mode == 'debug' ]
-then
-  cat $sync_back_log
+  cat $SYNC_BACK_LOG
 fi

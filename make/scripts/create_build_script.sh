@@ -1,42 +1,37 @@
 #!/bin/bash 
 
 # Import global config
-source $(dirname $(realpath "$0"))/script.cfg
+source $(dirname $(realpath "$0"))/init.sh
 
-printf '#!/QOpenSys/pkgs/bin/bash'"\\n\\n" > $compile_script
+printf '#!/QOpenSys/pkgs/bin/bash'"\\n\\n" > $COMPILE_SCRIPT
 
-if [ $mode == 'debug' -o $mode == 'show-change-debug' ]
+if [ $MODE == 'debug' -o $MODE == 'show-change-debug' ]
 then
-  echo -e "\n\n###################################################"
-  echo -e "Run ... $SCRIPT"
-  echo -e "###################################################\n"
 
-  echo "Mode: $mode"
+  echo "MODE: $MODE"
 
-  set -x
-
-  printf 'set -x'"\\n\\n" >> $compile_script
+  printf 'set -x'"\\n\\n" >> $COMPILE_SCRIPT
 fi
 
 
 
 create_object_list() {
-  make all -n | grep prod_obj | tee $compile_object_list
+  make all -n | grep prod_obj | tee $COMPILE_OBJECT_LIST
 }
 
 
-case $mode in 
+case $MODE in 
   summary|default)
-    make all -n | tee >(grep -ivE 'crtcmd|prod_obj' >> $compile_script) | grep -i 'crtcmd|summary' | cut -d '|' --output-delimiter ': ' -f 2
+    make all -n | tee >(grep -ivE 'crtcmd|prod_obj' >> $COMPILE_SCRIPT) | grep -i 'crtcmd|summary' | cut -d '|' --output-delimiter ': ' -f 2
     ;;
   detailed)
-    make all -n | tee >(grep -ivE 'crtcmd|prod_obj' >> $compile_script) | grep -i crtcmd | cut -d '|' --output-delimiter ': ' -f 2,3 
+    make all -n | tee >(grep -ivE 'crtcmd|prod_obj' >> $COMPILE_SCRIPT) | grep -i crtcmd | cut -d '|' --output-delimiter ': ' -f 2,3 
     ;;
   debug)
-    make all -n | tee >(grep -ivE 'crtcmd|prod_obj' >> $compile_script)
+    make all -n | tee >(grep -ivE 'crtcmd|prod_obj' >> $COMPILE_SCRIPT)
     ;;
   simulate)
-    make all -n | tee >(grep -ivE 'crtcmd|prod_obj' >> $compile_script) | grep -i 'crtcmd|summary' | cut -d '|' --output-delimiter ': ' -f 2
+    make all -n | tee >(grep -ivE 'crtcmd|prod_obj' >> $COMPILE_SCRIPT) | grep -i 'crtcmd|summary' | cut -d '|' --output-delimiter ': ' -f 2
     ;;
   show-change-debug)
     make all -n |grep crtcmd
@@ -51,5 +46,5 @@ case $mode in
     create_object_list
     ;;
   *)
-    echo "Mode $mode is not valid. Valid options {summary | debug | detailed | simulate | show-change-debug | schow-change-compile | show-change-object | create-object-list}"
+    echo "MODE $MODE is not valid. Valid options {summary | debug | detailed | simulate | show-change-debug | schow-change-compile | show-change-object | create-object-list}"
 esac
