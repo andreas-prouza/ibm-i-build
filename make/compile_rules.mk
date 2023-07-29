@@ -113,7 +113,7 @@ define POST_COMPILE_FINAL
 endef
 define FINALY
   $(CONVERT_STDERR_LOG) ; $(CONVERT_STDOUT_LOG) ; $(CONVERT_JOBLOG_LOG) ; $(CHECK_ERROR) && $(TOUCH)
-	$(info prod_obj|$@|$(LIBOBJ_NEW)|$(PROD_LIBOBJ))
+	$(info crtcmd|prod_obj|$@|$(LIBOBJ_NEW)|$(PROD_LIBOBJ))
 endef
 
 # Set Library List
