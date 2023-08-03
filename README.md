@@ -1,30 +1,24 @@
-- [Overview](#overview)
-- [Quick Start](#quick-start)
-- [SSH](#ssh)
-- [GNU Make](#gnu-make)
-- [Integration in your IDE](#integration-in-your-ide)
+# Documentation
+
+- [Overview](/docs/pages/overview.md)
+- [Quick Start](/docs/pages/quick_start.md)
+- [SSH](/docs/pages/SSH.md)
+- [GNU Make](/docs/pages/gnu_make.md)
+- [Integration in your IDE](/docs/pages/integration_in_your_ide.md)
 
 
+# 
 
-# [Overview](/docs/pages/overview.md)
+**This project should help to make our deployment process automated:**
 
-# [Quick Start](/docs/pages/quick_start.md)
-
-# [SSH](/docs/pages/SSH.md)
-
-... is needed because all communication goes over SSH protocoll.
-
-# [GNU Make](/docs/pages/gnu_make.md)
-
-... will be used for automated builds
-
-# [Integration in your IDE](/docs/pages/integration_in_your_ide.md)
-
-
-**This project should help to make our deployment process fully automated:**
-
-* Check all sources which have changed since last compilie
-* Compile in addition all objects which depend on the changed source
+## Features
+* Check for changes
+  
+    Check all sources which have changed since last compilie
+  
+* Check for dependencies
+  
+  Compile in addition all objects which depend on the changed source
 
   E.g. if a table or view has changed, compile also all programms which use them
 
@@ -39,12 +33,17 @@
 
   ```
 
-* Compile in correct order (tables before programs)
+* Compile in correct order
+  
+  tables before programs etc. based on dependency list
+
 * All actions can be done in you IDE (RDi or vscode)
 
   ![run-command-2.jpg](docs/assets/run-command-2.jpg)
 
-* All compile informations seperated by each source: joblog, spool file, error output
+* Logging
+  
+  All compile informations seperated by each source: joblog, spool file, error output
 
   ![compile-logs](docs/assets/compile-logs.jpg)
 
