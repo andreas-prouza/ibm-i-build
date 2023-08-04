@@ -37,9 +37,9 @@ fi
 MODE=${MODE,,}
 
 
-echo -e "\n\n$COLOR_MAGENTA_BOLD ###################################################  $COLOR_END"
-echo -e "$COLOR_CYAN_BOLD `date +"%F %T.%3N"` ... $SCRIPT $COLOR_END"
-echo -e "$COLOR_MAGENTA_BOLD ################################################### $COLOR_END\n"
+echo -e "\n$COLOR_MAGENTA_BOLD###################################################  $COLOR_END"
+echo -e "$COLOR_CYAN_BOLD`date +"%F %T.%3N"` ... $SCRIPT $COLOR_END"
+echo -e "$COLOR_MAGENTA_BOLD################################################### $COLOR_END\n"
 
 
 if [ $MODE == 'debug' -o $MODE == 'show-change-debug' ]

@@ -8,14 +8,12 @@ if [ $MODE == 'debug' ]
 then
 
   echo "MODE: $MODE"
-
   echo "SYNC2REMOTE_LOG: $SYNC2REMOTE_LOG"
 
 fi
 
-echo "$WORKSPACE_FOLDER/ $REMOTE_HOST:$REMOTE_WORKSPACE_FOLDER_NAME/"
-
-rsync -av --dry-run --rsync-path=/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} $WORKSPACE_FOLDER/ $REMOTE_HOST:$REMOTE_WORKSPACE_FOLDER_NAME/  > $TEMP_DIR/SYNC2REMOTE_LOG.log  2> $ERROR_OUTPUT
+rsync -av  --rsync-path=/bin/rsync --exclude={'.git','.vscode','.project','.gitignore','boot','dev','etc','home','lib*','media','mnt','opt','proc','root','run','sbin','sys','srv','usr','var','Q*','www'} \
+  --delete $WORKSPACE_FOLDER/ $REMOTE_HOST:$REMOTE_WORKSPACE_FOLDER_NAME/  > $TEMP_DIR/SYNC2REMOTE_LOG.log  2> $ERROR_OUTPUT
 [[ -s "$ERROR_OUTPUT" ]] &&  error_handler
 
 mv $TEMP_DIR/SYNC2REMOTE_LOG.log "$SYNC2REMOTE_LOG"  2> $ERROR_OUTPUT  

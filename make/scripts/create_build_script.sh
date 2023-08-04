@@ -56,4 +56,4 @@ esac
 
 [[ -s "$ERROR_OUTPUT" ]] &&  error_handler
 
-echo -e "$COLOR_GREEN \nfinished creation of build script $COLOR_END\n"
+echo -e "$COLOR_GREEN \n finished creation of build script $COLOR_END"
