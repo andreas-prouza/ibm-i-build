@@ -53,5 +53,5 @@ endef
 upper_case = $(shell echo '$1' | tr '[:lower:]' '[:upper:]')
 
 define bash_call
-  ($1)
+  $1
 endef

@@ -142,15 +142,15 @@ all: init $(OBJS)
 init:
 	$(info crtcmd|summary time start $(shell date +"%T.%3N"))
 #	>| true: returns always success of this command
-	-rm -rf $(LOG_DIR)/*
+	-rm -rf $(LOG_DIR)/**/*
 
 # Create subdirectory for each library we use for logs
-	-mkdir -p $(LOG_DIR)/prouzalib; \
-	mkdir -p $(LOG_DIR)/prouzalib2
+	-mkdir -p $(LOG_DIR)/prouzalib
+	-mkdir -p $(LOG_DIR)/prouzalib2
 
 # Create subdirectory for each library we use for builds
-	-mkdir -p $(TGT_DIR)/prouzalib; \
-	mkdir -p $(TGT_DIR)/prouzalib2
+	-mkdir -p $(TGT_DIR)/prouzalib
+	-mkdir -p $(TGT_DIR)/prouzalib2
 
 	$(file > $(OBJECT_LIST_FILE))
 

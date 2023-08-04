@@ -73,11 +73,11 @@ endef
 #########################################################
 
 # if you need to convert the log-output to UTF-8 ... If you have special characters on output ... but also makes problems sometimes
-CCSID_CONV= | iconv -f IBM-1252 -t utf-8 
-#CCSID_CONV= | sed -e 's/'$$'\344''/ä/g'
-CONVERT_STDERR_LOG= iconv -f IBM-1252 -t utf-8 $(CL_LOG_ERROR) > $(CL_LOG_ERROR)_tmp && mv $(CL_LOG_ERROR)_tmp $(CL_LOG_ERROR) 
-CONVERT_STDOUT_LOG= iconv -f IBM-1252 -t utf-8 $(CL_LOG_STDOUT) > $(CL_LOG_STDOUT)_tmp && mv $(CL_LOG_STDOUT)_tmp $(CL_LOG_STDOUT) 
-CONVERT_JOBLOG_LOG= iconv -f IBM-1252 -t utf-8 $(CL_LOG_JOBLOG) > $(CL_LOG_JOBLOG)_tmp && mv $(CL_LOG_JOBLOG)_tmp $(CL_LOG_JOBLOG) 
+## CCSID_CONV= | iconv -f IBM-1252 -t utf-8 
+# old CCSID_CONV= | sed -e 's/'$$'\344''/ä/g'
+## CONVERT_STDERR_LOG= iconv -f IBM-1252 -t utf-8 $(CL_LOG_ERROR) > $(CL_LOG_ERROR)_tmp && mv $(CL_LOG_ERROR)_tmp $(CL_LOG_ERROR) ;
+## CONVERT_STDOUT_LOG= iconv -f IBM-1252 -t utf-8 $(CL_LOG_STDOUT) > $(CL_LOG_STDOUT)_tmp && mv $(CL_LOG_STDOUT)_tmp $(CL_LOG_STDOUT) ;
+## CONVERT_JOBLOG_LOG= iconv -f IBM-1252 -t utf-8 $(CL_LOG_JOBLOG) > $(CL_LOG_JOBLOG)_tmp && mv $(CL_LOG_JOBLOG)_tmp $(CL_LOG_JOBLOG) ;
 
 CL_LOG_ERROR='$(LOG_DIR)/$(LOG_FILE_NAME).error.log'
 CL_LOG_STDOUT='$(LOG_DIR)/$(LOG_FILE_NAME).splf.log'
@@ -112,7 +112,7 @@ define POST_COMPILE_FINAL
   $(CL_LOG) ; $(PRINT_JOBLOG)
 endef
 define FINALY
-  $(CONVERT_STDERR_LOG) ; $(CONVERT_STDOUT_LOG) ; $(CONVERT_JOBLOG_LOG) ; $(CHECK_ERROR) && $(TOUCH)
+  $(CONVERT_STDERR_LOG)  $(CONVERT_STDOUT_LOG)  $(CONVERT_JOBLOG_LOG)  $(CHECK_ERROR) && $(TOUCH)
 	$(info crtcmd|prod_obj|$@|$(LIBOBJ_NEW)|$(PROD_LIBOBJ))
 endef
 

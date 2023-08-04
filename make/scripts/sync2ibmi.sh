@@ -9,19 +9,21 @@ then
 
   echo "MODE: $MODE"
 
-  echo "SYNC_LOG: $SYNC_LOG"
+  echo "SYNC2REMOTE_LOG: $SYNC2REMOTE_LOG"
 
 fi
 
-rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete "$WORKSPACE_FOLDER"/ "$REMOTE_HOST":"$REMOTE_WORKSPACE_FOLDER_NAME"/   2> $ERROR_OUTPUT   >"$TEMP_DIR/SYNC_LOG.log"
+echo "$WORKSPACE_FOLDER/ $REMOTE_HOST:$REMOTE_WORKSPACE_FOLDER_NAME/"
+
+rsync -av --dry-run --rsync-path=/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} $WORKSPACE_FOLDER/ $REMOTE_HOST:$REMOTE_WORKSPACE_FOLDER_NAME/  > $TEMP_DIR/SYNC2REMOTE_LOG.log  2> $ERROR_OUTPUT
 [[ -s "$ERROR_OUTPUT" ]] &&  error_handler
 
-mv $TEMP_DIR/SYNC_LOG.log "$SYNC_LOG"  2> $ERROR_OUTPUT  
+mv $TEMP_DIR/SYNC2REMOTE_LOG.log "$SYNC2REMOTE_LOG"  2> $ERROR_OUTPUT  
 [[ -s "$ERROR_OUTPUT" ]] &&  error_handler
 
 if [ $MODE == 'debug' ]
 then
-  cat $SYNC_LOG
+  cat $SYNC2REMOTE_LOG
 fi
 
 

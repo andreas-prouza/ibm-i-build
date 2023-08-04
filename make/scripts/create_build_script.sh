@@ -3,14 +3,13 @@
 # Import global config
 source $(dirname $(realpath "$0"))/init.sh
 
-printf '#!/QOpenSys/pkgs/bin/bash'"\\n\\n" > $COMPILE_SCRIPT
+printf '#!/bin/bash'"\\n\\n" > $COMPILE_SCRIPT
+chmod +x $COMPILE_SCRIPT
 
 if [ $MODE == 'debug' -o $MODE == 'show-change-debug' ]
 then
-
-  echo "MODE: $MODE"
-
-  printf 'set -x'"\\n\\n" >> $COMPILE_SCRIPT
+  printf "print_debug() {\\n"' echo "#DEBUG-Remote: "$BASH_COMMAND '"\\n}\\n\\n" >> $COMPILE_SCRIPT
+  printf "trap 'print_debug' DEBUG\\n\\n" >> $COMPILE_SCRIPT
 fi
 
 
