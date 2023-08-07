@@ -5,7 +5,7 @@
             {
                 "match": "xxxxx.*$",
                 "isAsync": true,
-                "cmd": "make/scripts/sync2ibmi.sh"
+                "cmd": "xxxmake/scripts/sync2ibmi.sh"
             }
         ]
     },
@@ -15,11 +15,11 @@
     "command-runner.commands": {
         "Sync source to IBM i": "make/scripts/cleanup.sh   &&   make/scripts/sync2ibmi.sh ",
         "Sync logs back": "make/scripts/cleanup.sh   &&   make/scripts/sync_back_from_ibmi.sh ",
-        "Run build (summary output)": "make/scripts/cleanup.sh    &&   make/scripts/create_build_script.sh summary   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh   &&   make/scripts/sync_back_from_ibmi.sh",
-        "Run build (detailed output)": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh detailed   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh   &&   make/scripts/sync_back_from_ibmi.sh",
-        "Run build (debug)": "make/scripts/cleanup.sh debug   &&   make/scripts/create_build_script.sh debug   &&   make/scripts/sync2ibmi.sh debug   &&   make/scripts/run_build.sh debug   &&   make/scripts/sync_back_from_ibmi.sh debug",
+        "Run build (summary output)": "make/scripts/cleanup.sh    &&   make/scripts/create_build_script.sh summary   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh;   make/scripts/sync_back_from_ibmi.sh",
+        "Run build (detailed output)": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh detailed   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh;   make/scripts/sync_back_from_ibmi.sh",
+        "Run build (debug)": "make/scripts/cleanup.sh debug   &&   make/scripts/create_build_script.sh debug   &&   make/scripts/sync2ibmi.sh debug   &&   make/scripts/run_build.sh debug;   make/scripts/sync_back_from_ibmi.sh debug",
         "Simulate build": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh simulate",
-        "Reset ALL": "make/scripts/cleanup.sh   &&   make clean",
+        "CleanUp Build": "make/scripts/cleanup.sh   &&   make clean",
         "Show Change Debug": "make/scripts/cleanup.sh debug   &&   make/scripts/create_build_script.sh show-change-debug  ",
         "Show Change Compile": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh schow-change-compile ",
         "Show Change Object":  "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change-object",

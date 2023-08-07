@@ -12,7 +12,7 @@ then
 
 fi
 
-rsync -av  --rsync-path=/bin/rsync --exclude={'.git','.vscode','.project','.gitignore','boot','dev','etc','home','lib*','media','mnt','opt','proc','root','run','sbin','sys','srv','usr','var','Q*','www'} \
+rsync -av   --exclude={'.git','.vscode','.project','.gitignore','boot','dev','etc','home','lib*','media','mnt','opt','proc','root','run','sbin','sys','srv','usr','var','Q*','www'} \
   --delete $WORKSPACE_FOLDER/ $REMOTE_HOST:$REMOTE_WORKSPACE_FOLDER_NAME/  > $TEMP_DIR/SYNC2REMOTE_LOG.log  2> $ERROR_OUTPUT
 [[ -s "$ERROR_OUTPUT" ]] &&  error_handler
 

@@ -53,6 +53,7 @@ Define ```~/.profile``` file:
 
 ```sh
 echo 'export PATH="/QOpenSys/pkgs/bin:$PATH"' > ~/.profile
+cp ~/.profile ~/.bashrc # .bashrc is necessary for rsync
 ```
 
 This is neseccary to have the correct ```PATH``` in the IBM i shell.
