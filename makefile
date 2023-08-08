@@ -29,7 +29,7 @@ ACTGRP=PROUZAGRP
 STGMDL=*SNGLVL
 
 # You can also add other libs if necessary (separated by blanks)
-LIBLIST=$(TGTLIB_OBJ_GLOBAL)
+LIBLIST=$(TGTLIB_OBJ_GLOBAL) PROUZAT1
 
 DBGVIEW=*SOURCE
 TGTRLS=*CURRENT

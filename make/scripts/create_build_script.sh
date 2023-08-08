@@ -10,6 +10,7 @@ if [ $MODE == 'debug' -o $MODE == 'show-change-debug' ]
 then
   printf "print_debug() {\\n"' echo "#DEBUG-Remote: "$BASH_COMMAND '"\\n}\\n\\n" >> $COMPILE_SCRIPT
   printf "trap 'print_debug' DEBUG\\n\\n" >> $COMPILE_SCRIPT
+  printf "cl -v \"dspjob\"\\n\\n" >> $COMPILE_SCRIPT
 fi
 
 

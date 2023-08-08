@@ -29,13 +29,15 @@ NEW_LIB = $(NEW_LIB_TMP4)
 
 
 # character convertion
-PGM_NEW=$(notdir $(subst §,$$$$'\247',$(subst $$,'$$$$',$(subst #,\#,$*))))
+#PGM_NEW=$(notdir $(subst §,$$$$'\247',$(subst $$,'$$$$',$(subst #,\#,$*))))
+PGM_NEW=$(notdir $(subst $$,'$$$$',$(subst #,\#,$*)))
 
 # Specified target library + character convertion
 LIBOBJ_NEW= $(NEW_LIB)/$(PGM_NEW)
 
 
-SOURCE_NAME_NEW=$$(notdir $$(subst §,$$$$'\247',$$(subst $$,'$$$$',$$(subst \#,\\\#,$$*))))
+#SOURCE_NAME_NEW=$$(notdir $$(subst §,$$$$'\247',$$(subst $$,'$$$$',$$(subst \#,\\\#,$$*))))
+SOURCE_NAME_NEW=$$(notdir $$(subst $$,'$$$$',$$(subst \#,\\\#,$$*)))
 
 LOG_FILE_NAME=$@
 
@@ -58,12 +60,12 @@ LOG_FILE_NAME=$@
 # So we need to convert the unix variant to the IBM i variant:
 #       mv $'\302\247'test.mbr $'\247'test.mbr
 
-CHG_ATTR=cl "CHGATR OBJ('"'$<'"') ATR(*CCSID) VALUE(1208)"
+CHG_ATTR=$(EXC) "CHGATR OBJ('"'$<'"') ATR(*CCSID) VALUE(1208)"
 define DOLLAR_SH_REPLACE
 	$(CHG_ATTR) $(CCSID_CONV)
-	$(if $(findstring §,$*),\
-			mv $(subst $$,'$$',$(subst #,\#,$?)) $$(echo $(subst $$,'$$',$(subst #,\#,$?)) | sed -e 's/'$$'\302''//g'),\
-	)
+#	$(if $(findstring §,$*),\
+#			mv $(subst $$,'$$',$(subst #,\#,$?)) $$(echo $(subst $$,'$$',$(subst #,\#,$?)) | sed -e 's/'$$'\302''//g'),\
+#	)
 endef
 
 
@@ -73,11 +75,11 @@ endef
 #########################################################
 
 # if you need to convert the log-output to UTF-8 ... If you have special characters on output ... but also makes problems sometimes
-## CCSID_CONV= | iconv -f IBM-1252 -t utf-8 
+CCSID_CONV= | iconv -f IBM-1252 -t utf-8 
 # old CCSID_CONV= | sed -e 's/'$$'\344''/ä/g'
-## CONVERT_STDERR_LOG= iconv -f IBM-1252 -t utf-8 $(CL_LOG_ERROR) > $(CL_LOG_ERROR)_tmp && mv $(CL_LOG_ERROR)_tmp $(CL_LOG_ERROR) ;
-## CONVERT_STDOUT_LOG= iconv -f IBM-1252 -t utf-8 $(CL_LOG_STDOUT) > $(CL_LOG_STDOUT)_tmp && mv $(CL_LOG_STDOUT)_tmp $(CL_LOG_STDOUT) ;
-## CONVERT_JOBLOG_LOG= iconv -f IBM-1252 -t utf-8 $(CL_LOG_JOBLOG) > $(CL_LOG_JOBLOG)_tmp && mv $(CL_LOG_JOBLOG)_tmp $(CL_LOG_JOBLOG) ;
+CONVERT_STDERR_LOG= iconv -f IBM-1252 -t utf-8 $(CL_LOG_ERROR) > $(CL_LOG_ERROR)_tmp && mv $(CL_LOG_ERROR)_tmp $(CL_LOG_ERROR) ;
+CONVERT_STDOUT_LOG= iconv -f IBM-1252 -t utf-8 $(CL_LOG_STDOUT) > $(CL_LOG_STDOUT)_tmp && mv $(CL_LOG_STDOUT)_tmp $(CL_LOG_STDOUT) ;
+CONVERT_JOBLOG_LOG= iconv -f IBM-1252 -t utf-8 $(CL_LOG_JOBLOG) > $(CL_LOG_JOBLOG)_tmp && mv $(CL_LOG_JOBLOG)_tmp $(CL_LOG_JOBLOG) ;
 
 CL_LOG_ERROR='$(LOG_DIR)/$(LOG_FILE_NAME).error.log'
 CL_LOG_STDOUT='$(LOG_DIR)/$(LOG_FILE_NAME).splf.log'

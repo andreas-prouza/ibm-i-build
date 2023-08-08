@@ -46,10 +46,10 @@
 ## Replace map specific libs to a separate target
 ## TGTLIB_{SRC-LIB} := {new-compile-lib}
 #############################################################
-#TGTLIB_PROUZALIB := T1
-#TGTLIB_PROUZALIB2 := T2
-TGTLIB_PROUZA4 := T3
-TGTLIB_PROUZA2 := T3
+TGTLIB_PROUZALIB := PROUZAT1
+TGTLIB_PROUZALIB2 := PROUZAT2
+TGTLIB_PROUZA4 := PROUZAT3
+TGTLIB_PROUZA2 := PROUZAT3
 #TGTLIB_PROUZA4 := *source
 #TGTLIB_OBJ_GLOBAL=Hansi
 
