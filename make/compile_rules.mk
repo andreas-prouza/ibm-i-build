@@ -62,10 +62,11 @@ LOG_FILE_NAME=$@
 
 CHG_ATTR=$(EXC) "CHGATR OBJ('"'$<'"') ATR(*CCSID) VALUE(1208)"
 define DOLLAR_SH_REPLACE
-	$(CHG_ATTR) $(CCSID_CONV)
-#	$(if $(findstring §,$*),\
-#			mv $(subst $$,'$$',$(subst #,\#,$?)) $$(echo $(subst $$,'$$',$(subst #,\#,$?)) | sed -e 's/'$$'\302''//g'),\
-#	)
+  $(CHG_ATTR) $(CCSID_CONV)
+# $(if $(findstring §,$*),\
+			mv $(subst $$,'$$',$(subst #,\#,$?)) $$(echo $(subst $$,'$$',$(subst #,\#,$?)) | sed -e 's/'$$'\302''//g'),\
+	)
+
 endef
 
 

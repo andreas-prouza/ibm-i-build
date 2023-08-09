@@ -24,6 +24,7 @@
         "Show Change Compile": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh schow-change-compile ",
         "Show Change Object":  "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change-object",
         "Create Prod Object List": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh create-object-list ",
+        "Create build script": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh summary ",
         "Reset Build Timestamp": "make/scripts/cleanup.sh   &&   make/scripts/reset.sh",
         "Test": "make/scripts/test.sh"
     }

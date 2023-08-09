@@ -8,7 +8,7 @@ chmod +x $COMPILE_SCRIPT
 
 if [ $MODE == 'debug' -o $MODE == 'show-change-debug' ]
 then
-  printf "print_debug() {\\n"' echo "#DEBUG-Remote: "$BASH_COMMAND '"\\n}\\n\\n" >> $COMPILE_SCRIPT
+  printf "print_debug() {\\n"' echo \"#DEBUG-Remote \"`date +"%%F %%T.%%3N"`\": \"$BASH_COMMAND '"\\n}\\n\\n" >> $COMPILE_SCRIPT
   printf "trap 'print_debug' DEBUG\\n\\n" >> $COMPILE_SCRIPT
   printf "cl -v \"dspjob\"\\n\\n" >> $COMPILE_SCRIPT
 fi
