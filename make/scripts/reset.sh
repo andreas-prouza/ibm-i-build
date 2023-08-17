@@ -7,7 +7,7 @@ source $(dirname $(realpath "$0"))/init.sh
 # git restore -s@ -SW -- build
 
 # Get version from another branch
-git checkout production -- build
+git checkout remotes/origin/production -- build
 
 ls -d $WORKSPACE_FOLDER/build/*/ | xargs -I {} find {} -type f | while read -r line; do touch $line -d "`cat $line`"; done
 
