@@ -26,6 +26,9 @@
         "Create Prod Object List": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh create-object-list ",
         "Create build script": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh summary ",
         "Reset Build Timestamp": "make/scripts/cleanup.sh   &&   make/scripts/reset.sh",
+        "Create deployment": "git -c 'core.editor=code --wait --reuse-window' merge production",
+        "Merge with production": "git pull && git -c 'core.editor=code --wait --reuse-window' merge main && git push && echo 'Done' && git rev-parse HEAD >> commit.log ",
+        "Merge cancel": "git merge --abort",
         "Test": "make/scripts/test.sh"
     }
 }
