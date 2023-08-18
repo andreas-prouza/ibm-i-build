@@ -21,7 +21,7 @@ print_debug() {
   echo "#DEBUG-$SCRIPT: "$BASH_COMMAND >> $STD_OUTPUT_TMP
 }
 on_exit() {
-  cat $STD_OUTPUT_TMP > $STD_OUTPUT 2>/dev/null
+  #cat $STD_OUTPUT_TMP > $STD_OUTPUT 2>/dev/null
 }
 
 trap 'on_exit' EXIT
