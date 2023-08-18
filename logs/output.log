@@ -1,0 +1,63 @@
+
+
+[1;95m###################################################  [0m
+
+[1;95m###################################################  [0m
+[1;96m2023-08-18 11:57:33.182 ... cleanup.sh [0m
+[1;96m2023-08-18 11:57:33.182 ... cleanup.sh [0m
+[1;95m################################################### [0m
+
+[1;95m################################################### [0m
+
+WORKSPACE_FOLDER /home/andreas/projekte/opensource/ibm-i-build
+WORKSPACE_FOLDER /home/andreas/projekte/opensource/ibm-i-build
+Create object list
+
+[1;95m###################################################  [0m
+
+[1;95m###################################################  [0m
+[1;96m2023-08-18 11:57:33.195 ... create_build_script.sh [0m
+[1;96m2023-08-18 11:57:33.195 ... create_build_script.sh [0m
+[1;95m################################################### [0m
+
+[1;95m################################################### [0m
+
+crtcmd|prod_obj|prouzalib2/test1.rpgle.pgm|PROUZAT2/test1|PROUZALIB2/test1
+crtcmd|prod_obj|prouzalib2/test1.rpgle.pgm|PROUZAT2/test1|PROUZALIB2/test1
+[92m 
+ finished creation of build script [0m
+[92m 
+ finished creation of build script [0m
+Create compile script
+
+[1;95m###################################################  [0m
+
+[1;95m###################################################  [0m
+[1;96m2023-08-18 11:57:33.449 ... create_build_script.sh [0m
+[1;96m2023-08-18 11:57:33.449 ... create_build_script.sh [0m
+[1;95m################################################### [0m
+
+[1;95m################################################### [0m
+
+summary time start 11:57:33.457
+summary ===============================================================
+summary Build RPG: 1 PROUZAT2/test1
+summary Build CL: 0 
+summary Build DSPF: 0 
+summary Build SRVPGM: 0 
+summary Build DB: 0 
+summary ===============================================================
+summary time end 11:57:33.689
+summary time start 11:57:33.457
+summary ===============================================================
+summary Build RPG: 1 PROUZAT2/test1
+summary Build CL: 0 
+summary Build DSPF: 0 
+summary Build SRVPGM: 0 
+summary Build DB: 0 
+summary ===============================================================
+summary time end 11:57:33.689
+[92m 
+ finished creation of build script [0m
+[92m 
+ finished creation of build script [0m

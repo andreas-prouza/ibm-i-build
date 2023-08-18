@@ -1,0 +1,5 @@
+[OBJECTS]
+*PGM=PROUZAT2/test1 
+*SRVPGM=
+*DSPF=
+*FILE=

@@ -1,0 +1,1 @@
+crtcmd|prod_obj|prouzalib2/test1.rpgle.pgm|PROUZAT2/test1|PROUZALIB2/test1
