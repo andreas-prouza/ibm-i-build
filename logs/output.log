@@ -3,8 +3,8 @@
 [1;95m###################################################  [0m
 
 [1;95m###################################################  [0m
-[1;96m2023-08-18 12:46:41.371 ... cleanup.sh [0m
-[1;96m2023-08-18 12:46:41.371 ... cleanup.sh [0m
+[1;96m2023-08-18 13:37:57.320 ... cleanup.sh [0m
+[1;96m2023-08-18 13:37:57.320 ... cleanup.sh [0m
 [1;95m################################################### [0m
 
 [1;95m################################################### [0m
@@ -16,12 +16,14 @@ Create object list
 [1;95m###################################################  [0m
 
 [1;95m###################################################  [0m
-[1;96m2023-08-18 12:46:41.396 ... create_build_script.sh [0m
-[1;96m2023-08-18 12:46:41.396 ... create_build_script.sh [0m
+[1;96m2023-08-18 13:37:57.339 ... create_build_script.sh [0m
 [1;95m################################################### [0m
 
+[1;96m2023-08-18 13:37:57.339 ... create_build_script.sh [0m
 [1;95m################################################### [0m
 
+crtcmd|prod_obj|prouzalib2/test1.rpgle.pgm|PROUZAT2/test1|PROUZALIB2/test1
+crtcmd|prod_obj|prouzalib2/test1.rpgle.pgm|PROUZAT2/test1|PROUZALIB2/test1
 [92m 
  finished creation of build script [0m
 [92m 
@@ -31,30 +33,30 @@ Create compile script
 [1;95m###################################################  [0m
 
 [1;95m###################################################  [0m
-[1;96m2023-08-18 12:46:41.426 ... create_build_script.sh [0m
-[1;96m2023-08-18 12:46:41.426 ... create_build_script.sh [0m
+[1;96m2023-08-18 13:37:57.621 ... create_build_script.sh [0m
+[1;96m2023-08-18 13:37:57.621 ... create_build_script.sh [0m
 [1;95m################################################### [0m
 
 [1;95m################################################### [0m
 
-summary time start 12:46:41.433
+summary time start 13:37:57.631
 summary ===============================================================
-summary Build RPG: 0 
+summary Build RPG: 1 PROUZAT2/test1
 summary Build CL: 0 
 summary Build DSPF: 0 
 summary Build SRVPGM: 0 
 summary Build DB: 0 
 summary ===============================================================
-summary time end 12:46:41.443
-summary time start 12:46:41.433
+summary time end 13:37:57.928
+summary time start 13:37:57.631
 summary ===============================================================
-summary Build RPG: 0 
+summary Build RPG: 1 PROUZAT2/test1
 summary Build CL: 0 
 summary Build DSPF: 0 
 summary Build SRVPGM: 0 
 summary Build DB: 0 
 summary ===============================================================
-summary time end 12:46:41.443
+summary time end 13:37:57.928
 [92m 
  finished creation of build script [0m
 [92m 
