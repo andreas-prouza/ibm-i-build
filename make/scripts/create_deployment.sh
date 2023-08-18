@@ -106,8 +106,7 @@ check_object_list
 echo "Create compile script"
 make/scripts/create_build_script.sh default
 
-git status
-git add .
+git add -A
 git commit -m "Object list & build script created"
 git push
 
