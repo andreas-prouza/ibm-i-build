@@ -1,6 +1,6 @@
 #logs/**
 .vscode/*.log
 #build/compile.sh
-build/*.txt
+#build/*.txt
 # make/.makeprofile.mk
 .vscode/settings.json
