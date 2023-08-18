@@ -57,7 +57,7 @@ git pull
 # Get version from another branch
 #git checkout remotes/origin/production -- build
 
-git checkout production
+git checkout $DEPLOYMENT_UAT_MAIN_BRANCH
 
 #-----------------------------------------
 # First create a new deployment
