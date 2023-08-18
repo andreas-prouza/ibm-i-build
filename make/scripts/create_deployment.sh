@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-set -x
+# set -x
 
 # Import global config
 source $(dirname $(realpath "$0"))/init.sh
@@ -19,6 +19,24 @@ git_checkout_release_branch () {
   git push --set-upstream origin $1
 
 }
+
+
+check_object_list () {
+
+  if [ ! -s "${COMPILE_OBJECT_LIST}" ]; then
+    git reset --hard HEAD
+    git clean -fd
+    git checkout $current_branch
+    git stash pop
+    git branch --delete  $new_release
+    git push -d origin $new_release
+    echo -e "\n\n$COLOR_RED No objects available to compile $COLOR_END\n"
+    exit 1
+  fi
+
+}
+
+
 
 # Undo changes
 # git restore -s@ -SW -- build
@@ -77,6 +95,8 @@ make/scripts/cleanup.sh
 
 echo "Create object list"
 make/scripts/create_build_script.sh create-object-list
+
+check_object_list
 
 echo "Create compile script"
 make/scripts/create_build_script.sh default
