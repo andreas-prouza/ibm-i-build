@@ -1,0 +1,3 @@
+CPD000D: Befehl QSYS/CRTRPGMOD nicht sicher für Job mit mehreren Threads.
+RNS9308: Umwandlung gestoppt. Fehler mit Bewertungsstufe 20 im Programm gefunden.
+RNS9309: Umwandlung fehlgeschlagen. Modul TEST1 in Bibliothek PROUZAT2 nicht erstellt.
