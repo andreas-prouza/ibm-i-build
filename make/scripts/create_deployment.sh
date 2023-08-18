@@ -126,3 +126,11 @@ echo "Restore workspace"
 # Get uncommited files back
 git checkout $current_branch
 git stash pop || true
+
+
+echo -e "$COLOR_GREEN Created new deployment $COLOR_END"
+echo -e "$COLOR_GREEN Workflow: $DEPLOYMENT_UAT_WORKFLOW $COLOR_END"
+echo -e "$COLOR_GREEN Version: $deployment_version $COLOR_END"
+echo -e "$COLOR_GREEN Commit: $current_commit $COLOR_END"
+echo -e "$COLOR_GREEN New branch: $new_release $COLOR_END"
+echo -e "$COLOR_GREEN $DEPLOYMENT_UAT_URL/show_details/$project/$deployment_version $COLOR_END"
