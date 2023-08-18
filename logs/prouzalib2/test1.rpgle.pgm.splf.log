@@ -1,5 +1,5 @@
 Command is > CRTRPGMOD MODULE(PROUZAT2/test1) SRCSTMF('./prouzalib2//qrpglesrc/test1.rpgle') DBGVIEW(*SOURCE) REPLACE(*YES) TGTCCSID(*JOB) INCDIR('./prouzalib2/') <
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 21:49:03       Seite      1
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 22:05:52       Seite      1
   Befehl . . . . . . . . . . . . . :   CRTRPGMOD
     Ausgegeben von . . . . . . . . :     PROUZAT1
   Modul  . . . . . . . . . . . . . :   TEST1
@@ -9,7 +9,7 @@ Command is > CRTRPGMOD MODULE(PROUZAT2/test1) SRCSTMF('./prouzalib2//qrpglesrc/t
     CCSID  . . . . . . . . . . . . :     1208
   Ziel-CCSID . . . . . . . . . . . :   *JOB (1141)
   Text 'Beschreibung'  . . . . . . :
-  Letzte Änderung  . . . . . . . . :   18/08/23  13:50:15
+  Letzte Änderung  . . . . . . . . :   18/08/23  22:05:49
   Generierungsbewertungsstufe  . . :   10
   Umwandlungsprogrammauswahlmögl.  :   *XREF      *GEN       *NOSECLVL  *SHOWCPY
                                        *EXPDDS    *EXT       *NOSHOWSKP *NOSRCSTMT
@@ -38,23 +38,23 @@ Command is > CRTRPGMOD MODULE(PROUZAT2/test1) SRCSTMF('./prouzalib2//qrpglesrc/t
   Verzeichnis einschließen . . . . :   ./prouzalib2/
   Vorprozessoroptionen . . . . . . :   *NONE
   REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 21:49:03       Seite      2
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 22:05:52       Seite      2
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
 Q u e l l e n l i s t e
      1 **free                                                                                                               000001
      2                                                                                                                      000002
-     3 dsply 'Yes, this is a very simple test for another LIB neu 2';                                                       000003
+     3 dsply 'Yes, this is a test for another LIB neuxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 2';                                   000003
      4                                                                                                                      000004
      5 return;                                                                                                              000005
 * * * * *   E N D E   D E R   Q U E L L E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 21:49:03       Seite      3
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 22:05:52       Seite      3
 Z u s ä t z l i c h e   D i a g n o s e n a c h r i c h t e n
  Msg-ID  Sv Nummer Folge   Nachrichtentext
-*RNF7016 20      3 000003  Anzeigelänge 53 überschreitet maximal zulässige Länge 52;
+*RNF7016 20      3 000003  Anzeigelänge 73 überschreitet maximal zulässige Länge 52;
                            die Bestimmung wird ignoriert.
 * * * * *   E N D E   D E R   Z U S Ä T Z L I C H E N   D I A G N O S E N A C H R I C H T E N   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 21:49:03       Seite      4
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 22:05:52       Seite      4
 Q u e r v e r w e i s l i s t e
       Datei- und Satzverweise:
          Datei             Einheit            Verweise (D=Definiert)
@@ -66,7 +66,7 @@ Q u e r v e r w e i s l i s t e
       Bezugszahlen-/Anzeigerverweise:
          Bez./Anz.                            Verweise (D=Definiert M=Modifiz.)
 * * * * *   E N D E   D E R   Q U E R V E R W E I S L I S T E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 21:49:03       Seite      5
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 22:05:52       Seite      5
 E x t e r n e   V e r w e i s e
       Statisch gebundene Prozeduren:
          Prozedur                             Verweise
@@ -78,12 +78,12 @@ E x t e r n e   V e r w e i s e
          Feld              Attribute          Definiert
          Keine Verweise in der Quelle.
 * * * * *   E N D E   D E R   E X T E R N E N   V E R W E I S E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 21:49:03       Seite      6
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 22:05:52       Seite      6
 N a c h r i c h t e n z u s a m m e n f a s s u n g
  Msg-ID  Sv Nummer Nachrichtentext
 *RNF7016 20      1 Anzeigelänge überschreitet die maximal zulässige Länge.
 * * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 21:49:03       Seite      7
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT2/TEST1           SPGV74     18/08/23 22:05:52       Seite      7
 E n d z u s a m m e n f a s s u n g
   Nachrichtenübersicht:
     Information (00)  . . . . . . . :        0
