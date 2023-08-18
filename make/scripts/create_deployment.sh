@@ -73,6 +73,7 @@ fi
 #-----------------------------------------
 # Create compile script
 #-----------------------------------------
+make/scripts/cleanup.sh
 
 echo "Create object list"
 make/scripts/create_build_script.sh create-object-list
