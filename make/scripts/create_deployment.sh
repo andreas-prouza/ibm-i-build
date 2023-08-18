@@ -83,7 +83,7 @@ git_checkout_release_branch $new_release $current_commit
 
 
 echo "Get commit hash of release branch"
-new_release_commit=$(git show-ref --verify refs/remotes/origin/$new_release | cut -d " " -f1)
+new_release_commit=$(git show-ref --verify refs/heads/$new_release | cut -d " " -f1)
 
 echo "Check if commit hash ist the same"
 if [ "$new_release_commit" != "$current_commit" ]; then
@@ -106,7 +106,7 @@ check_object_list
 echo "Create compile script"
 make/scripts/create_build_script.sh default
 
-git add -A; git commit -m "Object list & build script created"; git push
+git add -A; git commit -m "Object list & build script created"; git push --set-upstream origin $new_release
 
 
 #-----------------------------------------
