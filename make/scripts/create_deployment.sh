@@ -14,7 +14,7 @@ git_checkout_release_branch () {
     exit 0
   fi
 
-  echo "Create new branch"
+  echo "Create new branch $1 with commit $2"
   git checkout -b $1 $2
   git push --set-upstream origin $1
 
@@ -106,9 +106,7 @@ check_object_list
 echo "Create compile script"
 make/scripts/create_build_script.sh default
 
-git add -A
-git commit -m "Object list & build script created"
-git push
+git add -A; git commit -m "Object list & build script created"; git push
 
 
 #-----------------------------------------
