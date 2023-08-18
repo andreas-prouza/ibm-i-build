@@ -15,6 +15,8 @@
     * Windows Subsystem for Linus (WSL) is installed
   * for [Linux](integration_in_your_ide.md#linux)
     * ```rsync``` is installed
+    * ```make``` is installed
+    * ```jq``` is installed
   * [VSCode extensions](integration_in_your_ide.md#vscode-extensions) if you use vscode
 
 ### Without IDE
