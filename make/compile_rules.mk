@@ -202,6 +202,8 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE))
 
+	$(CHECK_ERROR)
+
 	$(info crtcmd|$@|$(RMVBNDDIR_CMD))
 	$(call bash_call,$(RMVBNDDIR))
 	$(info crtcmd|$@|$(CRTSRVPGM_CMD))
@@ -228,6 +230,8 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE))
 
+	$(CHECK_ERROR)
+
 	$(info crtcmd|$@|$(RMVBNDDIR_CMD))
 	$(call bash_call,$(RMVBNDDIR))
 	$(info crtcmd|$@|$(CRTSRVPGM_CMD))
@@ -252,6 +256,8 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 	$(eval cmd:=$(subst \,,$(cmd)))
 
 	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE))
+
+	$(CHECK_ERROR)
 
 	$(info crtcmd|$@|$(RMVBNDDIR_CMD))
 	$(call bash_call,$(RMVBNDDIR))
@@ -332,6 +338,8 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE))
 
+	$(CHECK_ERROR)
+
     # Create command string
 	$(eval cmd := CRTPGM PGM("$(LIBOBJ_NEW)") ACTGRP($(ACTGRP)) REPLACE(*YES) TGTRLS($(TGTRLS)) \
 					STGMDL($(STGMDL)) DETAIL(*BASIC) BNDDIR($(INCLUDE_BNDDIR)))
@@ -357,6 +365,8 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 	$(eval cmd:=$(subst \,,$(cmd)))
 
 	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE))
+
+	$(CHECK_ERROR)
 
     # Create command string
 	$(eval cmd := CRTPGM PGM("$(LIBOBJ_NEW)") ACTGRP($(ACTGRP)) REPLACE(*YES) TGTRLS($(TGTRLS)) STGMDL($(STGMDL)) DETAIL(*BASIC) BNDDIR($(INCLUDE_BNDDIR)))
