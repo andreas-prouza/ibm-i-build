@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-# set -x
+#set -x
 
 # Import global config
 source $(dirname $(realpath "$0"))/init.sh
@@ -109,6 +109,7 @@ make/scripts/create_build_script.sh default
 git add .
 git commit -m "Object list & build script created"
 git push
+
 
 #-----------------------------------------
 # Open deplyoment
