@@ -50,6 +50,7 @@ current_branch=`git rev-parse --abbrev-ref HEAD`
 current_commit=`git rev-parse HEAD`
 
 # Save all uncommited files
+git stash clear
 git stash --include-untracked
 
 git pull
