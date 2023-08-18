@@ -30,6 +30,10 @@ check_object_list () {
     git stash pop
     git branch --delete  $new_release
     git push -d origin $new_release
+    response=$(curl -X POST \
+          $DEPLOYMENT_UAT_URL/cancel_deployment \
+          -H 'Content-Type: application/json' \
+          -d '{"filename": "'$file_name'"}')
     echo -e "\n\n$COLOR_RED No objects available to compile $COLOR_END\n"
     exit 1
   fi
@@ -62,6 +66,7 @@ response=$(curl $DEPLOYMENT_UAT_URL/create_deployment/$DEPLOYMENT_UAT_WORKFLOW/$
 new_release=$(jq -r '.general.release_branch' <<< $response)
 deployment_version=$(jq -r '.general.deploy_version' <<< $response)
 project=$(jq -r '.general.project' <<< $response)
+file_name=$(jq -r '.general.file_name' <<< $response)
 
 echo -e "$COLOR_GREEN Created new deployment $COLOR_END"
 echo -e "$COLOR_GREEN Workflow: $DEPLOYMENT_UAT_WORKFLOW $COLOR_END"
