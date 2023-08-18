@@ -125,4 +125,4 @@ echo "Restore workspace"
 
 # Get uncommited files back
 git checkout $current_branch
-git stash pop
+git stash pop || true
