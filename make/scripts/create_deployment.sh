@@ -8,8 +8,8 @@ source $(dirname $(realpath "$0"))/init.sh
 
 git_checkout_release_branch () {
 
-  branch =$(git rev-parse --verify $1)
-  if [ $branch != '' ]; then
+  branch=$(git rev-parse --verify $1)
+  if [ "$branch" != '' ]; then
     git checkout $1
     exit 0
   fi
