@@ -16,7 +16,7 @@ git_checkout_release_branch () {
 
   echo "Create new branch $1 with commit $2"
   git checkout -b $1 $2
-  git push --set-upstream origin $1
+  #git push --set-upstream origin $1
 
 }
 
@@ -29,7 +29,7 @@ check_object_list () {
     git checkout $current_branch
     git stash pop
     git branch --delete  $new_release
-    git push -d origin $new_release
+    #git push -d origin $new_release
     response=$(curl -X POST \
           $DEPLOYMENT_UAT_URL/cancel_deployment \
           -H 'Content-Type: application/json' \
