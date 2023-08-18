@@ -100,7 +100,7 @@ TOUCH=touch '$(TGT_DIR)/$(LOG_FILE_NAME)'; date > $(TGT_DIR)/$(LOG_FILE_NAME)
 define CHECK_ERROR
 if [ -s $(CL_LOG_ERROR) ]; then
  echo -e '$(COLOR_RED)failed: $<$(COLOR_END)' 1>&2
- exit
+ exit 1
 fi
 endef
 
