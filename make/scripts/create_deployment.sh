@@ -11,6 +11,7 @@ git_checkout_release_branch () {
   branch=$(git rev-parse --verify $1)
   if [ "$branch" != '' ]; then
     git checkout $1
+    git pull
     exit 0
   fi
 
@@ -59,6 +60,8 @@ git pull
 #git checkout remotes/origin/production -- build
 
 git checkout $DEPLOYMENT_UAT_MAIN_BRANCH
+
+git pull
 
 #-----------------------------------------
 # First create a new deployment
