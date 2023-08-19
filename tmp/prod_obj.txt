@@ -1,0 +1,6 @@
+crtcmd|prod_obj|prouzalib/test.rpgle.pgm|PROUZAT1/test|PROUZALIB/test
+crtcmd|prod_obj|prouzalib/§test.rpgle.pgm|PROUZAT3/§test|PROUZA2/$$'\247'test
+crtcmd|prod_obj|prouzalib2/test.rpgle.pgm|PROUZAT2/test|PROUZALIB2/test
+crtcmd|prod_obj|prouzalib2/test1.rpgle.pgm|PROUZAT2/test1|PROUZALIB2/test1
+crtcmd|prod_obj|prouzalib/date.sqlrpgle.srvpgm|PROUZAT1/date|PROUZALIB/date
+crtcmd|prod_obj|prouzalib/testlog.rpgle.pgm|PROUZAT3/testlog|PROUZA2/testlog
