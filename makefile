@@ -119,11 +119,11 @@ help:
 all: init $(OBJS)
 	-cat $(LOG_DIR)/*.error.log 2> /dev/null | true
 
-	$(file >> $(OBJECT_LIST_FILE),[OBJECTS])
-	$(file >> $(OBJECT_LIST_FILE),*PGM=$(BUILD_RPG) $(BUILD_CL))
-	$(file >> $(OBJECT_LIST_FILE),*SRVPGM=$(BUILD_SRVPGM))
-	$(file >> $(OBJECT_LIST_FILE),*DSPF=$(BUILD_DSPF))
-	$(file >> $(OBJECT_LIST_FILE),*FILE=$(BUILD_DB))
+#	$(file >> $(OBJECT_LIST_FILE),[OBJECTS])
+#	$(file >> $(OBJECT_LIST_FILE),*PGM=$(BUILD_RPG) $(BUILD_CL))
+#	$(file >> $(OBJECT_LIST_FILE),*SRVPGM=$(BUILD_SRVPGM))
+#	$(file >> $(OBJECT_LIST_FILE),*DSPF=$(BUILD_DSPF))
+#	$(file >> $(OBJECT_LIST_FILE),*FILE=$(BUILD_DB))
 
 	$(info crtcmd|summary ===============================================================)
 	$(info crtcmd|summary Build RPG: $(COUNTER_RPG) $(BUILD_RPG))

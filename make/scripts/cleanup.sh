@@ -25,9 +25,10 @@ fi
 echo WORKSPACE_FOLDER $WORKSPACE_FOLDER
 
 
+mkdir -p $WORKSPACE_FOLDER/tmp/logs
 mkdir -p $WORKSPACE_FOLDER/logs
 mkdir -p $WORKSPACE_FOLDER/build
 
 find $WORKSPACE_FOLDER/logs -maxdepth 1 -type f -delete
 rm $WORKSPACE_FOLDER/logs/**/* || true 2>/dev/null
-find $WORKSPACE_FOLDER/build -maxdepth 1 -type f -delete
+rm $WORKSPACE_FOLDER/tmp/* || true 2>/dev/null
