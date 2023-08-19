@@ -152,7 +152,7 @@ init:
 	-mkdir -p $(TGT_DIR)/prouzalib
 	-mkdir -p $(TGT_DIR)/prouzalib2
 
-	$(file > $(OBJECT_LIST_FILE))
+#	$(file > $(OBJECT_LIST_FILE))
 
 # Be sure that all sources are UTF-8 ...  But quite slow for huge amount of sources
 #	cl -i "CHGATR OBJ('$(SRC_DIR)') ATR(*CCSID) VALUE(1208) SUBTREE(*ALL)"
