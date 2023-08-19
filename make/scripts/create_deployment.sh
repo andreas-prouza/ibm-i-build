@@ -50,9 +50,24 @@ check_object_list () {
 current_branch=`git rev-parse --abbrev-ref HEAD`
 current_commit=`git rev-parse HEAD`
 
+# Index all untracked files (so they become visible in "git diff")
+git add -N -A
+
+changed_files=$(git diff --name-status)
+
+if [ "$changed_files" != '' ]; then
+
+  echo -e "$COLOR_RED Untracked files exist!! $COLOR_END"
+  echo -e "$COLOR_CYAN_BOLD $changed_files $COLOR_END"
+  echo -e "$COLOR_RED Please commit them first $COLOR_END"
+  exit 1
+
+fi
+
 # Save all uncommited files
-git stash clear
-git stash --include-untracked
+# Not necessary anymore, because all is commited
+#git stash clear
+#git stash --include-untracked
 
 git pull
 
@@ -93,7 +108,7 @@ echo "Check if commit hash ist the same"
 if [ "$new_release_commit" != "$current_commit" ]; then
   echo -e "$COLOR_RED Commit of branch $new_release ($new_release_commit) does not match current commit ($current_commit) $COLOR_END"
   git checkout $current_branch
-  git stash pop
+  #git stash pop
   exit 1
 fi
 
@@ -128,7 +143,7 @@ echo "Restore workspace"
 
 # Get uncommited files back
 git checkout $current_branch
-git stash pop || true
+#git stash pop || true
 
 
 echo -e "$COLOR_GREEN Created new deployment $COLOR_END"
