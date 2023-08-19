@@ -60,3 +60,25 @@
 * Compare between different versions
 
   ![git-compare](docs/assets/git-compare.jpg)
+
+
+***Best practice***
+
+Disable ```logs``` and ```build``` dir to synch with remote repository.
+
+This is only necessary for build servers.
+
+```sh
+git update-index --assume-unchanged build/compile.sh
+git update-index --assume-unchanged build/objects.txt
+git update-index --assume-unchanged build/prod_obj.txt
+git update-index --assume-unchanged build/{you-lib}/*
+
+git update-index --assume-unchanged logs/{you-lib}/*
+```
+
+Exclude them in ```{you-dir}/.git/info/exclude```
+```sh
+logs/***
+build/***
+```
