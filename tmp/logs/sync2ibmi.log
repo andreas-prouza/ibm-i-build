@@ -1,0 +1,20 @@
+sending incremental file list
+deleting logs/prouzalib/§test.rpgle.pgm.splf.log
+deleting logs/prouzalib/§test.rpgle.pgm.joblog.log
+deleting logs/prouzalib/§test.rpgle.pgm.error.log
+deleting logs/prouzalib2/test1.rpgle.pgm.splf.log
+deleting logs/prouzalib2/test1.rpgle.pgm.joblog.log
+deleting logs/prouzalib2/test1.rpgle.pgm.error.log
+logs/prouzalib/
+logs/prouzalib2/
+prouzalib2/qrpglesrc/test1.rpgle
+tmp/
+tmp/compile.sh
+tmp/logs/
+tmp/logs/error.log
+tmp/logs/run_build.log
+tmp/logs/sync2ibmi.log
+tmp/logs/sync_back.log
+
+sent 6.527 bytes  received 469 bytes  2.798,40 bytes/sec
+total size is 626.125  speedup is 89,50

@@ -1,0 +1,9 @@
+receiving incremental file list
+build/prouzalib2/test1.rpgle.pgm
+logs/prouzalib2/
+logs/prouzalib2/test1.rpgle.pgm.error.log
+logs/prouzalib2/test1.rpgle.pgm.joblog.log
+logs/prouzalib2/test1.rpgle.pgm.splf.log
+
+sent 151 bytes  received 7,67K bytes  3,13K bytes/sec
+total size is 49,96K  speedup is 6,38
