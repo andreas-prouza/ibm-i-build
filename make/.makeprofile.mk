@@ -77,10 +77,14 @@ OBJS:= prouzalib/file1.pf.file \
 			 prouzalib/testsqlerr.sqlrpgle.pgm \
 			 prouzalib/prouzadir.bnddir \
 			 prouzalib/testcl.clle.pgm \
+			 prouzalib2/sqltest1.sqlrpgle.pgm \
+			 prouzalib2/sqltest1.sqlproc.pgm
 
 #OBJS:= prouzalib/test.rpgle.pgm \
 			 prouzalib2/test.rpgle.pgm \
 			 prouzalib2/test1.rpgle.pgm \
+
+prouzalib2/sqltest1.sqlproc.pgm: prouzalib2/sqltest1.sqlrpgle.pgm
 
 prouzalib2/test.rpgle.pgm: prouzalib/test.rpgle.pgm
 

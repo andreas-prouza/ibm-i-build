@@ -1,13 +1,12 @@
 sending incremental file list
-deleting logs/prouzalib/§test.rpgle.pgm.splf.log
-deleting logs/prouzalib/§test.rpgle.pgm.joblog.log
-deleting logs/prouzalib/§test.rpgle.pgm.error.log
-deleting logs/prouzalib2/test1.rpgle.pgm.splf.log
-deleting logs/prouzalib2/test1.rpgle.pgm.joblog.log
-deleting logs/prouzalib2/test1.rpgle.pgm.error.log
-logs/prouzalib/
+deleting logs/prouzalib2/sqltest1.sqlrpgle.pgm.splf.log
+deleting logs/prouzalib2/sqltest1.sqlrpgle.pgm.joblog.log
+deleting logs/prouzalib2/sqltest1.sqlrpgle.pgm.error.log
+deleting logs/prouzalib2/sqltest1.sqlproc.pgm.splf.log
+deleting logs/prouzalib2/sqltest1.sqlproc.pgm.joblog.log
+deleting logs/prouzalib2/sqltest1.sqlproc.pgm.error.log
 logs/prouzalib2/
-prouzalib2/qrpglesrc/test1.rpgle
+prouzalib2/qrpglesrc/sqltest1.sqlrpgle
 tmp/
 tmp/compile.sh
 tmp/logs/
@@ -16,5 +15,5 @@ tmp/logs/run_build.log
 tmp/logs/sync2ibmi.log
 tmp/logs/sync_back.log
 
-sent 6.527 bytes  received 469 bytes  2.798,40 bytes/sec
-total size is 626.125  speedup is 89,50
+sent 6.104 bytes  received 590 bytes  4.462,67 bytes/sec
+total size is 636.608  speedup is 95,10

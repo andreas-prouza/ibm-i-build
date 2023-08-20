@@ -1,0 +1,14 @@
+
+CREATE OR REPLACE PROCEDURE SQLTEST1
+	(IN p_lib char(10),
+	 IN p_srcpf char(10),
+   INOUT p_test int,
+	 INOUT p_count int,
+	 INOUT p_sqlcode int,
+   inout p_msg   char(200)
+	) 
+	LANGUAGE RPGLE
+	SPECIFIC SQLTEST1
+	NOT DETERMINISTIC
+	EXTERNAL NAME SQLTEST1
+	GENERAL;
