@@ -1,4 +1,6 @@
 
+DROP PROCEDURE SQLTEST1;
+
 CREATE OR REPLACE PROCEDURE SQLTEST1
 	(IN p_lib char(10),
 	 IN p_srcpf char(10),
