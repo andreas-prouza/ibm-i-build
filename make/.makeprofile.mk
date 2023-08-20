@@ -80,15 +80,17 @@ OBJS:= prouzalib/file1.pf.file \
 			 prouzalib2/sqltest1.sqlrpgle.pgm \
 			 prouzalib2/sqltest1.sqlproc.pgm \
 			 prouzalib2/sqltest2.sqlrpgle.pgm \
-			 prouzalib2/sqltest2.sqlproc.pgm
+			 prouzalib2/sqltest2.sqlproc.pgm \
+			 prouzalib2/sqlsrv1.sqlrpgle.srvpgm \
+			 prouzalib2/sqlsrv1.sqlproc.pgm \
 
 #OBJS:= prouzalib/test.rpgle.pgm \
 			 prouzalib2/test.rpgle.pgm \
 			 prouzalib2/test1.rpgle.pgm \
 
 prouzalib2/sqltest1.sqlproc.pgm: prouzalib2/sqltest1.sqlrpgle.pgm
-
 prouzalib2/sqltest2.sqlproc.pgm: prouzalib2/sqltest2.sqlrpgle.pgm
+prouzalib2/sqlsrv1.sqlproc.pgm: prouzalib2/sqlsrv1.sqlrpgle.srvpgm
 
 
 
