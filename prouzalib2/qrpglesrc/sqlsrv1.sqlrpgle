@@ -10,12 +10,10 @@ ctl-opt nomain;
 // ******************************************************
 
 
-dcl-proc proc1                    export;
+dcl-proc proc1                    export ;
     dcl-pi *n;
         p_lib                     char(10) const;
         p_srcpf                   char(10) const;
-        p_sqlcode                 int(10);
-        p_msg                     char(200);
     end-pi;
 
     exec sql Declare c_members cursor for
@@ -26,10 +24,7 @@ dcl-proc proc1                    export;
 
     exec sql open c_members;
 
-    p_sqlcode = sqlcode;
-
-    p_msg = 'SQLCode: ' + %char(sqlcode);
-
     return;
 
 end-proc;
+
