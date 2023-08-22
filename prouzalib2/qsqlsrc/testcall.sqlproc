@@ -1,0 +1,15 @@
+
+drop procedure prouzat2.testcall;
+
+create procedure prouzat2.testsqlcall
+(
+    in p_id int
+)
+dynamic result set 1
+specific prouzat2.testcall
+language sql
+begin
+    declare c_logger cursor for
+        SELECT * FROM prouzalib.logger;
+    open c_logger;
+end;
