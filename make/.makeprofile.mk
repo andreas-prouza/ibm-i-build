@@ -71,6 +71,7 @@ OBJS:= prouzalib/file1.pf.file \
 			 prouzalib/errhdlsql.sqlrpgle.srvpgm \
 			 prouzalib/logger.sqlrpgle.srvpgm \
 			 prouzalib/logger.sqltable.file \
+			 prouzalib/logger_hist.sqltable.file \
 			 prouzalib/testlog.rpgle.pgm \
 			 prouzalib/testlog2.sqlrpgle.pgm \
 			 prouzalib/testmod.rpgle.srvpgm \
@@ -83,6 +84,7 @@ OBJS:= prouzalib/file1.pf.file \
 			 prouzalib2/sqltest2.sqlproc.pgm \
 			 prouzalib2/sqlsrv1.sqlrpgle.srvpgm \
 			 prouzalib2/sqlsrv1.sqlproc.pgm \
+			 prouzalib2/sqltest3.rpgle.srvpgm \
 
 #OBJS:= prouzalib/test.rpgle.pgm \
 			 prouzalib2/test.rpgle.pgm \

@@ -69,7 +69,7 @@ dcl-proc logging export;
           Fetch first Row Only;
   ENDIF;
 
-  Exec Sql Insert Into prouzalib.Logger(loglevel, text, extref, program) 
+  Exec Sql Insert Into Logger(loglevel, text, extref, program) 
           values (:p_loglevel, :l_text, :l_extref :i_EXTREF, :l_program);
 
   if (%parms >= %Parmnum(p_print2Joblog) and p_print2Joblog);
