@@ -8,6 +8,13 @@ E.g. for german:
 CHGPRF CCSID(1141)
 ```
 
+Add the following settings to you ```.git/config``` file:
+```sh
+[core]
+precomposeunicode = true
+quotepath = false
+```
+
 Because builds will be run in a separate job and the job should contain (automatically at start up) the correct CCSID.
 
 ## In log files
