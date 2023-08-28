@@ -42,13 +42,8 @@ echo -e "$COLOR_CYAN_BOLD`date +"%F %T.%3N"` ... $SCRIPT $COLOR_END"
 echo -e "$COLOR_MAGENTA_BOLD################################################### $COLOR_END\n"
 
 
-if [ $MODE == 'debug' -o $MODE == 'show-change-debug' ]
-then
-
-  #exec > (tee -a stdout.txt.log)  #"$STD_OUTPUT_TMP".log
-  #set -x
-  #set -v
-  #set -o xtrace
-  trap 'print_debug' DEBUG
-
-fi
+#exec > (tee -a stdout.txt.log)  #"$STD_OUTPUT_TMP".log
+#set -x
+#set -v
+#set -o xtrace
+trap 'print_debug' DEBUG

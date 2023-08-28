@@ -14,21 +14,18 @@ source $(dirname $(realpath "$0"))/init.sh
 
 
 # Print all script variables
-if [ $MODE == 'debug' -o $MODE == 'show-change-debug' ]
-then
-  ( set -o posix ; set ) > $SCRIPT_VARS2
-  diff $SCRIPT_VARS $SCRIPT_VARS2 >> $STD_OUTPUT_TMP || true
-  #diff $SCRIPT_VARS $SCRIPT_VARS2 2>$ERROR_OUTPUT
-fi
-
+( set -o posix ; set ) > $SCRIPT_VARS2
+diff $SCRIPT_VARS $SCRIPT_VARS2 >> $STD_OUTPUT_TMP || true
+#diff $SCRIPT_VARS $SCRIPT_VARS2 2>$ERROR_OUTPUT
 
 echo WORKSPACE_FOLDER $WORKSPACE_FOLDER
 
 
-mkdir -p $WORKSPACE_FOLDER/tmp/logs
 mkdir -p $WORKSPACE_FOLDER/logs
 mkdir -p $WORKSPACE_FOLDER/build
 
 find $WORKSPACE_FOLDER/logs -maxdepth 1 -type f -delete
 rm $WORKSPACE_FOLDER/logs/**/* || true 2>/dev/null
-rm $WORKSPACE_FOLDER/tmp/* || true 2>/dev/null
+rm -rf $WORKSPACE_FOLDER/tmp/* || true 2>/dev/null
+
+mkdir -p $WORKSPACE_FOLDER/tmp/logs

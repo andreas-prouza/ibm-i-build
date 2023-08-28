@@ -1,9 +1,0 @@
-receiving incremental file list
-build/prouzalib2/sqltest1.sqlproc.pgm
-logs/prouzalib2/
-logs/prouzalib2/sqltest1.sqlproc.pgm.error.log
-logs/prouzalib2/sqltest1.sqlproc.pgm.joblog.log
-logs/prouzalib2/sqltest1.sqlproc.pgm.splf.log
-
-sent 151 bytes  received 4,79K bytes  3,30K bytes/sec
-total size is 18,13K  speedup is 3,67

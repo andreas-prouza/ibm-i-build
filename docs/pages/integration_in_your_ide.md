@@ -52,15 +52,22 @@ Rename the ```linux.settings.json``` to ```settings.json``` to get the Linux set
 I did this job by using WSL (Windows Subsystem for Linux).
 
 1. Open the "Turn Windows features on or off"
+
 2. Choose "Windows Subsystem for Linux" and select "OK"
    
     ![build-command](../assets/windows-features.png)
 
-3. Open the Microsoft Store and search for "Linux Ubuntu" and install it
+3. Enable Virtual Machine feature
+
+     ```dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart```
+
+4. Reboot your PC
+
+5. Open the Microsoft Store and search for "Linux Ubuntu" and install it
    
     ![build-command](../assets/install-ubuntu.png)
 
-4. After installing the Linux distribution "Launch" it.
+6. After installing the Linux distribution "Launch" it.
    
    The first time you may will be asked to set up a user/password for this environment.
 
@@ -73,6 +80,18 @@ wsl rsync ...
 ```
 
 Rename the ```windows.settings.json``` to ```settings.json``` to get the Windows settings.
+
+If you prefere Cygwin do these steps:
+
+* Download and install Cygwin with these options:
+  * openssh
+  * rsync
+* Open the Cygwin terminal
+* Add this in your ```.bash_profile```:
+    ```sh
+    export SHELLOPTS
+    set -o igncr
+    ```
 
 
 ### VSCode extensions

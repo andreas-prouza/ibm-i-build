@@ -4,7 +4,7 @@ ctl-opt main(main);
 
 
 // ******************************************************
-// Test SQL external procedures
+// Test SQL external procedures 
 //
 // SQL: call prouzat2.sqltest1 ('prouzalib', 'qrpglesrc', '10', '0', '0', '')
 // ******************************************************

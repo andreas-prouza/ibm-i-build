@@ -28,7 +28,42 @@
         "Reset Build Timestamp": "make/scripts/cleanup.sh   &&   make/scripts/reset.sh",
         "Create deployment": "make/scripts/create_deployment.sh",
         "Merge with production": "git pull && git -c 'core.editor=code --wait --reuse-window' merge main && git push && echo 'Done' && git rev-parse HEAD >> commit.log ",
-        "Merge cancel": "git merge --abort",
-        "Test": "make/scripts/test.sh"
-    }
+        "Merge cancel": "git merge --abort"
+    },
+    "workbench.editor.enablePreview": false,
+    "ShortcutMenuBar.beautify": false,
+    "ShortcutMenuBar.navigateBack": false,
+    "ShortcutMenuBar.navigateForward": false,
+    "ShortcutMenuBar.openFilesList": false,
+    "ShortcutMenuBar.toggleTerminal": false,
+    "ShortcutMenuBar.showCommands": true,
+    "ShortcutMenuBar.userButton01Command": "command-runner.run",
+    "actionButtons": {
+        "commands": [
+            {
+                "name": "🪟 Show Change Object",
+				"color": "orange",
+				"useVsCodeApi": false,
+                "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change-object"
+            },
+            {
+                "name": "♻️ CleanUp",
+				"color": "white",
+				"useVsCodeApi": false,
+                "command": "make/scripts/cleanup.sh  &&   make clean"
+            },
+            {
+                "name": "$(run-all) Run build",
+				"color": "white",
+				"useVsCodeApi": false,
+                "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh debug;   make/scripts/sync_back_from_ibmi.sh "
+            },
+            {
+                "name": "$(telescope) Show Change Object",
+				"color": "white",
+				"useVsCodeApi": false,
+                "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change-object"
+            }
+        ]
+        }
 }
