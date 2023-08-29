@@ -1,4 +1,7 @@
 
+ALTER TABLE logger DROP VERSIONING;
+
+
 Create or replace table logger (
       id        bigint generated always as identity (cycle),
       loglevel  char(10),

@@ -1,14 +1,5 @@
 {
     "makefile.extensionOutputFolder": "./.vscode",
-    "emeraldwalk.runonsave": {
-        "commands": [
-            {
-                "match": "xxxxx.*$",
-                "isAsync": true,
-                "cmd": "xxxmake/scripts/sync2ibmi.sh"
-            }
-        ]
-    },
     "command-runner.terminal.name": "Sync project",
     "command-runner.terminal.autoClear": true,
     "command-runner.terminal.autoFocus": true,
@@ -30,7 +21,7 @@
         "Merge with production": "git pull && git -c 'core.editor=code --wait --reuse-window' merge main && git push && echo 'Done' && git rev-parse HEAD >> commit.log ",
         "Merge cancel": "git merge --abort"
     },
-    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreview": true,
     "ShortcutMenuBar.beautify": false,
     "ShortcutMenuBar.navigateBack": false,
     "ShortcutMenuBar.navigateForward": false,
