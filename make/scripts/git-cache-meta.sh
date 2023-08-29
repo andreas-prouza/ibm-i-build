@@ -9,7 +9,9 @@
 
 # 2012-03-05 - added filetime, andris9
 
-: ${GIT_CACHE_META_FILE=build/.git_cache_meta}
+# Import global config
+source $(dirname $(realpath "$0"))/../global.cfg
+
 case $@ in
     --store|--stdout)
     case $1 in --store) exec > $GIT_CACHE_META_FILE; esac
