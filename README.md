@@ -4,6 +4,7 @@
 - [Quick Start](/docs/pages/quick_start.md)
 - [SSH](/docs/pages/SSH.md)
 - [GNU Make](/docs/pages/gnu_make.md)
+- [GIT notes](/docs/pages/git.md)
 - [Integration in your IDE](/docs/pages/integration_in_your_ide.md)
 - [FAQ](/docs/pages/faq.md)
 
