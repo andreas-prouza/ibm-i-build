@@ -174,18 +174,18 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 %.bnddir:
 	$(info crtcmd|$@|Bnddir init)
-	touch $(TGT_DIR)/$@
+	$(TOUCH)
 
 
 
 %.rpgle.cpy: $(CPYLE_PREREQ).rpgle
 	$(info crtcmd|$@|Not necessary)
-	touch $(TGT_DIR)/$@
+	$(TOUCH)
 
 
 %.rpg.cpy: $(CPY_PREREQ).rpg
 	$(info crtcmd|$@|Not necessary)
-	touch $(TGT_DIR)/$@
+	$(TOUCH)
 
 
 
