@@ -21,7 +21,8 @@ Add following code in ```.git/hooks/post-checkout```:
 # Import global config
 source make/global.cfg
 
-if [ -s "$GIT_CACHE_META_FILE" ]; then
+# Only when checkout a branch not a single file or directory
+if [ -s "$GIT_CACHE_META_FILE" ] && [ "$3" == '1' ]; then
   # apply change date for all files
   make/scripts/git-cache-meta.sh --apply
 fi
