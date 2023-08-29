@@ -33,7 +33,7 @@
         "commands": [
             {
                 "name": "$(symbol-property) Reset all",
-                "command": "git restore .; git reset; git clean -fd;  make/scripts/git-cache-meta.sh --apply "
+                "command": "git restore .  &&  git reset  &&  git clean -fd  &&  make/scripts/git-cache-meta.sh --apply "
             },
             {
                 "name": "🪟 Builds from prod",
