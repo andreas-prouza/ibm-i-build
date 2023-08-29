@@ -6,9 +6,9 @@
     "command-runner.commands": {
         "Sync source to IBM i": "make/scripts/cleanup.sh   &&   make/scripts/sync2ibmi.sh ",
         "Sync logs back": "make/scripts/cleanup.sh   &&   make/scripts/sync_back_from_ibmi.sh ",
-        "Run build (summary output)": "make/scripts/cleanup.sh    &&   make/scripts/create_build_script.sh summary   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh;   make/scripts/sync_back_from_ibmi.sh",
-        "Run build (detailed output)": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh detailed   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh;   make/scripts/sync_back_from_ibmi.sh",
-        "Run build (debug)": "make/scripts/cleanup.sh debug   &&   make/scripts/create_build_script.sh debug   &&   make/scripts/sync2ibmi.sh debug   &&   make/scripts/run_build.sh debug;   make/scripts/sync_back_from_ibmi.sh debug",
+        "Run build (summary output)": "make/scripts/cleanup.sh    &&   make/scripts/create_build_script.sh summary   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh;   make/scripts/sync_back_from_ibmi.sh; make/scripts/git-cache-meta.sh --store",
+        "Run build (detailed output)": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh detailed   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh;   make/scripts/sync_back_from_ibmi.sh; make/scripts/git-cache-meta.sh --store",
+        "Run build (debug)": "make/scripts/cleanup.sh debug   &&   make/scripts/create_build_script.sh debug   &&   make/scripts/sync2ibmi.sh debug   &&   make/scripts/run_build.sh debug;   make/scripts/sync_back_from_ibmi.sh debug; make/scripts/git-cache-meta.sh --store",
         "Simulate build": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh simulate",
         "CleanUp Build": "make/scripts/cleanup.sh   &&   make clean",
         "Show Change Debug": "make/scripts/cleanup.sh debug   &&   make/scripts/create_build_script.sh show-change-debug  ",
@@ -47,7 +47,7 @@
                 "name": "$(run-all) Run build",
 				"color": "white",
 				"useVsCodeApi": false,
-                "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh debug;   make/scripts/sync_back_from_ibmi.sh "
+                "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh debug;   make/scripts/sync_back_from_ibmi.sh;  make/scripts/git-cache-meta.sh --store"
             },
             {
                 "name": "$(telescope) Show Change Object",

@@ -16,7 +16,7 @@ case $@ in
     --store|--stdout)
     case $1 in --store) exec > $GIT_CACHE_META_FILE; esac
     find $(git ls-files)\
-        \( -printf 'touch -c -d "%TY-%Tm-%Td %TH:%TM:%TS" %p\n' \) ;;
+        \( -printf 'touch -c -d "%TY-%Tm-%Td %TH:%TM:%TS" '"'"'%p'"'"'\n' \) ;;
     --apply) sh -e $GIT_CACHE_META_FILE;;
     *) 1>&2 echo "Usage: $0 --store|--stdout|--apply"; exit 1;;
 esac
