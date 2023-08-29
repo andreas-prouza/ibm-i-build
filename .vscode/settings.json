@@ -32,19 +32,27 @@
     "actionButtons": {
         "commands": [
             {
-                "name": "🪟 Show Change Object",
-				"color": "orange",
-				"useVsCodeApi": false,
-                "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change-object"
+                "name": "$(symbol-property) Reset all",
+                "command": "git restore .; git reset; git clean -fd"
             },
             {
-                "name": "♻️ CleanUp",
+                "name": "🪟 Builds from prod",
+                "command": "make/scripts/cleanup.sh   &&   make/scripts/reset.sh",
+            },
+            {
+                "name": "♻️ Clean builds",
 				"color": "white",
 				"useVsCodeApi": false,
                 "command": "make/scripts/cleanup.sh  &&   make clean"
             },
             {
-                "name": "$(run-all) Run build",
+                "name": "♻️ Clean logs",
+				"color": "white",
+				"useVsCodeApi": false,
+                "command": "make/scripts/cleanup.sh "
+            },
+            {
+                "name": "$(run-all) Build all",
 				"color": "white",
 				"useVsCodeApi": false,
                 "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh debug;   make/scripts/sync_back_from_ibmi.sh;  make/scripts/git-cache-meta.sh --store"
@@ -54,6 +62,12 @@
 				"color": "white",
 				"useVsCodeApi": false,
                 "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change-object"
+            },
+            {
+                "name": "$(pass-filled) $(rocket)  Deploy",
+				"color": "",
+				"useVsCodeApi": false,
+                "command": "make/scripts/create_deployment.sh"
             }
         ]
         }
