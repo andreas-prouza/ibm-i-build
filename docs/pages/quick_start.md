@@ -22,8 +22,6 @@
   * ```rsync```
   * ```make```
   * ```jq```
-* If you use VSCode
-  * Install [VSCode extensions](integration_in_your_ide.md#vscode-extensions)
 
 
 ## Change build settings
@@ -55,10 +53,11 @@ Modify makefiles to your own settings
 
 ## VSCode as IDE
 
-1. Open the project directory in vscode
-2. Rename the ```.vscode/settings.json``` from the Windows or Linux template <br/>
+1. Install [VSCode extensions](integration_in_your_ide.md#vscode-extensions)
+2. Open the project directory in vscode
+3. Rename the ```.vscode/settings.json``` from the Windows or Linux template <br/>
    See [Project settings](integration_in_your_ide.md#project-settings)
-3. [Just run the build](integration_in_your_ide.md#lets-run-the-build)
+4. [Just run the build](integration_in_your_ide.md#lets-run-the-build)
 
 ## RDi as IDE
 
