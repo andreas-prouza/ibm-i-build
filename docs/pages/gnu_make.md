@@ -1,60 +1,36 @@
 - [GNU Make](#gnu-make)
   - [Installation](#installation)
-    - [On IBM i](#on-ibm-i)
-    - [On you PC](#on-you-pc)
-  - [Set up your Makefile(s)](#set-up-your-makefiles)
-  - [Run GNU Make](#run-gnu-make)
+  - [General](#general)
+  - [Set up your build settings](#set-up-your-build-settings)
+    - [Makefile](#makefile)
+    - [Global settings](#global-settings)
+  - [Prepare for first build](#prepare-for-first-build)
     - [Build directories](#build-directories)
     - [Preperation](#preperation)
     - [Run build](#run-build)
-  - [Summary](#summary)
 
 
 # GNU Make
 
 ## Installation 
 
-### On IBM i
+Set up is shown in [here](/docs/pages/integration_in_your_ide.md#prerequisites).
 
-You can install ist via ACS OpenSource-Package-Mangager or via YUM in the console
-```sh
-yum install make-gnu
-
-===================================================================
- Package        Arch          Version       Repository        Size
-===================================================================
-Installing:
- make-gnu       ppc64         4.2-2         ibmi-base        520 k
-```
-
-### On you PC
-
-* Linux
-  
-```sh
-    sudo apt install make
-    sudo pacman -S make
-    sudo yum install make
-```
-
-* In Windows (WSL)
-  
-```sh
-    sudo apt update
-    sudo apt install make
-```
+## General
 
 
 You may already noticed that we have 2 different type of make commands ```make``` and ```gmake```.<br/>
-This depends on the installation of gnu make (PC or IBM i, Windows WSL or Linux). But it's always the same.
+This depends on the installation of gnu make (PC or IBM i, Windows WSL or Linux). But it's always the same.<br/>
+```gmake``` is only a symbolic link to ```make```.
 
-## Set up your Makefile(s)
+## Set up your build settings
 
-```gmake``` uses ```makefile``` in which the plan is set up how to build your application.
+### Makefile
+```make``` uses ```makefile``` in which the plan is set up how to build your application.
 
 For more details about makefiles you can find a lot of stuff in the internet.
 
-I split it up into 5 makefiles
+Here I split it up into 5 makefiles
 
 1. ```makefile```
 
@@ -100,10 +76,23 @@ I split it up into 5 makefiles
     I already set up the compile rules, so it should be able to handle most of your (ILE) builds.<br/>
     If you also want to build objects like menues or printer files (or whatever you want), you can simple add the command at the end of this file.
 
-## Run GNU Make
+### Global settings
 
-From here, we haven't set up our IDE, but we are able to login to our IBM i via SSH and run the build directly on the server.<br/>
-So, login via SSH to your IBM i and go to your project directory.
+In addition to ```makefile``` there is the ```global.cfg``` file.
+
+This file is used for all scripts doing:
+* Synchronize sources
+* Start build
+* Some Git actions
+* creation of deployment script
+* creation of deploy file
+* start of deployment
+* etc.
+
+It contains general information to your systems.
+
+
+## Prepare for first build
 
 ### Build directories
 The build uses 2 directories in the IFS for the build output
@@ -123,7 +112,8 @@ The build uses 2 directories in the IFS for the build output
 ### Preperation
 Since the ```gmake all``` checks if a source has been changed since last build, gmake would compile all sources on very first run.
 
-If you don't want to build all from scretch and only wants to build new changed sources from now, you can use the following:
+If you don't want to build all from scretch and only wants to build new changed sources from now, you can use the following commands<br/>
+This should be possilbe if dyou have finished the [preperation topic](integration_in_your_ide.md#prerequisites).
 ```sh
 gmake init # to create all necessary directories for build
 gmake all --touch --directory=/home/prouza/myproject/build --makefile=/home/prouza/myproject/makefile
@@ -132,39 +122,8 @@ This only creates the dummy build object files in the ```./build``` directory.
 
 ### Run build
 
-After all this is done you can use ```gmake``` to build all changes in your application.
+After all this is done you can run the script to create compile script ford all changes in your application.
 ```sh
-gmake all
+make/scripts/cleanup.sh && make/scripts/create_build_script.sh summary
 ```
 
-
-## Summary
-
-1. Install GNU Make on IBM i
-2. Create a project directory in you working IFS path (e.g. /home/prouza/myproject)
-3. Copy all sources into this directory.<br/>
-All source files are subdirectories (e.g. /home/prouza/myproject/qrpglesrc/logtest.rpgle)
-4. Copy all make-config-files
-5. Modify the makefiles to your own settings
-   * makefile
-     * IFS Path
-     * Target lib (PGM & DB)
-     * ACTGRP
-     * LIBLIST
-   * object_list.mk
-     * If you want to add additional objects to be build
-   * .makeprofile.mk
-     * If you want to override some settings for your own environment
-6. Open a terminal (QSH, Putty, ...)
-7. Make sure you have the ```$PATH``` variable set correct (```/QOpenSys/pkgs/bin``` needs to be in the list)<br/>
-I also use ```BASH``` as shell. It makes life much easier.
-8. Go into your directory
-
-    ```sh
-    cd /home/prouza/myproject
-    ```
-9.  Run the build
-
-    ```sh
-    gmake all
-    ```

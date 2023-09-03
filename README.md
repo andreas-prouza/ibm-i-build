@@ -48,7 +48,7 @@
 
 * Logging
   
-  All compile informations seperated by each source: 
+  All compile informations separated by each source: 
   * joblog
   * spool file
   * error output

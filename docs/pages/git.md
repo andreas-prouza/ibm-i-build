@@ -1,9 +1,10 @@
-- [GIT settings](#git-settings)
+- [Git settings](#git-settings)
   - [Hooks](#hooks)
     - [post-checkout](#post-checkout)
+  - [Git config](#git-config)
 
 
-# GIT settings
+# Git settings
 
 ## Hooks
 
@@ -28,7 +29,7 @@ if [ -s "$GIT_CACHE_META_FILE" ] && [ "$3" == '1' ]; then
 fi
 ```
 
-## GIT config
+## Git config
 
 To be able to handle with special characters in file names add the following in ```.git/config```
 

@@ -1,41 +1,57 @@
 - [Integration in your IDE](#integration-in-your-ide)
+  - [Prerequisites](#prerequisites)
+    - [On IBM i](#on-ibm-i)
+    - [On Linux](#on-linux)
+    - [On Windows](#on-windows)
+      - [Using WSL (Windows Subsystem for Linux):](#using-wsl-windows-subsystem-for-linux)
+      - [Using Cygwin](#using-cygwin)
   - [VSCode](#vscode)
-  - [VSCode \& RSYNC](#vscode--rsync)
-    - [Prerequisites](#prerequisites)
-      - [IBM i](#ibm-i)
-      - [Linux](#linux)
-      - [Windows](#windows)
     - [VSCode extensions](#vscode-extensions)
+    - [Project settings](#project-settings)
     - [Let's run the build](#lets-run-the-build)
     - [Sync automatically after code changing](#sync-automatically-after-code-changing)
     - [Using ```Code for IBM i```](#using-code-for-ibm-i)
   - [RDi \& RSYNC](#rdi--rsync)
   - [VSCode or RDi \& GNU Make](#vscode-or-rdi--gnu-make)
 
+
 # Integration in your IDE
 
-
 ## Prerequisites
-You need to install ```rsync``` on your local machine and on IBM i.
 
-In addition install ```make``` on your local machine if you want to use it local.
+You need some tools on IBM i but also on our local machine:
+* ```rsync``` 
+  
+  To synchronize our sources between local machine an IBM i
 
-### IBM i
+* ```make```
+  
+  This generates the IBM i compile commands
+
+
+### On IBM i
+
 ```sh
-yum install rsync
+yum install rsync make-gnu
+
+===================================================================
+ Package        Arch          Version       Repository        Size
+===================================================================
+Installing:
+ make-gnu       ppc64         4.4-1         ibmi-base        520 k
+ rsync          ppc64         3.2.3-3       ibmi-base        2.1 M
 ```
 
-### Linux
-On Linux this is very easy. It only depends which package manager you are using (maybe it's already installed):
+### On Linux
+It only depends which package manager you are using (maybe it's already installed):
 ```sh
-sudo yum install rsync make
-sudo apt-get install rsync make
-sudo pacman -S rsync make
+sudo yum install     make jq
+sudo apt-get install make jq
+sudo pacman -S       make jq 
 ```
 
-Rename the ```linux.settings.json``` to ```settings.json``` to get the Linux settings.
 
-### Windows
+### On Windows
 ```rsync``` is a Unix based utility. So you can't just easily install it on Windows.<br/>
 You have 2 options:
 * WSL (Windows Subsystem for Linux)
@@ -78,7 +94,7 @@ If you prefere Cygwin download and install it with these options:
   * rsync
   * make
 
-After setup open the Cygwin terminal. Add this in your ```.bash_profile```:
+After setup open the Cygwin terminal. Add this in your ```~/.bash_profile```:
 
 ```sh
 export SHELLOPTS
@@ -87,19 +103,6 @@ set -o igncr
 
 
 ## VSCode
-You should have installed the ```Code for IBM i``` extension.
-
-With this you can work with your sources directly in the IFS of your IBM i.
-
-If you use GIT I recommend to install the ```Git Graph``` extension.
-
-## VSCode & RSYNC
-
-After our project was set up successfully we can now focus on our favourite IDE.
-
-In both IDEs you can use external commands like ```rsync``` to automatically synchronise your code with your working directory in the IFS.<br/>
-You can set up in both IDEs (RDi and VSCode) to do this automatically after saving your changes in the source.
-
 
 ### VSCode extensions
 
@@ -109,32 +112,24 @@ Therefore I am using the following extensions:
 
     This contains all IBM i extensions, which we want to use for development
 
-* Run on Save
-  
-    Automatically sync when source is saved.<br/>
-    So no need to do some extra sync.
-
+* VsCode Action Buttons
 * Command Runner
   
     To trigger the sync manually (e.g. if I switch branch) using:<br/> 
     CTRL+SHIFT+P --> Select: Run Command --> Select: Run Build (summary output)
 
 * GitLens and Git Graph (if you are using Git)
-  
 * WSL (for Windows only)
 
-    Since we use the Windows Subsystem for Linux (WSL) to synchronize the source to our IBM i, we need this extension to make our Windows path linux like.
+    If you use the Windows Subsystem for Linux (WSL) to synchronize the source to our IBM i, you need this extension to make our Windows path linux like.
 
+### Project settings
 
 You can just use the ```.vscode/settings.json``` from this project.<br/>
-Rename the ```windows.settings.json``` to ```settings.json``` to get the Windows settings.
+Rename the ```windows.settings.json``` to ```settings.json``` to get the Windows settings.<br/>
+Rename the ```linux.settings.json``` to ```settings.json``` to get the Linux settings.
 
-Don't forget to change: 
-* hostname
-* user (but not necessary if you use the ```~/.ssh/config```)
-* IFS target directory
-
-Notice for Windows:<br/>
+**Notice for Windows:**<br/>
 The standard terminal is set to ```Ubuntu (WSL)``` for this project in the ```.vscode/settings.json```.<br/>
 If you prefere Cygwin, you need to change the terminal property there.<br/>
 You may need to exit the current Windows terminal in vscode to get the config in action.

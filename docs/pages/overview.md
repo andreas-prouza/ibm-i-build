@@ -1,18 +1,22 @@
 # Overview
 
-My DevOps concept includes multiple components like GIT as a basis for source management.
+My DevOps concept includes multiple components like Git as a basis for source management.
 
-In this example I focus on the build part of the DevOps concept.
+In this example, I focus on the build part of the DevOps concept including Git.
 
-For all IBM i builds I use 2 components:
+For all IBM i builds I use the following components:
 
 * GNU Make
   
-  Build you source
+  Builds your sources (or at least creates the build commands) ...
 
-  * In correct order
-  * Consider dependencies (PF/LF/DSPF --> RPG)
+  * in correct order
+  * and considers dependencies (PF/LF/DSPF --> RPG)
   
-* VSCode or RDi with RSYNC
+* IDE: VSCode or RDi
   
-  To synchronise your sources to the build server (IBM i)
+* RSYNC
+  
+  To synchronize your sources to the IFS of the build server (IBM i)<br/>
+  Yes, all sources are in folder and not in source files.<br/>
+  This has many advantages, later more about this.
