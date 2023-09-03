@@ -44,6 +44,7 @@ Installing:
     sudo apt install make
 ```
 
+
 You may already noticed that we have 2 different type of make commands ```make``` and ```gmake```.<br/>
 This depends on the installation of gnu make (PC or IBM i, Windows WSL or Linux). But it's always the same.
 
@@ -81,6 +82,17 @@ I split it up into 5 makefiles
     Then all objects with dependencies are listed including all dependiencies which ```make``` should consider.<br/>
     You can find a detailed description in this file.<br/>
     If you have special definitions for an object, you can also define it there (e.g. activation group, binding directory, target library, ...)
+
+    In the following example the program ```mypgm``` depends on these objects:
+    ```
+    prouzalib/mypgm.sqlrpgle.pgm: \
+      prouzalib/logger.sqlrpgle.srvpgm \
+      prouzalib/errhdlsql.sqlrpgle.srvpgm \
+      prouzalib/date.rpgle.srvpgm \
+      prouzalib/myfile.pf.file \
+      prouzalib/myview.sqlview.file
+    ```
+    So, if one of the service programs (```logger```, ```errhdlsql```, ```date```), the table ```myfile``` or the view ```myview``` change also ```mypgm``` will be created.
 
 5. ```compile_rules.mk```
 

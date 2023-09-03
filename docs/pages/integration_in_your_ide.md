@@ -14,42 +14,34 @@
 
 # Integration in your IDE
 
-## VSCode
-You should have installed the ```Code for IBM i``` extension.
 
-With this you can work with your sources directly in the IFS of your IBM i.
-
-If you use GIT I recommend to install the ```Git Graph``` extension.
-
-## VSCode & RSYNC
-
-After our project was set up successfully we can now focus on our favourite IDE.
-
-In both IDEs you can use external commands like ```rsync``` to automatically synchronise your code with your working directory in the IFS.<br/>
-You can set up in both IDEs (RDi and VSCode) to do this automatically after saving your changes in the source.
-
-### Prerequisites
+## Prerequisites
 You need to install ```rsync``` on your local machine and on IBM i.
 
-#### IBM i
+In addition install ```make``` on your local machine if you want to use it local.
+
+### IBM i
 ```sh
 yum install rsync
 ```
 
-#### Linux
+### Linux
 On Linux this is very easy. It only depends which package manager you are using (maybe it's already installed):
 ```sh
-sudo yum install rsync
-sudo apt-get install rsync
-sudo pacman -S rsync
+sudo yum install rsync make
+sudo apt-get install rsync make
+sudo pacman -S rsync make
 ```
 
 Rename the ```linux.settings.json``` to ```settings.json``` to get the Linux settings.
 
-#### Windows
-```rsync``` is a Unix based utility. So you can't just easily install it on Windows.
+### Windows
+```rsync``` is a Unix based utility. So you can't just easily install it on Windows.<br/>
+You have 2 options:
+* WSL (Windows Subsystem for Linux)
+* Cygwin
 
-I did this job by using WSL (Windows Subsystem for Linux).
+#### Using WSL (Windows Subsystem for Linux):
 
 1. Open the "Turn Windows features on or off"
 
@@ -79,19 +71,34 @@ After this is done you can use ```rsync``` using WSL in the Windows CMD:
 wsl rsync ...
 ```
 
-Rename the ```windows.settings.json``` to ```settings.json``` to get the Windows settings.
+#### Using Cygwin
 
-If you prefere Cygwin do these steps:
-
-* Download and install Cygwin with these options:
+If you prefere Cygwin download and install it with these options:
   * openssh
   * rsync
-* Open the Cygwin terminal
-* Add this in your ```.bash_profile```:
-    ```sh
-    export SHELLOPTS
-    set -o igncr
-    ```
+  * make
+
+After setup open the Cygwin terminal. Add this in your ```.bash_profile```:
+
+```sh
+export SHELLOPTS
+set -o igncr
+```
+
+
+## VSCode
+You should have installed the ```Code for IBM i``` extension.
+
+With this you can work with your sources directly in the IFS of your IBM i.
+
+If you use GIT I recommend to install the ```Git Graph``` extension.
+
+## VSCode & RSYNC
+
+After our project was set up successfully we can now focus on our favourite IDE.
+
+In both IDEs you can use external commands like ```rsync``` to automatically synchronise your code with your working directory in the IFS.<br/>
+You can set up in both IDEs (RDi and VSCode) to do this automatically after saving your changes in the source.
 
 
 ### VSCode extensions
@@ -118,7 +125,10 @@ Therefore I am using the following extensions:
 
     Since we use the Windows Subsystem for Linux (WSL) to synchronize the source to our IBM i, we need this extension to make our Windows path linux like.
 
+
 You can just use the ```.vscode/settings.json``` from this project.<br/>
+Rename the ```windows.settings.json``` to ```settings.json``` to get the Windows settings.
+
 Don't forget to change: 
 * hostname
 * user (but not necessary if you use the ```~/.ssh/config```)
@@ -126,6 +136,7 @@ Don't forget to change:
 
 Notice for Windows:<br/>
 The standard terminal is set to ```Ubuntu (WSL)``` for this project in the ```.vscode/settings.json```.<br/>
+If you prefere Cygwin, you need to change the terminal property there.<br/>
 You may need to exit the current Windows terminal in vscode to get the config in action.
 
 

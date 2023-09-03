@@ -16,36 +16,42 @@
 ## Features
 * Check for changes
   
-    Check all sources which have changed since last compilie
+    It checks all sources which have changed since last compilie
   
 * Check for dependencies
   
-  Compile in addition all objects which depend on the changed source
+  All objects which depend on the changed source will also be compiled (in correct order)
 
-  E.g. if a table or view has changed, compile also all programms which use them
+  E.g. if a table or view has changed, all objects which use them will be compiled too
 
-  In the following example the program ```mypgm``` depends on these objects:
-  ```
-  prouzalib/mypgm.sqlrpgle.pgm: \
-    prouzalib/logger.sqlrpgle.srvpgm \
-    prouzalib/errhdlsql.sqlrpgle.srvpgm \
-    prouzalib/date.rpgle.srvpgm \
-    prouzalib/myfile.pf.file \
-    prouzalib/myview.sqlview.file
+  For details have a look at [Set up your Makefile(s)](/docs/pages/gnu_make.md#set-up-your-makefiles)
 
-  ```
 
 * Compile in correct order
   
-  tables before programs etc. based on dependency list
+  tables before programs etc. based on the dependency list
 
 * All actions can be done in you IDE (RDi or vscode)
+  * Using short cuts
 
-  ![run-command-2.jpg](docs/assets/run-command-2.jpg)
+    ![run-command-2.jpg](docs/assets/run-command-2.jpg)
+  
+  * Or action buttons
+
+    ![vscode-actions.jpg](docs/assets/vscode-actions.png)
+
+    ![rdi-actions.jpg](docs/assets/rdi-actions.png)
+
+  * You can also see which objects would be compiled in which target lib:
+    
+    ![vscode-show-change-obj.jpg](docs/assets/vscode-show-change-obj.png)
 
 * Logging
   
-  All compile informations seperated by each source: joblog, spool file, error output
+  All compile informations seperated by each source: 
+  * joblog
+  * spool file
+  * error output
 
   ![compile-logs](docs/assets/compile-logs.jpg)
 
