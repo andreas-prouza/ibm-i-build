@@ -51,7 +51,10 @@ sudo pacman -S       make jq
 ### On Windows
 ```rsync``` is a Unix based utility. So you can't just easily install it on Windows.<br/>
 You have 2 options:
-* WSL (Windows Subsystem for Linux)
+* WSL: Windows Subsystem for Linux
+  
+   Due to performance issues this is the recommended option.
+
 * Cygwin
 
 #### Using WSL (Windows Subsystem for Linux):
@@ -97,6 +100,9 @@ After setup open the Cygwin terminal. Add this in your ```~/.bash_profile```:
 export SHELLOPTS
 set -o igncr
 ```
+
+**Be aware:**<br/>
+If you want to use make with Cygwin, this will have very bad performance due to architecture and your antivirus scanner.
 
 
 ## VSCode
