@@ -68,3 +68,14 @@
 
   ![git-compare](docs/assets/git-compare.jpg)
 
+* Extended source list(s)
+  * You can use a source list containing all sources and the related text description from the source files.
+  * Feel free to make your own source lists for your current project.  
+  To get a list of all your needed sources.
+  * Extend the list with further information like
+    * category
+    * Link to wiki or ticket system
+    * department
+    * etc.
+
+  ![source-list](docs/assets/source-list.png)

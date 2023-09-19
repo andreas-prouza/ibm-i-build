@@ -1,4 +1,7 @@
 {
+    "workbench.editorAssociations": {   
+        "*.md": "vscode.markdown.preview.editor",
+    },
     "makefile.extensionOutputFolder": "./.vscode",
     "command-runner.terminal.name": "Sync project",
     "command-runner.terminal.autoClear": true,
