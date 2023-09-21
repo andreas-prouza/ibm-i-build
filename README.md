@@ -70,12 +70,13 @@
 
 * Extended source list(s)
   * You can use a source list containing all sources and the related text description from the source files.
-  * Feel free to make your own source lists for your current project.  
-  To get a list of all your needed sources.
+  * Feel free to make your own (multiple) source lists for your projects.  
+  To get a list of all your needed sources in each list.
   * Extend the list with further information like
-    * category
-    * Link to wiki or ticket system
-    * department
+    * Category
+    * Link to wiki or ticket
+    * Department
     * etc.
+  * This source list can be automatically generated (e.g. via SQL)
 
   ![source-list](docs/assets/source-list.png)
