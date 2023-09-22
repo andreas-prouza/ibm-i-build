@@ -64,7 +64,7 @@
                 "name": "$(telescope) Show Change Object",
 				"color": "white",
 				"useVsCodeApi": false,
-                "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change-object"
+                "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change-object   &&   make/scripts/git-cache-meta.sh --store"
             },
             {
                 "name": "$(pass-filled) $(rocket)  Deploy",
