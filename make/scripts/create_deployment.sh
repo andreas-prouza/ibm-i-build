@@ -82,7 +82,7 @@ git pull
 # First create a new deployment
 #-----------------------------------------
 response=$(curl $DEPLOYMENT_UAT_URL/create_deployment/$DEPLOYMENT_UAT_WORKFLOW/$current_commit)
-echo response >> $STD_OUTPUT_TMP
+echo $response >> $STD_OUTPUT_TMP
 new_release=$(jq -r '.general.release_branch' <<< $response)
 deployment_version=$(jq -r '.general.deploy_version' <<< $response)
 project=$(jq -r '.general.project' <<< $response)
