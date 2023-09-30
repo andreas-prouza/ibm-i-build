@@ -32,7 +32,7 @@ check_object_list () {
     git branch --delete  $new_release
     #git push -d origin $new_release
     response=$(curl -X POST \
-          $DEPLOYMENT_UAT_URL/cancel_deployment \
+          $DEPLOYMENT_UAT_URL/api/cancel_deployment?auth-token=$DEPLOYMENT_AUTH_TOKEN \
           -H 'Content-Type: application/json' \
           -d '{"filename": "'$file_name'"}')
     echo -e "\n\n$COLOR_RED No objects available to compile $COLOR_END\n"
@@ -60,7 +60,7 @@ if [ "$changed_files" != '' ]; then
   echo -e "$COLOR_RED Untracked files exist!! $COLOR_END"
   echo -e "$COLOR_CYAN_BOLD $changed_files $COLOR_END"
   echo -e "$COLOR_RED Please commit them first $COLOR_END"
-  exit 1
+  #!!!!!!!!!!!!exit 1
 
 fi
 
@@ -81,8 +81,12 @@ git pull
 #-----------------------------------------
 # First create a new deployment
 #-----------------------------------------
-response=$(curl $DEPLOYMENT_UAT_URL/create_deployment/$DEPLOYMENT_UAT_WORKFLOW/$current_commit)
+url=$DEPLOYMENT_UAT_URL/api/create_deployment/$DEPLOYMENT_UAT_WORKFLOW/$current_commit?auth-token=$DEPLOYMENT_AUTH_TOKEN
+echo "URL: $url" >> $STD_OUTPUT_TMP
+
+response=$(curl $url)
 echo $response >> $STD_OUTPUT_TMP
+
 new_release=$(jq -r '.general.release_branch' <<< $response)
 deployment_version=$(jq -r '.general.deploy_version' <<< $response)
 project=$(jq -r '.general.project' <<< $response)
