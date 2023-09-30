@@ -88,7 +88,7 @@ response=$(curl $url)
 echo $response >> $STD_OUTPUT_TMP
 
 error=$(jq -r '.Error' <<< $response)
-if [ ! -z "$error" ]; then
+if [[ "$error" != null ]]; then
   echo -e "$COLOR_RED $error $COLOR_END"
   git checkout $current_branch
   exit 1
