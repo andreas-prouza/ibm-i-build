@@ -87,6 +87,13 @@ echo "URL: $url" >> $STD_OUTPUT_TMP
 response=$(curl $url)
 echo $response >> $STD_OUTPUT_TMP
 
+error=$(jq -r '.Error' <<< $response)
+if [ "$error" != '' ]; then
+  echo -e "$COLOR_RED $error $COLOR_END"
+  git checkout $current_branch
+  exit 1
+fi
+
 new_release=$(jq -r '.general.release_branch' <<< $response)
 deployment_version=$(jq -r '.general.deploy_version' <<< $response)
 project=$(jq -r '.general.project' <<< $response)
