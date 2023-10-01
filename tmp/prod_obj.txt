@@ -1,8 +1,0 @@
-crtcmd|prod_obj|prouzalib/logger.sqlrpgle.srvpgm|PROUZAT1/logger|PROUZALIB/logger
-crtcmd|prod_obj|prouzalib/errhdlsql.sqlrpgle.srvpgm|PROUZAT1/errhdlsql|PROUZALIB/errhdlsql
-crtcmd|prod_obj|prouzalib/cpysrc2ifs.sqlrpgle.pgm|PROUZAT1/cpysrc2ifs|PROUZALIB/cpysrc2ifs
-crtcmd|prod_obj|prouzalib/date.sqlrpgle.srvpgm|PROUZAT1/date|PROUZALIB/date
-crtcmd|prod_obj|prouzalib/testmod.rpgle.srvpgm|PROUZAT1/testmod|PROUZALIB/testmod
-crtcmd|prod_obj|prouzalib/testlog.rpgle.pgm|PROUZAT3/testlog|PROUZA2/testlog
-crtcmd|prod_obj|prouzalib/testlog2.sqlrpgle.pgm|PROUZAT1/testlog2|PROUZALIB/testlog2
-crtcmd|prod_obj|prouzalib/testsqlerr.sqlrpgle.pgm|PROUZAT1/testsqlerr|PROUZALIB/testsqlerr
