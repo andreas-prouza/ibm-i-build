@@ -51,6 +51,9 @@ include $(MAKEFILE_DIR)/object_list.mk
 LOG_DIR=$(SRC_DIR)/logs
 # Directory to create a dummy file for each object. (For source timestamp change check)
 TGT_DIR=$(SRC_DIR)/build
+# Directory to create a dummy file for each object which has been compiled successfully
+COMPILED_DIR=$(SRC_DIR)/tmp
+COMPILED_FILE=$(COMPILED_DIR)/compiled.txt
 
 # Directory/Source-PF where different type of sources are stored
 PF_SRCF=$(SRC_DIR)/$$(dir $$@)/qddssrc
@@ -151,6 +154,9 @@ init:
 # Create subdirectory for each library we use for builds
 	-mkdir -p $(TGT_DIR)/prouzalib
 	-mkdir -p $(TGT_DIR)/prouzalib2
+
+	-rm -rf $(COMPILED_DIR)
+	-mkdir -p $(COMPILED_DIR)
 
 #	$(file > $(OBJECT_LIST_FILE))
 

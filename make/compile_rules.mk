@@ -91,7 +91,7 @@ CL_LOG= 2>> $(CL_LOG_ERROR)  >> $(CL_LOG_STDOUT)
 
 
 # Create build file to remember last build timestamp
-TOUCH=touch '$(TGT_DIR)/$(LOG_FILE_NAME)'; date > '$(TGT_DIR)/$(LOG_FILE_NAME)'
+TOUCH=touch '$(TGT_DIR)/$(LOG_FILE_NAME)'; date > '$(TGT_DIR)/$(LOG_FILE_NAME)'; echo '$(LOG_FILE_NAME)|'`date` >> $(COMPILED_FILE)
 
 
 # Check if the STDERR (redirected file) is empty
