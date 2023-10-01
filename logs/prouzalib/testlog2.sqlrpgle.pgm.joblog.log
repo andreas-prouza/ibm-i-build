@@ -1,0 +1,606 @@
+Command is > DSPJOBLOG <
+CPD000D: Befehl *LIBL/DSPJOBLOG nicht sicher für Job mit mehreren Threads.
+ 5770SS1 V7R5M0 220415                        Jobprotokoll anzeigen                SPGV74    01/10/23  06:36:56 CEST    Seite    1
+  Jobname  . . . . . . . . . . :   QP0ZSPWP        Benutzer  . . . . :   QSECOFR      Nummer . . . . . . . . . . . :   457960
+  Jobbeschreibung  . . . . . . :   QDFTSVR         Bibliothek  . . . :   QGPL
+NACHR-ID   ART                     BEW  DATUM     ZEIT             VON PGM      BIBLIOTHEK  INST     AN PGM      BIBLIOTHEK  INST
+CPC2196    Beendigung              00   01/10/23  06:36:55.765703  QLICUSRL     QSYS        0114     QP2USER2    QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QP2API
+                                     Zielprozedur  . . . . . . . :   runpase_common__FiPvT2
+                                     Anweisung . . . . . . . . . :   4
+                                     Nachricht . . . :   Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
+                                     Ursache  . . . . :  Wenn der Befehl ADDLIBLE benutzt wurde, wurde PROUZAT1 der
+                                       Benutzerbibliotheksliste hinzugefügt. Wenn der Befehl CHGSYSLIBL benutzt
+                                       wurde, wurde PROUZAT1 dem Systemteil der Bibliotheksliste hinzugefügt.
+CPD000D    Information             30   01/10/23  06:36:55.772541  QCATRS       QSYS        045F     QP2USER2    QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QP2API
+                                     Zielprozedur  . . . . . . . :   runpase_common__FiPvT2
+                                     Anweisung . . . . . . . . . :   4
+                                     Nachricht . . . :   Befehl QSYS/CRTSQLRPGI nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       QSYS/CRTSQLRPGI kann nicht sicher in einem Job mit mehreren Threads
+                                       ausgeführt werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung
+                                       des Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf
+                                       Abbruchnachricht CPF0001. Die Befehlsverarbeitung wird beendet.
+                                       Fehlerbeseitigung:  Der Befehl darf nicht in einem Job mit mehreren Threads
+                                       ausgeführt werden. Technische Beschreibung . . . . . . . :  Befehle, die für
+                                       Threads nicht sicher ausgeführt werden können, sollten nicht in einem Job
+                                       mit mehreren Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen)
+                                       feststellen, ob ein Befehl sicher für Threads ausgeführt werden kann und
+                                       welche Aktion vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl
+                                       für Threads nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL
+                                       angegeben, wird die vom Befehlsanalyseprogramm durchzuführende Aktion anhand
+                                       des Systemwerts QMLTTHDACN festgelegt.
+CPD000D    Information             30   01/10/23  06:36:55.773504  QCATRS       QSYS        045F     QSQPRUN     QSQL        07A7
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Nachricht . . . :   Befehl QSYS/CRTRPGMOD nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       QSYS/CRTRPGMOD kann nicht sicher in einem Job mit mehreren Threads
+                                       ausgeführt werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung
+                                       des Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf
+                                       Abbruchnachricht CPF0001. Die Befehlsverarbeitung wird beendet.
+                                       Fehlerbeseitigung:  Der Befehl darf nicht in einem Job mit mehreren Threads
+                                       ausgeführt werden. Technische Beschreibung . . . . . . . :  Befehle, die für
+                                       Threads nicht sicher ausgeführt werden können, sollten nicht in einem Job
+                                       mit mehreren Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen)
+                                       feststellen, ob ein Befehl sicher für Threads ausgeführt werden kann und
+                                       welche Aktion vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl
+                                       für Threads nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL
+                                       angegeben, wird die vom Befehlsanalyseprogramm durchzuführende Aktion anhand
+                                       des Systemwerts QMLTTHDACN festgelegt.
+CPD4090    Diagnose                10   01/10/23  06:36:55.781541  QDMCOPEN     QSYS        17CC     QC2IO       QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2CRIC1
+                                     Zielprozedur  . . . . . . . :   _C_Open file
+                                     Anweisung . . . . . . . . . :   15
+                                     Nachricht . . . :   Drucker PRT01 nicht gefunden. Ausgabewarteschlange in
+                                       QPRINT in Bibliothek QGPL geändert.
+                                     Ursache  . . . . :  Der Drucker PRT01 wurde nicht gefunden. Die
+                                       Ausgabewarteschlange wurde für die Spool-Druckerdatei QSYSPRT in der
+                                       Bibliothek QSYS2929 geändert. Fehlerbeseitigung:  Vor Wiederholung des
+ 5770SS1 V7R5M0 220415                        Jobprotokoll anzeigen                SPGV74    01/10/23  06:36:56 CEST    Seite    2
+  Jobname  . . . . . . . . . . :   QP0ZSPWP        Benutzer  . . . . :   QSECOFR      Nummer . . . . . . . . . . . :   457960
+  Jobbeschreibung  . . . . . . :   QDFTSVR         Bibliothek  . . . :   QGPL
+NACHR-ID   ART                     BEW  DATUM     ZEIT             VON PGM      BIBLIOTHEK  INST     AN PGM      BIBLIOTHEK  INST
+                                       Programmlaufes einen der folgenden Schritte durchführen: - Druckernamen für
+                                       die Spool-Druckerdatei QSYSPRT in der Bibliothek QSYS2929 mit dem Befehl
+                                       CHGPRTF ändern oder mit dem Befehl OVRPRTF überschreiben. - Konfiguration
+                                       für den Drucker hinzufügen oder erstellen (Befehl CRTDEVPRT).
+CPC7301    Beendigung              00   01/10/23  06:36:55.793620  QDDCPF       QSYS        054C     QRN4CPP     QDEVTOOLS   *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   GRP4SYSP
+                                     Zielprozedur  . . . . . . . :   doSystemCommand
+                                     Anweisung . . . . . . . . . :   3
+                                     Nachricht . . . :   Datei QSQLPRE in Bibliothek QTEMP erstellt.
+CPC7305    Beendigung              00   01/10/23  06:36:55.799614  QDDCPFM      QSYS        005B     QRN4CPP     QDEVTOOLS   *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   GRP4SYSP
+                                     Zielprozedur  . . . . . . . :   doSystemCommand
+                                     Anweisung . . . . . . . . . :   3
+                                     Nachricht . . . :   Teildatei TESTLOG2 zu Datei QSQLPRE in QTEMP hinzugefügt.
+CPD000D    Information             30   01/10/23  06:36:55.799787  QCATRS       QSYS        045F     QRN4CPP     QDEVTOOLS   *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   GRP4SYSP
+                                     Zielprozedur  . . . . . . . :   doSystemCommand
+                                     Anweisung . . . . . . . . . :   3
+                                     Nachricht . . . :   Befehl *LIBL/CHGPFM nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       *LIBL/CHGPFM kann nicht sicher in einem Job mit mehreren Threads ausgeführt
+                                       werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung des
+                                       Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf Abbruchnachricht
+                                       CPF0001. Die Befehlsverarbeitung wird beendet. Fehlerbeseitigung:  Der
+                                       Befehl darf nicht in einem Job mit mehreren Threads ausgeführt werden.
+                                       Technische Beschreibung . . . . . . . :  Befehle, die für Threads nicht
+                                       sicher ausgeführt werden können, sollten nicht in einem Job mit mehreren
+                                       Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen) feststellen,
+                                       ob ein Befehl sicher für Threads ausgeführt werden kann und welche Aktion
+                                       vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl für Threads
+                                       nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL angegeben, wird
+                                       die vom Befehlsanalyseprogramm durchzuführende Aktion anhand des Systemwerts
+                                       QMLTTHDACN festgelegt.
+CPC3201    Beendigung              00   01/10/23  06:36:55.801982  QDBCHGME     QSYS        06A1     QRN4CPP     QDEVTOOLS   *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   GRP4SYSP
+                                     Zielprozedur  . . . . . . . :   doSystemCommand
+                                     Anweisung . . . . . . . . . :   3
+                                     Nachricht . . . :   Teildatei TESTLOG2 in Datei QSQLPRE in QTEMP geändert.
+RNS9307    Beendigung              00   01/10/23  06:36:55.836785  QRN4CPP      QDEVTOOLS   *STMT    QSQPRUN     QSQL        07A7
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Ausgangsmodul . . . . . . . :   GRP4CPP
+                                     Ausgangsprozedur  . . . . . :   cleanup
+                                     Anweisung . . . . . . . . . :   19
+                                     Nachricht . . . :   Diagnoseprüfung der Quelle ist beendet. Höchste
+                                       Bewertungsstufe ist 00.
+                                     Ursache  . . . . : Die Diagnoseprüfung der angegebenen Quellenteildatei ist
+                                       beendet. Die höchste ausgegebene Nachrichtenbewertungsstufe ist 00.
+                                       Fehlerbeseitigung: Keine.
+CPC0904    Beendigung              00   01/10/23  06:36:55.840450  QWCCCRVC     QSYS        0095     QRN4CPP     QDEVTOOLS   *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   GRP4CPP
+                                     Zielprozedur  . . . . . . . :   update_dtaara
+                                     Anweisung . . . . . . . . . :   8
+ 5770SS1 V7R5M0 220415                        Jobprotokoll anzeigen                SPGV74    01/10/23  06:36:56 CEST    Seite    3
+  Jobname  . . . . . . . . . . :   QP0ZSPWP        Benutzer  . . . . :   QSECOFR      Nummer . . . . . . . . . . . :   457960
+  Jobbeschreibung  . . . . . . :   QDFTSVR         Bibliothek  . . . :   QGPL
+NACHR-ID   ART                     BEW  DATUM     ZEIT             VON PGM      BIBLIOTHEK  INST     AN PGM      BIBLIOTHEK  INST
+                                     Nachricht . . . :   Datenbereich RETURNCODE in Bibliothek QTEMP erstellt.
+CPC7301    Beendigung              00   01/10/23  06:36:55.852035  QDDCPF       QSYS        054C     QSQPMAIN    QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QSQPMAIN
+                                     Zielprozedur  . . . . . . . :   CRTFILE
+                                     Anweisung . . . . . . . . . :   15206
+                                     Nachricht . . . :   Datei QSQLTEMP1 in Bibliothek QTEMP erstellt.
+CPC7305    Beendigung              00   01/10/23  06:36:55.855983  QDDCPFM      QSYS        005B     QSQPMAIN    QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QSQPMAIN
+                                     Zielprozedur  . . . . . . . :   CRTFILE
+                                     Anweisung . . . . . . . . . :   15206
+                                     Nachricht . . . :   Teildatei TESTLOG2 zu Datei QSQLTEMP1 in QTEMP
+                                       hinzugefügt.
+CPD000D    Information             30   01/10/23  06:36:55.886384  QCATRS       QSYS        045F     QP2USER2    QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QP2API
+                                     Zielprozedur  . . . . . . . :   runpase_common__FiPvT2
+                                     Anweisung . . . . . . . . . :   4
+                                     Nachricht . . . :   Befehl QSYS/CRTRPGMOD nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       QSYS/CRTRPGMOD kann nicht sicher in einem Job mit mehreren Threads
+                                       ausgeführt werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung
+                                       des Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf
+                                       Abbruchnachricht CPF0001. Die Befehlsverarbeitung wird beendet.
+                                       Fehlerbeseitigung:  Der Befehl darf nicht in einem Job mit mehreren Threads
+                                       ausgeführt werden. Technische Beschreibung . . . . . . . :  Befehle, die für
+                                       Threads nicht sicher ausgeführt werden können, sollten nicht in einem Job
+                                       mit mehreren Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen)
+                                       feststellen, ob ein Befehl sicher für Threads ausgeführt werden kann und
+                                       welche Aktion vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl
+                                       für Threads nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL
+                                       angegeben, wird die vom Befehlsanalyseprogramm durchzuführende Aktion anhand
+                                       des Systemwerts QMLTTHDACN festgelegt.
+CPD4090    Diagnose                10   01/10/23  06:36:55.917236  QDMCOPEN     QSYS        17CC     QC2IO       QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2CRIC1
+                                     Zielprozedur  . . . . . . . :   _C_Open file
+                                     Anweisung . . . . . . . . . :   15
+                                     Nachricht . . . :   Drucker PRT01 nicht gefunden. Ausgabewarteschlange in
+                                       QPRINT in Bibliothek QGPL geändert.
+                                     Ursache  . . . . :  Der Drucker PRT01 wurde nicht gefunden. Die
+                                       Ausgabewarteschlange wurde für die Spool-Druckerdatei QSYSPRT in der
+                                       Bibliothek QSYS2929 geändert. Fehlerbeseitigung:  Vor Wiederholung des
+                                       Programmlaufes einen der folgenden Schritte durchführen: - Druckernamen für
+                                       die Spool-Druckerdatei QSYSPRT in der Bibliothek QSYS2929 mit dem Befehl
+                                       CHGPRTF ändern oder mit dem Befehl OVRPRTF überschreiben. - Konfiguration
+                                       für den Drucker hinzufügen oder erstellen (Befehl CRTDEVPRT).
+CPI2126    Information             00   01/10/23  06:36:55.996355  QLIINSRT     QSYS        0A1D     QBNINSOB    QSYS        024C
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Nachricht . . . :   Parameter AUT wurde ignoriert.
+                                     Ursache  . . . . :  Der Parameterwert AUT wurde ignoriert, da REPLACE(*YES)
+                                       angegeben wurde. Daher wurde das vorhandene Objekt als Berechtigungsquelle
+                                       verwendet. Alle privaten und öffentlichen Berechtigungen wurden aus dem
+                                       vorhandenen Objekt in das neue Objekt TESTLOG2 Art *MODULE in Bibliothek
+                                       PROUZAT1 kopiert. Fehlerbeseitigung:  Die Objektberechtigung anzeigen
+                                       (Befehl DSPOBJAUT), um festzustellen, ob die Berechtigung für Objekt
+ 5770SS1 V7R5M0 220415                        Jobprotokoll anzeigen                SPGV74    01/10/23  06:36:56 CEST    Seite    4
+  Jobname  . . . . . . . . . . :   QP0ZSPWP        Benutzer  . . . . :   QSECOFR      Nummer . . . . . . . . . . . :   457960
+  Jobbeschreibung  . . . . . . :   QDFTSVR         Bibliothek  . . . :   QGPL
+NACHR-ID   ART                     BEW  DATUM     ZEIT             VON PGM      BIBLIOTHEK  INST     AN PGM      BIBLIOTHEK  INST
+                                       TESTLOG2 Art *MODULE in Bibliothek PROUZAT1 geändert werden muss.
+                                       Gegebenenfalls die Objektberechtigung erteilen (Befehl GRTOBJAUT) oder die
+                                       Objektberechtigung widerrufen (Befehl RVKOBJAUT), um die Berechtigung für
+                                       Objekt TESTLOG2 Art *MODULE in Bibliothek PROUZAT1 zu ändern.
+CPI2121    Information             00   01/10/23  06:36:55.997992  QLIREINS     QSYS        02DD     QLIINSRT    QSYS        0789
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Nachricht . . . :   Ersetztes Objekt TESTLOG2 Art *MODULE wurde in QRPLOBJ
+                                       übertragen.
+                                     Ursache  . . . . :  Das ersetzte Objekt TESTLOG2 der Art *MODULE aus der
+                                       Bibliothek PROUZAT1 wurde in QA6829C381 umbenannt und in die Bibliothek
+                                       QRPLOBJ übertragen. Fehlerbeseitigung:  Wenn das ersetzte Objekt benötigt
+                                       wird, kann der Benutzer mit dem Befehl MOVOBJ (Objekt übertragen) das Objekt
+                                       von der Bibliothek QRPLOBJ in eine andere Bibliothek übertragen. Der Inhalt
+                                       der Bibliothek QRPLOBJ wird während des nächsten IPL des Systems gelöscht.
+                                       Der Inhalt von Bibliothek QRPLxxxxx ("xxxxx" ist die Nummer eines primären
+                                       Zusatzspeicherpools (ASP)) wird während des nächsten Anhängens (Aktivierung)
+                                       der ASP-Einheit gelöscht.
+RNS9305    Beendigung              00   01/10/23  06:36:56.007119  QRN4CPP      QDEVTOOLS   *STMT    QP2USER2    QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Ausgangsmodul . . . . . . . :   GRP4CPP
+                                     Ausgangsprozedur  . . . . . :   cleanup
+                                     Anweisung . . . . . . . . . :   19
+                                     Zielmodul . . . . . . . . . :   QP2API
+                                     Zielprozedur  . . . . . . . :   runpase_common__FiPvT2
+                                     Anweisung . . . . . . . . . :   4
+                                     Nachricht . . . :   Modul TESTLOG2 in Bibliothek PROUZAT1 gestellt. Höchste
+                                       Bewertungsstufe ist 00. Erstellt am 01/10/23 um 06:36:55.
+                                     Ursache  . . . . : Modul TESTLOG2 wurde erfolgreich in Bibliothek PROUZAT1
+                                       erstellt. Die höchste ausgegebene Nachrichtenbewertungsstufe war 00. Datum
+                                       und Uhrzeit der Modulerstellung sind 01/10/23 und 06:36:55.
+CPC7301    Beendigung              00   01/10/23  06:36:56.018681  QDDCPF       QSYS        054C     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   Datei QP2CMD in Bibliothek QTEMP erstellt.
+CPC7305    Beendigung              00   01/10/23  06:36:56.022488  QDDCPFM      QSYS        005B     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   Teildatei QP2CMD zu Datei QP2CMD in QTEMP hinzugefügt.
+CPD000D    Information             30   01/10/23  06:36:56.022894  QCATRS       QSYS        045F     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   Befehl QSYS/CPYSPLF nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       QSYS/CPYSPLF kann nicht sicher in einem Job mit mehreren Threads ausgeführt
+                                       werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung des
+                                       Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf Abbruchnachricht
+                                       CPF0001. Die Befehlsverarbeitung wird beendet. Fehlerbeseitigung:  Der
+                                       Befehl darf nicht in einem Job mit mehreren Threads ausgeführt werden.
+                                       Technische Beschreibung . . . . . . . :  Befehle, die für Threads nicht
+                                       sicher ausgeführt werden können, sollten nicht in einem Job mit mehreren
+                                       Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen) feststellen,
+ 5770SS1 V7R5M0 220415                        Jobprotokoll anzeigen                SPGV74    01/10/23  06:36:56 CEST    Seite    5
+  Jobname  . . . . . . . . . . :   QP0ZSPWP        Benutzer  . . . . :   QSECOFR      Nummer . . . . . . . . . . . :   457960
+  Jobbeschreibung  . . . . . . :   QDFTSVR         Bibliothek  . . . :   QGPL
+NACHR-ID   ART                     BEW  DATUM     ZEIT             VON PGM      BIBLIOTHEK  INST     AN PGM      BIBLIOTHEK  INST
+                                       ob ein Befehl sicher für Threads ausgeführt werden kann und welche Aktion
+                                       vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl für Threads
+                                       nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL angegeben, wird
+                                       die vom Befehlsanalyseprogramm durchzuführende Aktion anhand des Systemwerts
+                                       QMLTTHDACN festgelegt.
+CPF3485    Beendigung              00   01/10/23  06:36:56.040206  QSPCPYF      QSYS        076B     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   226 Sätze in Datei QP2CMD in QTEMP kopiert.
+                                     Ursache . . . . :  226 Datensätze wurden von der Spool-Datei TESTLOG2 Nummer
+                                       2116 Job 980677/PROUZAT1/QPRTJOB erstellt auf System SPGV74 am 01/10/23
+                                       06:36:55 in die physische Datei QP2CMD in QTEMP Teildatei QP2CMD kopiert.
+CPD000D    Information             30   01/10/23  06:36:56.044260  QCATRS       QSYS        045F     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   Befehl *LIBL/DLTSPLF nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       *LIBL/DLTSPLF kann nicht sicher in einem Job mit mehreren Threads ausgeführt
+                                       werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung des
+                                       Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf Abbruchnachricht
+                                       CPF0001. Die Befehlsverarbeitung wird beendet. Fehlerbeseitigung:  Der
+                                       Befehl darf nicht in einem Job mit mehreren Threads ausgeführt werden.
+                                       Technische Beschreibung . . . . . . . :  Befehle, die für Threads nicht
+                                       sicher ausgeführt werden können, sollten nicht in einem Job mit mehreren
+                                       Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen) feststellen,
+                                       ob ein Befehl sicher für Threads ausgeführt werden kann und welche Aktion
+                                       vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl für Threads
+                                       nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL angegeben, wird
+                                       die vom Befehlsanalyseprogramm durchzuführende Aktion anhand des Systemwerts
+                                       QMLTTHDACN festgelegt.
+CPD000D    Information             30   01/10/23  06:36:56.046435  QCATRS       QSYS        045F     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   Befehl QSYS/CPYSPLF nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       QSYS/CPYSPLF kann nicht sicher in einem Job mit mehreren Threads ausgeführt
+                                       werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung des
+                                       Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf Abbruchnachricht
+                                       CPF0001. Die Befehlsverarbeitung wird beendet. Fehlerbeseitigung:  Der
+                                       Befehl darf nicht in einem Job mit mehreren Threads ausgeführt werden.
+                                       Technische Beschreibung . . . . . . . :  Befehle, die für Threads nicht
+                                       sicher ausgeführt werden können, sollten nicht in einem Job mit mehreren
+                                       Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen) feststellen,
+                                       ob ein Befehl sicher für Threads ausgeführt werden kann und welche Aktion
+                                       vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl für Threads
+                                       nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL angegeben, wird
+                                       die vom Befehlsanalyseprogramm durchzuführende Aktion anhand des Systemwerts
+                                       QMLTTHDACN festgelegt.
+CPF3485    Beendigung              00   01/10/23  06:36:56.086583  QSPCPYF      QSYS        076B     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+ 5770SS1 V7R5M0 220415                        Jobprotokoll anzeigen                SPGV74    01/10/23  06:36:56 CEST    Seite    6
+  Jobname  . . . . . . . . . . :   QP0ZSPWP        Benutzer  . . . . :   QSECOFR      Nummer . . . . . . . . . . . :   457960
+  Jobbeschreibung  . . . . . . :   QDFTSVR         Bibliothek  . . . :   QGPL
+NACHR-ID   ART                     BEW  DATUM     ZEIT             VON PGM      BIBLIOTHEK  INST     AN PGM      BIBLIOTHEK  INST
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   462 Sätze in Datei QP2CMD in QTEMP kopiert.
+                                     Ursache . . . . :  462 Datensätze wurden von der Spool-Datei TESTLOG2 Nummer
+                                       2117 Job 980677/PROUZAT1/QPRTJOB erstellt auf System SPGV74 am 01/10/23
+                                       06:36:55 in die physische Datei QP2CMD in QTEMP Teildatei QP2CMD kopiert.
+CPD000D    Information             30   01/10/23  06:36:56.092371  QCATRS       QSYS        045F     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   Befehl *LIBL/DLTSPLF nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       *LIBL/DLTSPLF kann nicht sicher in einem Job mit mehreren Threads ausgeführt
+                                       werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung des
+                                       Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf Abbruchnachricht
+                                       CPF0001. Die Befehlsverarbeitung wird beendet. Fehlerbeseitigung:  Der
+                                       Befehl darf nicht in einem Job mit mehreren Threads ausgeführt werden.
+                                       Technische Beschreibung . . . . . . . :  Befehle, die für Threads nicht
+                                       sicher ausgeführt werden können, sollten nicht in einem Job mit mehreren
+                                       Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen) feststellen,
+                                       ob ein Befehl sicher für Threads ausgeführt werden kann und welche Aktion
+                                       vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl für Threads
+                                       nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL angegeben, wird
+                                       die vom Befehlsanalyseprogramm durchzuführende Aktion anhand des Systemwerts
+                                       QMLTTHDACN festgelegt.
+CPC2191    Beendigung              00   01/10/23  06:36:56.109546  QLIDLOBJ     QSYS        0743     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   Objekt QP2CMD in QTEMP Art *FILE wurde gelöscht.
+CPD000D    Information             30   01/10/23  06:36:56.116771  QCATRS       QSYS        045F     QP2USER2    QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QP2CL
+                                     Zielprozedur  . . . . . . . :   __Qp2RunCL
+                                     Anweisung . . . . . . . . . :   93
+                                     Nachricht . . . :   Befehl *LIBL/DSPJOBLOG nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       *LIBL/DSPJOBLOG kann nicht sicher in einem Job mit mehreren Threads
+                                       ausgeführt werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung
+                                       des Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf
+                                       Abbruchnachricht CPF0001. Die Befehlsverarbeitung wird beendet.
+                                       Fehlerbeseitigung:  Der Befehl darf nicht in einem Job mit mehreren Threads
+                                       ausgeführt werden. Technische Beschreibung . . . . . . . :  Befehle, die für
+                                       Threads nicht sicher ausgeführt werden können, sollten nicht in einem Job
+                                       mit mehreren Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen)
+                                       feststellen, ob ein Befehl sicher für Threads ausgeführt werden kann und
+                                       welche Aktion vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl
+                                       für Threads nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL
+                                       angegeben, wird die vom Befehlsanalyseprogramm durchzuführende Aktion anhand
+                                       des Systemwerts QMLTTHDACN festgelegt.
+Command is > DSPJOBLOG <
+CPD000D: Befehl *LIBL/DSPJOBLOG nicht sicher für Job mit mehreren Threads.
+ 5770SS1 V7R5M0 220415                        Jobprotokoll anzeigen                SPGV74    01/10/23  06:36:56 CEST    Seite    1
+  Jobname  . . . . . . . . . . :   QP0ZSPWP        Benutzer  . . . . :   QSECOFR      Nummer . . . . . . . . . . . :   457963
+  Jobbeschreibung  . . . . . . :   QDFTSVR         Bibliothek  . . . :   QGPL
+NACHR-ID   ART                     BEW  DATUM     ZEIT             VON PGM      BIBLIOTHEK  INST     AN PGM      BIBLIOTHEK  INST
+CPC2196    Beendigung              00   01/10/23  06:36:56.324559  QLICUSRL     QSYS        0114     QP2USER2    QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QP2API
+                                     Zielprozedur  . . . . . . . :   runpase_common__FiPvT2
+                                     Anweisung . . . . . . . . . :   4
+                                     Nachricht . . . :   Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
+                                     Ursache  . . . . :  Wenn der Befehl ADDLIBLE benutzt wurde, wurde PROUZAT1 der
+                                       Benutzerbibliotheksliste hinzugefügt. Wenn der Befehl CHGSYSLIBL benutzt
+                                       wurde, wurde PROUZAT1 dem Systemteil der Bibliotheksliste hinzugefügt.
+CPD000D    Information             30   01/10/23  06:36:56.325835  QCATRS       QSYS        045F     QP2USER2    QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QP2API
+                                     Zielprozedur  . . . . . . . :   runpase_common__FiPvT2
+                                     Anweisung . . . . . . . . . :   4
+                                     Nachricht . . . :   Befehl *LIBL/CRTPGM nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       *LIBL/CRTPGM kann nicht sicher in einem Job mit mehreren Threads ausgeführt
+                                       werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung des
+                                       Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf Abbruchnachricht
+                                       CPF0001. Die Befehlsverarbeitung wird beendet. Fehlerbeseitigung:  Der
+                                       Befehl darf nicht in einem Job mit mehreren Threads ausgeführt werden.
+                                       Technische Beschreibung . . . . . . . :  Befehle, die für Threads nicht
+                                       sicher ausgeführt werden können, sollten nicht in einem Job mit mehreren
+                                       Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen) feststellen,
+                                       ob ein Befehl sicher für Threads ausgeführt werden kann und welche Aktion
+                                       vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl für Threads
+                                       nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL angegeben, wird
+                                       die vom Befehlsanalyseprogramm durchzuführende Aktion anhand des Systemwerts
+                                       QMLTTHDACN festgelegt.
+CPD4090    Diagnose                10   01/10/23  06:36:56.326321  QDMCOPEN     QSYS        17CC     QUIOPEN     QSYS        0669
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Nachricht . . . :   Drucker PRT01 nicht gefunden. Ausgabewarteschlange in
+                                       QPRINT in Bibliothek QGPL geändert.
+                                     Ursache  . . . . :  Der Drucker PRT01 wurde nicht gefunden. Die
+                                       Ausgabewarteschlange wurde für die Spool-Druckerdatei QSYSPRT in der
+                                       Bibliothek QSYS2929 geändert. Fehlerbeseitigung:  Vor Wiederholung des
+                                       Programmlaufes einen der folgenden Schritte durchführen: - Druckernamen für
+                                       die Spool-Druckerdatei QSYSPRT in der Bibliothek QSYS2929 mit dem Befehl
+                                       CHGPRTF ändern oder mit dem Befehl OVRPRTF überschreiben. - Konfiguration
+                                       für den Drucker hinzufügen oder erstellen (Befehl CRTDEVPRT).
+CPD5D1D    Diagnose                20   01/10/23  06:36:56.332769  QBNBIND      QSYS        *STMT    QBNBIND     QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Ausgangsmodul . . . . . . . :   QBNBNDIR
+                                     Ausgangsprozedur  . . . . . :   QBNBNDIR__ProcessBindingDirectory__handleObjec
+                                       t__resolveObjectInBndDir__objectNotFound
+                                     Anweisung . . . . . . . . . :   36
+                                     Zielmodul . . . . . . . . . :   QBNBNDIR
+                                     Zielprozedur  . . . . . . . :   QBNBNDIR__ProcessBindingDirectory__handleObjec
+                                       t__resolveObjectInBndDir
+                                     Anweisung . . . . . . . . . :   5
+                                     Nachricht . . . :   Objekt GETTEXT der Art *SRVPGM in Bibliothek *LIBL nicht
+                                       gefunden.
+                                     Ursache  . . . . :  Objekt GETTEXT der Art *SRVPGM in Bibliothek *LIBL wurde
+                                       im Binderverzeichnis PROUZADIR in Bibliothek PROUZAT1 angegeben; es wurde
+                                       jedoch nicht zum Binden gefunden. Fehlerbeseitigung:  Den
+                                       Anwendungslieferanten oder den Kundendienst benachrichtigen.
+CPD5D1D    Diagnose                20   01/10/23  06:36:56.332861  QBNBIND      QSYS        *STMT    QBNBIND     QSYS        *STMT
+ 5770SS1 V7R5M0 220415                        Jobprotokoll anzeigen                SPGV74    01/10/23  06:36:56 CEST    Seite    2
+  Jobname  . . . . . . . . . . :   QP0ZSPWP        Benutzer  . . . . :   QSECOFR      Nummer . . . . . . . . . . . :   457963
+  Jobbeschreibung  . . . . . . :   QDFTSVR         Bibliothek  . . . :   QGPL
+NACHR-ID   ART                     BEW  DATUM     ZEIT             VON PGM      BIBLIOTHEK  INST     AN PGM      BIBLIOTHEK  INST
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Ausgangsmodul . . . . . . . :   QBNBNDIR
+                                     Ausgangsprozedur  . . . . . :   QBNBNDIR__ProcessBindingDirectory__handleObjec
+                                       t__resolveObjectInBndDir__objectNotFound
+                                     Anweisung . . . . . . . . . :   36
+                                     Zielmodul . . . . . . . . . :   QBNBNDIR
+                                     Zielprozedur  . . . . . . . :   QBNBNDIR__ProcessBindingDirectory__handleObjec
+                                       t__resolveObjectInBndDir
+                                     Anweisung . . . . . . . . . :   5
+                                     Nachricht . . . :   Objekt SQLSRV1 der Art *SRVPGM in Bibliothek *LIBL nicht
+                                       gefunden.
+                                     Ursache  . . . . :  Objekt SQLSRV1 der Art *SRVPGM in Bibliothek *LIBL wurde
+                                       im Binderverzeichnis PROUZADIR in Bibliothek PROUZAT1 angegeben; es wurde
+                                       jedoch nicht zum Binden gefunden. Fehlerbeseitigung:  Den
+                                       Anwendungslieferanten oder den Kundendienst benachrichtigen.
+CPD5D1D    Diagnose                20   01/10/23  06:36:56.332911  QBNBIND      QSYS        *STMT    QBNBIND     QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Ausgangsmodul . . . . . . . :   QBNBNDIR
+                                     Ausgangsprozedur  . . . . . :   QBNBNDIR__ProcessBindingDirectory__handleObjec
+                                       t__resolveObjectInBndDir__objectNotFound
+                                     Anweisung . . . . . . . . . :   36
+                                     Zielmodul . . . . . . . . . :   QBNBNDIR
+                                     Zielprozedur  . . . . . . . :   QBNBNDIR__ProcessBindingDirectory__handleObjec
+                                       t__resolveObjectInBndDir
+                                     Anweisung . . . . . . . . . :   5
+                                     Nachricht . . . :   Objekt SQLTEST3 der Art *SRVPGM in Bibliothek *LIBL nicht
+                                       gefunden.
+                                     Ursache  . . . . :  Objekt SQLTEST3 der Art *SRVPGM in Bibliothek *LIBL wurde
+                                       im Binderverzeichnis PROUZADIR in Bibliothek PROUZAT1 angegeben; es wurde
+                                       jedoch nicht zum Binden gefunden. Fehlerbeseitigung:  Den
+                                       Anwendungslieferanten oder den Kundendienst benachrichtigen.
+CPI2119    Information             00   01/10/23  06:36:56.359989  QLIINSRT     QSYS        0A1D     QBNINSOB    QSYS        024C
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Nachricht . . . :   Parameterwerte für AUT und USRPRF wurden ignoriert.
+                                     Ursache  . . . . :  Die Parameterwerte für AUT und USRPRF wurden ignoriert, da
+                                       REPLACE(*YES) angegeben war. Daher wurde das vorhandene Objekt als
+                                       Berechtigungsquelle verwendet. Alle persönlichen und allgemeinen
+                                       Berechtigungen, das Attribut USRPRF und das Attribut USEADPAUT wurden aus
+                                       dem vorhandenen Objekt in das neue Objekt TESTLOG2, Art *PGM, in Bibliothek
+                                       PROUZAT1 kopiert. Fehlerbeseitigung:  Die Objektberechtigung anzeigen
+                                       (Befehl DSPOBJAUT), um festzustellen, ob die Berechtigung für Objekt
+                                       TESTLOG2 Art *PGM in Bibliothek PROUZAT1 geändert werden muss.
+                                       Gegebenenfalls die Objektberechtigung erteilen (Befehl GRTOBJAUT) oder die
+                                       Objektberechtigung widerrufen (Befehl RVKOBJAUT), um die Berechtigung für
+                                       Objekt TESTLOG2 Art *PGM in Bibliothek PROUZAT1 zu ändern.
+CPI2121    Information             00   01/10/23  06:36:56.361644  QLIREINS     QSYS        02DD     QLIINSRT    QSYS        0789
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Nachricht . . . :   Ersetztes Objekt TESTLOG2 Art *PGM wurde in QRPLOBJ
+                                       übertragen.
+                                     Ursache  . . . . :  Das ersetzte Objekt TESTLOG2 der Art *PGM aus der
+                                       Bibliothek PROUZAT1 wurde in QA6829C4E4 umbenannt und in die Bibliothek
+                                       QRPLOBJ übertragen. Fehlerbeseitigung:  Wenn das ersetzte Objekt benötigt
+                                       wird, kann der Benutzer mit dem Befehl MOVOBJ (Objekt übertragen) das Objekt
+                                       von der Bibliothek QRPLOBJ in eine andere Bibliothek übertragen. Der Inhalt
+                                       der Bibliothek QRPLOBJ wird während des nächsten IPL des Systems gelöscht.
+                                       Der Inhalt von Bibliothek QRPLxxxxx ("xxxxx" ist die Nummer eines primären
+                                       Zusatzspeicherpools (ASP)) wird während des nächsten Anhängens (Aktivierung)
+                                       der ASP-Einheit gelöscht.
+ 5770SS1 V7R5M0 220415                        Jobprotokoll anzeigen                SPGV74    01/10/23  06:36:56 CEST    Seite    3
+  Jobname  . . . . . . . . . . :   QP0ZSPWP        Benutzer  . . . . :   QSECOFR      Nummer . . . . . . . . . . . :   457963
+  Jobbeschreibung  . . . . . . :   QDFTSVR         Bibliothek  . . . :   QGPL
+NACHR-ID   ART                     BEW  DATUM     ZEIT             VON PGM      BIBLIOTHEK  INST     AN PGM      BIBLIOTHEK  INST
+CPC5D07    Beendigung              00   01/10/23  06:36:56.364097  QBNBIND      QSYS        *STMT    QP2USER2    QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Ausgangsmodul . . . . . . . :   QBNBIND
+                                     Ausgangsprozedur  . . . . . :   QBNBIND__SendCompletionMessage
+                                     Anweisung . . . . . . . . . :   7
+                                     Zielmodul . . . . . . . . . :   QP2API
+                                     Zielprozedur  . . . . . . . :   runpase_common__FiPvT2
+                                     Anweisung . . . . . . . . . :   4
+                                     Nachricht . . . :   Programm TESTLOG2 in Bibliothek PROUZAT1 erstellt.
+                                     Ursache  . . . . :  Programm TESTLOG2 wurde in Bibliothek PROUZAT1 erfolgreich
+                                       erstellt. Fehlerbeseitigung:  Die Programmerstellung war erfolgreich.
+CPC7301    Beendigung              00   01/10/23  06:36:56.377006  QDDCPF       QSYS        054C     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   Datei QP2CMD in Bibliothek QTEMP erstellt.
+CPC7305    Beendigung              00   01/10/23  06:36:56.384232  QDDCPFM      QSYS        005B     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   Teildatei QP2CMD zu Datei QP2CMD in QTEMP hinzugefügt.
+CPD000D    Information             30   01/10/23  06:36:56.384669  QCATRS       QSYS        045F     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   Befehl QSYS/CPYSPLF nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       QSYS/CPYSPLF kann nicht sicher in einem Job mit mehreren Threads ausgeführt
+                                       werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung des
+                                       Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf Abbruchnachricht
+                                       CPF0001. Die Befehlsverarbeitung wird beendet. Fehlerbeseitigung:  Der
+                                       Befehl darf nicht in einem Job mit mehreren Threads ausgeführt werden.
+                                       Technische Beschreibung . . . . . . . :  Befehle, die für Threads nicht
+                                       sicher ausgeführt werden können, sollten nicht in einem Job mit mehreren
+                                       Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen) feststellen,
+                                       ob ein Befehl sicher für Threads ausgeführt werden kann und welche Aktion
+                                       vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl für Threads
+                                       nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL angegeben, wird
+                                       die vom Befehlsanalyseprogramm durchzuführende Aktion anhand des Systemwerts
+                                       QMLTTHDACN festgelegt.
+CPF3485    Beendigung              00   01/10/23  06:36:56.404945  QSPCPYF      QSYS        076B     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   54 Sätze in Datei QP2CMD in QTEMP kopiert.
+                                     Ursache . . . . :  54 Datensätze wurden von der Spool-Datei TESTLOG2 Nummer
+                                       2119 Job 980677/PROUZAT1/QPRTJOB erstellt auf System SPGV74 am 01/10/23
+                                       06:36:56 in die physische Datei QP2CMD in QTEMP Teildatei QP2CMD kopiert.
+CPD000D    Information             30   01/10/23  06:36:56.407163  QCATRS       QSYS        045F     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+ 5770SS1 V7R5M0 220415                        Jobprotokoll anzeigen                SPGV74    01/10/23  06:36:56 CEST    Seite    4
+  Jobname  . . . . . . . . . . :   QP0ZSPWP        Benutzer  . . . . :   QSECOFR      Nummer . . . . . . . . . . . :   457963
+  Jobbeschreibung  . . . . . . :   QDFTSVR         Bibliothek  . . . :   QGPL
+NACHR-ID   ART                     BEW  DATUM     ZEIT             VON PGM      BIBLIOTHEK  INST     AN PGM      BIBLIOTHEK  INST
+                                     Nachricht . . . :   Befehl *LIBL/DLTSPLF nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       *LIBL/DLTSPLF kann nicht sicher in einem Job mit mehreren Threads ausgeführt
+                                       werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung des
+                                       Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf Abbruchnachricht
+                                       CPF0001. Die Befehlsverarbeitung wird beendet. Fehlerbeseitigung:  Der
+                                       Befehl darf nicht in einem Job mit mehreren Threads ausgeführt werden.
+                                       Technische Beschreibung . . . . . . . :  Befehle, die für Threads nicht
+                                       sicher ausgeführt werden können, sollten nicht in einem Job mit mehreren
+                                       Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen) feststellen,
+                                       ob ein Befehl sicher für Threads ausgeführt werden kann und welche Aktion
+                                       vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl für Threads
+                                       nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL angegeben, wird
+                                       die vom Befehlsanalyseprogramm durchzuführende Aktion anhand des Systemwerts
+                                       QMLTTHDACN festgelegt.
+CPC2191    Beendigung              00   01/10/23  06:36:56.419633  QLIDLOBJ     QSYS        0743     QC2SYS      QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QC2SYS
+                                     Zielprozedur  . . . . . . . :   system
+                                     Anweisung . . . . . . . . . :   13
+                                     Nachricht . . . :   Objekt QP2CMD in QTEMP Art *FILE wurde gelöscht.
+CPD000D    Information             30   01/10/23  06:36:56.423631  QCATRS       QSYS        045F     QP2USER2    QSYS        *STMT
+                                     Von Benutzer  . . . . . . . :   PROUZAT1
+                                     Zielmodul . . . . . . . . . :   QP2CL
+                                     Zielprozedur  . . . . . . . :   __Qp2RunCL
+                                     Anweisung . . . . . . . . . :   93
+                                     Nachricht . . . :   Befehl *LIBL/DSPJOBLOG nicht sicher für Job mit mehreren
+                                       Threads.
+                                     Ursache  . . . . :  Der aktuelle Job enthält mehrere Threads. Der Befehl
+                                       *LIBL/DSPJOBLOG kann nicht sicher in einem Job mit mehreren Threads
+                                       ausgeführt werden. Aktion 2 wird ausgeführt. Aktionen: 2 -- Die Verarbeitung
+                                       des Befehls wird fortgesetzt. 3 -- Diese Nachricht folgt auf
+                                       Abbruchnachricht CPF0001. Die Befehlsverarbeitung wird beendet.
+                                       Fehlerbeseitigung:  Der Befehl darf nicht in einem Job mit mehreren Threads
+                                       ausgeführt werden. Technische Beschreibung . . . . . . . :  Befehle, die für
+                                       Threads nicht sicher ausgeführt werden können, sollten nicht in einem Job
+                                       mit mehreren Threads benutzt werden. Mit dem Befehl DSPCMD (Befehl anzeigen)
+                                       feststellen, ob ein Befehl sicher für Threads ausgeführt werden kann und
+                                       welche Aktion vom Befehlsanalyseprogramm ausgeführt wird, wenn der Befehl
+                                       für Threads nicht sicher ist. Wurde für die auszuführende Aktion *SYSVAL
+                                       angegeben, wird die vom Befehlsanalyseprogramm durchzuführende Aktion anhand
+                                       des Systemwerts QMLTTHDACN festgelegt.

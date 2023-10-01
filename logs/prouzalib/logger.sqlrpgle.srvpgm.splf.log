@@ -1,0 +1,1479 @@
+Command is > CRTSQLRPGI OBJ(PROUZAT1/logger) SRCSTMF('./prouzalib//qrpglesrc/logger.sqlrpgle') OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS(*CURRENT) DBGVIEW(*SOURCE) REPLACE(*YES) COMPILEOPT('TGTCCSID(*JOB) INCDIR(''./prouzalib/'')') <
+CPD000D: Befehl QSYS/CRTSQLRPGI nicht sicher für Job mit mehreren Threads.
+CPD000D: Befehl QSYS/CRTRPGMOD nicht sicher für Job mit mehreren Threads.
+RNS9305: Modul LOGGER in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 01/10/23 um 06:36:47.
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      1
+  Befehl . . . . . . . . . . . . . :   CRTRPGMOD
+    Ausgegeben von . . . . . . . . :     PROUZAT1
+  Modul  . . . . . . . . . . . . . :   LOGGER
+    Bibliothek . . . . . . . . . . :     PROUZAT1
+  Text 'Beschreibung'  . . . . . . :   *SRCMBRTXT
+  Quellendatenstromdatei . . . . . :   ./prouzalib//qrpglesrc/logger.sqlrpgle
+    CCSID  . . . . . . . . . . . . :     1208
+  Ziel-CCSID . . . . . . . . . . . :   *JOB (1141)
+  Text 'Beschreibung'  . . . . . . :
+  Letzte Änderung  . . . . . . . . :   30/09/23  16:32:52
+  Generierungsbewertungsstufe  . . :   10
+  Umwandlungsprogrammauswahlmögl.  :   *XREF      *GEN       *NOSECLVL  *SHOWCPY
+                                       *EXPDDS    *EXT       *NOSHOWSKP *NOSRCSTMT
+                                       *DEBUGIO   *UNREF     *NOEVENTF
+  Testhilfesichten . . . . . . . . :   *ALL
+  Testhilfeverschlüsselungsschl. . :   *NONE
+  Ausgabe  . . . . . . . . . . . . :   *PRINT
+  Optimierungsstufe  . . . . . . . :   *NONE
+  Quellenlisteneinrückung  . . . . :   *NONE
+  Umsetzungsauswahlmög. eingeben . :   *NONE
+  Sortierfolge . . . . . . . . . . :   *JOB
+  Sprachen-ID  . . . . . . . . . . :   *JOB
+  Modul ersetzen . . . . . . . . . :   *YES
+  Berechtigung . . . . . . . . . . :   *LIBCRTAUT
+  Numerische Daten abschneiden . . :   *YES
+  Numerische Daten korrigieren . . :   *NONE
+  Zielrelease  . . . . . . . . . . :   V7R5M0
+  Nullwerte zulassen . . . . . . . :   *NO
+  Speichermodell  . .  . . . . . . :   *INHERIT
+  Binderverzeichnis  . . . . . . . :   *NONE
+  Bedingungsnamen definieren . . . :   *NONE
+  Leistungsdatenerfassung aktiv. . :   *PEP
+  Profildefinitionsdaten . . . . . :   *NOCOL
+  LIC-Optionen . . . . . . . . . . :
+  Prog.-Schnittstelle generieren . :   *NO
+  Verzeichnis einschließen . . . . :   ./prouzalib/
+  Vorprozessoroptionen . . . . . . :   *NORMVCOMMENT *EXPINCLUDE   *NOSEQSRC
+  Ausgabequellendatei  . . . . . . :   QSQLPRE
+    Bibliothek . . . . . . . . . . :     QTEMP
+  Ausgabequellenteildatei  . . . . :   LOGGER
+  REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      2
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+Q u e l l e n l i s t e
+     1 **free                                                                                                               000001
+     2 ctl-opt nomain;                                                                                                      000002
+     3                                                                                                                      000003
+     4 // No commitment control because we never want to ROLLBACK anything in a Logger!                                     000004
+     5 exec sql Set Option COMMIT=*none;                                                                                    000005
+     6                                                                                                                      000006
+     7                                                                                                                      000007
+     8 /include 'qcpysrc/std'                                                                                               000008
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+        *--------------------------------------------------------------------------------------------*
+        * RPG-Teildateiname  . . . . :  std.rpgle                                                    *                     1
+        * Externer Name  . . . . . . :  ./prouzalib/qcpysrc/std.rpgle                                *                     1
+        * Letzte Änderung  . . . . . :  30/09/23  16:32:49                                           *                     1
+        *--------------------------------------------------------------------------------------------*
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+     9+**free                                                                                                              1000001
+    10+                                                                                                                    1000002
+    11+/IF NOT DEFINED(PROUZA_STD_COPY)                                                                                    1000003
+    12+/DEFINE PROUZA_STD_COPY                                                                                             1000004
+    13+                                                                                                                    1000005
+    14+// Job-Log output                                                                                                   1000006
+    15+dcl-pr writeJobLog    int(10)     extproc('Qp0zLprintf');                                                           1000007
+    16+  message                         pointer value options(*string);                                                   1000008
+    17+end-pr;                                                                                                             1000009
+    18+                                                                                                                    1000010
+    19+Dcl-C log_ende                    CONST(X'25');                                                                     1000011
+    20+                                                                                                                    1000012
+    21+                                                                                                                    1000013
+    22+                                                                                                                    1000014
+    23+                                                                                                                    1000015
+    24+// Run a system command                                                                                             1000016
+    25+Dcl-pr system         int(10)     extproc('system');                                                                1000017
+    26+  cmd                             pointer value options(*string);                                                   1000018
+    27+End-pr;                                                                                                             1000019
+    28+                                                                                                                    1000020
+    29+dcl-s ErrMsg          char(7)     import('_EXCP_MSGID');                                                            1000021
+    30+                                                                                                                    1000022
+    31+                                                                                                                    1000023
+    32+DCL-DS pgm_stat PSDS qualified;                                                                                     1000024
+    33+  status *STATUS;                                                                                                   1000025
+    34+  routine *ROUTINE;                                                                                                 1000026
+    35+  library CHAR(10) POS(81);                                                                                         1000027
+    36+  jobUserNumber char(26) pos(244);                                                                                  1000028
+    37+  job char(10) pos(244);                                                                                            1000029
+    38+  jobName char(10) pos(244);                                                                                        1000030
+    39+  User char(10) pos(254);                                                                                           1000031
+    40+  jobUser char(10) pos(254);                                                                                        1000032
+    41+  number zoned(6) pos(264);                                                                                         1000033
+    42+  jobnumber zoned(6) pos(264);                                                                                      1000034
+    43+  jobnumberalpha char(6) pos(264);                                                                                  1000035
+    44+  curUser char(10) pos(358);                                                                                        1000036
+    45+END-DS;                                                                                                             1000037
+    46+                                                                                                                    1000038
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      3
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    47+                                                                                                                    1000039
+    48+/ENDIF                                                                                                              1000040
+    49+                                                                                                                    1000041
+    50 /include 'qcpysrc/logger'                                                                                            000009
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+        *--------------------------------------------------------------------------------------------*
+        * RPG-Teildateiname  . . . . :  logger.rp+                                                   *                     2
+        * Externer Name  . . . . . . :  ./prouzalib/qcpysrc/logger.rpgle                             *                     2
+        * Letzte Änderung  . . . . . :  30/09/23  16:32:49                                           *                     2
+        *--------------------------------------------------------------------------------------------*
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    51+**free                                                                                                              2000001
+    52+                                                                                                                    2000002
+    53+/IF NOT DEFINED(PROUZA_LOGGER_COPY)                                                                                 2000003
+    54+/DEFINE PROUZA_LOGGER_COPY                                                                                          2000004
+    55+                                                                                                                    2000005
+    56+  dcl-c  C_LOG_DEBUG              'DEBUG';                                                                          2000006
+    57+  dcl-c  C_LOG_INFO               'INFO';                                                                           2000007
+    58+  dcl-c  C_LOG_WARNING            'WARNING';                                                                        2000008
+    59+  dcl-c  C_log_ERROR              'ERROR';                                                                          2000009
+    60+                                                                                                                    2000010
+    61+  dcl-ds logger_ds_tmp            extname('LOGGER') alias qualified template;                                       2000011
+    62+  END-DS;                                                                                                           2000012
+    63+                                                                                                                    2000013
+    64+  dcl-pr log;                                                                                                       2000014
+    65+    p_text                        like(logger_ds_tmp.text) const;                                                   2000015
+    66+    p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                2000016
+    67+    p_program                     like(logger_ds_tmp.program) const options(*nopass);                               2000017
+    68+    p_print2Joblog                ind const options(*nopass);                                                       2000018
+    69+  END-PR;                                                                                                           2000019
+    70+                                                                                                                    2000020
+    71+  dcl-pr loginfo;                                                                                                   2000021
+    72+    p_text                        like(logger_ds_tmp.text) const;                                                   2000022
+    73+    p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                2000023
+    74+    p_program                     like(logger_ds_tmp.program) const options(*nopass);                               2000024
+    75+    p_print2Joblog                ind const options(*nopass);                                                       2000025
+    76+  END-PR;                                                                                                           2000026
+    77+                                                                                                                    2000027
+    78+  dcl-pr logdebug;                                                                                                  2000028
+    79+    p_text                        like(logger_ds_tmp.text) const;                                                   2000029
+    80+    p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                2000030
+    81+    p_program                     like(logger_ds_tmp.program) const options(*nopass);                               2000031
+    82+    p_print2Joblog                ind const options(*nopass);                                                       2000032
+    83+  END-PR;                                                                                                           2000033
+    84+                                                                                                                    2000034
+    85+  dcl-pr logwarning;                                                                                                2000035
+    86+    p_text                        like(logger_ds_tmp.text) const;                                                   2000036
+    87+    p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                2000037
+    88+    p_program                     like(logger_ds_tmp.program) const options(*nopass);                               2000038
+    89+    p_print2Joblog                ind const options(*nopass);                                                       2000039
+    90+  END-PR;                                                                                                           2000040
+    91+                                                                                                                    2000041
+    92+  dcl-pr logerror;                                                                                                  2000042
+    93+    p_text                        like(logger_ds_tmp.text) const;                                                   2000043
+    94+    p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                2000044
+    95+    p_program                     like(logger_ds_tmp.program) const options(*nopass);                               2000045
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      4
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    96+    p_print2Joblog                ind const options(*nopass);                                                       2000046
+    97+  END-PR;                                                                                                           2000047
+    98+                                                                                                                    2000048
+    99+  dcl-pr IBMAPI_Send_Program_Message  extpgm('QMHSNDPM');                                                           2000049
+   100+    MsgID              char(7)      const;                                                                          2000050
+   101+    MsgFile            char(20)     const;                                                                          2000051
+   102+    MsgDta             char(32767)  const   options(*varsize);                                                      2000052
+   103+    MsgDtaLen          int(10)      const;                                                                          2000053
+   104+    MsgType            char(10)     const;                                                                          2000054
+   105+    MsgQ               char(10)     const;                                                                          2000055
+   106+    MsgQNbr            int(10)      const;                                                                          2000056
+   107+    MsgKey             char(4);                                                                                     2000057
+   108+    ErrorDs            likeds(ErrorDS);                                                                             2000058
+   109+  end-pr;                                                                                                           2000059
+   110+                                                                                                                    2000060
+   111+  dcl-pr Send_Program_Message;                                                                                      2000061
+   112+    p_msg                         varchar(1000) const;                                                              2000062
+   113+    p_type                        varchar(10)   const;                                                              2000063
+   114+    p_msgid                       char(7)       const options(*nopass);                                             2000064
+   115+    p_msgf                        char(10)      const options(*nopass);                                             2000065
+   116+    p_msgf_lib                    char(10)      const options(*nopass);                                             2000066
+   117+    p_log                         ind           const options(*nopass);                                             2000067
+   118+  END-PR;                                                                                                           2000068
+   119+                                                                                                                    2000069
+   120+  Dcl-ds ErrorDS       qualified inz;                                                                               2000070
+   121+    BytesProv          int(10) inz(0);                                                                              2000071
+   122+    BytesAvail         int(10) inz(0);                                                                              2000072
+   123+  end-ds;                                                                                                           2000073
+   124+                                                                                                                    2000074
+   125+  Dcl-s ProgramMsgKey  char(4) inz;                                                                                 2000075
+   126+                                                                                                                    2000076
+   127+                                                                                                                    2000077
+   128+/ENDIF                                                                                                              2000078
+   129                                                                                                                      000010
+   130 // No 'c_sqlerror' here, because of loop                                                                             000011
+   131 // If the logger fails, then the calling program schould not interrupt                                               000012
+   132                                                                                                                      000013
+   133                                                                                                                      000014
+   134                                                                                                                      000015
+   135                                                                                                                      000016
+   136 //--------------------------------------------------------------                                                     000017
+   137 // Log data to logger table                                                                                          000018
+   138 //                                                                                                                   000019
+   139 // Parameter:  - Text                                                                                                000020
+   140 //                                                                                                                   000021
+   141 //             - External Reference (Optional)                                                                       000022
+   142 //                 Just any key for you for better researching of log entries                                        000023
+   143 //                                                                                                                   000024
+   144 //             - Program (Optional)                                                                                  000025
+   145 //                 Program name of caller                                                                            000026
+   146 //                 If not passed, it will be retrieved automatically                                                 000027
+   147 //                                                                                                                   000028
+   148 //             - Print2Joblog (Optional)                                                                             000029
+   149 //                 *ON: The text will be written to the joblog                                                       000030
+   150 //                 *OFF: (Default) Data will not be written to the joblog                                            000031
+   151 //--------------------------------------------------------------                                                     000032
+   152                                                                                                                      000033
+   153 dcl-proc logging export;                                                                                             000034
+   154                                                                                                                      000035
+   155   dcl-pi *n;                                                                                                         000036
+   156     p_loglevel                    like(logger_ds_tmp.loglevel) const;                                                000037
+   157     p_text                        like(logger_ds_tmp.text) const;                                                    000038
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      5
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   158     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000039
+   159     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000040
+   160     p_print2Joblog                ind const options(*nopass);                                                        000041
+   161   END-PI;                                                                                                            000042
+   162                                                                                                                      000043
+   163   dcl-s l_text                    like(logger_ds_tmp.text) inz;                                                      000044
+   164                                                                                                                      000045
+   165   dcl-s l_extref                  like(logger_ds_tmp.extref) inz;                                                    000046
+   166   dcl-s i_EXTREF                  int(5) inz(-5);                                                                    000047
+   167                                                                                                                      000048
+   168   dcl-s l_program                 like(logger_ds_tmp.program) inz;                                                   000049
+   169                                                                                                                      000050
+   170   l_text = %trim(p_text);                                                                                            000051
+   171                                                                                                                      000052
+   172   if (%parms >= %Parmnum(p_extref));                                                                                 000053
+   173     l_extref = %trim(p_extref);                                                                                      000054
+   174     i_EXTREF = 0;                                                                                                    000055
+   175   endif;                                                                                                             000056
+   176                                                                                                                      000057
+   177   if (%parms >= %Parmnum(p_program));                                                                                000058
+   178     l_program = %trim(p_program);                                                                                    000059
+   179   else;                                                                                                              000060
+   180     Exec Sql Select                                                                                                  000061
+   181             Program_Library_name || '/' ||                                                                           000062
+   182             Program_name || '(' || coalesce(Procedure_name, '*none') || ')'                                          000063
+   183           Into :l_program                                                                                            000064
+   184           From table(qsys2.stack_info()) t1                                                                          000065
+   185           Where Program_library_name not like 'Q%'                                                                   000066
+   186           and   Program_name not in ('LOGGER', 'SQLERROR', '')                                                       000067
+   187           Order by ordinal_position desc                                                                             000068
+   188           Fetch first Row Only;                                                                                      000069
+   189   ENDIF;                                                                                                             000070
+   190                                                                                                                      000071
+   191   Exec Sql Insert Into Logger(loglevel, text, extref, program)                                                       000072
+   192           values (:p_loglevel, :l_text, :l_extref :i_EXTREF, :l_program);                                            000073
+   193                                                                                                                      000074
+   194   if (%parms >= %Parmnum(p_print2Joblog) and p_print2Joblog);                                                        000075
+   195     writeJobLog (l_text + log_ende);                                                                                 000076
+   196   endif;                                                                                                             000077
+   197                                                                                                                      000078
+   198 END-PROC;                                                                                                            000079
+   199                                                                                                                      000080
+   200                                                                                                                      000081
+   201 dcl-proc log export;                                                                                                 000082
+   202                                                                                                                      000083
+   203   dcl-pi *n;                                                                                                         000084
+   204     p_text                        like(logger_ds_tmp.text) const;                                                    000085
+   205     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000086
+   206     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000087
+   207     p_print2Joblog                ind const options(*nopass);                                                        000088
+   208   END-PI;                                                                                                            000089
+   209                                                                                                                      000090
+   210   if (%parms >= %Parmnum(p_print2Joblog));                                                                           000091
+   211     logging(C_LOG_INFO : p_text : p_extref : p_program : p_print2Joblog);                                            000092
+   212   elseif (%parms >= %Parmnum(p_program));                                                                            000093
+   213     logging(C_LOG_INFO : p_text : p_extref : p_program);                                                             000094
+   214   elseif (%parms >= %Parmnum(p_extref));                                                                             000095
+   215     logging(C_LOG_INFO : p_text : p_extref );                                                                        000096
+   216   else;                                                                                                              000097
+   217     logging(C_LOG_INFO : p_text);                                                                                    000098
+   218   endif;                                                                                                             000099
+   219                                                                                                                      000100
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      6
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   220 END-PROC;                                                                                                            000101
+   221                                                                                                                      000102
+   222                                                                                                                      000103
+   223 dcl-proc logdebug export;                                                                                            000104
+   224                                                                                                                      000105
+   225   dcl-pi *n;                                                                                                         000106
+   226     p_text                        like(logger_ds_tmp.text) const;                                                    000107
+   227     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000108
+   228     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000109
+   229     p_print2Joblog                ind const options(*nopass);                                                        000110
+   230   END-PI;                                                                                                            000111
+   231                                                                                                                      000112
+   232   if (%parms >= %Parmnum(p_print2Joblog));                                                                           000113
+   233     logging(C_log_DEBUG : p_text : p_extref : p_program : p_print2Joblog);                                           000114
+   234   elseif (%parms >= %Parmnum(p_program));                                                                            000115
+   235     logging(C_log_DEBUG : p_text : p_extref: p_program);                                                             000116
+   236   elseif (%parms >= %Parmnum(p_extref));                                                                             000117
+   237     logging(C_log_DEBUG : p_text : p_extref);                                                                        000118
+   238   else;                                                                                                              000119
+   239     logging(C_log_DEBUG : p_text);                                                                                   000120
+   240   endif;                                                                                                             000121
+   241                                                                                                                      000122
+   242 END-PROC;                                                                                                            000123
+   243                                                                                                                      000124
+   244                                                                                                                      000125
+   245                                                                                                                      000126
+   246 dcl-proc loginfo export;                                                                                             000127
+   247                                                                                                                      000128
+   248   dcl-pi *n;                                                                                                         000129
+   249     p_text                        like(logger_ds_tmp.text) const;                                                    000130
+   250     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000131
+   251     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000132
+   252     p_print2Joblog                ind const options(*nopass);                                                        000133
+   253   END-PI;                                                                                                            000134
+   254                                                                                                                      000135
+   255   if (%parms >= %Parmnum(p_print2Joblog));                                                                           000136
+   256     logging(C_log_INFO : p_text : p_extref : p_program : p_print2Joblog);                                            000137
+   257   elseif (%parms >= %Parmnum(p_program));                                                                            000138
+   258     logging(C_log_INFO : p_text : p_extref: p_program);                                                              000139
+   259   elseif (%parms >= %Parmnum(p_extref));                                                                             000140
+   260     logging(C_log_INFO : p_text : p_extref);                                                                         000141
+   261   else;                                                                                                              000142
+   262     logging(C_log_INFO : p_text);                                                                                    000143
+   263   endif;                                                                                                             000144
+   264                                                                                                                      000145
+   265 END-PROC;                                                                                                            000146
+   266                                                                                                                      000147
+   267                                                                                                                      000148
+   268                                                                                                                      000149
+   269 dcl-proc logwarning export;                                                                                          000150
+   270                                                                                                                      000151
+   271   dcl-pi *n;                                                                                                         000152
+   272     p_text                        like(logger_ds_tmp.text) const;                                                    000153
+   273     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000154
+   274     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000155
+   275     p_print2Joblog                ind const options(*nopass);                                                        000156
+   276   END-PI;                                                                                                            000157
+   277                                                                                                                      000158
+   278   if (%parms >= %Parmnum(p_print2Joblog));                                                                           000159
+   279     logging(C_log_WARNING : p_text : p_extref : p_program : p_print2Joblog);                                         000160
+   280   elseif (%parms >= %Parmnum(p_program));                                                                            000161
+   281     logging(C_log_WARNING : p_text : p_extref: p_program);                                                           000162
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      7
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   282   elseif (%parms >= %Parmnum(p_extref));                                                                             000163
+   283     logging(C_log_WARNING : p_text : p_extref);                                                                      000164
+   284   else;                                                                                                              000165
+   285     logging(C_log_WARNING : p_text);                                                                                 000166
+   286   endif;                                                                                                             000167
+   287                                                                                                                      000168
+   288 END-PROC;                                                                                                            000169
+   289                                                                                                                      000170
+   290                                                                                                                      000171
+   291                                                                                                                      000172
+   292 dcl-proc logerror export;                                                                                            000173
+   293                                                                                                                      000174
+   294   dcl-pi *n;                                                                                                         000175
+   295     p_text                        like(logger_ds_tmp.text) const;                                                    000176
+   296     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000177
+   297     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000178
+   298     p_print2Joblog                ind const options(*nopass);                                                        000179
+   299   END-PI;                                                                                                            000180
+   300                                                                                                                      000181
+   301   if (%parms >= %Parmnum(p_print2Joblog));                                                                           000182
+   302     logging(C_log_ERROR : p_text : p_extref : p_program : p_print2Joblog);                                           000183
+   303   elseif (%parms >= %Parmnum(p_program));                                                                            000184
+   304     logging(C_log_ERROR : p_text : p_extref: p_program);                                                             000185
+   305   elseif (%parms >= %Parmnum(p_extref));                                                                             000186
+   306     logging(C_log_ERROR : p_text : p_extref);                                                                        000187
+   307   else;                                                                                                              000188
+   308     logging(C_log_ERROR : p_text);                                                                                   000189
+   309   endif;                                                                                                             000190
+   310                                                                                                                      000191
+   311 END-PROC;                                                                                                            000192
+   312                                                                                                                      000193
+   313 //--------------------------------------------------------------                                                     000194
+   314 // Send Program Message                                                                                              000195
+   315 //                                                                                                                   000196
+   316 // Parameter:  Message                                                                                               000197
+   317 //                                                                                                                   000198
+   318 //             Type                                                                                                  000199
+   319 //                *ESCAPE for Excape messages                                                                        000200
+   320 //                                                                                                                   000201
+   321 //             Log                                                                                                   000202
+   322 //                Optional                                                                                           000203
+   323 //                *ON: Message will be written to the Logger table                                                   000204
+   324 //                *OFF: (Default) will not be written to Logger                                                      000205
+   325 //--------------------------------------------------------------                                                     000206
+   326                                                                                                                      000207
+   327 dcl-proc Send_Program_Message export;                                                                                000208
+   328   dcl-pi *n;                                                                                                         000209
+   329     p_msg                         varchar(1000) const;                                                               000210
+   330     p_type                        varchar(10)   const;                                                               000211
+   331     p_msgid                       char(7)       const options(*nopass);                                              000212
+   332     p_msgf                        char(10)      const options(*nopass);                                              000213
+   333     p_msgf_lib                    char(10)      const options(*nopass);                                              000214
+   334     p_log                         ind           const options(*nopass);                                              000215
+   335   END-PI;                                                                                                            000216
+   336                                                                                                                      000217
+   337   dcl-s l_msgid                   like(p_msgid);                                                                     000218
+   338   dcl-ds l_msgf_ds                qualified;                                                                         000219
+   339      file                         char(10);                                                                          000220
+   340      lib                          char(10);                                                                          000221
+   341   end-ds;                                                                                                            000222
+   342                                                                                                                      000223
+   343   l_msgid = 'CPF9897';                                                                                               000224
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      8
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   344   l_msgf_ds.file = 'QCPFMSG';                                                                                        000225
+   345   l_msgf_ds.lib = '*LIBL';                                                                                           000226
+   346                                                                                                                      000227
+   347   if (%parms < %parmnum(p_msgid) and p_msgid <> *blank);                                                             000228
+   348     l_msgid = p_msgid;                                                                                               000229
+   349   endif;                                                                                                             000230
+   350                                                                                                                      000231
+   351   if (%parms < %parmnum(p_msgf) and p_msgf <> *blank);                                                               000232
+   352     l_msgf_ds.file = p_msgf;                                                                                         000233
+   353   endif;                                                                                                             000234
+   354                                                                                                                      000235
+   355   if (%parms < %parmnum(p_msgf_lib) and p_msgf_lib <> *blank);                                                       000236
+   356     l_msgf_ds.lib = p_msgf_lib;                                                                                      000237
+   357   endif;                                                                                                             000238
+   358                                                                                                                      000239
+   359                                                                                                                      000240
+   360   if (%parms < %parmnum(p_log) Or p_log = *on);                                                                      000241
+   361     log('Send_Program_Message (' + %trim(p_type) + '): ' +                                                           000242
+   362          %trim(p_msg));                                                                                              000243
+   363   endif;                                                                                                             000244
+   364                                                                                                                      000245
+   365   IBMAPI_Send_Program_Message(l_msgid : l_msgf_ds :                                                                  000246
+   366                      p_msg : %len(%trim(p_msg)) :                                                                    000247
+   367                      p_type : '*PGMBDY' :                                                                            000248
+   368                      2 : ProgramMsgKey : ErrorDS );                                                                  000249
+   369                                                                                                                      000250
+   370 END-PROC;                                                                                                            000251
+* * * * *   E N D E   D E R   Q U E L L E   * * * * *
+/ C O P Y - T e i l d a t e i e n
+Zeile  Src  RPG-Name   <-------- Externer Name -------> CCSID  <- Letzte Änd. ->
+Nummer ID              Bibliothek Datei      Teildatei         Datum    Uhrzeit
+     8    1 std.rpgle  ./prouzalib/qcpysrc/std.rpgle     1208  30/09/23 16:32:49
+    50    2 logger.rp+ ./prouzalib/qcpysrc/logger.rpgle  1208  30/09/23 16:32:49
+* * * * *   E N D E   D E R   / C O P Y - T E I L D A T E I E N   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      9
+Zeil.- <---------------------- Datensätze ---------------------------------------------------------------->      Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10      Datum  ID  nummer
+U m w a n d l u n g s z e i t d a t e n
+* * * * *   E N D E   D E R   U M W A N D L U N G S Z E I T D A T E N   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     10
+N a c h r i c h t e n z u s a m m e n f a s s u n g
+ Msg-ID  Sv Nummer Nachrichtentext
+* * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     11
+E n d z u s a m m e n f a s s u n g
+  Nachrichtenübersicht:
+    Information (00)  . . . . . . . :        0
+    Warnung      (10) . . . . . . . :        0
+    Fehler       (20) . . . . . . . :        0
+    Schwerwiegender Fehler (30+)  . :        0
+    ---------------------------------  -------
+    Summe . . . . . . . . . . . . . :        0
+  Quellensätze insgesamt:
+    Sätze . . . . . . . . . . . . . :      370
+    Bestimmungen .  . . . . . . . . :      226
+    Datensätze  . . . . . . . . . . :        0
+    Bemerkungen . . . . . . . . . . :      119
+* * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
+Diagnoseprüfung der Quelle ist beendet. Höchste Bewertungsstufe ist 00.
+* * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      1
+  Befehl . . . . . . . . . . . . . :   CRTRPGMOD
+    Ausgegeben von . . . . . . . . :     PROUZAT1
+  Modul  . . . . . . . . . . . . . :   LOGGER
+    Bibliothek . . . . . . . . . . :     PROUZAT1
+  Text 'Beschreibung'  . . . . . . :   *SRCMBRTXT
+  Quellendatenstromdatei . . . . . :   /QSYS.LIB/QTEMP.LIB/QSQLTEMP1.FILE/LOGGER.MBR
+    CCSID  . . . . . . . . . . . . :     1141
+  Ziel-CCSID . . . . . . . . . . . :   *JOB (1141)
+  Text 'Beschreibung'  . . . . . . :
+  Letzte Änderung  . . . . . . . . :   01/10/23  06:36:47
+  Generierungsbewertungsstufe  . . :   10
+  Umwandlungsprogrammauswahlmögl.  :   *XREF      *GEN       *NOSECLVL  *SHOWCPY
+                                       *EXPDDS    *EXT       *NOSHOWSKP *NOSRCSTMT
+                                       *DEBUGIO   *UNREF     *NOEVENTF
+  Testhilfesichten . . . . . . . . :   *ALL
+  Testhilfeverschlüsselungsschl. . :   *NONE
+  Ausgabe  . . . . . . . . . . . . :   *PRINT
+  Optimierungsstufe  . . . . . . . :   *NONE
+  Quellenlisteneinrückung  . . . . :   *NONE
+  Umsetzungsauswahlmög. eingeben . :   *NONE
+  Sortierfolge . . . . . . . . . . :   *JOB
+  Sprachen-ID  . . . . . . . . . . :   *JOB
+  Modul ersetzen . . . . . . . . . :   *YES
+  Berechtigung . . . . . . . . . . :   *LIBCRTAUT
+  Numerische Daten abschneiden . . :   *YES
+  Numerische Daten korrigieren . . :   *NONE
+  Zielrelease  . . . . . . . . . . :   V7R5M0
+  Nullwerte zulassen . . . . . . . :   *NO
+  Speichermodell  . .  . . . . . . :   *INHERIT
+  Binderverzeichnis  . . . . . . . :   *NONE
+  Bedingungsnamen definieren . . . :   *NONE
+  Leistungsdatenerfassung aktiv. . :   *PEP
+  Profildefinitionsdaten . . . . . :   *NOCOL
+  LIC-Optionen . . . . . . . . . . :
+  Prog.-Schnittstelle generieren . :   *NO
+  Verzeichnis einschließen . . . . :   ./prouzalib/
+  Vorprozessoroptionen . . . . . . :   *NONE
+  REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      2
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+Q u e l l e n l i s t e
+     1 **free                                                                                                               000001
+     2 ctl-opt nomain;                                                                                                      000002
+     3                                                                                                                      000003
+     4 // No commitment control because we never want to ROLLBACK anything in a Logger!                                     000004
+     5        /SET CCSID(*CHAR:*JOBRUNMIX)                                                                                  000005
+     6        // SQL COMMUNICATION AREA                                                //SQL                                000006
+     7        DCL-DS SQLCA;                                                            //SQL                                000007
+     8          SQLCAID CHAR(8) INZ(X'0000000000000000');                              //SQL                                000008
+     9           SQLAID CHAR(8) OVERLAY(SQLCAID);                                      //SQL                                000009
+    10          SQLCABC INT(10);                                                       //SQL                                000010
+    11           SQLABC BINDEC(9) OVERLAY(SQLCABC);                                    //SQL                                000011
+    12          SQLCODE INT(10);                                                       //SQL                                000012
+    13           SQLCOD BINDEC(9) OVERLAY(SQLCODE);                                    //SQL                                000013
+    14          SQLERRML INT(5);                                                       //SQL                                000014
+    15           SQLERL BINDEC(4) OVERLAY(SQLERRML);                                   //SQL                                000015
+    16          SQLERRMC CHAR(70);                                                     //SQL                                000016
+    17           SQLERM CHAR(70) OVERLAY(SQLERRMC);                                    //SQL                                000017
+    18          SQLERRP CHAR(8);                                                       //SQL                                000018
+    19           SQLERP CHAR(8) OVERLAY(SQLERRP);                                      //SQL                                000019
+    20          SQLERR CHAR(24);                                                       //SQL                                000020
+    21           SQLER1 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000021
+    22           SQLER2 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000022
+    23           SQLER3 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000023
+    24           SQLER4 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000024
+    25           SQLER5 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000025
+    26           SQLER6 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000026
+    27           SQLERRD INT(10) DIM(6) OVERLAY(SQLERR);                               //SQL                                000027
+    28          SQLWRN CHAR(11);                                                       //SQL                                000028
+    29           SQLWN0 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000029
+    30           SQLWN1 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000030
+    31           SQLWN2 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000031
+    32           SQLWN3 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000032
+    33           SQLWN4 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000033
+    34           SQLWN5 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000034
+    35           SQLWN6 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000035
+    36           SQLWN7 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000036
+    37           SQLWN8 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000037
+    38           SQLWN9 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000038
+    39           SQLWNA CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000039
+    40           SQLWARN CHAR(1) DIM(11) OVERLAY(SQLWRN);                              //SQL                                000040
+    41          SQLSTATE CHAR(5);                                                      //SQL                                000041
+    42           SQLSTT CHAR(5) OVERLAY(SQLSTATE);                                     //SQL                                000042
+    43        END-DS SQLCA;                                                            //SQL                                000043
+    44        DCL-PR SQLROUTE_CALL EXTPGM(SQLROUTE);                                   //SQL                                000044
+    45          CA LIKEDS(SQLCA);                                                      //SQL                                000045
+    46          *N BINDEC(4) OPTIONS(*NOPASS);                                         //SQL                                000046
+    47          *N CHAR(1) OPTIONS(*NOPASS);                                           //SQL                                000047
+    48        END-PR SQLROUTE_CALL;                                                    //SQL                                000048
+    49        DCL-PR SQLOPEN_CALL EXTPGM(SQLOPEN);                                     //SQL                                000049
+    50          CA LIKEDS(SQLCA);                                                      //SQL                                000050
+    51          *N BINDEC(4);                                                          //SQL                                000051
+    52        END-PR SQLOPEN_CALL;                                                     //SQL                                000052
+    53        DCL-PR SQLCLSE_CALL EXTPGM(SQLCLSE);                                     //SQL                                000053
+    54          CA LIKEDS(SQLCA);                                                      //SQL                                000054
+    55          *N BINDEC(4);                                                          //SQL                                000055
+    56        END-PR SQLCLSE_CALL;                                                     //SQL                                000056
+    57        DCL-PR SQLCMIT_CALL EXTPGM(SQLCMIT);                                     //SQL                                000057
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      3
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    58          CA LIKEDS(SQLCA);                                                      //SQL                                000058
+    59          *N BINDEC(4);                                                          //SQL                                000059
+    60        END-PR SQLCMIT_CALL;                                                     //SQL                                000060
+    61        /RESTORE CCSID(*CHAR)                                                                                         000061
+    62        DCL-C SQLROUTE CONST('QSYS/QSQROUTE');                                   //SQL                                000062
+    63        DCL-C SQLOPEN CONST('QSYS/QSQROUTE');                                    //SQL                                000063
+    64        DCL-C SQLCLSE CONST('QSYS/QSQLCLSE');                                    //SQL                                000064
+    65        DCL-C SQLCMIT CONST('QSYS/QSQLCMIT');                                    //SQL                                000065
+    66        DCL-C SQFRD CONST(2);                                                    //SQL                                000066
+    67        DCL-C SQFCRT CONST(8);                                                   //SQL                                000067
+    68        DCL-C SQFOVR CONST(16);                                                  //SQL                                000068
+    69        DCL-C SQFAPP CONST(32);                                                  //SQL                                000069
+    70 //*exec sql Set Option COMMIT=*none;                                                                                 000070
+    71                                                                                                                      000071
+    72                                                                                                                      000072
+    73 // /include 'qcpysrc/std'                                                                                            000073
+    74 **END-FREE                                                                                                           000074
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    75 **free                                                                                                               000075
+    76                                                                                                                      000076
+    77 // /IF NOT DEFINED(PROUZA_STD_COPY)                                                                                  000077
+    78 // /DEFINE PROUZA_STD_COPY                                                                                           000078
+    79                                                                                                                      000079
+    80 // Job-Log output                                                                                                    000080
+    81 dcl-pr writeJobLog    int(10)     extproc('Qp0zLprintf');                                                            000081
+    82   message                         pointer value options(*string);                                                    000082
+    83 end-pr;                                                                                                              000083
+    84                                                                                                                      000084
+    85 Dcl-C log_ende                    CONST(X'25');                                                                      000085
+    86                                                                                                                      000086
+    87                                                                                                                      000087
+    88                                                                                                                      000088
+    89                                                                                                                      000089
+    90 // Run a system command                                                                                              000090
+    91 Dcl-pr system         int(10)     extproc('system');                                                                 000091
+    92   cmd                             pointer value options(*string);                                                    000092
+    93 End-pr;                                                                                                              000093
+    94                                                                                                                      000094
+    95 dcl-s ErrMsg          char(7)     import('_EXCP_MSGID');                                                             000095
+    96                                                                                                                      000096
+    97                                                                                                                      000097
+    98 DCL-DS pgm_stat PSDS qualified;                                                                                      000098
+    99   status *STATUS;                                                                                                    000099
+   100   routine *ROUTINE;                                                                                                  000100
+   101   library CHAR(10) POS(81);                                                                                          000101
+   102   jobUserNumber char(26) pos(244);                                                                                   000102
+   103   job char(10) pos(244);                                                                                             000103
+   104   jobName char(10) pos(244);                                                                                         000104
+   105   User char(10) pos(254);                                                                                            000105
+   106   jobUser char(10) pos(254);                                                                                         000106
+   107   number zoned(6) pos(264);                                                                                          000107
+   108   jobnumber zoned(6) pos(264);                                                                                       000108
+   109   jobnumberalpha char(6) pos(264);                                                                                   000109
+   110   curUser char(10) pos(358);                                                                                         000110
+   111 END-DS;                                                                                                              000111
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      4
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   112                                                                                                                      000112
+   113                                                                                                                      000113
+   114 // /ENDIF                                                                                                            000114
+   115                                                                                                                      000115
+   116 // /include 'qcpysrc/logger'                                                                                         000116
+   117 **END-FREE                                                                                                           000117
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   118 **free                                                                                                               000118
+   119                                                                                                                      000119
+   120 // /IF NOT DEFINED(PROUZA_LOGGER_COPY)                                                                               000120
+   121 // /DEFINE PROUZA_LOGGER_COPY                                                                                        000121
+   122                                                                                                                      000122
+   123   dcl-c  C_LOG_DEBUG              'DEBUG';                                                                           000123
+   124   dcl-c  C_LOG_INFO               'INFO';                                                                            000124
+   125   dcl-c  C_LOG_WARNING            'WARNING';                                                                         000125
+   126   dcl-c  C_log_ERROR              'ERROR';                                                                           000126
+   127                                                                                                                      000127
+   128   dcl-ds logger_ds_tmp            extname('LOGGER') alias qualified template;                                        000128
+   129   END-DS;                                                                                                            000129
+        *--------------------------------------------------------------------------------------------*                     1
+        * Datenstruktur  . . . . . . :  LOGGER_DS_TMP                                                *                     1
+        * Externes Format  . . . . . :  LOGGER : PROUZAT1/LOGGER                                     *                     1
+        *--------------------------------------------------------------------------------------------*                     1
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   130=D ID                            20I 0                                                                               1000001
+   131=D LOGLEVEL                      10A                                                                                 1000002
+   132=D TEXT                        1000A   VARYING                                                                       1000003
+   133=D EXTREF                       200A   VARYING                                                                       1000004
+   134=D PROGRAM                      200A   VARYING                                                                       1000005
+   135=D CHGTIME                       26Z                                                                                 1000006
+   136=D JOB                           28A   VARYING                                                                       1000007
+   137=D ACTION                         1A                                                                                 1000008
+   138=D START                         32Z                                                                                 1000009
+   139=D END                           32Z                                                                                 1000010
+   140=D TRANSID                       32Z                                                                                 1000011
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   141                                                                                                                      000130
+   142   dcl-pr log;                                                                                                        000131
+   143     p_text                        like(logger_ds_tmp.text) const;                                                    000132
+   144     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000133
+   145     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000134
+   146     p_print2Joblog                ind const options(*nopass);                                                        000135
+   147   END-PR;                                                                                                            000136
+   148                                                                                                                      000137
+   149   dcl-pr loginfo;                                                                                                    000138
+   150     p_text                        like(logger_ds_tmp.text) const;                                                    000139
+   151     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000140
+   152     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000141
+   153     p_print2Joblog                ind const options(*nopass);                                                        000142
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      5
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   154   END-PR;                                                                                                            000143
+   155                                                                                                                      000144
+   156   dcl-pr logdebug;                                                                                                   000145
+   157     p_text                        like(logger_ds_tmp.text) const;                                                    000146
+   158     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000147
+   159     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000148
+   160     p_print2Joblog                ind const options(*nopass);                                                        000149
+   161   END-PR;                                                                                                            000150
+   162                                                                                                                      000151
+   163   dcl-pr logwarning;                                                                                                 000152
+   164     p_text                        like(logger_ds_tmp.text) const;                                                    000153
+   165     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000154
+   166     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000155
+   167     p_print2Joblog                ind const options(*nopass);                                                        000156
+   168   END-PR;                                                                                                            000157
+   169                                                                                                                      000158
+   170   dcl-pr logerror;                                                                                                   000159
+   171     p_text                        like(logger_ds_tmp.text) const;                                                    000160
+   172     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000161
+   173     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000162
+   174     p_print2Joblog                ind const options(*nopass);                                                        000163
+   175   END-PR;                                                                                                            000164
+   176                                                                                                                      000165
+   177   dcl-pr IBMAPI_Send_Program_Message  extpgm('QMHSNDPM');                                                            000166
+   178     MsgID              char(7)      const;                                                                           000167
+   179     MsgFile            char(20)     const;                                                                           000168
+   180     MsgDta             char(32767)  const   options(*varsize);                                                       000169
+   181     MsgDtaLen          int(10)      const;                                                                           000170
+   182     MsgType            char(10)     const;                                                                           000171
+   183     MsgQ               char(10)     const;                                                                           000172
+   184     MsgQNbr            int(10)      const;                                                                           000173
+   185     MsgKey             char(4);                                                                                      000174
+   186     ErrorDs            likeds(ErrorDS);                                                                              000175
+   187   end-pr;                                                                                                            000176
+   188                                                                                                                      000177
+   189   dcl-pr Send_Program_Message;                                                                                       000178
+   190     p_msg                         varchar(1000) const;                                                               000179
+   191     p_type                        varchar(10)   const;                                                               000180
+   192     p_msgid                       char(7)       const options(*nopass);                                              000181
+   193     p_msgf                        char(10)      const options(*nopass);                                              000182
+   194     p_msgf_lib                    char(10)      const options(*nopass);                                              000183
+   195     p_log                         ind           const options(*nopass);                                              000184
+   196   END-PR;                                                                                                            000185
+   197                                                                                                                      000186
+   198   Dcl-ds ErrorDS       qualified inz;                                                                                000187
+   199     BytesProv          int(10) inz(0);                                                                               000188
+   200     BytesAvail         int(10) inz(0);                                                                               000189
+   201   end-ds;                                                                                                            000190
+   202                                                                                                                      000191
+   203   Dcl-s ProgramMsgKey  char(4) inz;                                                                                  000192
+   204                                                                                                                      000193
+   205                                                                                                                      000194
+   206 // /ENDIF                                                                                                            000195
+   207                                                                                                                      000196
+   208 // No 'c_sqlerror' here, because of loop                                                                             000197
+   209 // If the logger fails, then the calling program schould not interrupt                                               000198
+   210                                                                                                                      000199
+   211                                                                                                                      000200
+   212                                                                                                                      000201
+   213                                                                                                                      000202
+   214 //--------------------------------------------------------------                                                     000203
+   215 // Log data to logger table                                                                                          000204
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      6
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   216 //                                                                                                                   000205
+   217 // Parameter:  - Text                                                                                                000206
+   218 //                                                                                                                   000207
+   219 //             - External Reference (Optional)                                                                       000208
+   220 //                 Just any key for you for better researching of log entries                                        000209
+   221 //                                                                                                                   000210
+   222 //             - Program (Optional)                                                                                  000211
+   223 //                 Program name of caller                                                                            000212
+   224 //                 If not passed, it will be retrieved automatically                                                 000213
+   225 //                                                                                                                   000214
+   226 //             - Print2Joblog (Optional)                                                                             000215
+   227 //                 *ON: The text will be written to the joblog                                                       000216
+   228 //                 *OFF: (Default) Data will not be written to the joblog                                            000217
+   229 //--------------------------------------------------------------                                                     000218
+   230                                                                                                                      000219
+   231 dcl-proc logging export;                                                                                             000220
+   232                                                                                                                      000221
+   233   dcl-pi *n;                                                                                                         000222
+   234     p_loglevel                    like(logger_ds_tmp.loglevel) const;                                                000223
+   235     p_text                        like(logger_ds_tmp.text) const;                                                    000224
+   236     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000225
+   237     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000226
+   238     p_print2Joblog                ind const options(*nopass);                                                        000227
+   239   END-PI;                                                                                                            000228
+   240                                                                                                                      000229
+   241   dcl-s l_text                    like(logger_ds_tmp.text) inz;                                                      000230
+   242                                                                                                                      000231
+   243   dcl-s l_extref                  like(logger_ds_tmp.extref) inz;                                                    000232
+   244   dcl-s i_EXTREF                  int(5) inz(-5);                                                                    000233
+   245                                                                                                                      000234
+   246   dcl-s l_program                 like(logger_ds_tmp.program) inz;                                                   000235
+   247                                                                                                                      000236
+   248 **END-FREE                                                                                                           000237
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   249 D                 DS                  STATIC                               SELECT                                    000238
+   250 D  SQL_00000              1      2B 0 INZ(128)                             length of header                          000239
+   251 D  SQL_00001              3      4B 0 INZ(4)                               statement number                          000240
+   252 D  SQL_00002              5      8U 0 INZ(0)                               invocation mark                           000241
+   253 D  SQL_00003              9      9A   INZ('0') CCSID(*JOBRUNMIX)           data is okay                              000242
+   254 D  SQL_00004             10    128A   CCSID(*JOBRUNMIX)                    end of header                             000243
+   255 D  SQL_00005            129    330A   VARYING CCSID(*JOBRUNMIX)            L_PROGRAM                                 000244
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   256 **FREE                                                                                                               000245
+   257 **END-FREE                                                                                                           000246
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   258 D                 DS                  STATIC                               INSERT                                    000247
+   259 D  SQL_00006              1      2B 0 INZ(128)                             length of header                          000248
+   260 D  SQL_00007              3      4B 0 INZ(5)                               statement number                          000249
+   261 D  SQL_00008              5      8U 0 INZ(0)                               invocation mark                           000250
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      7
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   262 D  SQL_00009              9      9A   INZ('0') CCSID(*JOBRUNMIX)           data is okay                              000251
+   263 D  SQL_00010             10    128A   CCSID(*JOBRUNMIX)                    end of header                             000252
+   264 D  SQL_00011            129    138A   CCSID(*JOBRUNMIX)                    P_LOGLEVEL                                000253
+   265 D  SQL_00012            139   1140A   VARYING CCSID(*JOBRUNMIX)            L_TEXT                                    000254
+   266 D  SQL_00013           1141   1342A   VARYING CCSID(*JOBRUNMIX)            L_EXTREF                                  000255
+   267 D  SQL_00015           1343   1544A   VARYING CCSID(*JOBRUNMIX)            L_PROGRAM                                 000256
+   268 D  SQL_00014           1545   1546B 0                                      I_EXTREF                                  000257
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   269 **FREE                                                                                                               000258
+   270   l_text = %trim(p_text);                                                                                            000259
+   271                                                                                                                      000260
+   272   if (%parms >= %Parmnum(p_extref));                                                                 B01             000261
+   273     l_extref = %trim(p_extref);                                                                       01             000262
+   274     i_EXTREF = 0;                                                                                     01             000263
+   275   endif;                                                                                             E01             000264
+   276                                                                                                                      000265
+   277   if (%parms >= %Parmnum(p_program));                                                                B01             000266
+   278     l_program = %trim(p_program);                                                                     01             000267
+   279   else;                                                                                              X01             000268
+   280 //*    Exec Sql Select                                                                                               000269
+   281 //*            Program_Library_name || '/' ||                                                                        000270
+   282 //*            Program_name || '(' || coalesce(Procedure_name, '*none') || ')'                                       000271
+   283 //*          Into :l_program                                                                                         000272
+   284 //*          From table(qsys2.stack_info()) t1                                                                       000273
+   285 //*          Where Program_library_name not like 'Q%'                                                                000274
+   286 //*          and   Program_name not in ('LOGGER', 'SQLERROR', '')                                                    000275
+   287 //*          Order by ordinal_position desc                                                                          000276
+   288 //*          Fetch first Row Only;                                                                                   000277
+   289           SQLER6 = -4;                                                          //SQL 4               01             000278
+   290           SQLROUTE_CALL(                                                        //SQL                 01             000279
+   291                SQLCA                                                            //SQL                 01             000280
+   292              : SQL_00000                                                        //SQL                 01             000281
+   293           );                                                                    //SQL                 01             000282
+   294           IF SQL_00003 = '1';                                                   //SQL                B02             000283
+   295           EVAL L_PROGRAM = SQL_00005;                                           //SQL                 02             000284
+   296           ENDIF;                                                                //SQL                E02             000285
+   297   ENDIF;                                                                                             E01             000286
+   298                                                                                                                      000287
+   299 //*  Exec Sql Insert Into Logger(loglevel, text, extref, program)                                                    000288
+   300 //*          values (:p_loglevel, :l_text, :l_extref :i_EXTREF, :l_program);                                         000289
+   301           SQL_00011 = P_LOGLEVEL;                                               //SQL                                000290
+   302           SQL_00012 = L_TEXT;                                                   //SQL                                000291
+   303           SQL_00013 = L_EXTREF;                                                 //SQL                                000292
+   304           SQL_00014 = I_EXTREF;                                                 //SQL                                000293
+   305           SQL_00015 = L_PROGRAM;                                                //SQL                                000294
+   306           SQLER6 = -4;                                                          //SQL 5                              000295
+   307           SQLROUTE_CALL(                                                        //SQL                                000296
+   308                SQLCA                                                            //SQL                                000297
+   309              : SQL_00006                                                        //SQL                                000298
+   310           );                                                                    //SQL                                000299
+   311                                                                                                                      000300
+   312   if (%parms >= %Parmnum(p_print2Joblog) and p_print2Joblog);                                        B01             000301
+   313     writeJobLog (l_text + log_ende);                                                                  01             000302
+   314   endif;                                                                                             E01             000303
+   315                                                                                                                      000304
+   316 END-PROC;                                                                                                            000305
+   317                                                                                                                      000306
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      8
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   318                                                                                                                      000307
+   319 dcl-proc log export;                                                                                                 000308
+   320                                                                                                                      000309
+   321   dcl-pi *n;                                                                                                         000310
+   322     p_text                        like(logger_ds_tmp.text) const;                                                    000311
+   323     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000312
+   324     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000313
+   325     p_print2Joblog                ind const options(*nopass);                                                        000314
+   326   END-PI;                                                                                                            000315
+   327                                                                                                                      000316
+   328   if (%parms >= %Parmnum(p_print2Joblog));                                                           B01             000317
+   329     logging(C_LOG_INFO : p_text : p_extref : p_program : p_print2Joblog);                             01             000318
+   330   elseif (%parms >= %Parmnum(p_program));                                                            X01             000319
+   331     logging(C_LOG_INFO : p_text : p_extref : p_program);                                              01             000320
+   332   elseif (%parms >= %Parmnum(p_extref));                                                             X01             000321
+   333     logging(C_LOG_INFO : p_text : p_extref );                                                         01             000322
+   334   else;                                                                                              X01             000323
+   335     logging(C_LOG_INFO : p_text);                                                                     01             000324
+   336   endif;                                                                                             E01             000325
+   337                                                                                                                      000326
+   338 END-PROC;                                                                                                            000327
+   339                                                                                                                      000328
+   340                                                                                                                      000329
+   341 dcl-proc logdebug export;                                                                                            000330
+   342                                                                                                                      000331
+   343   dcl-pi *n;                                                                                                         000332
+   344     p_text                        like(logger_ds_tmp.text) const;                                                    000333
+   345     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000334
+   346     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000335
+   347     p_print2Joblog                ind const options(*nopass);                                                        000336
+   348   END-PI;                                                                                                            000337
+   349                                                                                                                      000338
+   350   if (%parms >= %Parmnum(p_print2Joblog));                                                           B01             000339
+   351     logging(C_log_DEBUG : p_text : p_extref : p_program : p_print2Joblog);                            01             000340
+   352   elseif (%parms >= %Parmnum(p_program));                                                            X01             000341
+   353     logging(C_log_DEBUG : p_text : p_extref: p_program);                                              01             000342
+   354   elseif (%parms >= %Parmnum(p_extref));                                                             X01             000343
+   355     logging(C_log_DEBUG : p_text : p_extref);                                                         01             000344
+   356   else;                                                                                              X01             000345
+   357     logging(C_log_DEBUG : p_text);                                                                    01             000346
+   358   endif;                                                                                             E01             000347
+   359                                                                                                                      000348
+   360 END-PROC;                                                                                                            000349
+   361                                                                                                                      000350
+   362                                                                                                                      000351
+   363                                                                                                                      000352
+   364 dcl-proc loginfo export;                                                                                             000353
+   365                                                                                                                      000354
+   366   dcl-pi *n;                                                                                                         000355
+   367     p_text                        like(logger_ds_tmp.text) const;                                                    000356
+   368     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000357
+   369     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000358
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite      9
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   370     p_print2Joblog                ind const options(*nopass);                                                        000359
+   371   END-PI;                                                                                                            000360
+   372                                                                                                                      000361
+   373   if (%parms >= %Parmnum(p_print2Joblog));                                                           B01             000362
+   374     logging(C_log_INFO : p_text : p_extref : p_program : p_print2Joblog);                             01             000363
+   375   elseif (%parms >= %Parmnum(p_program));                                                            X01             000364
+   376     logging(C_log_INFO : p_text : p_extref: p_program);                                               01             000365
+   377   elseif (%parms >= %Parmnum(p_extref));                                                             X01             000366
+   378     logging(C_log_INFO : p_text : p_extref);                                                          01             000367
+   379   else;                                                                                              X01             000368
+   380     logging(C_log_INFO : p_text);                                                                     01             000369
+   381   endif;                                                                                             E01             000370
+   382                                                                                                                      000371
+   383 END-PROC;                                                                                                            000372
+   384                                                                                                                      000373
+   385                                                                                                                      000374
+   386                                                                                                                      000375
+   387 dcl-proc logwarning export;                                                                                          000376
+   388                                                                                                                      000377
+   389   dcl-pi *n;                                                                                                         000378
+   390     p_text                        like(logger_ds_tmp.text) const;                                                    000379
+   391     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000380
+   392     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000381
+   393     p_print2Joblog                ind const options(*nopass);                                                        000382
+   394   END-PI;                                                                                                            000383
+   395                                                                                                                      000384
+   396   if (%parms >= %Parmnum(p_print2Joblog));                                                           B01             000385
+   397     logging(C_log_WARNING : p_text : p_extref : p_program : p_print2Joblog);                          01             000386
+   398   elseif (%parms >= %Parmnum(p_program));                                                            X01             000387
+   399     logging(C_log_WARNING : p_text : p_extref: p_program);                                            01             000388
+   400   elseif (%parms >= %Parmnum(p_extref));                                                             X01             000389
+   401     logging(C_log_WARNING : p_text : p_extref);                                                       01             000390
+   402   else;                                                                                              X01             000391
+   403     logging(C_log_WARNING : p_text);                                                                  01             000392
+   404   endif;                                                                                             E01             000393
+   405                                                                                                                      000394
+   406 END-PROC;                                                                                                            000395
+   407                                                                                                                      000396
+   408                                                                                                                      000397
+   409                                                                                                                      000398
+   410 dcl-proc logerror export;                                                                                            000399
+   411                                                                                                                      000400
+   412   dcl-pi *n;                                                                                                         000401
+   413     p_text                        like(logger_ds_tmp.text) const;                                                    000402
+   414     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000403
+   415     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000404
+   416     p_print2Joblog                ind const options(*nopass);                                                        000405
+   417   END-PI;                                                                                                            000406
+   418                                                                                                                      000407
+   419   if (%parms >= %Parmnum(p_print2Joblog));                                                           B01             000408
+   420     logging(C_log_ERROR : p_text : p_extref : p_program : p_print2Joblog);                            01             000409
+   421   elseif (%parms >= %Parmnum(p_program));                                                            X01             000410
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     10
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   422     logging(C_log_ERROR : p_text : p_extref: p_program);                                              01             000411
+   423   elseif (%parms >= %Parmnum(p_extref));                                                             X01             000412
+   424     logging(C_log_ERROR : p_text : p_extref);                                                         01             000413
+   425   else;                                                                                              X01             000414
+   426     logging(C_log_ERROR : p_text);                                                                    01             000415
+   427   endif;                                                                                             E01             000416
+   428                                                                                                                      000417
+   429 END-PROC;                                                                                                            000418
+   430                                                                                                                      000419
+   431 //--------------------------------------------------------------                                                     000420
+   432 // Send Program Message                                                                                              000421
+   433 //                                                                                                                   000422
+   434 // Parameter:  Message                                                                                               000423
+   435 //                                                                                                                   000424
+   436 //             Type                                                                                                  000425
+   437 //                *ESCAPE for Excape messages                                                                        000426
+   438 //                                                                                                                   000427
+   439 //             Log                                                                                                   000428
+   440 //                Optional                                                                                           000429
+   441 //                *ON: Message will be written to the Logger table                                                   000430
+   442 //                *OFF: (Default) will not be written to Logger                                                      000431
+   443 //--------------------------------------------------------------                                                     000432
+   444                                                                                                                      000433
+   445 dcl-proc Send_Program_Message export;                                                                                000434
+   446   dcl-pi *n;                                                                                                         000435
+   447     p_msg                         varchar(1000) const;                                                               000436
+   448     p_type                        varchar(10)   const;                                                               000437
+   449     p_msgid                       char(7)       const options(*nopass);                                              000438
+   450     p_msgf                        char(10)      const options(*nopass);                                              000439
+   451     p_msgf_lib                    char(10)      const options(*nopass);                                              000440
+   452     p_log                         ind           const options(*nopass);                                              000441
+   453   END-PI;                                                                                                            000442
+   454                                                                                                                      000443
+   455   dcl-s l_msgid                   like(p_msgid);                                                                     000444
+   456   dcl-ds l_msgf_ds                qualified;                                                                         000445
+   457      file                         char(10);                                                                          000446
+   458      lib                          char(10);                                                                          000447
+   459   end-ds;                                                                                                            000448
+   460                                                                                                                      000449
+   461   l_msgid = 'CPF9897';                                                                                               000450
+   462   l_msgf_ds.file = 'QCPFMSG';                                                                                        000451
+   463   l_msgf_ds.lib = '*LIBL';                                                                                           000452
+   464                                                                                                                      000453
+   465   if (%parms < %parmnum(p_msgid) and p_msgid <> *blank);                                             B01             000454
+   466     l_msgid = p_msgid;                                                                                01             000455
+   467   endif;                                                                                             E01             000456
+   468                                                                                                                      000457
+   469   if (%parms < %parmnum(p_msgf) and p_msgf <> *blank);                                               B01             000458
+   470     l_msgf_ds.file = p_msgf;                                                                          01             000459
+   471   endif;                                                                                             E01             000460
+   472                                                                                                                      000461
+   473   if (%parms < %parmnum(p_msgf_lib) and p_msgf_lib <> *blank);                                       B01             000462
+   474     l_msgf_ds.lib = p_msgf_lib;                                                                       01             000463
+   475   endif;                                                                                             E01             000464
+   476                                                                                                                      000465
+   477                                                                                                                      000466
+   478   if (%parms < %parmnum(p_log) Or p_log = *on);                                                      B01             000467
+   479     log('Send_Program_Message (' + %trim(p_type) + '): ' +                                            01             000468
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     11
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   480          %trim(p_msg));                                                                               01             000469
+   481   endif;                                                                                             E01             000470
+   482                                                                                                                      000471
+   483   IBMAPI_Send_Program_Message(l_msgid : l_msgf_ds :                                                                  000472
+   484                      p_msg : %len(%trim(p_msg)) :                                                                    000473
+   485                      p_type : '*PGMBDY' :                                                                            000474
+   486                      2 : ProgramMsgKey : ErrorDS );                                                                  000475
+   487                                                                                                                      000476
+   488 END-PROC;                                                                                                            000477
+* * * * *   E N D E   D E R   Q U E L L E   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     12
+Z u s ä t z l i c h e   D i a g n o s e n a c h r i c h t e n
+ Msg-ID  Sv Nummer Folge   Nachrichtentext
+*RNF5409 00    313 000302  Der Prototypaufruf gibt einen Wert zurück, der verloren
+                           geht, wenn CALLP verwendet wird.
+* * * * *   E N D E   D E R   Z U S Ä T Z L I C H E N   D I A G N O S E N A C H R I C H T E N   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     13
+Q u e r v e r w e i s l i s t e
+      Datei- und Satzverweise:
+         Datei             Einheit            Verweise (D=Definiert)
+           Satz
+         Keine Verweise in der Quelle.
+      Globale Feldverweise:
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         C_LOG_DEBUG       KONSTANTE             123D    351     353     355
+                                                 357
+         C_LOG_ERROR       KONSTANTE             126D    420     422     424
+                                                 426
+         C_LOG_INFO        KONSTANTE             124D    329     331     333
+                                                 335     374     376     378
+                                                 380
+         C_LOG_WARNING     KONSTANTE             125D    397     399     401
+                                                 403
+*RNF7031 ERRMSG            A(7)                   95D
+                           CCSID(JOBRUNMIX)
+         ERRORDS           DS(8)                 186     198D    486
+                           CCSID(JOBRUNMIX)
+*RNF7031   BYTESAVAIL      I(10,0)               200D
+*RNF7031   BYTESPROV       I(10,0)               199D
+         IBMAPI_SEND_PROGRAM_MESSAGE...
+                           PROTOTYPE             177D    483M
+         LOG               PROTOTYPE             142D    319     479M
+         LOG_ENDE          KONSTANTE              85D    313
+         LOGDEBUG          PROTOTYPE             156D    341
+         LOGERROR          PROTOTYPE             170D    410
+         LOGGER_DS_TMP     DS(1577)              128D    143     144     145
+                           CCSID(JOBRUNMIX)      150     151     152     157
+                           TEMPLATE              158     159     164     165
+                                                 166     171     172     173
+                                                 234     235     236     237
+                                                 241     243     246     322
+                                                 323     324     344     345
+                                                 346     367     368     369
+                                                 390     391     392     413
+                                                 414     415
+*RNF7031   ACTION          A(1)                  137D
+                           CCSID(JOBRUNMIX)
+                           ALWNULL
+*RNF7031   CHGTIME         Z(26)                 135D
+*RNF7031   END             Z(32)                 139D
+           EXTREF          A(200)                133D    144     151     158
+                           VARYING(2)            165     172     236     243
+                           CCSID(JOBRUNMIX)      323     345     368     391
+                           ALWNULL               414
+*RNF7031   ID              I(20,0)               130D
+*RNF7031   JOB             A(28)                 136D
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+                           ALWNULL
+           LOGLEVEL        A(10)                 131D    234
+                           CCSID(JOBRUNMIX)
+                           ALWNULL
+           PROGRAM         A(200)                134D    145     152     159
+                           VARYING(2)            166     173     237     246
+                           CCSID(JOBRUNMIX)      324     346     369     392
+                           ALWNULL               415
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     14
+*RNF7031   START           Z(32)                 138D
+           TEXT            A(1000)               132D    143     150     157
+                           VARYING(2)            164     171     235     241
+                           CCSID(JOBRUNMIX)      322     344     367     390
+                           ALWNULL               413
+*RNF7031   TRANSID         Z(32)                 140D
+                           ALWNULL
+         LOGGING           PROTOTYPE             231     329M    331M    333M
+                                                 335M    351M    353M    355M
+                                                 357M    374M    376M    378M
+                                                 380M    397M    399M    401M
+                                                 403M    420M    422M    424M
+                                                 426M
+         LOGINFO           PROTOTYPE             149D    364
+         LOGWARNING        PROTOTYPE             163D    387
+*RNF7031 PGM_STAT          DS(367)                98D
+                           CCSID(JOBRUNMIX)
+*RNF7031   CURUSER         A(10)                 110D
+                           CCSID(JOBRUNMIX)
+*RNF7031   JOB             A(10)                 103D
+                           CCSID(JOBRUNMIX)
+*RNF7031   JOBNAME         A(10)                 104D
+                           CCSID(JOBRUNMIX)
+*RNF7031   JOBNUMBER       S(6,0)                108D
+*RNF7031   JOBNUMBERALPHA  A(6)                  109D
+                           CCSID(JOBRUNMIX)
+*RNF7031   JOBUSER         A(10)                 106D
+                           CCSID(JOBRUNMIX)
+*RNF7031   JOBUSERNUMBER   A(26)                 102D
+                           CCSID(JOBRUNMIX)
+*RNF7031   LIBRARY         A(10)                 101D
+                           CCSID(JOBRUNMIX)
+*RNF7031   NUMBER          S(6,0)                107D
+*RNF7031   ROUTINE         A(8)                  100D
+                           CCSID(JOBRUNMIX)
+*RNF7031   STATUS          S(5,0)                 99D
+*RNF7031   USER            A(10)                 105D
+                           CCSID(JOBRUNMIX)
+         PROGRAMMSGKEY     A(4)                  203D    486
+                           CCSID(JOBRUNMIX)
+         SEND_PROGRAM_MESSAGE...
+                           PROTOTYPE             189D    445
+*RNF7031 SQFAPP            KONSTANTE              69D
+*RNF7031 SQFCRT            KONSTANTE              67D
+*RNF7031 SQFOVR            KONSTANTE              68D
+*RNF7031 SQFRD             KONSTANTE              66D
+*RNF7031 SQLABC            B(9,0)                 11D
+*RNF7031 SQLAID            A(8)                    9D
+                           CCSID(JOBRUNMIX)
+         SQLCA             DS(136)                 7D     45      50      54
+                           CCSID(JOBRUNMIX)       58     291     308
+         SQLCABC           I(10,0)                10D     11
+         SQLCAID           A(8)                    8D      9
+                           CCSID(JOBRUNMIX)
+         SQLCLSE           KONSTANTE              53      64D
+*RNF7031 SQLCLSE_CALL      PROTOTYPE              53D
+         SQLCMIT           KONSTANTE              57      65D
+*RNF7031 SQLCMIT_CALL      PROTOTYPE              57D
+*RNF7031 SQLCOD            B(9,0)                 13D
+         SQLCODE           I(10,0)                12D     13
+*RNF7031 SQLERL            B(4,0)                 15D
+*RNF7031 SQLERM            A(70)                  17D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLERP            A(8)                   19D
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     15
+                           CCSID(JOBRUNMIX)
+         SQLERR            A(24)                  20D     21      22      23
+                           CCSID(JOBRUNMIX)       24      25      26      27
+*RNF7031 SQLERRD(6)        I(10,0)                27D
+         SQLERRMC          A(70)                  16D     17
+                           CCSID(JOBRUNMIX)
+         SQLERRML          I(5,0)                 14D     15
+         SQLERRP           A(8)                   18D     19
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLER1            B(9,0)                 21D
+*RNF7031 SQLER2            B(9,0)                 22D
+*RNF7031 SQLER3            B(9,0)                 23D
+*RNF7031 SQLER4            B(9,0)                 24D
+*RNF7031 SQLER5            B(9,0)                 25D
+         SQLER6            B(9,0)                 26D    289M    306M
+         SQLOPEN           KONSTANTE              49      63D
+*RNF7031 SQLOPEN_CALL      PROTOTYPE              49D
+         SQLROUTE          KONSTANTE              44      62D
+         SQLROUTE_CALL     PROTOTYPE              44D    290M    307M
+         SQLSTATE          A(5)                   41D     42
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLSTT            A(5)                   42D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWARN(11)       A(1)                   40D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWNA            A(1)                   39D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN0            A(1)                   29D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN1            A(1)                   30D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN2            A(1)                   31D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN3            A(1)                   32D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN4            A(1)                   33D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN5            A(1)                   34D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN6            A(1)                   35D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN7            A(1)                   36D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN8            A(1)                   37D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN9            A(1)                   38D
+                           CCSID(JOBRUNMIX)
+         SQLWRN            A(11)                  28D     29      30      31
+                           CCSID(JOBRUNMIX)       32      33      34      35
+                                                  36      37      38      39
+                                                  40
+*RNF7031 SYSTEM            I(10,0)                91D
+                           PROTOTYPE
+         WRITEJOBLOG       I(10,0)                81D    313M
+                           PROTOTYPE
+      Feldverweise für Unterprozedur LOGGING
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         I_EXTREF          I(5,0)                244D    274M    304
+         L_EXTREF          A(200)                243D    273M    303
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         L_PROGRAM         A(200)                246D    278M    295M    305
+                           VARYING(2)
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     16
+                           CCSID(JOBRUNMIX)
+         L_TEXT            A(1000)               241D    270M    302     313
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_EXTREF          A(200)                236D    272     273
+                           BASED(_QRNL_PST+)
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_LOGLEVEL        A(10)                 234D    301
+                           BASED(_QRNL_PST+)
+                           CCSID(JOBRUNMIX)
+         P_PRINT2JOBLOG    N(1)                  238D    312     312
+                           BASED(_QRNL_PST+)
+         P_PROGRAM         A(200)                237D    277     278
+                           BASED(_QRNL_PST+)
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_TEXT            A(1000)               235D    270
+                           BASED(_QRNL_PST+)
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         SQL_00000         B(4,0)                250D    292
+*RNF7031 SQL_00001         B(4,0)                251D
+*RNF7031 SQL_00002         U(10,0)               252D
+         SQL_00003         A(1)                  253D    294
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQL_00004         A(119)                254D
+                           CCSID(JOBRUNMIX)
+         SQL_00005         A(200)                255D    295
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         SQL_00006         B(4,0)                259D    309
+*RNF7031 SQL_00007         B(4,0)                260D
+*RNF7031 SQL_00008         U(10,0)               261D
+*RNF7031 SQL_00009         A(1)                  262D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQL_00010         A(119)                263D
+                           CCSID(JOBRUNMIX)
+         SQL_00011         A(10)                 264D    301M
+                           CCSID(JOBRUNMIX)
+         SQL_00012         A(1000)               265D    302M
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         SQL_00013         A(200)                266D    303M
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         SQL_00014         B(4,0)                268D    304M
+         SQL_00015         A(200)                267D    305M
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+      Feldverweise für Unterprozedur LOG
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         P_EXTREF          A(200)                323D    329     331     332
+                           BASED(_QRNL_PST+)     333
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_PRINT2JOBLOG    N(1)                  325D    328     329
+                           BASED(_QRNL_PST+)
+         P_PROGRAM         A(200)                324D    329     330     331
+                           BASED(_QRNL_PST+)
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_TEXT            A(1000)               322D    329     331     333
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     17
+                           BASED(_QRNL_PST+)     335
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+      Feldverweise für Unterprozedur LOGDEBUG
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         P_EXTREF          A(200)                345D    351     353     354
+                           BASED(_QRNL_PST+)     355
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_PRINT2JOBLOG    N(1)                  347D    350     351
+                           BASED(_QRNL_PST+)
+         P_PROGRAM         A(200)                346D    351     352     353
+                           BASED(_QRNL_PST+)
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_TEXT            A(1000)               344D    351     353     355
+                           BASED(_QRNL_PST+)     357
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+      Feldverweise für Unterprozedur LOGINFO
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         P_EXTREF          A(200)                368D    374     376     377
+                           BASED(_QRNL_PST+)     378
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_PRINT2JOBLOG    N(1)                  370D    373     374
+                           BASED(_QRNL_PST+)
+         P_PROGRAM         A(200)                369D    374     375     376
+                           BASED(_QRNL_PST+)
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_TEXT            A(1000)               367D    374     376     378
+                           BASED(_QRNL_PST+)     380
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+      Feldverweise für Unterprozedur LOGWARNING
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         P_EXTREF          A(200)                391D    397     399     400
+                           BASED(_QRNL_PST+)     401
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_PRINT2JOBLOG    N(1)                  393D    396     397
+                           BASED(_QRNL_PST+)
+         P_PROGRAM         A(200)                392D    397     398     399
+                           BASED(_QRNL_PST+)
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_TEXT            A(1000)               390D    397     399     401
+                           BASED(_QRNL_PST+)     403
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+      Feldverweise für Unterprozedur LOGERROR
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         P_EXTREF          A(200)                414D    420     422     423
+                           BASED(_QRNL_PST+)     424
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_PRINT2JOBLOG    N(1)                  416D    419     420
+                           BASED(_QRNL_PST+)
+         P_PROGRAM         A(200)                415D    420     421     422
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     18
+                           BASED(_QRNL_PST+)
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_TEXT            A(1000)               413D    420     422     424
+                           BASED(_QRNL_PST+)     426
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+      Feldverweise für Unterprozedur SEND_PROGRAM_MESSAGE
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         L_MSGF_DS         DS(20)                456D    462M    463M    470M
+                           CCSID(JOBRUNMIX)      474M    483
+           FILE            A(10)                 457D    462     470
+                           CCSID(JOBRUNMIX)
+           LIB             A(10)                 458D    463     474
+                           CCSID(JOBRUNMIX)
+         L_MSGID           A(7)                  455D    461M    466M    483
+                           CCSID(JOBRUNMIX)
+         P_LOG             N(1)                  452D    478     478
+                           BASED(_QRNL_PST+)
+         P_MSG             A(1000)               447D    480     484     484
+                           BASED(_QRNL_PST+)
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_MSGF            A(10)                 450D    469     469     470
+                           BASED(_QRNL_PST+)
+                           CCSID(JOBRUNMIX)
+         P_MSGF_LIB        A(10)                 451D    473     473     474
+                           BASED(_QRNL_PST+)
+                           CCSID(JOBRUNMIX)
+         P_MSGID           A(7)                  449D    455     465     465
+                           BASED(_QRNL_PST+)     466
+                           CCSID(JOBRUNMIX)
+         P_TYPE            A(10)                 448D    479     485
+                           BASED(_QRNL_PST+)
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+      Bezugszahlen-/Anzeigerverweise:
+         Bez./Anz.                            Verweise (D=Definiert M=Modifiz.)
+* * * * *   E N D E   D E R   Q U E R V E R W E I S L I S T E   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     19
+E x t e r n e   V e r w e i s e
+      Statisch gebundene Prozeduren:
+         Prozedur                             Verweise
+         system                                   91
+         Qp0zLprintf                              81     313
+      Importierte Felder:
+         Feld              Attribute          Definiert
+         _EXCP_MSGID       A(7)                  95
+      Exportierte Felder:
+         Feld              Attribute          Definiert
+         Keine Verweise in der Quelle.
+* * * * *   E N D E   D E R   E X T E R N E N   V E R W E I S E   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     20
+N a c h r i c h t e n z u s a m m e n f a s s u n g
+ Msg-ID  Sv Nummer Nachrichtentext
+*RNF5409 00      1 Der Prototypaufruf gibt einen Wert zurück, der verloren geht,
+                   wenn CALLP verwendet wird.
+*RNF7031 00     63 Kein Verweis auf den Namen oder die Bezugszahl/den Anzeiger
+                   vorhanden.
+* * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     01/10/23 06:36:47       Seite     21
+E n d z u s a m m e n f a s s u n g
+  Nachrichtenübersicht:
+    Information (00)  . . . . . . . :       64
+    Warnung      (10) . . . . . . . :        0
+    Fehler       (20) . . . . . . . :        0
+    Schwerwiegender Fehler (30+)  . :        0
+    ---------------------------------  -------
+    Summe . . . . . . . . . . . . . :       64
+  Quellensätze insgesamt:
+    Sätze . . . . . . . . . . . . . :      488
+    Bestimmungen .  . . . . . . . . :      323
+    Datensätze  . . . . . . . . . . :        0
+    Bemerkungen . . . . . . . . . . :      140
+* * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
+Modul LOGGER in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 01/10/23 um 06:36:47.
+* * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
+Command is > RMVBNDDIRE BNDDIR(*LIBL/PROUZADIR) OBJ(*LIBL/logger) <
+CPD000D: Befehl *LIBL/RMVBNDDIRE nicht sicher für Job mit mehreren Threads.
+CPC5D09: 1 Einträge entfernt, 0 Einträge nicht aus Binderverzeichnis PROUZADIR in Bibliothek PROUZAT1 entfernt.
+Command is > CRTSRVPGM SRVPGM(PROUZAT1/logger) MODULE(PROUZAT1/logger) EXPORT(*ALL) ACTGRP(PROUZAGRP) BNDDIR(*LIBL/PROUZADIR) REPLACE(*YES) TGTRLS(*CURRENT) STGMDL(*SNGLVL) <
+CPD000D: Befehl *LIBL/CRTSRVPGM nicht sicher für Job mit mehreren Threads.
+CPC5D0B: Serviceprogramm LOGGER in Bibliothek PROUZAT1 erstellt.
+Command is > ADDBNDDIRE BNDDIR(*LIBL/PROUZADIR) OBJ(*LIBL/logger) <
+CPD000D: Befehl *LIBL/ADDBNDDIRE nicht sicher für Job mit mehreren Threads.
+CPC5D05: 1 Einträge hinzugefügt, 0 Einträge dem Binderverzeichnis PROUZADIR in Bibliothek PROUZAT1 nicht hinzugefügt.

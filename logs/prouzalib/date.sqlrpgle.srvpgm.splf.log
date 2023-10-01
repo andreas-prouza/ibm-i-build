@@ -1,0 +1,1102 @@
+Command is > CRTSQLRPGI OBJ(PROUZAT1/date) SRCSTMF('./prouzalib//qrpglesrc/date.sqlrpgle') OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS(*CURRENT) DBGVIEW(*SOURCE) REPLACE(*YES) COMPILEOPT('TGTCCSID(*JOB) INCDIR(''./prouzalib/'')') <
+CPD000D: Befehl QSYS/CRTSQLRPGI nicht sicher für Job mit mehreren Threads.
+CPD000D: Befehl QSYS/CRTRPGMOD nicht sicher für Job mit mehreren Threads.
+RNS9305: Modul DATE in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 01/10/23 um 06:36:51.
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      1
+  Befehl . . . . . . . . . . . . . :   CRTRPGMOD
+    Ausgegeben von . . . . . . . . :     PROUZAT1
+  Modul  . . . . . . . . . . . . . :   DATE
+    Bibliothek . . . . . . . . . . :     PROUZAT1
+  Text 'Beschreibung'  . . . . . . :   *SRCMBRTXT
+  Quellendatenstromdatei . . . . . :   ./prouzalib//qrpglesrc/date.sqlrpgle
+    CCSID  . . . . . . . . . . . . :     1208
+  Ziel-CCSID . . . . . . . . . . . :   *JOB (1141)
+  Text 'Beschreibung'  . . . . . . :
+  Letzte Änderung  . . . . . . . . :   30/09/23  16:32:49
+  Generierungsbewertungsstufe  . . :   10
+  Umwandlungsprogrammauswahlmögl.  :   *XREF      *GEN       *NOSECLVL  *SHOWCPY
+                                       *EXPDDS    *EXT       *NOSHOWSKP *NOSRCSTMT
+                                       *DEBUGIO   *UNREF     *NOEVENTF
+  Testhilfesichten . . . . . . . . :   *ALL
+  Testhilfeverschlüsselungsschl. . :   *NONE
+  Ausgabe  . . . . . . . . . . . . :   *PRINT
+  Optimierungsstufe  . . . . . . . :   *NONE
+  Quellenlisteneinrückung  . . . . :   *NONE
+  Umsetzungsauswahlmög. eingeben . :   *NONE
+  Sortierfolge . . . . . . . . . . :   *JOB
+  Sprachen-ID  . . . . . . . . . . :   *JOB
+  Modul ersetzen . . . . . . . . . :   *YES
+  Berechtigung . . . . . . . . . . :   *LIBCRTAUT
+  Numerische Daten abschneiden . . :   *YES
+  Numerische Daten korrigieren . . :   *NONE
+  Zielrelease  . . . . . . . . . . :   V7R5M0
+  Nullwerte zulassen . . . . . . . :   *NO
+  Speichermodell  . .  . . . . . . :   *INHERIT
+  Binderverzeichnis  . . . . . . . :   *NONE
+  Bedingungsnamen definieren . . . :   *NONE
+  Leistungsdatenerfassung aktiv. . :   *PEP
+  Profildefinitionsdaten . . . . . :   *NOCOL
+  LIC-Optionen . . . . . . . . . . :
+  Prog.-Schnittstelle generieren . :   *NO
+  Verzeichnis einschließen . . . . :   ./prouzalib/
+  Vorprozessoroptionen . . . . . . :   *NORMVCOMMENT *EXPINCLUDE   *NOSEQSRC
+  Ausgabequellendatei  . . . . . . :   QSQLPRE
+    Bibliothek . . . . . . . . . . :     QTEMP
+  Ausgabequellenteildatei  . . . . :   DATE
+  REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      2
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+Q u e l l e n l i s t e
+     1 **free                                                                                                               000001
+     2 ctl-opt nomain;                                                                                                      000002
+     3                                                                                                                      000003
+     4 exec sql set option commit=*none;                                                                                    000004
+     5                                                                                                                      000005
+     6 /copy 'qcpysrc/date'                                                                                                 000006
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+        *--------------------------------------------------------------------------------------------*
+        * RPG-Teildateiname  . . . . :  date.rpgle                                                   *                     1
+        * Externer Name  . . . . . . :  ./prouzalib/qcpysrc/date.rpgle                               *                     1
+        * Letzte Änderung  . . . . . :  30/09/23  16:32:49                                           *                     1
+        *--------------------------------------------------------------------------------------------*
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+     7+**free                                                                                                              1000001
+     8+                                                                                                                    1000002
+     9+    dcl-pr get_date_by_name       varchar(100);                                                                     1000003
+    10+        p_date                    date options(*nopass);                                                            1000004
+    11+    end-pr;                                                                                                         1000005
+    12+                                                                                                                    1000006
+    13+    dcl-pr get_next_working_day   date;                                                                             1000007
+    14+        p_date                    date const;                                                                       1000008
+    15+    end-pr;                                                                                                         1000009
+    16+                                                                                                                    1000010
+    17+    dcl-pr  int_2_date            date;                                                                             1000011
+    18+        p_date                    int(10) const;                                                                    1000012
+    19+    end-pr;                                                                                                         1000013
+    20 /copy 'qcpysrc/logger'                                                                                               000007
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+        *--------------------------------------------------------------------------------------------*
+        * RPG-Teildateiname  . . . . :  logger.rp+                                                   *                     2
+        * Externer Name  . . . . . . :  ./prouzalib/qcpysrc/logger.rpgle                             *                     2
+        * Letzte Änderung  . . . . . :  30/09/23  16:32:49                                           *                     2
+        *--------------------------------------------------------------------------------------------*
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    21+**free                                                                                                              2000001
+    22+                                                                                                                    2000002
+    23+/IF NOT DEFINED(PROUZA_LOGGER_COPY)                                                                                 2000003
+    24+/DEFINE PROUZA_LOGGER_COPY                                                                                          2000004
+    25+                                                                                                                    2000005
+    26+  dcl-c  C_LOG_DEBUG              'DEBUG';                                                                          2000006
+    27+  dcl-c  C_LOG_INFO               'INFO';                                                                           2000007
+    28+  dcl-c  C_LOG_WARNING            'WARNING';                                                                        2000008
+    29+  dcl-c  C_log_ERROR              'ERROR';                                                                          2000009
+    30+                                                                                                                    2000010
+    31+  dcl-ds logger_ds_tmp            extname('LOGGER') alias qualified template;                                       2000011
+    32+  END-DS;                                                                                                           2000012
+    33+                                                                                                                    2000013
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      3
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    34+  dcl-pr log;                                                                                                       2000014
+    35+    p_text                        like(logger_ds_tmp.text) const;                                                   2000015
+    36+    p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                2000016
+    37+    p_program                     like(logger_ds_tmp.program) const options(*nopass);                               2000017
+    38+    p_print2Joblog                ind const options(*nopass);                                                       2000018
+    39+  END-PR;                                                                                                           2000019
+    40+                                                                                                                    2000020
+    41+  dcl-pr loginfo;                                                                                                   2000021
+    42+    p_text                        like(logger_ds_tmp.text) const;                                                   2000022
+    43+    p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                2000023
+    44+    p_program                     like(logger_ds_tmp.program) const options(*nopass);                               2000024
+    45+    p_print2Joblog                ind const options(*nopass);                                                       2000025
+    46+  END-PR;                                                                                                           2000026
+    47+                                                                                                                    2000027
+    48+  dcl-pr logdebug;                                                                                                  2000028
+    49+    p_text                        like(logger_ds_tmp.text) const;                                                   2000029
+    50+    p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                2000030
+    51+    p_program                     like(logger_ds_tmp.program) const options(*nopass);                               2000031
+    52+    p_print2Joblog                ind const options(*nopass);                                                       2000032
+    53+  END-PR;                                                                                                           2000033
+    54+                                                                                                                    2000034
+    55+  dcl-pr logwarning;                                                                                                2000035
+    56+    p_text                        like(logger_ds_tmp.text) const;                                                   2000036
+    57+    p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                2000037
+    58+    p_program                     like(logger_ds_tmp.program) const options(*nopass);                               2000038
+    59+    p_print2Joblog                ind const options(*nopass);                                                       2000039
+    60+  END-PR;                                                                                                           2000040
+    61+                                                                                                                    2000041
+    62+  dcl-pr logerror;                                                                                                  2000042
+    63+    p_text                        like(logger_ds_tmp.text) const;                                                   2000043
+    64+    p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                2000044
+    65+    p_program                     like(logger_ds_tmp.program) const options(*nopass);                               2000045
+    66+    p_print2Joblog                ind const options(*nopass);                                                       2000046
+    67+  END-PR;                                                                                                           2000047
+    68+                                                                                                                    2000048
+    69+  dcl-pr IBMAPI_Send_Program_Message  extpgm('QMHSNDPM');                                                           2000049
+    70+    MsgID              char(7)      const;                                                                          2000050
+    71+    MsgFile            char(20)     const;                                                                          2000051
+    72+    MsgDta             char(32767)  const   options(*varsize);                                                      2000052
+    73+    MsgDtaLen          int(10)      const;                                                                          2000053
+    74+    MsgType            char(10)     const;                                                                          2000054
+    75+    MsgQ               char(10)     const;                                                                          2000055
+    76+    MsgQNbr            int(10)      const;                                                                          2000056
+    77+    MsgKey             char(4);                                                                                     2000057
+    78+    ErrorDs            likeds(ErrorDS);                                                                             2000058
+    79+  end-pr;                                                                                                           2000059
+    80+                                                                                                                    2000060
+    81+  dcl-pr Send_Program_Message;                                                                                      2000061
+    82+    p_msg                         varchar(1000) const;                                                              2000062
+    83+    p_type                        varchar(10)   const;                                                              2000063
+    84+    p_msgid                       char(7)       const options(*nopass);                                             2000064
+    85+    p_msgf                        char(10)      const options(*nopass);                                             2000065
+    86+    p_msgf_lib                    char(10)      const options(*nopass);                                             2000066
+    87+    p_log                         ind           const options(*nopass);                                             2000067
+    88+  END-PR;                                                                                                           2000068
+    89+                                                                                                                    2000069
+    90+  Dcl-ds ErrorDS       qualified inz;                                                                               2000070
+    91+    BytesProv          int(10) inz(0);                                                                              2000071
+    92+    BytesAvail         int(10) inz(0);                                                                              2000072
+    93+  end-ds;                                                                                                           2000073
+    94+                                                                                                                    2000074
+    95+  Dcl-s ProgramMsgKey  char(4) inz;                                                                                 2000075
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      4
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    96+                                                                                                                    2000076
+    97+                                                                                                                    2000077
+    98+/ENDIF                                                                                                              2000078
+    99                                                                                                                      000008
+   100 /copy 'qcpysrc/errhdlsql'                                                                                            000009
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+        *--------------------------------------------------------------------------------------------*
+        * RPG-Teildateiname  . . . . :  errhdlsql+                                                   *                     3
+        * Externer Name  . . . . . . :  ./prouzalib/qcpysrc/errhdlsql.rpgle                          *                     3
+        * Letzte Änderung  . . . . . :  30/09/23  16:32:49                                           *                     3
+        *--------------------------------------------------------------------------------------------*
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   101+**free                                                                                                              3000001
+   102+                                                                                                                    3000002
+   103+exec sql Whenever SQLERROR do sqlerror();                                                                           3000003
+   104+exec sql Whenever SQLWARNING do sqlwarning();                                                                       3000004
+   105+                                                                                                                    3000005
+   106+                                                                                                                    3000006
+   107+dcl-pr sqlerror;                                                                                                    3000007
+   108+end-pr;                                                                                                             3000008
+   109+                                                                                                                    3000009
+   110+dcl-pr sqlwarning;                                                                                                  3000010
+   111+end-pr;                                                                                                             3000011
+   112                                                                                                                      000010
+   113 // ***********************************************                                                                   000011
+   114 // Generates date in format:                                                                                         000012
+   115 //        {dayname}, {day}. {monthname} {year}                                                                       000013
+   116 // ***********************************************                                                                   000014
+   117                                                                                                                      000015
+   118                                                                                                                      000016
+   119                                                                                                                      000017
+   120 dcl-proc get_date_by_name         export;                                                                            000018
+   121                                                                                                                      000019
+   122     dcl-pi get_date_by_name       varchar(100);                                                                      000020
+   123         p_date                    date options(*nopass);                                                             000021
+   124     end-pi;                                                                                                          000022
+   125                                                                                                                      000023
+   126     dcl-s l_date                  like(p_date);                                                                      000024
+   127     dcl-s l_date_text             like(get_date_by_name);                                                            000025
+   128                                                                                                                      000026
+   129                                                                                                                      000027
+   130     l_date = %date;                                                                                                  000028
+   131     if %parms >= %Parmnum(p_date);                                                                                   000029
+   132         l_date = p_date;                                                                                             000030
+   133     endif;                                                                                                           000031
+   134                                                                                                                      000032
+   135     exec sql set :l_date_text = dayname(:l_date) || ', ' ||                                                          000033
+   136                     DAY(:l_date) || '. ' || MONTHNAME(:l_date) ||                                                    000034
+   137                     ' ' || YEAR(:l_date);                                                                            000035
+   138                                                                                                                      000036
+   139     return l_date_text;                                                                                              000037
+   140                                                                                                                      000038
+   141 end-proc;                                                                                                            000039
+   142                                                                                                                      000040
+   143                                                                                                                      000041
+   144                                                                                                                      000042
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      5
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   145 // ***********************************************                                                                   000043
+   146 // Retrieves next working day                                                                                        000044
+   147 // ***********************************************                                                                   000045
+   148                                                                                                                      000046
+   149 dcl-proc get_next_working_day     export;                                                                            000047
+   150                                                                                                                      000048
+   151     dcl-pi get_next_working_day   date;                                                                              000049
+   152         p_date                    date const;                                                                        000050
+   153     end-pi;                                                                                                          000051
+   154                                                                                                                      000052
+   155     dcl-s l_daynum                int(10);                                                                           000053
+   156     dcl-s l_add_days              int(10);                                                                           000054
+   157     dcl-s l_new_date              date;                                                                              000055
+   158                                                                                                                      000056
+   159     logdebug('Input Date: ' + %char(p_date));                                                                        000057
+   160                                                                                                                      000058
+   161     l_add_days = 1;                                                                                                  000059
+   162     exec sql set :l_daynum = dayofweek_iso(:p_date);                                                                 000060
+   163                                                                                                                      000061
+   164     logdebug('Day of Week: ' + %char(l_daynum));                                                                     000062
+   165                                                                                                                      000063
+   166     // Skip weekends                                                                                                 000064
+   167     if l_daynum >= 5;                                                                                                000065
+   168         l_add_days = (7 - l_daynum) + 1;                                                                             000066
+   169         logdebug('Weekend + ' + %char(l_add_days) + ' days');                                                        000067
+   170     endif;                                                                                                           000068
+   171                                                                                                                      000069
+   172     exec sql set :l_new_date = :p_date + :l_add_days days;                                                           000070
+   173                                                                                                                      000071
+   174     logdebug('New date: ' + %char(l_new_date));                                                                      000072
+   175                                                                                                                      000073
+   176     return l_new_date;                                                                                               000074
+   177                                                                                                                      000075
+   178 on-exit;                                                                                                             000076
+   179                                                                                                                      000077
+   180     logdebug('get_next_working_day ende');                                                                           000078
+   181     return %date;                                                                                                    000079
+   182                                                                                                                      000080
+   183 end-proc;                                                                                                            000081
+   184                                                                                                                      000082
+   185                                                                                                                      000083
+   186 // ***********************************************                                                                   000084
+   187 // Convert date from data type INT to DATE                                                                           000085
+   188 //     Input date format must be: yyyymmdd                                                                           000086
+   189 // ***********************************************                                                                   000087
+   190                                                                                                                      000088
+   191 dcl-proc int_2_date               export;                                                                            000089
+   192     dcl-pi  int_2_date            date;                                                                              000090
+   193         p_date                    int(10) const;                                                                     000091
+   194     end-pi;                                                                                                          000092
+   195                                                                                                                      000093
+   196     dcl-s l_date                 date;                                                                               000094
+   197                                                                                                                      000095
+   198     exec sql set :l_date = date(regexp_replace(char(:p_date),                                                        000096
+   199                                     '(....)(..)(..)', '$1-$2-$3'));                                                  000097
+   200                                                                                                                      000098
+   201     return l_date;                                                                                                   000099
+   202 end-proc;                                                                                                            000100
+* * * * *   E N D E   D E R   Q U E L L E   * * * * *
+/ C O P Y - T e i l d a t e i e n
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      6
+Zeile  Src  RPG-Name   <-------- Externer Name -------> CCSID  <- Letzte Änd. ->
+Nummer ID              Bibliothek Datei      Teildatei         Datum    Uhrzeit
+     6    1 date.rpgle ./prouzalib/qcpysrc/date.rpgle    1208  30/09/23 16:32:49
+    20    2 logger.rp+ ./prouzalib/qcpysrc/logger.rpgle  1208  30/09/23 16:32:49
+   100    3 errhdlsql+ ./prouzalib/qcpysrc/errhdlsql.r+  1208  30/09/23 16:32:49
+* * * * *   E N D E   D E R   / C O P Y - T E I L D A T E I E N   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      7
+Zeil.- <---------------------- Datensätze ---------------------------------------------------------------->      Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10      Datum  ID  nummer
+U m w a n d l u n g s z e i t d a t e n
+* * * * *   E N D E   D E R   U M W A N D L U N G S Z E I T D A T E N   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      8
+N a c h r i c h t e n z u s a m m e n f a s s u n g
+ Msg-ID  Sv Nummer Nachrichtentext
+* * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      9
+E n d z u s a m m e n f a s s u n g
+  Nachrichtenübersicht:
+    Information (00)  . . . . . . . :        0
+    Warnung      (10) . . . . . . . :        0
+    Fehler       (20) . . . . . . . :        0
+    Schwerwiegender Fehler (30+)  . :        0
+    ---------------------------------  -------
+    Summe . . . . . . . . . . . . . :        0
+  Quellensätze insgesamt:
+    Sätze . . . . . . . . . . . . . :      202
+    Bestimmungen .  . . . . . . . . :      117
+    Datensätze  . . . . . . . . . . :        0
+    Bemerkungen . . . . . . . . . . :       69
+* * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
+Diagnoseprüfung der Quelle ist beendet. Höchste Bewertungsstufe ist 00.
+* * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      1
+  Befehl . . . . . . . . . . . . . :   CRTRPGMOD
+    Ausgegeben von . . . . . . . . :     PROUZAT1
+  Modul  . . . . . . . . . . . . . :   DATE
+    Bibliothek . . . . . . . . . . :     PROUZAT1
+  Text 'Beschreibung'  . . . . . . :   *SRCMBRTXT
+  Quellendatenstromdatei . . . . . :   /QSYS.LIB/QTEMP.LIB/QSQLTEMP1.FILE/DATE.MBR
+    CCSID  . . . . . . . . . . . . :     1141
+  Ziel-CCSID . . . . . . . . . . . :   *JOB (1141)
+  Text 'Beschreibung'  . . . . . . :
+  Letzte Änderung  . . . . . . . . :   01/10/23  06:36:51
+  Generierungsbewertungsstufe  . . :   10
+  Umwandlungsprogrammauswahlmögl.  :   *XREF      *GEN       *NOSECLVL  *SHOWCPY
+                                       *EXPDDS    *EXT       *NOSHOWSKP *NOSRCSTMT
+                                       *DEBUGIO   *UNREF     *NOEVENTF
+  Testhilfesichten . . . . . . . . :   *ALL
+  Testhilfeverschlüsselungsschl. . :   *NONE
+  Ausgabe  . . . . . . . . . . . . :   *PRINT
+  Optimierungsstufe  . . . . . . . :   *NONE
+  Quellenlisteneinrückung  . . . . :   *NONE
+  Umsetzungsauswahlmög. eingeben . :   *NONE
+  Sortierfolge . . . . . . . . . . :   *JOB
+  Sprachen-ID  . . . . . . . . . . :   *JOB
+  Modul ersetzen . . . . . . . . . :   *YES
+  Berechtigung . . . . . . . . . . :   *LIBCRTAUT
+  Numerische Daten abschneiden . . :   *YES
+  Numerische Daten korrigieren . . :   *NONE
+  Zielrelease  . . . . . . . . . . :   V7R5M0
+  Nullwerte zulassen . . . . . . . :   *NO
+  Speichermodell  . .  . . . . . . :   *INHERIT
+  Binderverzeichnis  . . . . . . . :   *NONE
+  Bedingungsnamen definieren . . . :   *NONE
+  Leistungsdatenerfassung aktiv. . :   *PEP
+  Profildefinitionsdaten . . . . . :   *NOCOL
+  LIC-Optionen . . . . . . . . . . :
+  Prog.-Schnittstelle generieren . :   *NO
+  Verzeichnis einschließen . . . . :   ./prouzalib/
+  Vorprozessoroptionen . . . . . . :   *NONE
+  REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      2
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+Q u e l l e n l i s t e
+     1 **free                                                                                                               000001
+     2 ctl-opt nomain;                                                                                                      000002
+     3                                                                                                                      000003
+     4        /SET CCSID(*CHAR:*JOBRUNMIX)                                                                                  000004
+     5        // SQL COMMUNICATION AREA                                                //SQL                                000005
+     6        DCL-DS SQLCA;                                                            //SQL                                000006
+     7          SQLCAID CHAR(8) INZ(X'0000000000000000');                              //SQL                                000007
+     8           SQLAID CHAR(8) OVERLAY(SQLCAID);                                      //SQL                                000008
+     9          SQLCABC INT(10);                                                       //SQL                                000009
+    10           SQLABC BINDEC(9) OVERLAY(SQLCABC);                                    //SQL                                000010
+    11          SQLCODE INT(10);                                                       //SQL                                000011
+    12           SQLCOD BINDEC(9) OVERLAY(SQLCODE);                                    //SQL                                000012
+    13          SQLERRML INT(5);                                                       //SQL                                000013
+    14           SQLERL BINDEC(4) OVERLAY(SQLERRML);                                   //SQL                                000014
+    15          SQLERRMC CHAR(70);                                                     //SQL                                000015
+    16           SQLERM CHAR(70) OVERLAY(SQLERRMC);                                    //SQL                                000016
+    17          SQLERRP CHAR(8);                                                       //SQL                                000017
+    18           SQLERP CHAR(8) OVERLAY(SQLERRP);                                      //SQL                                000018
+    19          SQLERR CHAR(24);                                                       //SQL                                000019
+    20           SQLER1 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000020
+    21           SQLER2 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000021
+    22           SQLER3 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000022
+    23           SQLER4 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000023
+    24           SQLER5 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000024
+    25           SQLER6 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000025
+    26           SQLERRD INT(10) DIM(6) OVERLAY(SQLERR);                               //SQL                                000026
+    27          SQLWRN CHAR(11);                                                       //SQL                                000027
+    28           SQLWN0 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000028
+    29           SQLWN1 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000029
+    30           SQLWN2 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000030
+    31           SQLWN3 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000031
+    32           SQLWN4 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000032
+    33           SQLWN5 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000033
+    34           SQLWN6 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000034
+    35           SQLWN7 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000035
+    36           SQLWN8 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000036
+    37           SQLWN9 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000037
+    38           SQLWNA CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000038
+    39           SQLWARN CHAR(1) DIM(11) OVERLAY(SQLWRN);                              //SQL                                000039
+    40          SQLSTATE CHAR(5);                                                      //SQL                                000040
+    41           SQLSTT CHAR(5) OVERLAY(SQLSTATE);                                     //SQL                                000041
+    42        END-DS SQLCA;                                                            //SQL                                000042
+    43        DCL-PR SQLROUTE_CALL EXTPGM(SQLROUTE);                                   //SQL                                000043
+    44          CA LIKEDS(SQLCA);                                                      //SQL                                000044
+    45          *N BINDEC(4) OPTIONS(*NOPASS);                                         //SQL                                000045
+    46          *N CHAR(1) OPTIONS(*NOPASS);                                           //SQL                                000046
+    47        END-PR SQLROUTE_CALL;                                                    //SQL                                000047
+    48        DCL-PR SQLOPEN_CALL EXTPGM(SQLOPEN);                                     //SQL                                000048
+    49          CA LIKEDS(SQLCA);                                                      //SQL                                000049
+    50          *N BINDEC(4);                                                          //SQL                                000050
+    51        END-PR SQLOPEN_CALL;                                                     //SQL                                000051
+    52        DCL-PR SQLCLSE_CALL EXTPGM(SQLCLSE);                                     //SQL                                000052
+    53          CA LIKEDS(SQLCA);                                                      //SQL                                000053
+    54          *N BINDEC(4);                                                          //SQL                                000054
+    55        END-PR SQLCLSE_CALL;                                                     //SQL                                000055
+    56        DCL-PR SQLCMIT_CALL EXTPGM(SQLCMIT);                                     //SQL                                000056
+    57          CA LIKEDS(SQLCA);                                                      //SQL                                000057
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      3
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    58          *N BINDEC(4);                                                          //SQL                                000058
+    59        END-PR SQLCMIT_CALL;                                                     //SQL                                000059
+    60        /RESTORE CCSID(*CHAR)                                                                                         000060
+    61        DCL-C SQLROUTE CONST('QSYS/QSQROUTE');                                   //SQL                                000061
+    62        DCL-C SQLOPEN CONST('QSYS/QSQROUTE');                                    //SQL                                000062
+    63        DCL-C SQLCLSE CONST('QSYS/QSQLCLSE');                                    //SQL                                000063
+    64        DCL-C SQLCMIT CONST('QSYS/QSQLCMIT');                                    //SQL                                000064
+    65        DCL-C SQFRD CONST(2);                                                    //SQL                                000065
+    66        DCL-C SQFCRT CONST(8);                                                   //SQL                                000066
+    67        DCL-C SQFOVR CONST(16);                                                  //SQL                                000067
+    68        DCL-C SQFAPP CONST(32);                                                  //SQL                                000068
+    69 //*exec sql set option commit=*none;                                                                                 000069
+    70                                                                                                                      000070
+    71 // /copy 'qcpysrc/date'                                                                                              000071
+    72 **END-FREE                                                                                                           000072
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    73 **free                                                                                                               000073
+    74                                                                                                                      000074
+    75     dcl-pr get_date_by_name       varchar(100);                                                                      000075
+    76         p_date                    date options(*nopass);                                                             000076
+    77     end-pr;                                                                                                          000077
+    78                                                                                                                      000078
+    79     dcl-pr get_next_working_day   date;                                                                              000079
+    80         p_date                    date const;                                                                        000080
+    81     end-pr;                                                                                                          000081
+    82                                                                                                                      000082
+    83     dcl-pr  int_2_date            date;                                                                              000083
+    84         p_date                    int(10) const;                                                                     000084
+    85     end-pr;                                                                                                          000085
+    86 // /copy 'qcpysrc/logger'                                                                                            000086
+    87 **END-FREE                                                                                                           000087
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    88 **free                                                                                                               000088
+    89                                                                                                                      000089
+    90 // /IF NOT DEFINED(PROUZA_LOGGER_COPY)                                                                               000090
+    91 // /DEFINE PROUZA_LOGGER_COPY                                                                                        000091
+    92                                                                                                                      000092
+    93   dcl-c  C_LOG_DEBUG              'DEBUG';                                                                           000093
+    94   dcl-c  C_LOG_INFO               'INFO';                                                                            000094
+    95   dcl-c  C_LOG_WARNING            'WARNING';                                                                         000095
+    96   dcl-c  C_log_ERROR              'ERROR';                                                                           000096
+    97                                                                                                                      000097
+    98   dcl-ds logger_ds_tmp            extname('LOGGER') alias qualified template;                                        000098
+    99   END-DS;                                                                                                            000099
+        *--------------------------------------------------------------------------------------------*                     1
+        * Datenstruktur  . . . . . . :  LOGGER_DS_TMP                                                *                     1
+        * Externes Format  . . . . . :  LOGGER : PROUZAT1/LOGGER                                     *                     1
+        *--------------------------------------------------------------------------------------------*                     1
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      4
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   100=D ID                            20I 0                                                                               1000001
+   101=D LOGLEVEL                      10A                                                                                 1000002
+   102=D TEXT                        1000A   VARYING                                                                       1000003
+   103=D EXTREF                       200A   VARYING                                                                       1000004
+   104=D PROGRAM                      200A   VARYING                                                                       1000005
+   105=D CHGTIME                       26Z                                                                                 1000006
+   106=D JOB                           28A   VARYING                                                                       1000007
+   107=D ACTION                         1A                                                                                 1000008
+   108=D START                         32Z                                                                                 1000009
+   109=D END                           32Z                                                                                 1000010
+   110=D TRANSID                       32Z                                                                                 1000011
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   111                                                                                                                      000100
+   112   dcl-pr log;                                                                                                        000101
+   113     p_text                        like(logger_ds_tmp.text) const;                                                    000102
+   114     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000103
+   115     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000104
+   116     p_print2Joblog                ind const options(*nopass);                                                        000105
+   117   END-PR;                                                                                                            000106
+   118                                                                                                                      000107
+   119   dcl-pr loginfo;                                                                                                    000108
+   120     p_text                        like(logger_ds_tmp.text) const;                                                    000109
+   121     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000110
+   122     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000111
+   123     p_print2Joblog                ind const options(*nopass);                                                        000112
+   124   END-PR;                                                                                                            000113
+   125                                                                                                                      000114
+   126   dcl-pr logdebug;                                                                                                   000115
+   127     p_text                        like(logger_ds_tmp.text) const;                                                    000116
+   128     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000117
+   129     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000118
+   130     p_print2Joblog                ind const options(*nopass);                                                        000119
+   131   END-PR;                                                                                                            000120
+   132                                                                                                                      000121
+   133   dcl-pr logwarning;                                                                                                 000122
+   134     p_text                        like(logger_ds_tmp.text) const;                                                    000123
+   135     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000124
+   136     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000125
+   137     p_print2Joblog                ind const options(*nopass);                                                        000126
+   138   END-PR;                                                                                                            000127
+   139                                                                                                                      000128
+   140   dcl-pr logerror;                                                                                                   000129
+   141     p_text                        like(logger_ds_tmp.text) const;                                                    000130
+   142     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000131
+   143     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000132
+   144     p_print2Joblog                ind const options(*nopass);                                                        000133
+   145   END-PR;                                                                                                            000134
+   146                                                                                                                      000135
+   147   dcl-pr IBMAPI_Send_Program_Message  extpgm('QMHSNDPM');                                                            000136
+   148     MsgID              char(7)      const;                                                                           000137
+   149     MsgFile            char(20)     const;                                                                           000138
+   150     MsgDta             char(32767)  const   options(*varsize);                                                       000139
+   151     MsgDtaLen          int(10)      const;                                                                           000140
+   152     MsgType            char(10)     const;                                                                           000141
+   153     MsgQ               char(10)     const;                                                                           000142
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      5
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   154     MsgQNbr            int(10)      const;                                                                           000143
+   155     MsgKey             char(4);                                                                                      000144
+   156     ErrorDs            likeds(ErrorDS);                                                                              000145
+   157   end-pr;                                                                                                            000146
+   158                                                                                                                      000147
+   159   dcl-pr Send_Program_Message;                                                                                       000148
+   160     p_msg                         varchar(1000) const;                                                               000149
+   161     p_type                        varchar(10)   const;                                                               000150
+   162     p_msgid                       char(7)       const options(*nopass);                                              000151
+   163     p_msgf                        char(10)      const options(*nopass);                                              000152
+   164     p_msgf_lib                    char(10)      const options(*nopass);                                              000153
+   165     p_log                         ind           const options(*nopass);                                              000154
+   166   END-PR;                                                                                                            000155
+   167                                                                                                                      000156
+   168   Dcl-ds ErrorDS       qualified inz;                                                                                000157
+   169     BytesProv          int(10) inz(0);                                                                               000158
+   170     BytesAvail         int(10) inz(0);                                                                               000159
+   171   end-ds;                                                                                                            000160
+   172                                                                                                                      000161
+   173   Dcl-s ProgramMsgKey  char(4) inz;                                                                                  000162
+   174                                                                                                                      000163
+   175                                                                                                                      000164
+   176 // /ENDIF                                                                                                            000165
+   177                                                                                                                      000166
+   178 // /copy 'qcpysrc/errhdlsql'                                                                                         000167
+   179 **END-FREE                                                                                                           000168
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   180 **free                                                                                                               000169
+   181                                                                                                                      000170
+   182 //*exec sql Whenever SQLERROR do sqlerror();                                                                         000171
+   183 //*exec sql Whenever SQLWARNING do sqlwarning();                                                                     000172
+   184                                                                                                                      000173
+   185                                                                                                                      000174
+   186 dcl-pr sqlerror;                                                                                                     000175
+   187 end-pr;                                                                                                              000176
+   188                                                                                                                      000177
+   189 dcl-pr sqlwarning;                                                                                                   000178
+   190 end-pr;                                                                                                              000179
+   191                                                                                                                      000180
+   192 // ***********************************************                                                                   000181
+   193 // Generates date in format:                                                                                         000182
+   194 //        {dayname}, {day}. {monthname} {year}                                                                       000183
+   195 // ***********************************************                                                                   000184
+   196                                                                                                                      000185
+   197                                                                                                                      000186
+   198                                                                                                                      000187
+   199 dcl-proc get_date_by_name         export;                                                                            000188
+   200                                                                                                                      000189
+   201     dcl-pi get_date_by_name       varchar(100);                                                                      000190
+   202         p_date                    date options(*nopass);                                                             000191
+   203     end-pi;                                                                                                          000192
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      6
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   204                                                                                                                      000193
+   205     dcl-s l_date                  like(p_date);                                                                      000194
+   206     dcl-s l_date_text             like(get_date_by_name);                                                            000195
+   207                                                                                                                      000196
+   208                                                                                                                      000197
+   209 **END-FREE                                                                                                           000198
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   210 D                 DS                  STATIC                               SET                                       000199
+   211 D  SQL_00000              1      2B 0 INZ(128)                             length of header                          000200
+   212 D  SQL_00001              3      4B 0 INZ(6)                               statement number                          000201
+   213 D  SQL_00002              5      8U 0 INZ(0)                               invocation mark                           000202
+   214 D  SQL_00003              9      9A   INZ('0') CCSID(*JOBRUNMIX)           data is okay                              000203
+   215 D  SQL_00004             10    128A   CCSID(*JOBRUNMIX)                    end of header                             000204
+   216 D  SQL_00005            129    136D   DATFMT(*DMY/)                        L_DATE                                    000205
+   217 D  SQL_00006            137    144D   DATFMT(*DMY/)                        L_DATE                                    000206
+   218 D  SQL_00007            145    152D   DATFMT(*DMY/)                        L_DATE                                    000207
+   219 D  SQL_00008            153    160D   DATFMT(*DMY/)                        L_DATE                                    000208
+   220 D  SQL_00009            161    262A   VARYING CCSID(*JOBRUNMIX)            L_DATE_TEXT                               000209
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   221 **FREE                                                                                                               000210
+   222     l_date = %date;                                                                                                  000211
+   223     if %parms >= %Parmnum(p_date);                                                                   B01             000212
+   224         l_date = p_date;                                                                              01             000213
+   225     endif;                                                                                           E01             000214
+   226                                                                                                                      000215
+   227 //*    exec sql set :l_date_text = dayname(:l_date) || ', ' ||                                                       000216
+   228 //*                    DAY(:l_date) || '. ' || MONTHNAME(:l_date) ||                                                 000217
+   229 //*                    ' ' || YEAR(:l_date);                                                                         000218
+   230           SQL_00005 = L_DATE;                                                   //SQL                                000219
+   231           SQL_00006 = L_DATE;                                                   //SQL                                000220
+   232           SQL_00007 = L_DATE;                                                   //SQL                                000221
+   233           SQL_00008 = L_DATE;                                                   //SQL                                000222
+   234           SQLER6 = -4;                                                          //SQL 6                              000223
+   235           SQLROUTE_CALL(                                                        //SQL                                000224
+   236                SQLCA                                                            //SQL                                000225
+   237              : SQL_00000                                                        //SQL                                000226
+   238           );                                                                    //SQL                                000227
+   239           IF SQL_00003 = '1';                                                   //SQL                B01             000228
+   240           EVAL L_DATE_TEXT = SQL_00009;                                         //SQL                 01             000229
+   241           ENDIF;                                                                //SQL                E01             000230
+   242           IF SQLCOD < 0;                                                        //SQL                B01             000231
+   243           SQLERROR();                                                           //SQL                 01             000232
+   244           ENDIF;                                                                //SQL                E01             000233
+   245           IF (SQLCOD > 0 AND SQLCOD <> 100)                                     //SQL                B01             000234
+   246           OR SQLWN0 = 'W'                                                       //SQL                B01             000235
+   247           OR %SUBST(SQLSTT:1:2) = '01';                                         //SQL                B01             000236
+   248           SQLWARNING();                                                         //SQL                 01             000237
+   249           ENDIF;                                                                //SQL                E01             000238
+   250                                                                                                                      000239
+   251     return l_date_text;                                                                                              000240
+   252                                                                                                                      000241
+   253 end-proc;                                                                                                            000242
+   254                                                                                                                      000243
+   255                                                                                                                      000244
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      7
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   256                                                                                                                      000245
+   257 // ***********************************************                                                                   000246
+   258 // Retrieves next working day                                                                                        000247
+   259 // ***********************************************                                                                   000248
+   260                                                                                                                      000249
+   261 dcl-proc get_next_working_day     export;                                                                            000250
+   262                                                                                                                      000251
+   263     dcl-pi get_next_working_day   date;                                                                              000252
+   264         p_date                    date const;                                                                        000253
+   265     end-pi;                                                                                                          000254
+   266                                                                                                                      000255
+   267     dcl-s l_daynum                int(10);                                                                           000256
+   268     dcl-s l_add_days              int(10);                                                                           000257
+   269     dcl-s l_new_date              date;                                                                              000258
+   270                                                                                                                      000259
+   271 **END-FREE                                                                                                           000260
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   272 D                 DS                  STATIC                               SET                                       000261
+   273 D  SQL_00010              1      2B 0 INZ(128)                             length of header                          000262
+   274 D  SQL_00011              3      4B 0 INZ(7)                               statement number                          000263
+   275 D  SQL_00012              5      8U 0 INZ(0)                               invocation mark                           000264
+   276 D  SQL_00013              9      9A   INZ('0') CCSID(*JOBRUNMIX)           data is okay                              000265
+   277 D  SQL_00014             10    128A   CCSID(*JOBRUNMIX)                    end of header                             000266
+   278 D  SQL_00015            129    136D   DATFMT(*DMY/)                        P_DATE                                    000267
+   279 D  SQL_00016            137    140I 0                                      L_DAYNUM                                  000268
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   280 **FREE                                                                                                               000269
+   281 **END-FREE                                                                                                           000270
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   282 D                 DS                  STATIC                               SET                                       000271
+   283 D  SQL_00017              1      2B 0 INZ(128)                             length of header                          000272
+   284 D  SQL_00018              3      4B 0 INZ(8)                               statement number                          000273
+   285 D  SQL_00019              5      8U 0 INZ(0)                               invocation mark                           000274
+   286 D  SQL_00020              9      9A   INZ('0') CCSID(*JOBRUNMIX)           data is okay                              000275
+   287 D  SQL_00021             10    128A   CCSID(*JOBRUNMIX)                    end of header                             000276
+   288 D  SQL_00022            129    136D   DATFMT(*DMY/)                        P_DATE                                    000277
+   289 D  SQL_00023            137    140I 0                                      L_ADD_DAYS                                000278
+   290 D  SQL_00024            141    148D   DATFMT(*DMY/)                        L_NEW_DATE                                000279
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   291 **FREE                                                                                                               000280
+   292     logdebug('Input Date: ' + %char(p_date));                                                                        000281
+   293                                                                                                                      000282
+   294     l_add_days = 1;                                                                                                  000283
+   295 //*    exec sql set :l_daynum = dayofweek_iso(:p_date);                                                              000284
+   296           SQL_00015 = P_DATE;                                                   //SQL                                000285
+   297           SQLER6 = -4;                                                          //SQL 7                              000286
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      8
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   298           SQLROUTE_CALL(                                                        //SQL                                000287
+   299                SQLCA                                                            //SQL                                000288
+   300              : SQL_00010                                                        //SQL                                000289
+   301           );                                                                    //SQL                                000290
+   302           IF SQL_00013 = '1';                                                   //SQL                B01             000291
+   303           EVAL L_DAYNUM = SQL_00016;                                            //SQL                 01             000292
+   304           ENDIF;                                                                //SQL                E01             000293
+   305           IF SQLCOD < 0;                                                        //SQL                B01             000294
+   306           SQLERROR();                                                           //SQL                 01             000295
+   307           ENDIF;                                                                //SQL                E01             000296
+   308           IF (SQLCOD > 0 AND SQLCOD <> 100)                                     //SQL                B01             000297
+   309           OR SQLWN0 = 'W'                                                       //SQL                B01             000298
+   310           OR %SUBST(SQLSTT:1:2) = '01';                                         //SQL                B01             000299
+   311           SQLWARNING();                                                         //SQL                 01             000300
+   312           ENDIF;                                                                //SQL                E01             000301
+   313                                                                                                                      000302
+   314     logdebug('Day of Week: ' + %char(l_daynum));                                                                     000303
+   315                                                                                                                      000304
+   316     // Skip weekends                                                                                                 000305
+   317     if l_daynum >= 5;                                                                                B01             000306
+   318         l_add_days = (7 - l_daynum) + 1;                                                              01             000307
+   319         logdebug('Weekend + ' + %char(l_add_days) + ' days');                                         01             000308
+   320     endif;                                                                                           E01             000309
+   321                                                                                                                      000310
+   322 //*    exec sql set :l_new_date = :p_date + :l_add_days days;                                                        000311
+   323           SQL_00022 = P_DATE;                                                   //SQL                                000312
+   324           SQL_00023 = L_ADD_DAYS;                                               //SQL                                000313
+   325           SQLER6 = -4;                                                          //SQL 8                              000314
+   326           SQLROUTE_CALL(                                                        //SQL                                000315
+   327                SQLCA                                                            //SQL                                000316
+   328              : SQL_00017                                                        //SQL                                000317
+   329           );                                                                    //SQL                                000318
+   330           IF SQL_00020 = '1';                                                   //SQL                B01             000319
+   331           EVAL L_NEW_DATE = SQL_00024;                                          //SQL                 01             000320
+   332           ENDIF;                                                                //SQL                E01             000321
+   333           IF SQLCOD < 0;                                                        //SQL                B01             000322
+   334           SQLERROR();                                                           //SQL                 01             000323
+   335           ENDIF;                                                                //SQL                E01             000324
+   336           IF (SQLCOD > 0 AND SQLCOD <> 100)                                     //SQL                B01             000325
+   337           OR SQLWN0 = 'W'                                                       //SQL                B01             000326
+   338           OR %SUBST(SQLSTT:1:2) = '01';                                         //SQL                B01             000327
+   339           SQLWARNING();                                                         //SQL                 01             000328
+   340           ENDIF;                                                                //SQL                E01             000329
+   341                                                                                                                      000330
+   342     logdebug('New date: ' + %char(l_new_date));                                                                      000331
+   343                                                                                                                      000332
+   344     return l_new_date;                                                                                               000333
+   345                                                                                                                      000334
+   346 on-exit;                                                                                                             000335
+   347                                                                                                                      000336
+   348     logdebug('get_next_working_day ende');                                                                           000337
+   349     return %date;                                                                                                    000338
+   350                                                                                                                      000339
+   351 end-proc;                                                                                                            000340
+   352                                                                                                                      000341
+   353                                                                                                                      000342
+   354 // ***********************************************                                                                   000343
+   355 // Convert date from data type INT to DATE                                                                           000344
+   356 //     Input date format must be: yyyymmdd                                                                           000345
+   357 // ***********************************************                                                                   000346
+   358                                                                                                                      000347
+   359 dcl-proc int_2_date               export;                                                                            000348
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite      9
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   360     dcl-pi  int_2_date            date;                                                                              000349
+   361         p_date                    int(10) const;                                                                     000350
+   362     end-pi;                                                                                                          000351
+   363                                                                                                                      000352
+   364     dcl-s l_date                 date;                                                                               000353
+   365                                                                                                                      000354
+   366 **END-FREE                                                                                                           000355
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   367 D                 DS                  STATIC                               SET                                       000356
+   368 D  SQL_00025              1      2B 0 INZ(128)                             length of header                          000357
+   369 D  SQL_00026              3      4B 0 INZ(9)                               statement number                          000358
+   370 D  SQL_00027              5      8U 0 INZ(0)                               invocation mark                           000359
+   371 D  SQL_00028              9      9A   INZ('0') CCSID(*JOBRUNMIX)           data is okay                              000360
+   372 D  SQL_00029             10    128A   CCSID(*JOBRUNMIX)                    end of header                             000361
+   373 D  SQL_00030            129    132I 0                                      P_DATE                                    000362
+   374 D  SQL_00031            133    140D   DATFMT(*DMY/)                        L_DATE                                    000363
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   375 **FREE                                                                                                               000364
+   376 //*    exec sql set :l_date = date(regexp_replace(char(:p_date),                                                     000365
+   377 //*                                    '(....)(..)(..)', '$1-$2-$3'));                                               000366
+   378           SQL_00030 = P_DATE;                                                   //SQL                                000367
+   379           SQLER6 = -4;                                                          //SQL 9                              000368
+   380           SQLROUTE_CALL(                                                        //SQL                                000369
+   381                SQLCA                                                            //SQL                                000370
+   382              : SQL_00025                                                        //SQL                                000371
+   383           );                                                                    //SQL                                000372
+   384           IF SQL_00028 = '1';                                                   //SQL                B01             000373
+   385           EVAL L_DATE = SQL_00031;                                              //SQL                 01             000374
+   386           ENDIF;                                                                //SQL                E01             000375
+   387           IF SQLCOD < 0;                                                        //SQL                B01             000376
+   388           SQLERROR();                                                           //SQL                 01             000377
+   389           ENDIF;                                                                //SQL                E01             000378
+   390           IF (SQLCOD > 0 AND SQLCOD <> 100)                                     //SQL                B01             000379
+   391           OR SQLWN0 = 'W'                                                       //SQL                B01             000380
+   392           OR %SUBST(SQLSTT:1:2) = '01';                                         //SQL                B01             000381
+   393           SQLWARNING();                                                         //SQL                 01             000382
+   394           ENDIF;                                                                //SQL                E01             000383
+   395                                                                                                                      000384
+   396     return l_date;                                                                                                   000385
+   397 end-proc;                                                                                                            000386
+* * * * *   E N D E   D E R   Q U E L L E   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite     10
+Z u s ä t z l i c h e   D i a g n o s e n a c h r i c h t e n
+ Msg-ID  Sv Nummer Folge   Nachrichtentext
+* * * * *   E N D E   D E R   Z U S Ä T Z L I C H E N   D I A G N O S E N A C H R I C H T E N   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite     11
+Q u e r v e r w e i s l i s t e
+      Datei- und Satzverweise:
+         Datei             Einheit            Verweise (D=Definiert)
+           Satz
+         Keine Verweise in der Quelle.
+      Globale Feldverweise:
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+*RNF7031 C_LOG_DEBUG       KONSTANTE              93D
+*RNF7031 C_LOG_ERROR       KONSTANTE              96D
+*RNF7031 C_LOG_INFO        KONSTANTE              94D
+*RNF7031 C_LOG_WARNING     KONSTANTE              95D
+         ERRORDS           DS(8)                 156     168D
+                           CCSID(JOBRUNMIX)
+*RNF7031   BYTESAVAIL      I(10,0)               170D
+*RNF7031   BYTESPROV       I(10,0)               169D
+         GET_DATE_BY_NAME  A(100)                 75D    199     201     206
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+                           PROTOTYPE
+         GET_NEXT_WORKING_DAY...
+                           D(10*ISO-)             79D    261     263
+                           PROTOTYPE
+*RNF7031 IBMAPI_SEND_PROGRAM_MESSAGE...
+                           PROTOTYPE             147D
+         INT_2_DATE        D(10*ISO-)             83D    359     360
+                           PROTOTYPE
+*RNF7031 LOG               PROTOTYPE             112D
+         LOGDEBUG          PROTOTYPE             126D    292M    314M    319M
+                                                 342M    348M
+*RNF7031 LOGERROR          PROTOTYPE             140D
+         LOGGER_DS_TMP     DS(1577)               98D    113     114     115
+                           CCSID(JOBRUNMIX)      120     121     122     127
+                           TEMPLATE              128     129     134     135
+                                                 136     141     142     143
+*RNF7031   ACTION          A(1)                  107D
+                           CCSID(JOBRUNMIX)
+                           ALWNULL
+*RNF7031   CHGTIME         Z(26)                 105D
+*RNF7031   END             Z(32)                 109D
+           EXTREF          A(200)                103D    114     121     128
+                           VARYING(2)            135     142
+                           CCSID(JOBRUNMIX)
+                           ALWNULL
+*RNF7031   ID              I(20,0)               100D
+*RNF7031   JOB             A(28)                 106D
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+                           ALWNULL
+*RNF7031   LOGLEVEL        A(10)                 101D
+                           CCSID(JOBRUNMIX)
+                           ALWNULL
+           PROGRAM         A(200)                104D    115     122     129
+                           VARYING(2)            136     143
+                           CCSID(JOBRUNMIX)
+                           ALWNULL
+*RNF7031   START           Z(32)                 108D
+           TEXT            A(1000)               102D    113     120     127
+                           VARYING(2)            134     141
+                           CCSID(JOBRUNMIX)
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite     12
+                           ALWNULL
+*RNF7031   TRANSID         Z(32)                 110D
+                           ALWNULL
+*RNF7031 LOGINFO           PROTOTYPE             119D
+*RNF7031 LOGWARNING        PROTOTYPE             133D
+*RNF7031 PROGRAMMSGKEY     A(4)                  173D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SEND_PROGRAM_MESSAGE...
+                           PROTOTYPE             159D
+*RNF7031 SQFAPP            KONSTANTE              68D
+*RNF7031 SQFCRT            KONSTANTE              66D
+*RNF7031 SQFOVR            KONSTANTE              67D
+*RNF7031 SQFRD             KONSTANTE              65D
+*RNF7031 SQLABC            B(9,0)                 10D
+*RNF7031 SQLAID            A(8)                    8D
+                           CCSID(JOBRUNMIX)
+         SQLCA             DS(136)                 6D     44      49      53
+                           CCSID(JOBRUNMIX)       57     236     299     327
+                                                 381
+         SQLCABC           I(10,0)                 9D     10
+         SQLCAID           A(8)                    7D      8
+                           CCSID(JOBRUNMIX)
+         SQLCLSE           KONSTANTE              52      63D
+*RNF7031 SQLCLSE_CALL      PROTOTYPE              52D
+         SQLCMIT           KONSTANTE              56      64D
+*RNF7031 SQLCMIT_CALL      PROTOTYPE              56D
+         SQLCOD            B(9,0)                 12D    242     245     245
+                                                 305     308     308     333
+                                                 336     336     387     390
+                                                 390
+         SQLCODE           I(10,0)                11D     12
+*RNF7031 SQLERL            B(4,0)                 14D
+*RNF7031 SQLERM            A(70)                  16D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLERP            A(8)                   18D
+                           CCSID(JOBRUNMIX)
+         SQLERR            A(24)                  19D     20      21      22
+                           CCSID(JOBRUNMIX)       23      24      25      26
+*RNF7031 SQLERRD(6)        I(10,0)                26D
+         SQLERRMC          A(70)                  15D     16
+                           CCSID(JOBRUNMIX)
+         SQLERRML          I(5,0)                 13D     14
+         SQLERROR          PROTOTYPE             186D    243M    306M    334M
+                                                 388M
+         SQLERRP           A(8)                   17D     18
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLER1            B(9,0)                 20D
+*RNF7031 SQLER2            B(9,0)                 21D
+*RNF7031 SQLER3            B(9,0)                 22D
+*RNF7031 SQLER4            B(9,0)                 23D
+*RNF7031 SQLER5            B(9,0)                 24D
+         SQLER6            B(9,0)                 25D    234M    297M    325M
+                                                 379M
+         SQLOPEN           KONSTANTE              48      62D
+*RNF7031 SQLOPEN_CALL      PROTOTYPE              48D
+         SQLROUTE          KONSTANTE              43      61D
+         SQLROUTE_CALL     PROTOTYPE              43D    235M    298M    326M
+                                                 380M
+         SQLSTATE          A(5)                   40D     41
+                           CCSID(JOBRUNMIX)
+         SQLSTT            A(5)                   41D    247     310     338
+                           CCSID(JOBRUNMIX)      392
+*RNF7031 SQLWARN(11)       A(1)                   39D
+                           CCSID(JOBRUNMIX)
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite     13
+         SQLWARNING        PROTOTYPE             189D    248M    311M    339M
+                                                 393M
+*RNF7031 SQLWNA            A(1)                   38D
+                           CCSID(JOBRUNMIX)
+         SQLWN0            A(1)                   28D    246     309     337
+                           CCSID(JOBRUNMIX)      391
+*RNF7031 SQLWN1            A(1)                   29D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN2            A(1)                   30D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN3            A(1)                   31D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN4            A(1)                   32D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN5            A(1)                   33D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN6            A(1)                   34D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN7            A(1)                   35D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN8            A(1)                   36D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN9            A(1)                   37D
+                           CCSID(JOBRUNMIX)
+         SQLWRN            A(11)                  27D     28      29      30
+                           CCSID(JOBRUNMIX)       31      32      33      34
+                                                  35      36      37      38
+                                                  39
+      Feldverweise für Unterprozedur GET_DATE_BY_NAME
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         L_DATE            D(10*ISO-)            205D    222M    224M    230
+                                                 231     232     233
+         L_DATE_TEXT       A(100)                206D    240M    251
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_DATE            D(10*ISO-)            202D    205     223     224
+                           BASED(_QRNL_PST+)
+         SQL_00000         B(4,0)                211D    237
+*RNF7031 SQL_00001         B(4,0)                212D
+*RNF7031 SQL_00002         U(10,0)               213D
+         SQL_00003         A(1)                  214D    239
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQL_00004         A(119)                215D
+                           CCSID(JOBRUNMIX)
+         SQL_00005         D(8*DMY/)             216D    230M
+         SQL_00006         D(8*DMY/)             217D    231M
+         SQL_00007         D(8*DMY/)             218D    232M
+         SQL_00008         D(8*DMY/)             219D    233M
+         SQL_00009         A(100)                220D    240
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+      Feldverweise für Unterprozedur GET_NEXT_WORKING_DAY
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         L_ADD_DAYS        I(10,0)               268D    294M    318M    319
+                                                 324
+         L_DAYNUM          I(10,0)               267D    303M    314     317
+                                                 318
+         L_NEW_DATE        D(10*ISO-)            269D    331M    342     344
+         P_DATE            D(10*ISO-)            264D    292     296     323
+                           BASED(_QRNL_PST+)
+         SQL_00010         B(4,0)                273D    300
+*RNF7031 SQL_00011         B(4,0)                274D
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite     14
+*RNF7031 SQL_00012         U(10,0)               275D
+         SQL_00013         A(1)                  276D    302
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQL_00014         A(119)                277D
+                           CCSID(JOBRUNMIX)
+         SQL_00015         D(8*DMY/)             278D    296M
+         SQL_00016         I(10,0)               279D    303
+         SQL_00017         B(4,0)                283D    328
+*RNF7031 SQL_00018         B(4,0)                284D
+*RNF7031 SQL_00019         U(10,0)               285D
+         SQL_00020         A(1)                  286D    330
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQL_00021         A(119)                287D
+                           CCSID(JOBRUNMIX)
+         SQL_00022         D(8*DMY/)             288D    323M
+         SQL_00023         I(10,0)               289D    324M
+         SQL_00024         D(8*DMY/)             290D    331
+      Feldverweise für Unterprozedur INT_2_DATE
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         L_DATE            D(10*ISO-)            364D    385M    396
+         P_DATE            I(10,0)               361D    378
+                           BASED(_QRNL_PST+)
+         SQL_00025         B(4,0)                368D    382
+*RNF7031 SQL_00026         B(4,0)                369D
+*RNF7031 SQL_00027         U(10,0)               370D
+         SQL_00028         A(1)                  371D    384
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQL_00029         A(119)                372D
+                           CCSID(JOBRUNMIX)
+         SQL_00030         I(10,0)               373D    378M
+         SQL_00031         D(8*DMY/)             374D    385
+      Bezugszahlen-/Anzeigerverweise:
+         Bez./Anz.                            Verweise (D=Definiert M=Modifiz.)
+* * * * *   E N D E   D E R   Q U E R V E R W E I S L I S T E   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite     15
+E x t e r n e   V e r w e i s e
+      Statisch gebundene Prozeduren:
+         Prozedur                             Verweise
+         LOG                                     112
+         LOGINFO                                 119
+         LOGDEBUG                                126     292     314     319
+                                                 342     348
+         LOGERROR                                140
+         SQLERROR                                186     243     306     334
+                                                 388
+         LOGWARNING                              133
+         SQLWARNING                              189     248     311     339
+                                                 393
+         SEND_PROGRAM_MESSAGE                    159
+      Importierte Felder:
+         Feld              Attribute          Definiert
+         Keine Verweise in der Quelle.
+      Exportierte Felder:
+         Feld              Attribute          Definiert
+         Keine Verweise in der Quelle.
+* * * * *   E N D E   D E R   E X T E R N E N   V E R W E I S E   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite     16
+N a c h r i c h t e n z u s a m m e n f a s s u n g
+ Msg-ID  Sv Nummer Nachrichtentext
+*RNF7031 00     62 Kein Verweis auf den Namen oder die Bezugszahl/den Anzeiger
+                   vorhanden.
+* * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/DATE            SPGV74     01/10/23 06:36:51       Seite     17
+E n d z u s a m m e n f a s s u n g
+  Nachrichtenübersicht:
+    Information (00)  . . . . . . . :       62
+    Warnung      (10) . . . . . . . :        0
+    Fehler       (20) . . . . . . . :        0
+    Schwerwiegender Fehler (30+)  . :        0
+    ---------------------------------  -------
+    Summe . . . . . . . . . . . . . :       62
+  Quellensätze insgesamt:
+    Sätze . . . . . . . . . . . . . :      397
+    Bestimmungen .  . . . . . . . . :      288
+    Datensätze  . . . . . . . . . . :        0
+    Bemerkungen . . . . . . . . . . :       86
+* * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
+Modul DATE in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 01/10/23 um 06:36:51.
+* * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
+Command is > RMVBNDDIRE BNDDIR(*LIBL/PROUZADIR) OBJ(*LIBL/date) <
+CPD000D: Befehl *LIBL/RMVBNDDIRE nicht sicher für Job mit mehreren Threads.
+CPC5D09: 1 Einträge entfernt, 0 Einträge nicht aus Binderverzeichnis PROUZADIR in Bibliothek PROUZAT1 entfernt.
+Command is > CRTSRVPGM SRVPGM(PROUZAT1/date) MODULE(PROUZAT1/date) EXPORT(*ALL) ACTGRP(PROUZAGRP) BNDDIR(*LIBL/PROUZADIR) REPLACE(*YES) TGTRLS(*CURRENT) STGMDL(*SNGLVL) <
+CPD000D: Befehl *LIBL/CRTSRVPGM nicht sicher für Job mit mehreren Threads.
+CPC5D0B: Serviceprogramm DATE in Bibliothek PROUZAT1 erstellt.
+Command is > ADDBNDDIRE BNDDIR(*LIBL/PROUZADIR) OBJ(*LIBL/date) <
+CPD000D: Befehl *LIBL/ADDBNDDIRE nicht sicher für Job mit mehreren Threads.
+CPC5D05: 1 Einträge hinzugefügt, 0 Einträge dem Binderverzeichnis PROUZADIR in Bibliothek PROUZAT1 nicht hinzugefügt.
