@@ -13,6 +13,8 @@ mkdir -p ./logs/prouzalib
 mkdir -p ./logs/prouzalib2
 mkdir -p ./build/prouzalib
 mkdir -p ./build/prouzalib2
+rm -rf ./tmp
+mkdir -p ./tmp
 (   cl "CHGATR OBJ('"'prouzalib//qrpglesrc/logger.sqlrpgle'"') ATR(*CCSID) VALUE(1208)" | iconv -f IBM-1252 -t utf-8 
 #  
 )
@@ -27,7 +29,7 @@ fi
 if [ -s './logs/prouzalib/logger.sqlrpgle.srvpgm.error.log' ]; then
 echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/logger.sqlrpgle\033[0m' 1>&2
 exit 1
-fi && touch './build/prouzalib/logger.sqlrpgle.srvpgm'; date > './build/prouzalib/logger.sqlrpgle.srvpgm'
+fi && touch './build/prouzalib/logger.sqlrpgle.srvpgm'; date > './build/prouzalib/logger.sqlrpgle.srvpgm'; echo 'prouzalib/logger.sqlrpgle.srvpgm|'`date` >> ./tmp/compiled.txt
 (   cl "CHGATR OBJ('"'prouzalib//qrpglesrc/errhdlsql.sqlrpgle'"') ATR(*CCSID) VALUE(1208)" | iconv -f IBM-1252 -t utf-8 
 #  
 )
@@ -42,7 +44,7 @@ fi
 if [ -s './logs/prouzalib/errhdlsql.sqlrpgle.srvpgm.error.log' ]; then
 echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/errhdlsql.sqlrpgle\033[0m' 1>&2
 exit 1
-fi && touch './build/prouzalib/errhdlsql.sqlrpgle.srvpgm'; date > './build/prouzalib/errhdlsql.sqlrpgle.srvpgm'
+fi && touch './build/prouzalib/errhdlsql.sqlrpgle.srvpgm'; date > './build/prouzalib/errhdlsql.sqlrpgle.srvpgm'; echo 'prouzalib/errhdlsql.sqlrpgle.srvpgm|'`date` >> ./tmp/compiled.txt
 (   cl "CHGATR OBJ('"'prouzalib//qrpglesrc/cpysrc2ifs.sqlrpgle'"') ATR(*CCSID) VALUE(1208)" | iconv -f IBM-1252 -t utf-8 
 #  
 )
@@ -55,7 +57,7 @@ fi
 if [ -s './logs/prouzalib/cpysrc2ifs.sqlrpgle.pgm.error.log' ]; then
 echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/cpysrc2ifs.sqlrpgle\033[0m' 1>&2
 exit 1
-fi && touch './build/prouzalib/cpysrc2ifs.sqlrpgle.pgm'; date > './build/prouzalib/cpysrc2ifs.sqlrpgle.pgm'
+fi && touch './build/prouzalib/cpysrc2ifs.sqlrpgle.pgm'; date > './build/prouzalib/cpysrc2ifs.sqlrpgle.pgm'; echo 'prouzalib/cpysrc2ifs.sqlrpgle.pgm|'`date` >> ./tmp/compiled.txt
 (   cl "CHGATR OBJ('"'prouzalib//qrpglesrc/date.sqlrpgle'"') ATR(*CCSID) VALUE(1208)" | iconv -f IBM-1252 -t utf-8 
 #  
 )
@@ -70,7 +72,7 @@ fi
 if [ -s './logs/prouzalib/date.sqlrpgle.srvpgm.error.log' ]; then
 echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/date.sqlrpgle\033[0m' 1>&2
 exit 1
-fi && touch './build/prouzalib/date.sqlrpgle.srvpgm'; date > './build/prouzalib/date.sqlrpgle.srvpgm'
+fi && touch './build/prouzalib/date.sqlrpgle.srvpgm'; date > './build/prouzalib/date.sqlrpgle.srvpgm'; echo 'prouzalib/date.sqlrpgle.srvpgm|'`date` >> ./tmp/compiled.txt
 (   cl "CHGATR OBJ('"'prouzalib//qrpglesrc/testmod.rpgle'"') ATR(*CCSID) VALUE(1208)" | iconv -f IBM-1252 -t utf-8 
 #  
 )
@@ -85,8 +87,8 @@ fi
 if [ -s './logs/prouzalib/testmod.rpgle.srvpgm.error.log' ]; then
 echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/testmod.rpgle\033[0m' 1>&2
 exit 1
-fi && touch './build/prouzalib/testmod.rpgle.srvpgm'; date > './build/prouzalib/testmod.rpgle.srvpgm'
-touch './build/prouzalib/prouzadir.bnddir'; date > './build/prouzalib/prouzadir.bnddir'
+fi && touch './build/prouzalib/testmod.rpgle.srvpgm'; date > './build/prouzalib/testmod.rpgle.srvpgm'; echo 'prouzalib/testmod.rpgle.srvpgm|'`date` >> ./tmp/compiled.txt
+touch './build/prouzalib/prouzadir.bnddir'; date > './build/prouzalib/prouzadir.bnddir'; echo 'prouzalib/prouzadir.bnddir|'`date` >> ./tmp/compiled.txt
 (   cl "CHGATR OBJ('"'prouzalib//qrpglesrc/testlog.rpgle'"') ATR(*CCSID) VALUE(1208)" | iconv -f IBM-1252 -t utf-8 
 #  
 )
@@ -99,7 +101,7 @@ fi
 if [ -s './logs/prouzalib/testlog.rpgle.pgm.error.log' ]; then
 echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/testlog.rpgle\033[0m' 1>&2
 exit 1
-fi && touch './build/prouzalib/testlog.rpgle.pgm'; date > './build/prouzalib/testlog.rpgle.pgm'
+fi && touch './build/prouzalib/testlog.rpgle.pgm'; date > './build/prouzalib/testlog.rpgle.pgm'; echo 'prouzalib/testlog.rpgle.pgm|'`date` >> ./tmp/compiled.txt
 (   cl "CHGATR OBJ('"'prouzalib//qrpglesrc/testlog2.sqlrpgle'"') ATR(*CCSID) VALUE(1208)" | iconv -f IBM-1252 -t utf-8 
 #  
 )
@@ -112,7 +114,7 @@ fi
 if [ -s './logs/prouzalib/testlog2.sqlrpgle.pgm.error.log' ]; then
 echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/testlog2.sqlrpgle\033[0m' 1>&2
 exit 1
-fi && touch './build/prouzalib/testlog2.sqlrpgle.pgm'; date > './build/prouzalib/testlog2.sqlrpgle.pgm'
+fi && touch './build/prouzalib/testlog2.sqlrpgle.pgm'; date > './build/prouzalib/testlog2.sqlrpgle.pgm'; echo 'prouzalib/testlog2.sqlrpgle.pgm|'`date` >> ./tmp/compiled.txt
 (   cl "CHGATR OBJ('"'prouzalib//qrpglesrc/testsqlerr.sqlrpgle'"') ATR(*CCSID) VALUE(1208)" | iconv -f IBM-1252 -t utf-8 
 #  
 )
@@ -125,6 +127,6 @@ fi
 if [ -s './logs/prouzalib/testsqlerr.sqlrpgle.pgm.error.log' ]; then
 echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/testsqlerr.sqlrpgle\033[0m' 1>&2
 exit 1
-fi && touch './build/prouzalib/testsqlerr.sqlrpgle.pgm'; date > './build/prouzalib/testsqlerr.sqlrpgle.pgm'
+fi && touch './build/prouzalib/testsqlerr.sqlrpgle.pgm'; date > './build/prouzalib/testsqlerr.sqlrpgle.pgm'; echo 'prouzalib/testsqlerr.sqlrpgle.pgm|'`date` >> ./tmp/compiled.txt
 cat ./logs/*.error.log 2> /dev/null | true
 echo -e "\033[102;97mCompile complete\033[0m"
