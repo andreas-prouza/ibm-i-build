@@ -1,0 +1,908 @@
+Command is > CRTSQLRPGI OBJ(PROUZAT1/cpysrc2ifs) SRCSTMF('./prouzalib//qrpglesrc/cpysrc2ifs.sqlrpgle') OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS(*CURRENT) DBGVIEW(*SOURCE) REPLACE(*YES) COMPILEOPT('TGTCCSID(*JOB) INCDIR(''./prouzalib/'')') <
+CPD000D: Befehl QSYS/CRTSQLRPGI nicht sicher für Job mit mehreren Threads.
+CPD000D: Befehl QSYS/CRTRPGMOD nicht sicher für Job mit mehreren Threads.
+RNS9305: Modul CPYSRC2IFS in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 06/10/23 um 10:52:13.
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      1
+  Befehl . . . . . . . . . . . . . :   CRTRPGMOD
+    Ausgegeben von . . . . . . . . :     PROUZAT1
+  Modul  . . . . . . . . . . . . . :   CPYSRC2IFS
+    Bibliothek . . . . . . . . . . :     PROUZAT1
+  Text 'Beschreibung'  . . . . . . :   *SRCMBRTXT
+  Quellendatenstromdatei . . . . . :   ./prouzalib//qrpglesrc/cpysrc2ifs.sqlrpgle
+    CCSID  . . . . . . . . . . . . :     1208
+  Ziel-CCSID . . . . . . . . . . . :   *JOB (1141)
+  Text 'Beschreibung'  . . . . . . :
+  Letzte Änderung  . . . . . . . . :   30/09/23  16:32:49
+  Generierungsbewertungsstufe  . . :   10
+  Umwandlungsprogrammauswahlmögl.  :   *XREF      *GEN       *NOSECLVL  *SHOWCPY
+                                       *EXPDDS    *EXT       *NOSHOWSKP *NOSRCSTMT
+                                       *DEBUGIO   *UNREF     *NOEVENTF
+  Testhilfesichten . . . . . . . . :   *ALL
+  Testhilfeverschlüsselungsschl. . :   *NONE
+  Ausgabe  . . . . . . . . . . . . :   *PRINT
+  Optimierungsstufe  . . . . . . . :   *NONE
+  Quellenlisteneinrückung  . . . . :   *NONE
+  Umsetzungsauswahlmög. eingeben . :   *NONE
+  Sortierfolge . . . . . . . . . . :   *JOB
+  Sprachen-ID  . . . . . . . . . . :   *JOB
+  Modul ersetzen . . . . . . . . . :   *YES
+  Berechtigung . . . . . . . . . . :   *LIBCRTAUT
+  Numerische Daten abschneiden . . :   *YES
+  Numerische Daten korrigieren . . :   *NONE
+  Zielrelease  . . . . . . . . . . :   V7R5M0
+  Nullwerte zulassen . . . . . . . :   *NO
+  Speichermodell  . .  . . . . . . :   *INHERIT
+  Binderverzeichnis  . . . . . . . :   *NONE
+  Bedingungsnamen definieren . . . :   *NONE
+  Leistungsdatenerfassung aktiv. . :   *PEP
+  Profildefinitionsdaten . . . . . :   *NOCOL
+  LIC-Optionen . . . . . . . . . . :
+  Prog.-Schnittstelle generieren . :   *NO
+  Verzeichnis einschließen . . . . :   ./prouzalib/
+  Vorprozessoroptionen . . . . . . :   *NORMVCOMMENT *EXPINCLUDE   *NOSEQSRC
+  Ausgabequellendatei  . . . . . . :   QSQLPRE
+    Bibliothek . . . . . . . . . . :     QTEMP
+  Ausgabequellenteildatei  . . . . :   CPYSRC2IFS
+  REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      2
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+Q u e l l e n l i s t e
+     1 **free                                                                                                               000001
+     2 ctl-opt main(main);                                                                                                  000002
+     3                                                                                                                      000003
+     4                                                                                                                      000004
+     5 /copy 'qcpysrc/errhdlsql'                                                                                            000005
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+        *--------------------------------------------------------------------------------------------*
+        * RPG-Teildateiname  . . . . :  errhdlsql+                                                   *                     1
+        * Externer Name  . . . . . . :  ./prouzalib/qcpysrc/errhdlsql.rpgle                          *                     1
+        * Letzte Änderung  . . . . . :  30/09/23  16:32:49                                           *                     1
+        *--------------------------------------------------------------------------------------------*
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+     6+**free                                                                                                              1000001
+     7+                                                                                                                    1000002
+     8+exec sql Whenever SQLERROR do sqlerror();                                                                           1000003
+     9+exec sql Whenever SQLWARNING do sqlwarning();                                                                       1000004
+    10+                                                                                                                    1000005
+    11+                                                                                                                    1000006
+    12+dcl-pr sqlerror;                                                                                                    1000007
+    13+end-pr;                                                                                                             1000008
+    14+                                                                                                                    1000009
+    15+dcl-pr sqlwarning;                                                                                                  1000010
+    16+end-pr;                                                                                                             1000011
+    17                                                                                                                      000006
+    18                                                                                                                      000007
+    19 // ******************************************************                                                            000008
+    20 // Copy all source files from a LIB to IFS                                                                           000009
+    21 // ******************************************************                                                            000010
+    22                                                                                                                      000011
+    23                                                                                                                      000012
+    24                                                                                                                      000013
+    25 Dcl-pr system                     int(10) extproc('system');                                                         000014
+    26   cmd                             pointer value options(*string);                                                    000015
+    27 End-pr;                                                                                                              000016
+    28                                                                                                                      000017
+    29 dcl-s ErrMsg                      char(7) import('_EXCP_MSGID');                                                     000018
+    30                                                                                                                      000019
+    31 // Job-Log output                                                                                                    000020
+    32 dcl-pr writeJobLog                int(10) extproc('Qp0zLprintf');                                                    000021
+    33   message                         pointer value options(*string);                                                    000022
+    34 end-pr;                                                                                                              000023
+    35                                                                                                                      000024
+    36 Dcl-C log_ende                    CONST(X'25');                                                                      000025
+    37                                                                                                                      000026
+    38                                                                                                                      000027
+    39 dcl-proc main;                                                                                                       000028
+    40     dcl-pi *n;                                                                                                       000029
+    41         p_lib                     char(10) const;                                                                    000030
+    42         p_root_dir                char(100) const;                                                                   000031
+    43     end-pi;                                                                                                          000032
+    44                                                                                                                      000033
+    45     dcl-s l_lib varchar(10);                                                                                         000034
+    46     dcl-s l_file varchar(10);                                                                                        000035
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      3
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    47     dcl-s l_file_tmp varchar(10);                                                                                    000036
+    48     dcl-s l_mbr varchar(10);                                                                                         000037
+    49     dcl-s l_ext varchar(10);                                                                                         000038
+    50                                                                                                                      000039
+    51     dcl-s l_cmd      varchar(500);                                                                                   000040
+    52     dcl-s l_root_dir varchar(100);                                                                                   000041
+    53     dcl-s l_cur_dir      varchar(100);                                                                               000042
+    54                                                                                                                      000043
+    55     exec sql Declare c_cpy cursor for                                                                                000044
+    56         SELECT table_schema, lower(table_name), lower(table_partition),                                              000045
+    57                 lower(source_type)                                                                                   000046
+    58         FROM qsys2.SYSPSTAT                                                                                          000047
+    59         WHERE table_schema = :p_lib                                                                                  000048
+    60         AND source_type IS NOT NULL                                                                                  000049
+    61         AND source_type NOT IN ('TXT')                                                                               000050
+    62         and table_partition <> '';                                                                                   000051
+    63                                                                                                                      000052
+    64     writeJobLog ('Start' + log_ende);                                                                                000053
+    65                                                                                                                      000054
+    66                                                                                                                      000055
+    67     exec sql open c_cpy;                                                                                             000056
+    68     exec sql fetch c_cpy into :l_lib, :l_file, :l_mbr, :l_ext;                                                       000057
+    69                                                                                                                      000058
+    70     l_root_dir= %trim(p_root_dir) + '/' +                                                                            000059
+    71                 %char(%timestamp(*SYS : 0) : *ISO) + '/' +                                                           000060
+    72                 %trim(p_lib);                                                                                        000061
+    73                                                                                                                      000062
+    74     // Create directory and all it's parent folders if not exist                                                     000063
+    75     l_cmd = 'QSH cmd(''mkdir -p ' + l_root_dir + ''')';                                                              000064
+    76     writeJobLog (l_cmd + log_ende);                                                                                  000065
+    77     system(l_cmd);                                                                                                   000066
+    78                                                                                                                      000067
+    79     dow sqlcode = 0;                                                                                                 000068
+    80                                                                                                                      000069
+    81     if (l_file <> l_file_tmp);                                                                                       000070
+    82         l_file_tmp = l_file;                                                                                         000071
+    83         l_cur_dir = l_root_dir + '/' + l_file;                                                                       000072
+    84         l_cmd = 'mkdir ''' + l_cur_dir + '''';                                                                       000073
+    85         writeJobLog (l_cmd + log_ende);                                                                              000074
+    86         system(l_cmd);                                                                                               000075
+    87         l_cmd = 'CHGATR OBJ(''' + l_cur_dir + ''') ATR(*CCSID) VALUE(1208)';                                         000076
+    88         writeJobLog (l_cmd + log_ende);                                                                              000077
+    89         system(l_cmd);                                                                                               000078
+    90     ENDIF;                                                                                                           000079
+    91                                                                                                                      000080
+    92     l_cmd = 'CPYTOSTMF FROMMBR(''/QSYS.LIB/' + %trim(p_lib) + '.LIB/' +                                              000081
+    93                     l_file + '.FILE/' +                                                                              000082
+    94                     l_mbr + '.MBR'') STMFCCSID(1208) +                                                               000083
+    95                 TOSTMF(''' + l_cur_dir + '/' + l_mbr + '.' + l_ext + ''')';                                          000084
+    96     clear ErrMsg;                                                                                                    000085
+    97     system (l_cmd);                                                                                                  000086
+    98                                                                                                                      000087
+    99     if (ErrMsg <> '');                                                                                               000088
+   100         writeJobLog ('Error in Command: ' + ErrMsg + log_ende);                                                      000089
+   101         writeJobLog (l_cmd + log_ende);                                                                              000090
+   102         return;                                                                                                      000091
+   103     ENDIF;                                                                                                           000092
+   104                                                                                                                      000093
+   105     exec sql fetch c_cpy into :l_lib, :l_file, :l_mbr, :l_ext;                                                       000094
+   106     ENDDO;                                                                                                           000095
+   107                                                                                                                      000096
+   108     exec sql close c_cpy;                                                                                            000097
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      4
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   109                                                                                                                      000098
+   110     return;                                                                                                          000099
+   111                                                                                                                      000100
+   112 end-proc;                                                                                                            000101
+* * * * *   E N D E   D E R   Q U E L L E   * * * * *
+/ C O P Y - T e i l d a t e i e n
+Zeile  Src  RPG-Name   <-------- Externer Name -------> CCSID  <- Letzte Änd. ->
+Nummer ID              Bibliothek Datei      Teildatei         Datum    Uhrzeit
+     5    1 errhdlsql+ ./prouzalib/qcpysrc/errhdlsql.r+  1208  30/09/23 16:32:49
+* * * * *   E N D E   D E R   / C O P Y - T E I L D A T E I E N   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      5
+Zeil.- <---------------------- Datensätze ---------------------------------------------------------------->      Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10      Datum  ID  nummer
+U m w a n d l u n g s z e i t d a t e n
+* * * * *   E N D E   D E R   U M W A N D L U N G S Z E I T D A T E N   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      6
+N a c h r i c h t e n z u s a m m e n f a s s u n g
+ Msg-ID  Sv Nummer Nachrichtentext
+* * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      7
+E n d z u s a m m e n f a s s u n g
+  Nachrichtenübersicht:
+    Information (00)  . . . . . . . :        0
+    Warnung      (10) . . . . . . . :        0
+    Fehler       (20) . . . . . . . :        0
+    Schwerwiegender Fehler (30+)  . :        0
+    ---------------------------------  -------
+    Summe . . . . . . . . . . . . . :        0
+  Quellensätze insgesamt:
+    Sätze . . . . . . . . . . . . . :      112
+    Bestimmungen .  . . . . . . . . :       70
+    Datensätze  . . . . . . . . . . :        0
+    Bemerkungen . . . . . . . . . . :       37
+* * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
+Diagnoseprüfung der Quelle ist beendet. Höchste Bewertungsstufe ist 00.
+* * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      1
+  Befehl . . . . . . . . . . . . . :   CRTRPGMOD
+    Ausgegeben von . . . . . . . . :     PROUZAT1
+  Modul  . . . . . . . . . . . . . :   CPYSRC2IFS
+    Bibliothek . . . . . . . . . . :     PROUZAT1
+  Text 'Beschreibung'  . . . . . . :   *SRCMBRTXT
+  Quellendatenstromdatei . . . . . :   /QSYS.LIB/QTEMP.LIB/QSQLTEMP1.FILE/CPYSRC2IFS.MBR
+    CCSID  . . . . . . . . . . . . :     1141
+  Ziel-CCSID . . . . . . . . . . . :   *JOB (1141)
+  Text 'Beschreibung'  . . . . . . :
+  Letzte Änderung  . . . . . . . . :   06/10/23  10:52:13
+  Generierungsbewertungsstufe  . . :   10
+  Umwandlungsprogrammauswahlmögl.  :   *XREF      *GEN       *NOSECLVL  *SHOWCPY
+                                       *EXPDDS    *EXT       *NOSHOWSKP *NOSRCSTMT
+                                       *DEBUGIO   *UNREF     *NOEVENTF
+  Testhilfesichten . . . . . . . . :   *ALL
+  Testhilfeverschlüsselungsschl. . :   *NONE
+  Ausgabe  . . . . . . . . . . . . :   *PRINT
+  Optimierungsstufe  . . . . . . . :   *NONE
+  Quellenlisteneinrückung  . . . . :   *NONE
+  Umsetzungsauswahlmög. eingeben . :   *NONE
+  Sortierfolge . . . . . . . . . . :   *JOB
+  Sprachen-ID  . . . . . . . . . . :   *JOB
+  Modul ersetzen . . . . . . . . . :   *YES
+  Berechtigung . . . . . . . . . . :   *LIBCRTAUT
+  Numerische Daten abschneiden . . :   *YES
+  Numerische Daten korrigieren . . :   *NONE
+  Zielrelease  . . . . . . . . . . :   V7R5M0
+  Nullwerte zulassen . . . . . . . :   *NO
+  Speichermodell  . .  . . . . . . :   *INHERIT
+  Binderverzeichnis  . . . . . . . :   *NONE
+  Bedingungsnamen definieren . . . :   *NONE
+  Leistungsdatenerfassung aktiv. . :   *PEP
+  Profildefinitionsdaten . . . . . :   *NOCOL
+  LIC-Optionen . . . . . . . . . . :
+  Prog.-Schnittstelle generieren . :   *NO
+  Verzeichnis einschließen . . . . :   ./prouzalib/
+  Vorprozessoroptionen . . . . . . :   *NONE
+  REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      2
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+Q u e l l e n l i s t e
+     1 **free                                                                                                               000001
+     2 ctl-opt main(main);                                                                                                  000002
+     3                                                                                                                      000003
+     4                                                                                                                      000004
+     5 // /copy 'qcpysrc/errhdlsql'                                                                                         000005
+     6 **END-FREE                                                                                                           000006
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+     7 **free                                                                                                               000007
+     8                                                                                                                      000008
+     9        /SET CCSID(*CHAR:*JOBRUNMIX)                                                                                  000009
+    10        // SQL COMMUNICATION AREA                                                //SQL                                000010
+    11        DCL-DS SQLCA;                                                            //SQL                                000011
+    12          SQLCAID CHAR(8) INZ(X'0000000000000000');                              //SQL                                000012
+    13           SQLAID CHAR(8) OVERLAY(SQLCAID);                                      //SQL                                000013
+    14          SQLCABC INT(10);                                                       //SQL                                000014
+    15           SQLABC BINDEC(9) OVERLAY(SQLCABC);                                    //SQL                                000015
+    16          SQLCODE INT(10);                                                       //SQL                                000016
+    17           SQLCOD BINDEC(9) OVERLAY(SQLCODE);                                    //SQL                                000017
+    18          SQLERRML INT(5);                                                       //SQL                                000018
+    19           SQLERL BINDEC(4) OVERLAY(SQLERRML);                                   //SQL                                000019
+    20          SQLERRMC CHAR(70);                                                     //SQL                                000020
+    21           SQLERM CHAR(70) OVERLAY(SQLERRMC);                                    //SQL                                000021
+    22          SQLERRP CHAR(8);                                                       //SQL                                000022
+    23           SQLERP CHAR(8) OVERLAY(SQLERRP);                                      //SQL                                000023
+    24          SQLERR CHAR(24);                                                       //SQL                                000024
+    25           SQLER1 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000025
+    26           SQLER2 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000026
+    27           SQLER3 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000027
+    28           SQLER4 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000028
+    29           SQLER5 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000029
+    30           SQLER6 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000030
+    31           SQLERRD INT(10) DIM(6) OVERLAY(SQLERR);                               //SQL                                000031
+    32          SQLWRN CHAR(11);                                                       //SQL                                000032
+    33           SQLWN0 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000033
+    34           SQLWN1 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000034
+    35           SQLWN2 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000035
+    36           SQLWN3 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000036
+    37           SQLWN4 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000037
+    38           SQLWN5 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000038
+    39           SQLWN6 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000039
+    40           SQLWN7 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000040
+    41           SQLWN8 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000041
+    42           SQLWN9 CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000042
+    43           SQLWNA CHAR(1) OVERLAY(SQLWRN:*NEXT);                                 //SQL                                000043
+    44           SQLWARN CHAR(1) DIM(11) OVERLAY(SQLWRN);                              //SQL                                000044
+    45          SQLSTATE CHAR(5);                                                      //SQL                                000045
+    46           SQLSTT CHAR(5) OVERLAY(SQLSTATE);                                     //SQL                                000046
+    47        END-DS SQLCA;                                                            //SQL                                000047
+    48        DCL-PR SQLROUTE_CALL EXTPGM(SQLROUTE);                                   //SQL                                000048
+    49          CA LIKEDS(SQLCA);                                                      //SQL                                000049
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      3
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+    50          *N BINDEC(4) OPTIONS(*NOPASS);                                         //SQL                                000050
+    51          *N CHAR(1) OPTIONS(*NOPASS);                                           //SQL                                000051
+    52        END-PR SQLROUTE_CALL;                                                    //SQL                                000052
+    53        DCL-PR SQLOPEN_CALL EXTPGM(SQLOPEN);                                     //SQL                                000053
+    54          CA LIKEDS(SQLCA);                                                      //SQL                                000054
+    55          *N BINDEC(4);                                                          //SQL                                000055
+    56        END-PR SQLOPEN_CALL;                                                     //SQL                                000056
+    57        DCL-PR SQLCLSE_CALL EXTPGM(SQLCLSE);                                     //SQL                                000057
+    58          CA LIKEDS(SQLCA);                                                      //SQL                                000058
+    59          *N BINDEC(4);                                                          //SQL                                000059
+    60        END-PR SQLCLSE_CALL;                                                     //SQL                                000060
+    61        DCL-PR SQLCMIT_CALL EXTPGM(SQLCMIT);                                     //SQL                                000061
+    62          CA LIKEDS(SQLCA);                                                      //SQL                                000062
+    63          *N BINDEC(4);                                                          //SQL                                000063
+    64        END-PR SQLCMIT_CALL;                                                     //SQL                                000064
+    65        /RESTORE CCSID(*CHAR)                                                                                         000065
+    66        DCL-C SQLROUTE CONST('QSYS/QSQROUTE');                                   //SQL                                000066
+    67        DCL-C SQLOPEN CONST('QSYS/QSQROUTE');                                    //SQL                                000067
+    68        DCL-C SQLCLSE CONST('QSYS/QSQLCLSE');                                    //SQL                                000068
+    69        DCL-C SQLCMIT CONST('QSYS/QSQLCMIT');                                    //SQL                                000069
+    70        DCL-C SQFRD CONST(2);                                                    //SQL                                000070
+    71        DCL-C SQFCRT CONST(8);                                                   //SQL                                000071
+    72        DCL-C SQFOVR CONST(16);                                                  //SQL                                000072
+    73        DCL-C SQFAPP CONST(32);                                                  //SQL                                000073
+    74 //*exec sql Whenever SQLERROR do sqlerror();                                                                         000074
+    75 //*exec sql Whenever SQLWARNING do sqlwarning();                                                                     000075
+    76                                                                                                                      000076
+    77                                                                                                                      000077
+    78 dcl-pr sqlerror;                                                                                                     000078
+    79 end-pr;                                                                                                              000079
+    80                                                                                                                      000080
+    81 dcl-pr sqlwarning;                                                                                                   000081
+    82 end-pr;                                                                                                              000082
+    83                                                                                                                      000083
+    84                                                                                                                      000084
+    85 // ******************************************************                                                            000085
+    86 // Copy all source files from a LIB to IFS                                                                           000086
+    87 // ******************************************************                                                            000087
+    88                                                                                                                      000088
+    89                                                                                                                      000089
+    90                                                                                                                      000090
+    91 Dcl-pr system                     int(10) extproc('system');                                                         000091
+    92   cmd                             pointer value options(*string);                                                    000092
+    93 End-pr;                                                                                                              000093
+    94                                                                                                                      000094
+    95 dcl-s ErrMsg                      char(7) import('_EXCP_MSGID');                                                     000095
+    96                                                                                                                      000096
+    97 // Job-Log output                                                                                                    000097
+    98 dcl-pr writeJobLog                int(10) extproc('Qp0zLprintf');                                                    000098
+    99   message                         pointer value options(*string);                                                    000099
+   100 end-pr;                                                                                                              000100
+   101                                                                                                                      000101
+   102 Dcl-C log_ende                    CONST(X'25');                                                                      000102
+   103                                                                                                                      000103
+   104                                                                                                                      000104
+   105 dcl-proc main;                                                                                                       000105
+   106     dcl-pi *n;                                                                                                       000106
+   107         p_lib                     char(10) const;                                                                    000107
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      4
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   108         p_root_dir                char(100) const;                                                                   000108
+   109     end-pi;                                                                                                          000109
+   110                                                                                                                      000110
+   111     dcl-s l_lib varchar(10);                                                                                         000111
+   112     dcl-s l_file varchar(10);                                                                                        000112
+   113     dcl-s l_file_tmp varchar(10);                                                                                    000113
+   114     dcl-s l_mbr varchar(10);                                                                                         000114
+   115     dcl-s l_ext varchar(10);                                                                                         000115
+   116                                                                                                                      000116
+   117     dcl-s l_cmd      varchar(500);                                                                                   000117
+   118     dcl-s l_root_dir varchar(100);                                                                                   000118
+   119     dcl-s l_cur_dir      varchar(100);                                                                               000119
+   120                                                                                                                      000120
+   121 **END-FREE                                                                                                           000121
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   122 D                 DS                  STATIC                               OPEN                                      000122
+   123 D  SQL_00000              1      2B 0 INZ(128)                             length of header                          000123
+   124 D  SQL_00001              3      4B 0 INZ(4)                               statement number                          000124
+   125 D  SQL_00002              5      8U 0 INZ(0)                               invocation mark                           000125
+   126 D  SQL_00003              9      9A   INZ('0') CCSID(*JOBRUNMIX)           data is okay                              000126
+   127 D  SQL_00004             10    128A   CCSID(*JOBRUNMIX)                    end of header                             000127
+   128 D  SQL_00005            129    138A   CCSID(*JOBRUNMIX)                    P_LIB                                     000128
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   129 **FREE                                                                                                               000129
+   130 **END-FREE                                                                                                           000130
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   131 D                 DS                  STATIC                               FETCH                                     000131
+   132 D  SQL_00006              1      2B 0 INZ(128)                             length of header                          000132
+   133 D  SQL_00007              3      4B 0 INZ(5)                               statement number                          000133
+   134 D  SQL_00008              5      8U 0 INZ(0)                               invocation mark                           000134
+   135 D  SQL_00009              9      9A   INZ('0') CCSID(*JOBRUNMIX)           data is okay                              000135
+   136 D  SQL_00010             10    128A   CCSID(*JOBRUNMIX)                    end of header                             000136
+   137 D  SQL_00011            129    140A   VARYING CCSID(*JOBRUNMIX)            L_LIB                                     000137
+   138 D  SQL_00012            141    152A   VARYING CCSID(*JOBRUNMIX)            L_FILE                                    000138
+   139 D  SQL_00013            153    164A   VARYING CCSID(*JOBRUNMIX)            L_MBR                                     000139
+   140 D  SQL_00014            165    176A   VARYING CCSID(*JOBRUNMIX)            L_EXT                                     000140
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   141 **FREE                                                                                                               000141
+   142 **END-FREE                                                                                                           000142
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   143 D                 DS                  STATIC                               FETCH                                     000143
+   144 D  SQL_00015              1      2B 0 INZ(128)                             length of header                          000144
+   145 D  SQL_00016              3      4B 0 INZ(6)                               statement number                          000145
+   146 D  SQL_00017              5      8U 0 INZ(0)                               invocation mark                           000146
+   147 D  SQL_00018              9      9A   INZ('0') CCSID(*JOBRUNMIX)           data is okay                              000147
+   148 D  SQL_00019             10    128A   CCSID(*JOBRUNMIX)                    end of header                             000148
+   149 D  SQL_00020            129    140A   VARYING CCSID(*JOBRUNMIX)            L_LIB                                     000149
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      5
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   150 D  SQL_00021            141    152A   VARYING CCSID(*JOBRUNMIX)            L_FILE                                    000150
+   151 D  SQL_00022            153    164A   VARYING CCSID(*JOBRUNMIX)            L_MBR                                     000151
+   152 D  SQL_00023            165    176A   VARYING CCSID(*JOBRUNMIX)            L_EXT                                     000152
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   153 **FREE                                                                                                               000153
+   154 **END-FREE                                                                                                           000154
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
+Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
+   155 D                 DS                  STATIC                               CLOSE                                     000155
+   156 D  SQL_00024              1      2B 0 INZ(128)                             length of header                          000156
+   157 D  SQL_00025              3      4B 0 INZ(7)                               statement number                          000157
+   158 D  SQL_00026              5      8U 0 INZ(0)                               invocation mark                           000158
+   159 D  SQL_00027              9      9A   INZ('0') CCSID(*JOBRUNMIX)           data is okay                              000159
+   160 D  SQL_00028             10    127A   CCSID(*JOBRUNMIX)                    end of header                             000160
+   161 D  SQL_00029            128    128A   CCSID(*JOBRUNMIX)                    end of header                             000161
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   162 **FREE                                                                                                               000162
+   163 //*    exec sql Declare c_cpy cursor for                                                                             000163
+   164 //*        SELECT table_schema, lower(table_name), lower(table_partition),                                           000164
+   165 //*                lower(source_type)                                                                                000165
+   166 //*        FROM qsys2.SYSPSTAT                                                                                       000166
+   167 //*        WHERE table_schema = :p_lib                                                                               000167
+   168 //*        AND source_type IS NOT NULL                                                                               000168
+   169 //*        AND source_type NOT IN ('TXT')                                                                            000169
+   170 //*        and table_partition <> '';                                                                                000170
+   171                                                                                                                      000171
+   172     writeJobLog ('Start' + log_ende);                                                                                000172
+   173                                                                                                                      000173
+   174                                                                                                                      000174
+   175 //*    exec sql open c_cpy;                                                                                          000175
+   176           SQL_00005 = P_LIB;                                                    //SQL                                000176
+   177           SQLER6 = -4;                                                          //SQL                                000177
+   178           IF SQL_00002 = 0                                                      //SQL                B01             000178
+   179           OR SQL_00003 <> *LOVAL;                                               //SQL                B01             000179
+   180           SQLROUTE_CALL(                                                        //SQL                 01             000180
+   181                SQLCA                                                            //SQL                 01             000181
+   182              : SQL_00000                                                        //SQL                 01             000182
+   183           );                                                                    //SQL                 01             000183
+   184           ELSE;                                                                 //SQL                X01             000184
+   185           SQLOPEN_CALL(                                                         //SQL                 01             000185
+   186                SQLCA                                                            //SQL                 01             000186
+   187              : SQL_00000                                                        //SQL                 01             000187
+   188           );                                                                    //SQL                 01             000188
+   189           ENDIF;                                                                //SQL                E01             000189
+   190           IF SQLCOD < 0;                                                        //SQL                B01             000190
+   191           SQLERROR();                                                           //SQL                 01             000191
+   192           ENDIF;                                                                //SQL                E01             000192
+   193           IF (SQLCOD > 0 AND SQLCOD <> 100)                                     //SQL                B01             000193
+   194           OR SQLWN0 = 'W'                                                       //SQL                B01             000194
+   195           OR %SUBST(SQLSTT:1:2) = '01';                                         //SQL                B01             000195
+   196           SQLWARNING();                                                         //SQL                 01             000196
+   197           ENDIF;                                                                //SQL                E01             000197
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      6
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   198 //*    exec sql fetch c_cpy into :l_lib, :l_file, :l_mbr, :l_ext;                                                    000198
+   199           SQLER6 = -4;                                                          //SQL 5                              000199
+   200           SQLROUTE_CALL(                                                        //SQL                                000200
+   201                SQLCA                                                            //SQL                                000201
+   202              : SQL_00006                                                        //SQL                                000202
+   203           );                                                                    //SQL                                000203
+   204           IF SQL_00009 = '1';                                                   //SQL                B01             000204
+   205           EVAL L_LIB = SQL_00011;                                               //SQL                 01             000205
+   206           EVAL L_FILE = SQL_00012;                                              //SQL                 01             000206
+   207           EVAL L_MBR = SQL_00013;                                               //SQL                 01             000207
+   208           EVAL L_EXT = SQL_00014;                                               //SQL                 01             000208
+   209           ENDIF;                                                                //SQL                E01             000209
+   210           IF SQLCOD < 0;                                                        //SQL                B01             000210
+   211           SQLERROR();                                                           //SQL                 01             000211
+   212           ENDIF;                                                                //SQL                E01             000212
+   213           IF (SQLCOD > 0 AND SQLCOD <> 100)                                     //SQL                B01             000213
+   214           OR SQLWN0 = 'W'                                                       //SQL                B01             000214
+   215           OR %SUBST(SQLSTT:1:2) = '01';                                         //SQL                B01             000215
+   216           SQLWARNING();                                                         //SQL                 01             000216
+   217           ENDIF;                                                                //SQL                E01             000217
+   218                                                                                                                      000218
+   219     l_root_dir= %trim(p_root_dir) + '/' +                                                                            000219
+   220                 %char(%timestamp(*SYS : 0) : *ISO) + '/' +                                                           000220
+   221                 %trim(p_lib);                                                                                        000221
+   222                                                                                                                      000222
+   223     // Create directory and all it's parent folders if not exist                                                     000223
+   224     l_cmd = 'QSH cmd(''mkdir -p ' + l_root_dir + ''')';                                                              000224
+   225     writeJobLog (l_cmd + log_ende);                                                                                  000225
+   226     system(l_cmd);                                                                                                   000226
+   227                                                                                                                      000227
+   228     dow sqlcode = 0;                                                                                 B01             000228
+   229                                                                                                                      000229
+   230     if (l_file <> l_file_tmp);                                                                       B02             000230
+   231         l_file_tmp = l_file;                                                                          02             000231
+   232         l_cur_dir = l_root_dir + '/' + l_file;                                                        02             000232
+   233         l_cmd = 'mkdir ''' + l_cur_dir + '''';                                                        02             000233
+   234         writeJobLog (l_cmd + log_ende);                                                               02             000234
+   235         system(l_cmd);                                                                                02             000235
+   236         l_cmd = 'CHGATR OBJ(''' + l_cur_dir + ''') ATR(*CCSID) VALUE(1208)';                          02             000236
+   237         writeJobLog (l_cmd + log_ende);                                                               02             000237
+   238         system(l_cmd);                                                                                02             000238
+   239     ENDIF;                                                                                           E02             000239
+   240                                                                                                                      000240
+   241     l_cmd = 'CPYTOSTMF FROMMBR(''/QSYS.LIB/' + %trim(p_lib) + '.LIB/' +                               01             000241
+   242                     l_file + '.FILE/' +                                                               01             000242
+   243                     l_mbr + '.MBR'') STMFCCSID(1208) +                                                01             000243
+   244                 TOSTMF(''' + l_cur_dir + '/' + l_mbr + '.' + l_ext + ''')';                           01             000244
+   245     clear ErrMsg;                                                                                     01             000245
+   246     system (l_cmd);                                                                                   01             000246
+   247                                                                                                                      000247
+   248     if (ErrMsg <> '');                                                                               B02             000248
+   249         writeJobLog ('Error in Command: ' + ErrMsg + log_ende);                                       02             000249
+   250         writeJobLog (l_cmd + log_ende);                                                               02             000250
+   251         return;                                                                                       02             000251
+   252     ENDIF;                                                                                           E02             000252
+   253                                                                                                                      000253
+   254 //*    exec sql fetch c_cpy into :l_lib, :l_file, :l_mbr, :l_ext;                                                    000254
+   255           SQLER6 = -4;                                                          //SQL 6               01             000255
+   256           SQLROUTE_CALL(                                                        //SQL                 01             000256
+   257                SQLCA                                                            //SQL                 01             000257
+   258              : SQL_00015                                                        //SQL                 01             000258
+   259           );                                                                    //SQL                 01             000259
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      7
+Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
+Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
+   260           IF SQL_00018 = '1';                                                   //SQL                B02             000260
+   261           EVAL L_LIB = SQL_00020;                                               //SQL                 02             000261
+   262           EVAL L_FILE = SQL_00021;                                              //SQL                 02             000262
+   263           EVAL L_MBR = SQL_00022;                                               //SQL                 02             000263
+   264           EVAL L_EXT = SQL_00023;                                               //SQL                 02             000264
+   265           ENDIF;                                                                //SQL                E02             000265
+   266           IF SQLCOD < 0;                                                        //SQL                B02             000266
+   267           SQLERROR();                                                           //SQL                 02             000267
+   268           ENDIF;                                                                //SQL                E02             000268
+   269           IF (SQLCOD > 0 AND SQLCOD <> 100)                                     //SQL                B02             000269
+   270           OR SQLWN0 = 'W'                                                       //SQL                B02             000270
+   271           OR %SUBST(SQLSTT:1:2) = '01';                                         //SQL                B02             000271
+   272           SQLWARNING();                                                         //SQL                 02             000272
+   273           ENDIF;                                                                //SQL                E02             000273
+   274     ENDDO;                                                                                           E01             000274
+   275                                                                                                                      000275
+   276 //*    exec sql close c_cpy;                                                                                         000276
+   277           SQLER6 = 7;                                                           //SQL                                000277
+   278           IF SQL_00026 = 0;                                                     //SQL                B01             000278
+   279           SQLROUTE_CALL(                                                        //SQL                 01             000279
+   280                SQLCA                                                            //SQL                 01             000280
+   281              : SQL_00024                                                        //SQL                 01             000281
+   282           );                                                                    //SQL                 01             000282
+   283           ELSE;                                                                 //SQL                X01             000283
+   284           SQLCLSE_CALL(                                                         //SQL                 01             000284
+   285                SQLCA                                                            //SQL                 01             000285
+   286              : SQL_00024                                                        //SQL                 01             000286
+   287           );                                                                    //SQL                 01             000287
+   288           ENDIF;                                                                //SQL                E01             000288
+   289           IF SQLCOD < 0;                                                        //SQL                B01             000289
+   290           SQLERROR();                                                           //SQL                 01             000290
+   291           ENDIF;                                                                //SQL                E01             000291
+   292           IF (SQLCOD > 0 AND SQLCOD <> 100)                                     //SQL                B01             000292
+   293           OR SQLWN0 = 'W'                                                       //SQL                B01             000293
+   294           OR %SUBST(SQLSTT:1:2) = '01';                                         //SQL                B01             000294
+   295           SQLWARNING();                                                         //SQL                 01             000295
+   296           ENDIF;                                                                //SQL                E01             000296
+   297                                                                                                                      000297
+   298     return;                                                                                                          000298
+   299                                                                                                                      000299
+   300 end-proc;                                                                                                            000300
+* * * * *   E N D E   D E R   Q U E L L E   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      8
+Z u s ä t z l i c h e   D i a g n o s e n a c h r i c h t e n
+ Msg-ID  Sv Nummer Folge   Nachrichtentext
+*RNF5409 00    172 000172  Der Prototypaufruf gibt einen Wert zurück, der verloren
+                           geht, wenn CALLP verwendet wird.
+*RNF5409 00    225 000225  Der Prototypaufruf gibt einen Wert zurück, der verloren
+                           geht, wenn CALLP verwendet wird.
+*RNF5409 00    226 000226  Der Prototypaufruf gibt einen Wert zurück, der verloren
+                           geht, wenn CALLP verwendet wird.
+*RNF5409 00    234 000234  Der Prototypaufruf gibt einen Wert zurück, der verloren
+                           geht, wenn CALLP verwendet wird.
+*RNF5409 00    235 000235  Der Prototypaufruf gibt einen Wert zurück, der verloren
+                           geht, wenn CALLP verwendet wird.
+*RNF5409 00    237 000237  Der Prototypaufruf gibt einen Wert zurück, der verloren
+                           geht, wenn CALLP verwendet wird.
+*RNF5409 00    238 000238  Der Prototypaufruf gibt einen Wert zurück, der verloren
+                           geht, wenn CALLP verwendet wird.
+*RNF5409 00    246 000246  Der Prototypaufruf gibt einen Wert zurück, der verloren
+                           geht, wenn CALLP verwendet wird.
+*RNF5409 00    249 000249  Der Prototypaufruf gibt einen Wert zurück, der verloren
+                           geht, wenn CALLP verwendet wird.
+*RNF5409 00    250 000250  Der Prototypaufruf gibt einen Wert zurück, der verloren
+                           geht, wenn CALLP verwendet wird.
+* * * * *   E N D E   D E R   Z U S Ä T Z L I C H E N   D I A G N O S E N A C H R I C H T E N   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite      9
+Q u e r v e r w e i s l i s t e
+      Datei- und Satzverweise:
+         Datei             Einheit            Verweise (D=Definiert)
+           Satz
+         Keine Verweise in der Quelle.
+      Globale Feldverweise:
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         ERRMSG            A(7)                   95D    245M    248     249
+                           CCSID(JOBRUNMIX)
+         LOG_ENDE          KONSTANTE             102D    172     225     234
+                                                 237     249     250
+         MAIN              PROTOTYPE               2     105
+*RNF7031 SQFAPP            KONSTANTE              73D
+*RNF7031 SQFCRT            KONSTANTE              71D
+*RNF7031 SQFOVR            KONSTANTE              72D
+*RNF7031 SQFRD             KONSTANTE              70D
+*RNF7031 SQLABC            B(9,0)                 15D
+*RNF7031 SQLAID            A(8)                   13D
+                           CCSID(JOBRUNMIX)
+         SQLCA             DS(136)                11D     49      54      58
+                           CCSID(JOBRUNMIX)       62     181     186     201
+                                                 257     280     285
+         SQLCABC           I(10,0)                14D     15
+         SQLCAID           A(8)                   12D     13
+                           CCSID(JOBRUNMIX)
+         SQLCLSE           KONSTANTE              57      68D
+         SQLCLSE_CALL      PROTOTYPE              57D    284M
+         SQLCMIT           KONSTANTE              61      69D
+*RNF7031 SQLCMIT_CALL      PROTOTYPE              61D
+         SQLCOD            B(9,0)                 17D    190     193     193
+                                                 210     213     213     266
+                                                 269     269     289     292
+                                                 292
+         SQLCODE           I(10,0)                16D     17     228
+*RNF7031 SQLERL            B(4,0)                 19D
+*RNF7031 SQLERM            A(70)                  21D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLERP            A(8)                   23D
+                           CCSID(JOBRUNMIX)
+         SQLERR            A(24)                  24D     25      26      27
+                           CCSID(JOBRUNMIX)       28      29      30      31
+*RNF7031 SQLERRD(6)        I(10,0)                31D
+         SQLERRMC          A(70)                  20D     21
+                           CCSID(JOBRUNMIX)
+         SQLERRML          I(5,0)                 18D     19
+         SQLERROR          PROTOTYPE              78D    191M    211M    267M
+                                                 290M
+         SQLERRP           A(8)                   22D     23
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLER1            B(9,0)                 25D
+*RNF7031 SQLER2            B(9,0)                 26D
+*RNF7031 SQLER3            B(9,0)                 27D
+*RNF7031 SQLER4            B(9,0)                 28D
+*RNF7031 SQLER5            B(9,0)                 29D
+         SQLER6            B(9,0)                 30D    177M    199M    255M
+                                                 277M
+         SQLOPEN           KONSTANTE              53      67D
+         SQLOPEN_CALL      PROTOTYPE              53D    185M
+         SQLROUTE          KONSTANTE              48      66D
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite     10
+         SQLROUTE_CALL     PROTOTYPE              48D    180M    200M    256M
+                                                 279M
+         SQLSTATE          A(5)                   45D     46
+                           CCSID(JOBRUNMIX)
+         SQLSTT            A(5)                   46D    195     215     271
+                           CCSID(JOBRUNMIX)      294
+*RNF7031 SQLWARN(11)       A(1)                   44D
+                           CCSID(JOBRUNMIX)
+         SQLWARNING        PROTOTYPE              81D    196M    216M    272M
+                                                 295M
+*RNF7031 SQLWNA            A(1)                   43D
+                           CCSID(JOBRUNMIX)
+         SQLWN0            A(1)                   33D    194     214     270
+                           CCSID(JOBRUNMIX)      293
+*RNF7031 SQLWN1            A(1)                   34D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN2            A(1)                   35D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN3            A(1)                   36D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN4            A(1)                   37D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN5            A(1)                   38D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN6            A(1)                   39D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN7            A(1)                   40D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN8            A(1)                   41D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQLWN9            A(1)                   42D
+                           CCSID(JOBRUNMIX)
+         SQLWRN            A(11)                  32D     33      34      35
+                           CCSID(JOBRUNMIX)       36      37      38      39
+                                                  40      41      42      43
+                                                  44
+         SYSTEM            I(10,0)                91D    226M    235M    238M
+                           PROTOTYPE             246M
+         WRITEJOBLOG       I(10,0)                98D    172M    225M    234M
+                           PROTOTYPE             237M    249M    250M
+      Feldverweise für Unterprozedur MAIN
+         Feld              Attribute          Verweise (D=Definiert M=Modifiz.)
+         L_CMD             A(500)                117D    224M    225     226
+                           VARYING(2)            233M    234     235     236M
+                           CCSID(JOBRUNMIX)      237     238     241M    246
+                                                 250
+         L_CUR_DIR         A(100)                119D    232M    233     236
+                           VARYING(2)            244
+                           CCSID(JOBRUNMIX)
+         L_EXT             A(10)                 115D    208M    244     264M
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         L_FILE            A(10)                 112D    206M    230     231
+                           VARYING(2)            232     242     262M
+                           CCSID(JOBRUNMIX)
+         L_FILE_TMP        A(10)                 113D    230     231M
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         L_LIB             A(10)                 111D    205M    261M
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         L_MBR             A(10)                 114D    207M    243     244
+                           VARYING(2)            263M
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite     11
+                           CCSID(JOBRUNMIX)
+         L_ROOT_DIR        A(100)                118D    219M    224     232
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         P_LIB             A(10)                 107D    176     221     241
+                           BASED(_QRNL_PST+)
+                           CCSID(JOBRUNMIX)
+         P_ROOT_DIR        A(100)                108D    219
+                           BASED(_QRNL_PST+)
+                           CCSID(JOBRUNMIX)
+         SQL_00000         B(4,0)                123D    182     187
+*RNF7031 SQL_00001         B(4,0)                124D
+         SQL_00002         U(10,0)               125D    178
+         SQL_00003         A(1)                  126D    179
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQL_00004         A(119)                127D
+                           CCSID(JOBRUNMIX)
+         SQL_00005         A(10)                 128D    176M
+                           CCSID(JOBRUNMIX)
+         SQL_00006         B(4,0)                132D    202
+*RNF7031 SQL_00007         B(4,0)                133D
+*RNF7031 SQL_00008         U(10,0)               134D
+         SQL_00009         A(1)                  135D    204
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQL_00010         A(119)                136D
+                           CCSID(JOBRUNMIX)
+         SQL_00011         A(10)                 137D    205
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         SQL_00012         A(10)                 138D    206
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         SQL_00013         A(10)                 139D    207
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         SQL_00014         A(10)                 140D    208
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         SQL_00015         B(4,0)                144D    258
+*RNF7031 SQL_00016         B(4,0)                145D
+*RNF7031 SQL_00017         U(10,0)               146D
+         SQL_00018         A(1)                  147D    260
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQL_00019         A(119)                148D
+                           CCSID(JOBRUNMIX)
+         SQL_00020         A(10)                 149D    261
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         SQL_00021         A(10)                 150D    262
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         SQL_00022         A(10)                 151D    263
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         SQL_00023         A(10)                 152D    264
+                           VARYING(2)
+                           CCSID(JOBRUNMIX)
+         SQL_00024         B(4,0)                156D    281     286
+*RNF7031 SQL_00025         B(4,0)                157D
+         SQL_00026         U(10,0)               158D    278
+*RNF7031 SQL_00027         A(1)                  159D
+                           CCSID(JOBRUNMIX)
+*RNF7031 SQL_00028         A(118)                160D
+                           CCSID(JOBRUNMIX)
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite     12
+*RNF7031 SQL_00029         A(1)                  161D
+                           CCSID(JOBRUNMIX)
+      Bezugszahlen-/Anzeigerverweise:
+         Bez./Anz.                            Verweise (D=Definiert M=Modifiz.)
+* * * * *   E N D E   D E R   Q U E R V E R W E I S L I S T E   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite     13
+E x t e r n e   V e r w e i s e
+      Statisch gebundene Prozeduren:
+         Prozedur                             Verweise
+         system                                   91     226     235     238
+                                                 246
+         SQLERROR                                 78     191     211     267
+                                                 290
+         SQLWARNING                               81     196     216     272
+                                                 295
+         Qp0zLprintf                              98     172     225     234
+                                                 237     249     250
+      Importierte Felder:
+         Feld              Attribute          Definiert
+         _EXCP_MSGID       A(7)                  95
+      Exportierte Felder:
+         Feld              Attribute          Definiert
+         Keine Verweise in der Quelle.
+* * * * *   E N D E   D E R   E X T E R N E N   V E R W E I S E   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite     14
+N a c h r i c h t e n z u s a m m e n f a s s u n g
+ Msg-ID  Sv Nummer Nachrichtentext
+*RNF5409 00     10 Der Prototypaufruf gibt einen Wert zurück, der verloren geht,
+                   wenn CALLP verwendet wird.
+*RNF7031 00     39 Kein Verweis auf den Namen oder die Bezugszahl/den Anzeiger
+                   vorhanden.
+* * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     06/10/23 10:52:13       Seite     15
+E n d z u s a m m e n f a s s u n g
+  Nachrichtenübersicht:
+    Information (00)  . . . . . . . :       49
+    Warnung      (10) . . . . . . . :        0
+    Fehler       (20) . . . . . . . :        0
+    Schwerwiegender Fehler (30+)  . :        0
+    ---------------------------------  -------
+    Summe . . . . . . . . . . . . . :       49
+  Quellensätze insgesamt:
+    Sätze . . . . . . . . . . . . . :      300
+    Bestimmungen .  . . . . . . . . :      232
+    Datensätze  . . . . . . . . . . :        0
+    Bemerkungen . . . . . . . . . . :       53
+* * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
+Modul CPYSRC2IFS in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 06/10/23 um 10:52:13.
+* * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
+Command is > CRTPGM PGM(PROUZAT1/cpysrc2ifs) ACTGRP(PROUZAGRP) REPLACE(*YES) TGTRLS(*CURRENT) STGMDL(*SNGLVL) DETAIL(*BASIC) BNDDIR(*LIBL/PROUZADIR) <
+CPD000D: Befehl *LIBL/CRTPGM nicht sicher für Job mit mehreren Threads.
+CPC5D07: Programm CPYSRC2IFS in Bibliothek PROUZAT1 erstellt.
+                                                Programm erstellen                                                     Seite     1
+5770SS1 V7R5M0  220415                                                    PROUZAT1/CPYSRC2IFS    SPGV74    06/10/23  10:52:14 CEST
+ Programm . . . . . . . . . . . . . . . . . . . . . :   CPYSRC2IFS
+   Bibliothek . . . . . . . . . . . . . . . . . . . :     PROUZAT1
+ Modul der Programmeingangsprozedur . . . . . . . . :   *FIRST
+   Bibliothek . . . . . . . . . . . . . . . . . . . :
+ Aktivierungsgruppe . . . . . . . . . . . . . . . . :   PROUZAGRP
+ Erstellungsangaben . . . . . . . . . . . . . . . . :   *GEN        *NODUPPROC  *NODUPVAR   *WARN       *RSLVREF
+ Listendetail . . . . . . . . . . . . . . . . . . . :   *BASIC
+ Aktualisierung zulassen  . . . . . . . . . . . . . :   *YES
+ *SRVPGM-Bibliothek aktualisieren . . . . . . . . . :   *NO
+ Benutzerprofil . . . . . . . . . . . . . . . . . . :   *USER
+ Bestehendes Programm ersetzen  . . . . . . . . . . :   *YES
+ Berechtigung . . . . . . . . . . . . . . . . . . . :   *LIBCRTAUT
+ Ziel-Release . . . . . . . . . . . . . . . . . . . :   *CURRENT
+ Reinitialisierung zulassen . . . . . . . . . . . . :   *NO
+ Speichermodell . . . . . . . . . . . . . . . . . . :   *SNGLVL
+ Argumentoptimierung  . . . . . . . . . . . . . . . :   *NO
+ Interprozedurale Analyse . . . . . . . . . . . . . :   *NO
+ IPA-Steuerdatei  . . . . . . . . . . . . . . . . . :   *NONE
+ Text . . . . . . . . . . . . . . . . . . . . . . . :   *ENTMODTXT
+ Modul       Bibliothek           Modul       Bibliothek           Modul       Bibliothek           Modul       Bibliothek
+ CPYSRC2IFS  PROUZAT1
+                                                Programm erstellen                                                     Seite     2
+5770SS1 V7R5M0  220415                                                    PROUZAT1/CPYSRC2IFS    SPGV74    06/10/23  10:52:14 CEST
+ Service-                                    Service-                                    Service-
+ programm    Bibliothek  Aktivierung         programm    Bibliothek  Aktivierung         programm    Bibliothek  Aktivierung
+ *NONE
+ Binderverzeichnis  Bibliothek    Binderverzeichnis  Bibliothek    Binderverzeichnis  Bibliothek    Binderverzeichnis  Bibliothek
+    PROUZADIR       *LIBL
+                                                Programm erstellen                                                     Seite     3
+5770SS1 V7R5M0  220415                                                    PROUZAT1/CPYSRC2IFS    SPGV74    06/10/23  10:52:14 CEST
+                                                           Kurzübersicht
+ Programmeingangsprozeduren . . . . . . . . . . :   1
+   Symbol    Art       Bibliothek  Objekt      Gebunden    Kennung
+             *MODULE   PROUZAT1    CPYSRC2IFS  *YES        _QRNP_PEP_CPYSRC2IFS
+ Mehrere Definitionen mit hoher Priorität . . . :   0
+ Unaufgelöste Referenzen  . . . . . . . . . . . :   0
+ Aktivierungsgruppe . . . . . . . . . . . . . . :   PROUZAGRP
+                                * * * * *   E N D E  D E R  K U R Z Ü B E R S I C H T   * * * * *
+                                                Programm erstellen                                                     Seite     4
+5770SS1 V7R5M0  220415                                                    PROUZAT1/CPYSRC2IFS    SPGV74    06/10/23  10:52:14 CEST
+                                                           Bindestatistik
+ CPU-Zeit für Symbolsammlung  . . . . . . . . . . . . . . . . :                .000
+ CPU-Zeit für Symbolauflösung . . . . . . . . . . . . . . . . :                .000
+ CPU-Zeit für Auflösung des Binderverzeichnisses  . . . . . . :                .000
+ CPU-Zeit für Compilierung der Bindersprache  . . . . . . . . :                .000
+ CPU-Zeit für Erstellung der Liste  . . . . . . . . . . . . . :                .000
+ CPU-Zeit für Erstellung des Programms/Serviceprogramms . . . :                .002
+ Gesamte CPU-Zeit . . . . . . . . . . . . . . . . . . . . . . :                .009
+ Gesamte abgelaufene Zeit . . . . . . . . . . . . . . . . . . :                .058
+                                 * * * * *   E N D E  D E R  B I N D E S T A T I S T I K      * * * * *
+*CPC5D07 - Programm CPYSRC2IFS in Bibliothek PROUZAT1 erstellt.
+              * * * * *   E N D E  D E R  L I S T E  Z U R  E R S T E L L U N G  D E S  P R O G R A M M S   * * * * *
