@@ -4,3 +4,4 @@
 #build/*.txt
 # make/.makeprofile.mk
 .vscode/settings.json
+make/global.cfg
