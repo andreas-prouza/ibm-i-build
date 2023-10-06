@@ -53,16 +53,16 @@ current_commit=`git rev-parse HEAD`
 # Index all untracked files (so they become visible in "git diff")
 git add -N -A
 
-changed_files=$(git diff --name-status)
+#changed_files=$(git diff --name-status)
 
-if [ "$changed_files" != '' ]; then
+#if [ "$changed_files" != '' ]; then
 
-  echo -e "$COLOR_RED Untracked files exist!! $COLOR_END"
-  echo -e "$COLOR_CYAN_BOLD $changed_files $COLOR_END"
-  echo -e "$COLOR_RED Please commit them first $COLOR_END"
+#  echo -e "$COLOR_RED Untracked files exist!! $COLOR_END"
+#  echo -e "$COLOR_CYAN_BOLD $changed_files $COLOR_END"
+#  echo -e "$COLOR_RED Please commit them first $COLOR_END"
   #!!!!!!!!!!!!exit 1
 
-fi
+#fi
 
 # Save all uncommited files
 # Not necessary anymore, because all is commited
@@ -87,7 +87,14 @@ echo "URL: $url" >> $STD_OUTPUT_TMP
 response=$(curl $url)
 echo $response >> $STD_OUTPUT_TMP
 
-error=$(jq -r '.Error' <<< $response)
+#error=$(jq -r '.Error' <<< $response 2> $ERROR_OUTPUT)
+error=$(jq -r '.Error' <<< $response 2> $ERROR_OUTPUT)
+if [[ -s "$ERROR_OUTPUT" ]]; then
+  echo -e "$COLOR_RED $response $COLOR_END"
+  error_handler
+  #echo -e "$COLOR_RED $ERROR_OUTPUT $COLOR_END"
+fi
+
 if [[ "$error" != null ]]; then
   echo -e "$COLOR_RED $error $COLOR_END"
   git checkout $current_branch

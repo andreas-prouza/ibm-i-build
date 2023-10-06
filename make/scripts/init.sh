@@ -25,7 +25,7 @@ print_debug() {
 #}
 
 #trap 'on_exit' EXIT
-trap 'error_handler' ERR
+#trap 'error_handler' ERR
 
 exec > >(tee -a $STD_OUTPUT_TMP)
 
