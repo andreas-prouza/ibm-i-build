@@ -2,7 +2,6 @@
 ctl-opt nomain;
 
 
-
 // No commitment control because we never want to ROLLBACK anything in a Logger!
 exec sql Set Option COMMIT=*none;
 

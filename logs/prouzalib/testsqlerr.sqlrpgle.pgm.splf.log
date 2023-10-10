@@ -1,8 +1,8 @@
 Command is > CRTSQLRPGI OBJ(PROUZAT1/testsqlerr) SRCSTMF('./prouzalib//qrpglesrc/testsqlerr.sqlrpgle') OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS(*CURRENT) DBGVIEW(*SOURCE) REPLACE(*YES) COMPILEOPT('TGTCCSID(*JOB) INCDIR(''./prouzalib/'')') <
 CPD000D: Befehl QSYS/CRTSQLRPGI nicht sicher für Job mit mehreren Threads.
 CPD000D: Befehl QSYS/CRTRPGMOD nicht sicher für Job mit mehreren Threads.
-RNS9305: Modul TESTSQLERR in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 10/10/23 um 06:21:07.
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      1
+RNS9305: Modul TESTSQLERR in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 10/10/23 um 06:29:18.
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      1
   Befehl . . . . . . . . . . . . . :   CRTRPGMOD
     Ausgegeben von . . . . . . . . :     PROUZAT1
   Modul  . . . . . . . . . . . . . :   TESTSQLERR
@@ -44,7 +44,7 @@ RNS9305: Modul TESTSQLERR in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsst
     Bibliothek . . . . . . . . . . :     QTEMP
   Ausgabequellenteildatei  . . . . :   TESTSQLERR
   REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      2
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      2
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
 Q u e l l e n l i s t e
@@ -103,7 +103,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
     44+    p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                1000037
     45+    p_program                     like(logger_ds_tmp.program) const options(*nopass);                               1000038
     46+    p_print2Joblog                ind const options(*nopass);                                                       1000039
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      3
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      3
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
     47+  END-PR;                                                                                                           1000040
@@ -164,7 +164,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
     93+dcl-pr sqlerror;                                                                                                    2000007
     94+end-pr;                                                                                                             2000008
     95+                                                                                                                    2000009
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      4
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      4
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
     96+dcl-pr sqlwarning;                                                                                                  2000010
@@ -193,16 +193,16 @@ Nummer ID              Bibliothek Datei      Teildatei         Datum    Uhrzeit
      7    1 logger.rp+ ./prouzalib/qcpysrc/logger.rpgle  1208  27/07/23 17:54:11
     86    2 errhdlsql+ ./prouzalib/qcpysrc/errhdlsql.r+  1208  27/07/23 17:54:11
 * * * * *   E N D E   D E R   / C O P Y - T E I L D A T E I E N   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      5
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      5
 Zeil.- <---------------------- Datensätze ---------------------------------------------------------------->      Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10      Datum  ID  nummer
 U m w a n d l u n g s z e i t d a t e n
 * * * * *   E N D E   D E R   U M W A N D L U N G S Z E I T D A T E N   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      6
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      6
 N a c h r i c h t e n z u s a m m e n f a s s u n g
  Msg-ID  Sv Nummer Nachrichtentext
 * * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      7
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      7
 E n d z u s a m m e n f a s s u n g
   Nachrichtenübersicht:
     Information (00)  . . . . . . . :        0
@@ -219,7 +219,7 @@ E n d z u s a m m e n f a s s u n g
 * * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
 Diagnoseprüfung der Quelle ist beendet. Höchste Bewertungsstufe ist 00.
 * * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
-5770ST1 V7R5M0 220415          SQL-ILE-RPG-Objekt erstellen        TESTSQLERR                  10/10/23 06:21:07         Seite     1
+5770ST1 V7R5M0 220415          SQL-ILE-RPG-Objekt erstellen        TESTSQLERR                  10/10/23 06:29:18         Seite     1
 Quellenart ...............RPG
 Objektname................PROUZAT1/TESTSQLERR
 Quellendatei..............QTEMP/QSQLPRE
@@ -271,12 +271,12 @@ Optionen für Dezimalergebnisse:
   Mind.zahl Kommastellen..0
 DECFLOAT-Rundungsmodus....*HALFEVEN
 Compileroptionen..........TGTCCSID(*JOB) INCDIR('./prouzalib/')
-Quellenteildatei am 10/10/23  06:21:07 geändert
-5770ST1 V7R5M0 220415          SQL-ILE-RPG-Objekt erstellen        TESTSQLERR                  10/10/23 06:21:07         Seite     2
+Quellenteildatei am 10/10/23  06:29:18 geändert
+5770ST1 V7R5M0 220415          SQL-ILE-RPG-Objekt erstellen        TESTSQLERR                  10/10/23 06:29:18         Seite     2
                                              DIAGNOSENACHRICHTEN
     5   exec sql Set Option COMMIT=*none;                                                                      000005   27/07/23
   109     exec sql Select count(*) Into :l_count from doesnt_exist;                                            000018   27/07/23
-5770ST1 V7R5M0 220415          SQL-ILE-RPG-Objekt erstellen        TESTSQLERR                  10/10/23 06:21:07         Seite     3
+5770ST1 V7R5M0 220415          SQL-ILE-RPG-Objekt erstellen        TESTSQLERR                  10/10/23 06:29:18         Seite     3
                                              DIAGNOSENACHRICHTEN
 MSG ID  WTK  SATZ  TEXT
 SQL5066   0       5  Vorkompilierungsauswahl COMMIT mit Anweisung SET OPTION
@@ -289,7 +289,7 @@ SQL1103  10     109  Position 47 Spaltendefinitionen für Tabelle DOESNT_EXIST
 Fehler der Wertigkeitsstufe 10 in Quelle gefunden.
   116 Quellensätze verarbeitet.
                                * * * * *  E N D E  D E R  L I S T E  * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      1
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      1
   Befehl . . . . . . . . . . . . . :   CRTRPGMOD
     Ausgegeben von . . . . . . . . :     PROUZAT1
   Modul  . . . . . . . . . . . . . :   TESTSQLERR
@@ -299,7 +299,7 @@ Fehler der Wertigkeitsstufe 10 in Quelle gefunden.
     CCSID  . . . . . . . . . . . . :     1141
   Ziel-CCSID . . . . . . . . . . . :   *JOB (1141)
   Text 'Beschreibung'  . . . . . . :
-  Letzte Änderung  . . . . . . . . :   10/10/23  06:21:07
+  Letzte Änderung  . . . . . . . . :   10/10/23  06:29:18
   Generierungsbewertungsstufe  . . :   10
   Umwandlungsprogrammauswahlmögl.  :   *XREF      *GEN       *NOSECLVL  *SHOWCPY
                                        *EXPDDS    *EXT       *NOSHOWSKP *NOSRCSTMT
@@ -328,7 +328,7 @@ Fehler der Wertigkeitsstufe 10 in Quelle gefunden.
   Verzeichnis einschließen . . . . :   ./prouzalib/
   Vorprozessoroptionen . . . . . . :   *NONE
   REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      2
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      2
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
 Q u e l l e n l i s t e
@@ -388,7 +388,7 @@ Q u e l l e n l i s t e
     25           SQLER5 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000025
     26           SQLER6 BINDEC(9) OVERLAY(SQLERR:*NEXT);                               //SQL                                000026
     27           SQLERRD INT(10) DIM(6) OVERLAY(SQLERR);                               //SQL                                000027
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      3
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      3
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
     28          SQLWRN CHAR(11);                                                       //SQL                                000028
@@ -449,7 +449,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
     79   dcl-c  C_LOG_DEBUG              'DEBUG';                                                                           000079
     80   dcl-c  C_LOG_INFO               'INFO';                                                                            000080
     81   dcl-c  C_LOG_WARNING            'WARNING';                                                                         000081
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      4
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      4
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
     82   dcl-c  C_log_ERROR              'ERROR';                                                                           000082
@@ -510,7 +510,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    129     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000118
    130     p_print2Joblog                ind const options(*nopass);                                                        000119
    131   END-PR;                                                                                                            000120
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      5
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      5
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    132                                                                                                                      000121
@@ -567,7 +567,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    179                                                                                                                      000168
    180   dcl-s l_count                     int(10);                                                                         000169
    181                                                                                                                      000170
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      6
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      6
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    182 **END-FREE                                                                                                           000171
@@ -611,11 +611,11 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    216 end-proc;                                                                                                            000205
    217                                                                                                                      000206
 * * * * *   E N D E   D E R   Q U E L L E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      7
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      7
 Z u s ä t z l i c h e   D i a g n o s e n a c h r i c h t e n
  Msg-ID  Sv Nummer Folge   Nachrichtentext
 * * * * *   E N D E   D E R   Z U S Ä T Z L I C H E N   D I A G N O S E N A C H R I C H T E N   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      8
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      8
 Q u e r v e r w e i s l i s t e
       Datei- und Satzverweise:
          Datei             Einheit            Verweise (D=Definiert)
@@ -675,7 +675,7 @@ Q u e r v e r w e i s l i s t e
                            CCSID(JOBRUNMIX)
 *RNF7031 SEND_PROGRAM_MESSAGE...
                            PROTOTYPE             145D
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite      9
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite      9
 *RNF7031 SQFAPP            KONSTANTE              69D
 *RNF7031 SQFCRT            KONSTANTE              67D
 *RNF7031 SQFOVR            KONSTANTE              68D
@@ -740,7 +740,7 @@ Q u e r v e r w e i s l i s t e
 *RNF7031 SQLWN5            A(1)                   34D
                            CCSID(JOBRUNMIX)
 *RNF7031 SQLWN6            A(1)                   35D
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite     10
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite     10
                            CCSID(JOBRUNMIX)
 *RNF7031 SQLWN7            A(1)                   36D
                            CCSID(JOBRUNMIX)
@@ -766,7 +766,7 @@ Q u e r v e r w e i s l i s t e
       Bezugszahlen-/Anzeigerverweise:
          Bez./Anz.                            Verweise (D=Definiert M=Modifiz.)
 * * * * *   E N D E   D E R   Q U E R V E R W E I S L I S T E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite     11
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite     11
 E x t e r n e   V e r w e i s e
       Statisch gebundene Prozeduren:
          Prozedur                             Verweise
@@ -785,13 +785,13 @@ E x t e r n e   V e r w e i s e
          Feld              Attribute          Definiert
          Keine Verweise in der Quelle.
 * * * * *   E N D E   D E R   E X T E R N E N   V E R W E I S E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite     12
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite     12
 N a c h r i c h t e n z u s a m m e n f a s s u n g
  Msg-ID  Sv Nummer Nachrichtentext
 *RNF7031 00     53 Kein Verweis auf den Namen oder die Bezugszahl/den Anzeiger
                    vorhanden.
 * * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:21:07       Seite     13
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTSQLERR      SPGV74     10/10/23 06:29:18       Seite     13
 E n d z u s a m m e n f a s s u n g
   Nachrichtenübersicht:
     Information (00)  . . . . . . . :       53
@@ -806,13 +806,13 @@ E n d z u s a m m e n f a s s u n g
     Datensätze  . . . . . . . . . . :        0
     Bemerkungen . . . . . . . . . . :       41
 * * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
-Modul TESTSQLERR in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 10/10/23 um 06:21:07.
+Modul TESTSQLERR in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 10/10/23 um 06:29:18.
 * * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
 Command is > CRTPGM PGM(PROUZAT1/testsqlerr) ACTGRP(PROUZAGRP) REPLACE(*YES) TGTRLS(*CURRENT) STGMDL(*SNGLVL) DETAIL(*BASIC) BNDDIR(*LIBL/PROUZADIR) <
 CPD000D: Befehl *LIBL/CRTPGM nicht sicher für Job mit mehreren Threads.
 CPC5D07: Programm TESTSQLERR in Bibliothek PROUZAT1 erstellt.
                                                 Programm erstellen                                                     Seite     1
-5770SS1 V7R5M0  220415                                                    PROUZAT1/TESTSQLERR    SPGV74    10/10/23  06:21:08 CEST
+5770SS1 V7R5M0  220415                                                    PROUZAT1/TESTSQLERR    SPGV74    10/10/23  06:29:19 CEST
  Programm . . . . . . . . . . . . . . . . . . . . . :   TESTSQLERR
    Bibliothek . . . . . . . . . . . . . . . . . . . :     PROUZAT1
  Modul der Programmeingangsprozedur . . . . . . . . :   *FIRST
@@ -835,14 +835,14 @@ CPC5D07: Programm TESTSQLERR in Bibliothek PROUZAT1 erstellt.
  Modul       Bibliothek           Modul       Bibliothek           Modul       Bibliothek           Modul       Bibliothek
  TESTSQLERR  PROUZAT1
                                                 Programm erstellen                                                     Seite     2
-5770SS1 V7R5M0  220415                                                    PROUZAT1/TESTSQLERR    SPGV74    10/10/23  06:21:08 CEST
+5770SS1 V7R5M0  220415                                                    PROUZAT1/TESTSQLERR    SPGV74    10/10/23  06:29:19 CEST
  Service-                                    Service-                                    Service-
  programm    Bibliothek  Aktivierung         programm    Bibliothek  Aktivierung         programm    Bibliothek  Aktivierung
  *NONE
  Binderverzeichnis  Bibliothek    Binderverzeichnis  Bibliothek    Binderverzeichnis  Bibliothek    Binderverzeichnis  Bibliothek
     PROUZADIR       *LIBL
                                                 Programm erstellen                                                     Seite     3
-5770SS1 V7R5M0  220415                                                    PROUZAT1/TESTSQLERR    SPGV74    10/10/23  06:21:08 CEST
+5770SS1 V7R5M0  220415                                                    PROUZAT1/TESTSQLERR    SPGV74    10/10/23  06:29:19 CEST
                                                            Kurzübersicht
  Programmeingangsprozeduren . . . . . . . . . . :   1
    Symbol    Art       Bibliothek  Objekt      Gebunden    Kennung
@@ -852,7 +852,7 @@ CPC5D07: Programm TESTSQLERR in Bibliothek PROUZAT1 erstellt.
  Aktivierungsgruppe . . . . . . . . . . . . . . :   PROUZAGRP
                                 * * * * *   E N D E  D E R  K U R Z Ü B E R S I C H T   * * * * *
                                                 Programm erstellen                                                     Seite     4
-5770SS1 V7R5M0  220415                                                    PROUZAT1/TESTSQLERR    SPGV74    10/10/23  06:21:08 CEST
+5770SS1 V7R5M0  220415                                                    PROUZAT1/TESTSQLERR    SPGV74    10/10/23  06:29:19 CEST
                                                            Bindestatistik
  CPU-Zeit für Symbolsammlung  . . . . . . . . . . . . . . . . :                .000
  CPU-Zeit für Symbolauflösung . . . . . . . . . . . . . . . . :                .000
@@ -861,7 +861,7 @@ CPC5D07: Programm TESTSQLERR in Bibliothek PROUZAT1 erstellt.
  CPU-Zeit für Erstellung der Liste  . . . . . . . . . . . . . :                .000
  CPU-Zeit für Erstellung des Programms/Serviceprogramms . . . :                .000
  Gesamte CPU-Zeit . . . . . . . . . . . . . . . . . . . . . . :                .003
- Gesamte abgelaufene Zeit . . . . . . . . . . . . . . . . . . :                .065
+ Gesamte abgelaufene Zeit . . . . . . . . . . . . . . . . . . :                .041
                                  * * * * *   E N D E  D E R  B I N D E S T A T I S T I K      * * * * *
 *CPC5D07 - Programm TESTSQLERR in Bibliothek PROUZAT1 erstellt.
               * * * * *   E N D E  D E R  L I S T E  Z U R  E R S T E L L U N G  D E S  P R O G R A M M S   * * * * *

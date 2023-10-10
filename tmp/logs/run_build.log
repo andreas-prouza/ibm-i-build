@@ -1,7 +1,7 @@
-#DEBUG-Remote 2023-10-10 06:20:53.409: cl -v "dspjob"
+#DEBUG-Remote 2023-10-10 06:29:08.465: cl -v "dspjob"
 Command is > dspjob <
- 5770SS1 V7R5M0 220415                 Job anzeigen                                             10/10/23  6:20:53     Seite      1
- Job . . . :   QP0ZSPWP     Benutzer . :   QSECOFR       Nummer . . . . :   760653
+ 5770SS1 V7R5M0 220415                 Job anzeigen                                             10/10/23  6:29:08     Seite      1
+ Job . . . :   QP0ZSPWP     Benutzer . :   QSECOFR       Nummer . . . . :   760899
                                Jobstatusattribute
    Jobstatus  . . . . . . . . . . . . . . . . . :   AKTIV
    Aktuelles Benutzerprofil . . . . . . . . . . :   PROUZAT1
@@ -9,23 +9,23 @@ Command is > dspjob <
      Definiert von  . . . . . . . . . . . . . . :     *SYSTEM
    Im System eingegangen:
      Datum  . . . . . . . . . . . . . . . . . . :   10/10/23
-     Zeit . . . . . . . . . . . . . . . . . . . :   06:20:53
+     Zeit . . . . . . . . . . . . . . . . . . . :   06:29:08
    Gestartet:
      Datum  . . . . . . . . . . . . . . . . . . :   10/10/23
-     Zeit . . . . . . . . . . . . . . . . . . . :   06:20:53
+     Zeit . . . . . . . . . . . . . . . . . . . :   06:29:08
    Subsystem  . . . . . . . . . . . . . . . . . :   QUSRWRK
      Subsystempool-ID . . . . . . . . . . . . . :
    Übergeben durch
      Jobname  . . . . . . . . . . . . . . . . . :   QP0ZSPWP
      Benutzer . . . . . . . . . . . . . . . . . :   QSECOFR
-     Nummer . . . . . . . . . . . . . . . . . . :   760651
+     Nummer . . . . . . . . . . . . . . . . . . :   760897
    Jobart . . . . . . . . . . . . . . . . . . . :   BCI
    Sonderumgebung . . . . . . . . . . . . . . . :   *NONE
    Rückkehrcode des Programms . . . . . . . . . :   0
    Kontrollierte Beendigung angefordert . . . . :   NEIN
    System . . . . . . . . . . . . . . . . . . . :   SPGV74
- 5770SS1 V7R5M0 220415                 Job anzeigen                                             10/10/23  6:20:53     Seite      2
- Job . . . :   QP0ZSPWP     Benutzer . :   QSECOFR       Nummer . . . . :   760653
+ 5770SS1 V7R5M0 220415                 Job anzeigen                                             10/10/23  6:29:08     Seite      2
+ Job . . . :   QP0ZSPWP     Benutzer . :   QSECOFR       Nummer . . . . :   760899
                             Jobdefinitionsattribute
    Jobbeschreibung  . . . . . . . . . . . . . . :   JOBD         QDFTSVR
      Bibliothek . . . . . . . . . . . . . . . . :                  QGPL
@@ -51,7 +51,7 @@ Command is > dspjob <
    Zeittrennzeichen . . . . . . . . . . . . . . :   TIMSEP       :
    Jobzeit:                                         DATETIME
      Aktuelles Datum  . . . . . . . . . . . . . :                10/10/2023
-     Aktuelle Uhrzeit . . . . . . . . . . . . . :                06:20:53
+     Aktuelle Uhrzeit . . . . . . . . . . . . . :                06:29:08
    Wochentag  . . . . . . . . . . . . . . . . . :   DAYOFWEEK    *TUE
    Zeitzone . . . . . . . . . . . . . . . . . . :   TIMZON       QP0100CET2
      Abweichung . . . . . . . . . . . . . . . . :   TIMOFFSET      +02:00
@@ -83,8 +83,8 @@ Command is > dspjob <
    Aktion für Spool-Datei . . . . . . . . . . . :   SPLFACN      *KEEP
    Workloadgruppe . . . . . . . . . . . . . . . :   WLCGRP       *NONE
    Prozessorressourcenpriorität . . . . . . . . :   PRCRSCPTY    *SYSCTL
- 5770SS1 V7R5M0 220415                 Job anzeigen                                             10/10/23  6:20:53     Seite      3
- Job . . . :   QP0ZSPWP     Benutzer . :   QSECOFR       Nummer . . . . :   760653
+ 5770SS1 V7R5M0 220415                 Job anzeigen                                             10/10/23  6:29:08     Seite      3
+ Job . . . :   QP0ZSPWP     Benutzer . :   QSECOFR       Nummer . . . . :   760899
                                 Jobablaufattribute
    Ausführungspriorität  . . . . . . . . . . . . . . . . :   RUNPTY       50
    Zeitscheibe in Millisekunden  . . . . . . . . . . . . :   TIMESLICE    2000
@@ -101,14 +101,14 @@ Command is > dspjob <
      Gruppe  . . . . . . . . . . . . . . . . . . . . . . :                *NOGROUP
      Grad  . . . . . . . . . . . . . . . . . . . . . . . :                *NORMAL
    Gruppe mit Ressourcenaffinität  . . . . . . . . . . . :   RSCAFNGRP    *NO
- 5770SS1  V7R5M0   220415              Job anzeigen                                             10/10/23  6:20:53     Seite      4
- Job . . . :   QP0ZSPWP    Benutzer . :   QSECOFR    Nummer . . . . :   760653
+ 5770SS1  V7R5M0   220415              Job anzeigen                                             10/10/23  6:29:08     Seite      4
+ Job . . . :   QP0ZSPWP    Benutzer . :   QSECOFR    Nummer . . . . :   760899
                                         Spool-Ausgabedateien
             Einheit od                   Ges.- Akt.                                          Dat.
  Datei      Warteschl. Ben.daten  Status Seite Seite Kopien Form.art   Pty Datum    Uhrzeit  Nr.    Warteschl. Bibliothek
      Keine SPOOL-Ausgabedateien.
                                        Jobaufrufstapel
- Thread  . :   000007DC
+ Thread  . :   000007E5
                                                                                                     Modul oder             Ctl
  Typ  Programm                Anweisungs-IDs           Instruktion      Aktivierungsgruppe          erweiterter Typ        Bdy
       QP0ZPCP2   QSYS                                                   *DFTACTGRP 0000000000000001 QP0ZPCP2   QBUILDSS1    J
@@ -143,8 +143,8 @@ Prozedur:           execute_command_internal
   P   bash                                             5341    00000E8C                             *PASE_64
 Prozedur:           execute_simple_command
         Lademodul:  /bin/bash
- 5770SS1 V7R5M0 220415                 Job anzeigen                                             10/10/23  6:20:53     Seite      5
- Job . . . :   QP0ZSPWP     Benutzer . :   QSECOFR       Nummer . . . . :   760653
+ 5770SS1 V7R5M0 220415                 Job anzeigen                                             10/10/23  6:29:08     Seite      5
+ Job . . . :   QP0ZSPWP     Benutzer . :   QSECOFR       Nummer . . . . :   760899
   P   bash                                             4828    000003C4                             *PASE_64
 Prozedur:           execute_builtin.isra.1
         Lademodul:  /bin/bash
@@ -182,14 +182,14 @@ Prozedur:           __Qp2RunCL
   Datei. . . . :   Q04079N018     Bibliothek  . . . : QSPL           Art. . . . . :   PHY            ASP-Einheit    :   *SYSBAS
                 Sperre
  Teildatei      Art             Sperre          Status                          Bereich         Thread
-  Q920813264     MBR             *SHRRD          HELD                            *JOB
+  Q390089136     MBR             *SHRRD          HELD                            *JOB
                  DATEN           *SHRUPD         HELD                            *JOB
                         Jobdatensatzsperren
  Satz-
  Datei      Bibliothek   Teildatei              nummer    Status
    (Job hat keine Datensatzsperren)
- 5770SS1 V7R5M0 220415                 Job anzeigen                                             10/10/23  6:20:53     Seite      6
- Job . . . :   QP0ZSPWP     Benutzer . :   QSECOFR       Nummer . . . . :   760653
+ 5770SS1 V7R5M0 220415                 Job anzeigen                                             10/10/23  6:29:08     Seite      6
+ Job . . . :   QP0ZSPWP     Benutzer . :   QSECOFR       Nummer . . . . :   760899
                               Jobbibliotheksliste
                           ASP
    Bibliothek  Typ        Einheit     Text
@@ -224,15 +224,15 @@ Prozedur:           __Qp2RunCL
  Mutex
  Status           Mutex
    (Job hat keine Mutexes)
- 5770SS1 V7R5M0 220415                 Job anzeigen                                             10/10/23  6:20:53     Seite      7
- Job . . . :   QP0ZSPWP     Benutzer . :   QSECOFR       Nummer . . . . :   760653
+ 5770SS1 V7R5M0 220415                 Job anzeigen                                             10/10/23  6:29:08     Seite      7
+ Job . . . :   QP0ZSPWP     Benutzer . :   QSECOFR       Nummer . . . . :   760899
                         Threads
                                     Gesamt       E/A-       Ausführungs-
 Thread          Name        Status  CPU          E/A        Priorität
-000007DC                    RUN            .024        645       50
-000007DF                    DEQA                                 50
-000007DE                    DEQA                                 50
-000007DD                    DEQA                         1       50
+000007E5                    RUN            .024        620       50
+000007E8                    DEQA                                 50
+000007E7                    DEQA                                 50
+000007E6                    DEQA                                 50
                         MLB-Attribute
 Archiv-      Ressourcen-           Wartezeit vor         Wartezeit für Einlegen
 einheit      zuordnungspriorität        Wartezeit             Wartezeit
@@ -265,89 +265,69 @@ TAPMLB01             50                      5                     5
  QIBM_IFS_OPEN_MAX                       '66000'                                                                              37
  LANG                                    '/QSYS.LIB/EN_US.LOCALE                            '                                 37
                           * * * * *  E N D E  D E R  L I S T E  * * * * *
-#DEBUG-Remote 2023-10-10 06:20:53.876: rm -rf ./logs/**/*
-#DEBUG-Remote 2023-10-10 06:20:54.056: mkdir -p ./logs/prouzalib
-#DEBUG-Remote 2023-10-10 06:20:54.231: mkdir -p ./logs/prouzalib2
-#DEBUG-Remote 2023-10-10 06:20:54.399: mkdir -p ./build/prouzalib
-#DEBUG-Remote 2023-10-10 06:20:54.555: mkdir -p ./build/prouzalib2
-#DEBUG-Remote 2023-10-10 06:20:54.720: rm -rf ./tmp
-#DEBUG-Remote 2023-10-10 06:20:54.893: mkdir -p ./tmp
+#DEBUG-Remote 2023-10-10 06:29:08.887: rm -rf ./logs/**/*
+#DEBUG-Remote 2023-10-10 06:29:09.038: mkdir -p ./logs/prouzalib
+#DEBUG-Remote 2023-10-10 06:29:09.209: mkdir -p ./logs/prouzalib2
+#DEBUG-Remote 2023-10-10 06:29:09.370: mkdir -p ./build/prouzalib
+#DEBUG-Remote 2023-10-10 06:29:09.537: mkdir -p ./build/prouzalib2
+#DEBUG-Remote 2023-10-10 06:29:09.693: rm -rf ./tmp
+#DEBUG-Remote 2023-10-10 06:29:09.865: mkdir -p ./tmp
 CPFB414: Attribute wurden fÃ¼r 1 Objekte geÃ¤ndert. 0 Objekte wurden nicht geÃ¤ndert.
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:20:55.886: [ -s './logs/prouzalib/logger.sqlrpgle.srvpgm.error.log' ]
+#DEBUG-Remote 2023-10-10 06:29:10.713: [ -s './logs/prouzalib/errhdlsql.sqlrpgle.srvpgm.error.log' ]
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:20:56.398: [ -s './logs/prouzalib/logger.sqlrpgle.srvpgm.error.log' ]
-#DEBUG-Remote 2023-10-10 06:20:56.484: touch './build/prouzalib/logger.sqlrpgle.srvpgm'
-#DEBUG-Remote 2023-10-10 06:20:56.625: date > './build/prouzalib/logger.sqlrpgle.srvpgm'
-#DEBUG-Remote 2023-10-10 06:20:56.794: echo 'prouzalib/logger.sqlrpgle.srvpgm|'`date` >> ./tmp/compiled.txt
+#DEBUG-Remote 2023-10-10 06:29:11.166: [ -s './logs/prouzalib/errhdlsql.sqlrpgle.srvpgm.error.log' ]
+#DEBUG-Remote 2023-10-10 06:29:11.259: touch './build/prouzalib/errhdlsql.sqlrpgle.srvpgm'
+#DEBUG-Remote 2023-10-10 06:29:11.394: date > './build/prouzalib/errhdlsql.sqlrpgle.srvpgm'
+#DEBUG-Remote 2023-10-10 06:29:11.545: echo 'prouzalib/errhdlsql.sqlrpgle.srvpgm|'`date` >> ./tmp/compiled.txt
 CPFB414: Attribute wurden fÃ¼r 1 Objekte geÃ¤ndert. 0 Objekte wurden nicht geÃ¤ndert.
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:20:57.607: [ -s './logs/prouzalib/errhdlsql.sqlrpgle.srvpgm.error.log' ]
+#DEBUG-Remote 2023-10-10 06:29:12.379: [ -s './logs/prouzalib/cpysrc2ifs.sqlrpgle.pgm.error.log' ]
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:20:58.093: [ -s './logs/prouzalib/errhdlsql.sqlrpgle.srvpgm.error.log' ]
-#DEBUG-Remote 2023-10-10 06:20:58.178: touch './build/prouzalib/errhdlsql.sqlrpgle.srvpgm'
-#DEBUG-Remote 2023-10-10 06:20:58.314: date > './build/prouzalib/errhdlsql.sqlrpgle.srvpgm'
-#DEBUG-Remote 2023-10-10 06:20:58.470: echo 'prouzalib/errhdlsql.sqlrpgle.srvpgm|'`date` >> ./tmp/compiled.txt
+#DEBUG-Remote 2023-10-10 06:29:12.709: [ -s './logs/prouzalib/cpysrc2ifs.sqlrpgle.pgm.error.log' ]
+#DEBUG-Remote 2023-10-10 06:29:12.791: touch './build/prouzalib/cpysrc2ifs.sqlrpgle.pgm'
+#DEBUG-Remote 2023-10-10 06:29:12.915: date > './build/prouzalib/cpysrc2ifs.sqlrpgle.pgm'
+#DEBUG-Remote 2023-10-10 06:29:13.070: echo 'prouzalib/cpysrc2ifs.sqlrpgle.pgm|'`date` >> ./tmp/compiled.txt
 CPFB414: Attribute wurden fÃ¼r 1 Objekte geÃ¤ndert. 0 Objekte wurden nicht geÃ¤ndert.
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:20:59.334: [ -s './logs/prouzalib/cpysrc2ifs.sqlrpgle.pgm.error.log' ]
+#DEBUG-Remote 2023-10-10 06:29:14.073: [ -s './logs/prouzalib/date.sqlrpgle.srvpgm.error.log' ]
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:20:59.733: [ -s './logs/prouzalib/cpysrc2ifs.sqlrpgle.pgm.error.log' ]
-#DEBUG-Remote 2023-10-10 06:20:59.821: touch './build/prouzalib/cpysrc2ifs.sqlrpgle.pgm'
-#DEBUG-Remote 2023-10-10 06:20:59.962: date > './build/prouzalib/cpysrc2ifs.sqlrpgle.pgm'
-#DEBUG-Remote 2023-10-10 06:21:00.119: echo 'prouzalib/cpysrc2ifs.sqlrpgle.pgm|'`date` >> ./tmp/compiled.txt
+CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
+CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
+#DEBUG-Remote 2023-10-10 06:29:14.587: [ -s './logs/prouzalib/date.sqlrpgle.srvpgm.error.log' ]
+#DEBUG-Remote 2023-10-10 06:29:14.673: touch './build/prouzalib/date.sqlrpgle.srvpgm'
+#DEBUG-Remote 2023-10-10 06:29:14.819: date > './build/prouzalib/date.sqlrpgle.srvpgm'
+#DEBUG-Remote 2023-10-10 06:29:14.977: echo 'prouzalib/date.sqlrpgle.srvpgm|'`date` >> ./tmp/compiled.txt
+#DEBUG-Remote 2023-10-10 06:29:15.142: touch './build/prouzalib/prouzadir.bnddir'
+#DEBUG-Remote 2023-10-10 06:29:15.300: date > './build/prouzalib/prouzadir.bnddir'
+#DEBUG-Remote 2023-10-10 06:29:15.468: echo 'prouzalib/prouzadir.bnddir|'`date` >> ./tmp/compiled.txt
 CPFB414: Attribute wurden fÃ¼r 1 Objekte geÃ¤ndert. 0 Objekte wurden nicht geÃ¤ndert.
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:21:01.169: [ -s './logs/prouzalib/date.sqlrpgle.srvpgm.error.log' ]
+#DEBUG-Remote 2023-10-10 06:29:16.096: [ -s './logs/prouzalib/testlog.rpgle.pgm.error.log' ]
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:21:01.784: [ -s './logs/prouzalib/date.sqlrpgle.srvpgm.error.log' ]
-#DEBUG-Remote 2023-10-10 06:21:01.875: touch './build/prouzalib/date.sqlrpgle.srvpgm'
-#DEBUG-Remote 2023-10-10 06:21:02.033: date > './build/prouzalib/date.sqlrpgle.srvpgm'
-#DEBUG-Remote 2023-10-10 06:21:02.187: echo 'prouzalib/date.sqlrpgle.srvpgm|'`date` >> ./tmp/compiled.txt
+#DEBUG-Remote 2023-10-10 06:29:16.408: [ -s './logs/prouzalib/testlog.rpgle.pgm.error.log' ]
+#DEBUG-Remote 2023-10-10 06:29:16.493: touch './build/prouzalib/testlog.rpgle.pgm'
+#DEBUG-Remote 2023-10-10 06:29:16.648: date > './build/prouzalib/testlog.rpgle.pgm'
+#DEBUG-Remote 2023-10-10 06:29:16.802: echo 'prouzalib/testlog.rpgle.pgm|'`date` >> ./tmp/compiled.txt
 CPFB414: Attribute wurden fÃ¼r 1 Objekte geÃ¤ndert. 0 Objekte wurden nicht geÃ¤ndert.
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:21:02.772: [ -s './logs/prouzalib/testmod.rpgle.srvpgm.error.log' ]
+#DEBUG-Remote 2023-10-10 06:29:17.591: [ -s './logs/prouzalib/testlog2.sqlrpgle.pgm.error.log' ]
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:21:03.229: [ -s './logs/prouzalib/testmod.rpgle.srvpgm.error.log' ]
-#DEBUG-Remote 2023-10-10 06:21:03.330: touch './build/prouzalib/testmod.rpgle.srvpgm'
-#DEBUG-Remote 2023-10-10 06:21:03.489: date > './build/prouzalib/testmod.rpgle.srvpgm'
-#DEBUG-Remote 2023-10-10 06:21:03.660: echo 'prouzalib/testmod.rpgle.srvpgm|'`date` >> ./tmp/compiled.txt
-#DEBUG-Remote 2023-10-10 06:21:03.814: touch './build/prouzalib/prouzadir.bnddir'
-#DEBUG-Remote 2023-10-10 06:21:03.967: date > './build/prouzalib/prouzadir.bnddir'
-#DEBUG-Remote 2023-10-10 06:21:04.134: echo 'prouzalib/prouzadir.bnddir|'`date` >> ./tmp/compiled.txt
+#DEBUG-Remote 2023-10-10 06:29:17.871: [ -s './logs/prouzalib/testlog2.sqlrpgle.pgm.error.log' ]
+#DEBUG-Remote 2023-10-10 06:29:17.949: touch './build/prouzalib/testlog2.sqlrpgle.pgm'
+#DEBUG-Remote 2023-10-10 06:29:18.071: date > './build/prouzalib/testlog2.sqlrpgle.pgm'
+#DEBUG-Remote 2023-10-10 06:29:18.218: echo 'prouzalib/testlog2.sqlrpgle.pgm|'`date` >> ./tmp/compiled.txt
 CPFB414: Attribute wurden fÃ¼r 1 Objekte geÃ¤ndert. 0 Objekte wurden nicht geÃ¤ndert.
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:21:04.727: [ -s './logs/prouzalib/testlog.rpgle.pgm.error.log' ]
+#DEBUG-Remote 2023-10-10 06:29:19.018: [ -s './logs/prouzalib/testsqlerr.sqlrpgle.pgm.error.log' ]
 CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:21:05.029: [ -s './logs/prouzalib/testlog.rpgle.pgm.error.log' ]
-#DEBUG-Remote 2023-10-10 06:21:05.120: touch './build/prouzalib/testlog.rpgle.pgm'
-#DEBUG-Remote 2023-10-10 06:21:05.273: date > './build/prouzalib/testlog.rpgle.pgm'
-#DEBUG-Remote 2023-10-10 06:21:05.424: echo 'prouzalib/testlog.rpgle.pgm|'`date` >> ./tmp/compiled.txt
-CPFB414: Attribute wurden fÃ¼r 1 Objekte geÃ¤ndert. 0 Objekte wurden nicht geÃ¤ndert.
-CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:21:06.214: [ -s './logs/prouzalib/testlog2.sqlrpgle.pgm.error.log' ]
-CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:21:06.508: [ -s './logs/prouzalib/testlog2.sqlrpgle.pgm.error.log' ]
-#DEBUG-Remote 2023-10-10 06:21:06.592: touch './build/prouzalib/testlog2.sqlrpgle.pgm'
-#DEBUG-Remote 2023-10-10 06:21:06.720: date > './build/prouzalib/testlog2.sqlrpgle.pgm'
-#DEBUG-Remote 2023-10-10 06:21:06.887: echo 'prouzalib/testlog2.sqlrpgle.pgm|'`date` >> ./tmp/compiled.txt
-CPFB414: Attribute wurden fÃ¼r 1 Objekte geÃ¤ndert. 0 Objekte wurden nicht geÃ¤ndert.
-CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:21:08.123: [ -s './logs/prouzalib/testsqlerr.sqlrpgle.pgm.error.log' ]
-CPC2196: Bibliothek PROUZAT1 der Bibliotheksliste hinzugefügt.
-#DEBUG-Remote 2023-10-10 06:21:08.553: [ -s './logs/prouzalib/testsqlerr.sqlrpgle.pgm.error.log' ]
-#DEBUG-Remote 2023-10-10 06:21:08.643: touch './build/prouzalib/testsqlerr.sqlrpgle.pgm'
-#DEBUG-Remote 2023-10-10 06:21:08.779: date > './build/prouzalib/testsqlerr.sqlrpgle.pgm'
-#DEBUG-Remote 2023-10-10 06:21:08.955: echo 'prouzalib/testsqlerr.sqlrpgle.pgm|'`date` >> ./tmp/compiled.txt
-#DEBUG-Remote 2023-10-10 06:21:09.137: cat ./logs/*.error.log 2> /dev/null
-#DEBUG-Remote 2023-10-10 06:21:09.295: true
-#DEBUG-Remote 2023-10-10 06:21:09.458: echo -e "\033[102;97mCompile complete\033[0m"
+#DEBUG-Remote 2023-10-10 06:29:19.300: [ -s './logs/prouzalib/testsqlerr.sqlrpgle.pgm.error.log' ]
+#DEBUG-Remote 2023-10-10 06:29:19.381: touch './build/prouzalib/testsqlerr.sqlrpgle.pgm'
+#DEBUG-Remote 2023-10-10 06:29:19.502: date > './build/prouzalib/testsqlerr.sqlrpgle.pgm'
+#DEBUG-Remote 2023-10-10 06:29:19.656: echo 'prouzalib/testsqlerr.sqlrpgle.pgm|'`date` >> ./tmp/compiled.txt
+#DEBUG-Remote 2023-10-10 06:29:19.798: cat ./logs/*.error.log 2> /dev/null
+#DEBUG-Remote 2023-10-10 06:29:19.941: true
+#DEBUG-Remote 2023-10-10 06:29:20.088: echo -e "\033[102;97mCompile complete\033[0m"
 [102;97mCompile complete[0m

@@ -3,11 +3,9 @@ receiving incremental file list
 build/prouzalib/cpysrc2ifs.sqlrpgle.pgm
 build/prouzalib/date.sqlrpgle.srvpgm
 build/prouzalib/errhdlsql.sqlrpgle.srvpgm
-build/prouzalib/logger.sqlrpgle.srvpgm
 build/prouzalib/prouzadir.bnddir
 build/prouzalib/testlog.rpgle.pgm
 build/prouzalib/testlog2.sqlrpgle.pgm
-build/prouzalib/testmod.rpgle.srvpgm
 build/prouzalib/testsqlerr.sqlrpgle.pgm
 logs/
 logs/prouzalib/
@@ -20,22 +18,16 @@ logs/prouzalib/date.sqlrpgle.srvpgm.splf.log
 logs/prouzalib/errhdlsql.sqlrpgle.srvpgm.error.log
 logs/prouzalib/errhdlsql.sqlrpgle.srvpgm.joblog.log
 logs/prouzalib/errhdlsql.sqlrpgle.srvpgm.splf.log
-logs/prouzalib/logger.sqlrpgle.srvpgm.error.log
-logs/prouzalib/logger.sqlrpgle.srvpgm.joblog.log
-logs/prouzalib/logger.sqlrpgle.srvpgm.splf.log
 logs/prouzalib/testlog.rpgle.pgm.error.log
 logs/prouzalib/testlog.rpgle.pgm.joblog.log
 logs/prouzalib/testlog.rpgle.pgm.splf.log
 logs/prouzalib/testlog2.sqlrpgle.pgm.error.log
 logs/prouzalib/testlog2.sqlrpgle.pgm.joblog.log
 logs/prouzalib/testlog2.sqlrpgle.pgm.splf.log
-logs/prouzalib/testmod.rpgle.srvpgm.error.log
-logs/prouzalib/testmod.rpgle.srvpgm.joblog.log
-logs/prouzalib/testmod.rpgle.srvpgm.splf.log
 logs/prouzalib/testsqlerr.sqlrpgle.pgm.error.log
 logs/prouzalib/testsqlerr.sqlrpgle.pgm.joblog.log
 logs/prouzalib/testsqlerr.sqlrpgle.pgm.splf.log
 logs/prouzalib2/
 
-sent 767 bytes  received 58,72K bytes  39,66K bytes/sec
-total size is 1,16M  speedup is 19,58
+sent 603 bytes  received 44,20K bytes  29,87K bytes/sec
+total size is 853,41K  speedup is 19,05
