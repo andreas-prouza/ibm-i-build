@@ -1,8 +1,8 @@
 Command is > CRTSQLRPGI OBJ(PROUZAT1/logger) SRCSTMF('./prouzalib//qrpglesrc/logger.sqlrpgle') OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS(*CURRENT) DBGVIEW(*SOURCE) REPLACE(*YES) COMPILEOPT('TGTCCSID(*JOB) INCDIR(''./prouzalib/'')') <
 CPD000D: Befehl QSYS/CRTSQLRPGI nicht sicher für Job mit mehreren Threads.
 CPD000D: Befehl QSYS/CRTRPGMOD nicht sicher für Job mit mehreren Threads.
-RNS9305: Modul LOGGER in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 06/10/23 um 10:52:10.
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      1
+RNS9305: Modul LOGGER in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 10/10/23 um 06:20:55.
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      1
   Befehl . . . . . . . . . . . . . :   CRTRPGMOD
     Ausgegeben von . . . . . . . . :     PROUZAT1
   Modul  . . . . . . . . . . . . . :   LOGGER
@@ -12,7 +12,7 @@ RNS9305: Modul LOGGER in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe 
     CCSID  . . . . . . . . . . . . :     1208
   Ziel-CCSID . . . . . . . . . . . :   *JOB (1141)
   Text 'Beschreibung'  . . . . . . :
-  Letzte Änderung  . . . . . . . . :   30/09/23  16:32:52
+  Letzte Änderung  . . . . . . . . :   22/09/23  09:56:26
   Generierungsbewertungsstufe  . . :   10
   Umwandlungsprogrammauswahlmögl.  :   *XREF      *GEN       *NOSECLVL  *SHOWCPY
                                        *EXPDDS    *EXT       *NOSHOWSKP *NOSRCSTMT
@@ -44,7 +44,7 @@ RNS9305: Modul LOGGER in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe 
     Bibliothek . . . . . . . . . . :     QTEMP
   Ausgabequellenteildatei  . . . . :   LOGGER
   REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      2
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      2
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
 Q u e l l e n l i s t e
@@ -61,7 +61,7 @@ Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+...
         *--------------------------------------------------------------------------------------------*
         * RPG-Teildateiname  . . . . :  std.rpgle                                                    *                     1
         * Externer Name  . . . . . . :  ./prouzalib/qcpysrc/std.rpgle                                *                     1
-        * Letzte Änderung  . . . . . :  30/09/23  16:32:49                                           *                     1
+        * Letzte Änderung  . . . . . :  27/07/23  17:54:11                                           *                     1
         *--------------------------------------------------------------------------------------------*
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
@@ -103,7 +103,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
     44+  curUser char(10) pos(358);                                                                                        1000036
     45+END-DS;                                                                                                             1000037
     46+                                                                                                                    1000038
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      3
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      3
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
     47+                                                                                                                    1000039
@@ -115,7 +115,7 @@ Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+...
         *--------------------------------------------------------------------------------------------*
         * RPG-Teildateiname  . . . . :  logger.rp+                                                   *                     2
         * Externer Name  . . . . . . :  ./prouzalib/qcpysrc/logger.rpgle                             *                     2
-        * Letzte Änderung  . . . . . :  30/09/23  16:32:49                                           *                     2
+        * Letzte Änderung  . . . . . :  27/07/23  17:54:11                                           *                     2
         *--------------------------------------------------------------------------------------------*
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
@@ -164,7 +164,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
     93+    p_text                        like(logger_ds_tmp.text) const;                                                   2000043
     94+    p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                2000044
     95+    p_program                     like(logger_ds_tmp.program) const options(*nopass);                               2000045
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      4
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      4
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
     96+    p_print2Joblog                ind const options(*nopass);                                                       2000046
@@ -229,7 +229,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    155   dcl-pi *n;                                                                                                         000036
    156     p_loglevel                    like(logger_ds_tmp.loglevel) const;                                                000037
    157     p_text                        like(logger_ds_tmp.text) const;                                                    000038
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      5
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      5
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    158     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000039
@@ -294,7 +294,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    217     logging(C_LOG_INFO : p_text);                                                                                    000098
    218   endif;                                                                                                             000099
    219                                                                                                                      000100
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      6
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      6
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    220 END-PROC;                                                                                                            000101
@@ -359,7 +359,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    279     logging(C_log_WARNING : p_text : p_extref : p_program : p_print2Joblog);                                         000160
    280   elseif (%parms >= %Parmnum(p_program));                                                                            000161
    281     logging(C_log_WARNING : p_text : p_extref: p_program);                                                           000162
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      7
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      7
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    282   elseif (%parms >= %Parmnum(p_extref));                                                                             000163
@@ -424,7 +424,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    341   end-ds;                                                                                                            000222
    342                                                                                                                      000223
    343   l_msgid = 'CPF9897';                                                                                               000224
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      8
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      8
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    344   l_msgf_ds.file = 'QCPFMSG';                                                                                        000225
@@ -458,19 +458,19 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
 / C O P Y - T e i l d a t e i e n
 Zeile  Src  RPG-Name   <-------- Externer Name -------> CCSID  <- Letzte Änd. ->
 Nummer ID              Bibliothek Datei      Teildatei         Datum    Uhrzeit
-     8    1 std.rpgle  ./prouzalib/qcpysrc/std.rpgle     1208  30/09/23 16:32:49
-    50    2 logger.rp+ ./prouzalib/qcpysrc/logger.rpgle  1208  30/09/23 16:32:49
+     8    1 std.rpgle  ./prouzalib/qcpysrc/std.rpgle     1208  27/07/23 17:54:11
+    50    2 logger.rp+ ./prouzalib/qcpysrc/logger.rpgle  1208  27/07/23 17:54:11
 * * * * *   E N D E   D E R   / C O P Y - T E I L D A T E I E N   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      9
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      9
 Zeil.- <---------------------- Datensätze ---------------------------------------------------------------->      Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10      Datum  ID  nummer
 U m w a n d l u n g s z e i t d a t e n
 * * * * *   E N D E   D E R   U M W A N D L U N G S Z E I T D A T E N   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     10
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     10
 N a c h r i c h t e n z u s a m m e n f a s s u n g
  Msg-ID  Sv Nummer Nachrichtentext
 * * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     11
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     11
 E n d z u s a m m e n f a s s u n g
   Nachrichtenübersicht:
     Information (00)  . . . . . . . :        0
@@ -487,7 +487,7 @@ E n d z u s a m m e n f a s s u n g
 * * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
 Diagnoseprüfung der Quelle ist beendet. Höchste Bewertungsstufe ist 00.
 * * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      1
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      1
   Befehl . . . . . . . . . . . . . :   CRTRPGMOD
     Ausgegeben von . . . . . . . . :     PROUZAT1
   Modul  . . . . . . . . . . . . . :   LOGGER
@@ -497,7 +497,7 @@ Diagnoseprüfung der Quelle ist beendet. Höchste Bewertungsstufe ist 00.
     CCSID  . . . . . . . . . . . . :     1141
   Ziel-CCSID . . . . . . . . . . . :   *JOB (1141)
   Text 'Beschreibung'  . . . . . . :
-  Letzte Änderung  . . . . . . . . :   06/10/23  10:52:10
+  Letzte Änderung  . . . . . . . . :   10/10/23  06:20:55
   Generierungsbewertungsstufe  . . :   10
   Umwandlungsprogrammauswahlmögl.  :   *XREF      *GEN       *NOSECLVL  *SHOWCPY
                                        *EXPDDS    *EXT       *NOSHOWSKP *NOSRCSTMT
@@ -526,7 +526,7 @@ Diagnoseprüfung der Quelle ist beendet. Höchste Bewertungsstufe ist 00.
   Verzeichnis einschließen . . . . :   ./prouzalib/
   Vorprozessoroptionen . . . . . . :   *NONE
   REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      2
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      2
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
 Q u e l l e n l i s t e
@@ -587,7 +587,7 @@ Q u e l l e n l i s t e
     55          *N BINDEC(4);                                                          //SQL                                000055
     56        END-PR SQLCLSE_CALL;                                                     //SQL                                000056
     57        DCL-PR SQLCMIT_CALL EXTPGM(SQLCMIT);                                     //SQL                                000057
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      3
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      3
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
     58          CA LIKEDS(SQLCA);                                                      //SQL                                000058
@@ -648,7 +648,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    109   jobnumberalpha char(6) pos(264);                                                                                   000109
    110   curUser char(10) pos(358);                                                                                         000110
    111 END-DS;                                                                                                              000111
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      4
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      4
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    112                                                                                                                      000112
@@ -705,7 +705,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    151     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000140
    152     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000141
    153     p_print2Joblog                ind const options(*nopass);                                                        000142
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      5
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      5
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    154   END-PR;                                                                                                            000143
@@ -770,7 +770,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    213                                                                                                                      000202
    214 //--------------------------------------------------------------                                                     000203
    215 // Log data to logger table                                                                                          000204
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      6
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      6
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    216 //                                                                                                                   000205
@@ -825,7 +825,7 @@ Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+...
    259 D  SQL_00006              1      2B 0 INZ(128)                             length of header                          000248
    260 D  SQL_00007              3      4B 0 INZ(5)                               statement number                          000249
    261 D  SQL_00008              5      8U 0 INZ(0)                               invocation mark                           000250
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      7
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      7
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
 Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
    262 D  SQL_00009              9      9A   INZ('0') CCSID(*JOBRUNMIX)           data is okay                              000251
@@ -886,7 +886,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    315                                                                                                                      000304
    316 END-PROC;                                                                                                            000305
    317                                                                                                                      000306
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      8
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      8
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    318                                                                                                                      000307
@@ -941,7 +941,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    367     p_text                        like(logger_ds_tmp.text) const;                                                    000356
    368     p_extref                      like(logger_ds_tmp.extref) const options(*nopass);                                 000357
    369     p_program                     like(logger_ds_tmp.program) const options(*nopass);                                000358
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite      9
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite      9
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    370     p_print2Joblog                ind const options(*nopass);                                                        000359
@@ -996,7 +996,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    419   if (%parms >= %Parmnum(p_print2Joblog));                                                           B01             000408
    420     logging(C_log_ERROR : p_text : p_extref : p_program : p_print2Joblog);                            01             000409
    421   elseif (%parms >= %Parmnum(p_program));                                                            X01             000410
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     10
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     10
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    422     logging(C_log_ERROR : p_text : p_extref: p_program);                                              01             000411
@@ -1057,7 +1057,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    477                                                                                                                      000466
    478   if (%parms < %parmnum(p_log) Or p_log = *on);                                                      B01             000467
    479     log('Send_Program_Message (' + %trim(p_type) + '): ' +                                            01             000468
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     11
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     11
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    480          %trim(p_msg));                                                                               01             000469
@@ -1070,13 +1070,13 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    487                                                                                                                      000476
    488 END-PROC;                                                                                                            000477
 * * * * *   E N D E   D E R   Q U E L L E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     12
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     12
 Z u s ä t z l i c h e   D i a g n o s e n a c h r i c h t e n
  Msg-ID  Sv Nummer Folge   Nachrichtentext
 *RNF5409 00    313 000302  Der Prototypaufruf gibt einen Wert zurück, der verloren
                            geht, wenn CALLP verwendet wird.
 * * * * *   E N D E   D E R   Z U S Ä T Z L I C H E N   D I A G N O S E N A C H R I C H T E N   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     13
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     13
 Q u e r v e r w e i s l i s t e
       Datei- und Satzverweise:
          Datei             Einheit            Verweise (D=Definiert)
@@ -1136,7 +1136,7 @@ Q u e r v e r w e i s l i s t e
                            VARYING(2)            166     173     237     246
                            CCSID(JOBRUNMIX)      324     346     369     392
                            ALWNULL               415
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     14
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     14
 *RNF7031   START           Z(32)                 138D
            TEXT            A(1000)               132D    143     150     157
                            VARYING(2)            164     171     235     241
@@ -1201,7 +1201,7 @@ Q u e r v e r w e i s l i s t e
 *RNF7031 SQLERM            A(70)                  17D
                            CCSID(JOBRUNMIX)
 *RNF7031 SQLERP            A(8)                   19D
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     15
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     15
                            CCSID(JOBRUNMIX)
          SQLERR            A(24)                  20D     21      22      23
                            CCSID(JOBRUNMIX)       24      25      26      27
@@ -1265,7 +1265,7 @@ Q u e r v e r w e i s l i s t e
                            CCSID(JOBRUNMIX)
          L_PROGRAM         A(200)                246D    278M    295M    305
                            VARYING(2)
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     16
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     16
                            CCSID(JOBRUNMIX)
          L_TEXT            A(1000)               241D    270M    302     313
                            VARYING(2)
@@ -1329,7 +1329,7 @@ Q u e r v e r w e i s l i s t e
                            VARYING(2)
                            CCSID(JOBRUNMIX)
          P_TEXT            A(1000)               322D    329     331     333
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     17
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     17
                            BASED(_QRNL_PST+)     335
                            VARYING(2)
                            CCSID(JOBRUNMIX)
@@ -1390,7 +1390,7 @@ Q u e r v e r w e i s l i s t e
          P_PRINT2JOBLOG    N(1)                  416D    419     420
                            BASED(_QRNL_PST+)
          P_PROGRAM         A(200)                415D    420     421     422
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     18
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     18
                            BASED(_QRNL_PST+)
                            VARYING(2)
                            CCSID(JOBRUNMIX)
@@ -1430,7 +1430,7 @@ Q u e r v e r w e i s l i s t e
       Bezugszahlen-/Anzeigerverweise:
          Bez./Anz.                            Verweise (D=Definiert M=Modifiz.)
 * * * * *   E N D E   D E R   Q U E R V E R W E I S L I S T E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     19
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     19
 E x t e r n e   V e r w e i s e
       Statisch gebundene Prozeduren:
          Prozedur                             Verweise
@@ -1443,7 +1443,7 @@ E x t e r n e   V e r w e i s e
          Feld              Attribute          Definiert
          Keine Verweise in der Quelle.
 * * * * *   E N D E   D E R   E X T E R N E N   V E R W E I S E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     20
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     20
 N a c h r i c h t e n z u s a m m e n f a s s u n g
  Msg-ID  Sv Nummer Nachrichtentext
 *RNF5409 00      1 Der Prototypaufruf gibt einen Wert zurück, der verloren geht,
@@ -1451,7 +1451,7 @@ N a c h r i c h t e n z u s a m m e n f a s s u n g
 *RNF7031 00     63 Kein Verweis auf den Namen oder die Bezugszahl/den Anzeiger
                    vorhanden.
 * * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     06/10/23 10:52:10       Seite     21
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/LOGGER          SPGV74     10/10/23 06:20:55       Seite     21
 E n d z u s a m m e n f a s s u n g
   Nachrichtenübersicht:
     Information (00)  . . . . . . . :       64
@@ -1466,7 +1466,7 @@ E n d z u s a m m e n f a s s u n g
     Datensätze  . . . . . . . . . . :        0
     Bemerkungen . . . . . . . . . . :      140
 * * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
-Modul LOGGER in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 06/10/23 um 10:52:10.
+Modul LOGGER in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 10/10/23 um 06:20:55.
 * * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
 Command is > RMVBNDDIRE BNDDIR(*LIBL/PROUZADIR) OBJ(*LIBL/logger) <
 CPD000D: Befehl *LIBL/RMVBNDDIRE nicht sicher für Job mit mehreren Threads.

@@ -1,7 +1,7 @@
 Command is > CRTRPGMOD MODULE(PROUZAT1/testmod) SRCSTMF('./prouzalib//qrpglesrc/testmod.rpgle') DBGVIEW(*SOURCE) REPLACE(*YES) TGTCCSID(*JOB) INCDIR('./prouzalib/') <
 CPD000D: Befehl QSYS/CRTRPGMOD nicht sicher für Job mit mehreren Threads.
-RNS9305: Modul TESTMOD in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 06/10/23 um 10:52:16.
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     06/10/23 10:52:16       Seite      1
+RNS9305: Modul TESTMOD in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 10/10/23 um 06:21:02.
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     10/10/23 06:21:02       Seite      1
   Befehl . . . . . . . . . . . . . :   CRTRPGMOD
     Ausgegeben von . . . . . . . . :     PROUZAT1
   Modul  . . . . . . . . . . . . . :   TESTMOD
@@ -11,7 +11,7 @@ RNS9305: Modul TESTMOD in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe
     CCSID  . . . . . . . . . . . . :     1208
   Ziel-CCSID . . . . . . . . . . . :   *JOB (1141)
   Text 'Beschreibung'  . . . . . . :
-  Letzte Änderung  . . . . . . . . :   30/09/23  16:32:49
+  Letzte Änderung  . . . . . . . . :   27/07/23  17:54:11
   Generierungsbewertungsstufe  . . :   10
   Umwandlungsprogrammauswahlmögl.  :   *XREF      *GEN       *NOSECLVL  *SHOWCPY
                                        *EXPDDS    *EXT       *NOSHOWSKP *NOSRCSTMT
@@ -40,7 +40,7 @@ RNS9305: Modul TESTMOD in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe
   Verzeichnis einschließen . . . . :   ./prouzalib/
   Vorprozessoroptionen . . . . . . :   *NONE
   REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     06/10/23 10:52:16       Seite      2
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     10/10/23 06:21:02       Seite      2
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
 Q u e l l e n l i s t e
@@ -54,7 +54,7 @@ Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+...
         *--------------------------------------------------------------------------------------------*
         * RPG-Teildateiname  . . . . :  testmod.r+                                                   *                     1
         * Externer Name  . . . . . . :  ./prouzalib/qcpysrc/testmod.rpgle                            *                     1
-        * Letzte Änderung  . . . . . :  30/09/23  16:32:49                                           *                     1
+        * Letzte Änderung  . . . . . :  27/07/23  17:54:11                                           *                     1
         *--------------------------------------------------------------------------------------------*
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
@@ -68,7 +68,7 @@ Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+...
         *--------------------------------------------------------------------------------------------*
         * RPG-Teildateiname  . . . . :  logger.rp+                                                   *                     2
         * Externer Name  . . . . . . :  ./prouzalib/qcpysrc/logger.rpgle                             *                     2
-        * Letzte Änderung  . . . . . :  30/09/23  16:32:49                                           *                     2
+        * Letzte Änderung  . . . . . :  27/07/23  17:54:11                                           *                     2
         *--------------------------------------------------------------------------------------------*
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
@@ -91,7 +91,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
 Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
     23=D ID                            20I 0                                                                               3000001
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     06/10/23 10:52:16       Seite      3
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     10/10/23 06:21:02       Seite      3
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
 Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
     24=D LOGLEVEL                      10A                                                                                 3000002
@@ -154,7 +154,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
     79+    ErrorDs            likeds(ErrorDS);                                                                             2000058
     80+  end-pr;                                                                                                           2000059
     81+                                                                                                                    2000060
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     06/10/23 10:52:16       Seite      4
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     10/10/23 06:21:02       Seite      4
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
     82+  dcl-pr Send_Program_Message;                                                                                      2000061
@@ -187,17 +187,17 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    109                                                                                                                      000016
    110                                                                                                                      000017
 * * * * *   E N D E   D E R   Q U E L L E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     06/10/23 10:52:16       Seite      5
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     10/10/23 06:21:02       Seite      5
 Z u s ä t z l i c h e   D i a g n o s e n a c h r i c h t e n
  Msg-ID  Sv Nummer Folge   Nachrichtentext
 * * * * *   E N D E   D E R   Z U S Ä T Z L I C H E N   D I A G N O S E N A C H R I C H T E N   * * * * *
 / C O P Y - T e i l d a t e i e n
 Zeile  Src  RPG-Name   <-------- Externer Name -------> CCSID  <- Letzte Änd. ->
 Nummer ID              Bibliothek Datei      Teildatei         Datum    Uhrzeit
-     5    1 testmod.r+ ./prouzalib/qcpysrc/testmod.rpg+  1208  30/09/23 16:32:49
-    10    2 logger.rp+ ./prouzalib/qcpysrc/logger.rpgle  1208  30/09/23 16:32:49
+     5    1 testmod.r+ ./prouzalib/qcpysrc/testmod.rpg+  1208  27/07/23 17:54:11
+    10    2 logger.rp+ ./prouzalib/qcpysrc/logger.rpgle  1208  27/07/23 17:54:11
 * * * * *   E N D E   D E R   / C O P Y - T E I L D A T E I E N   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     06/10/23 10:52:16       Seite      6
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     10/10/23 06:21:02       Seite      6
 Q u e r v e r w e i s l i s t e
       Datei- und Satzverweise:
          Datei             Einheit            Verweise (D=Definiert)
@@ -254,9 +254,9 @@ Q u e r v e r w e i s l i s t e
          Keine Verweise in der Quelle.
       Bezugszahlen-/Anzeigerverweise:
          Bez./Anz.                            Verweise (D=Definiert M=Modifiz.)
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     06/10/23 10:52:16       Seite      7
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     10/10/23 06:21:02       Seite      7
 * * * * *   E N D E   D E R   Q U E R V E R W E I S L I S T E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     06/10/23 10:52:16       Seite      8
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     10/10/23 06:21:02       Seite      8
 E x t e r n e   V e r w e i s e
       Statisch gebundene Prozeduren:
          Prozedur                             Verweise
@@ -273,13 +273,13 @@ E x t e r n e   V e r w e i s e
          Feld              Attribute          Definiert
          Keine Verweise in der Quelle.
 * * * * *   E N D E   D E R   E X T E R N E N   V E R W E I S E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     06/10/23 10:52:16       Seite      9
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     10/10/23 06:21:02       Seite      9
 N a c h r i c h t e n z u s a m m e n f a s s u n g
  Msg-ID  Sv Nummer Nachrichtentext
 *RNF7031 00     21 Kein Verweis auf den Namen oder die Bezugszahl/den Anzeiger
                    vorhanden.
 * * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     06/10/23 10:52:16       Seite     10
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/TESTMOD         SPGV74     10/10/23 06:21:02       Seite     10
 E n d z u s a m m e n f a s s u n g
   Nachrichtenübersicht:
     Information (00)  . . . . . . . :       21
@@ -294,7 +294,7 @@ E n d z u s a m m e n f a s s u n g
     Datensätze  . . . . . . . . . . :        0
     Bemerkungen . . . . . . . . . . :       25
 * * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
-Modul TESTMOD in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 06/10/23 um 10:52:16.
+Modul TESTMOD in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 10/10/23 um 06:21:02.
 * * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
 Command is > RMVBNDDIRE BNDDIR(*LIBL/PROUZADIR) OBJ(*LIBL/testmod) <
 CPD000D: Befehl *LIBL/RMVBNDDIRE nicht sicher für Job mit mehreren Threads.
