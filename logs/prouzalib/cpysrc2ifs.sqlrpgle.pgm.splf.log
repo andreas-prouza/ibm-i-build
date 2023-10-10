@@ -1,8 +1,8 @@
 Command is > CRTSQLRPGI OBJ(PROUZAT1/cpysrc2ifs) SRCSTMF('./prouzalib//qrpglesrc/cpysrc2ifs.sqlrpgle') OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS(*CURRENT) DBGVIEW(*SOURCE) REPLACE(*YES) COMPILEOPT('TGTCCSID(*JOB) INCDIR(''./prouzalib/'')') <
 CPD000D: Befehl QSYS/CRTSQLRPGI nicht sicher für Job mit mehreren Threads.
 CPD000D: Befehl QSYS/CRTRPGMOD nicht sicher für Job mit mehreren Threads.
-RNS9305: Modul CPYSRC2IFS in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 10/10/23 um 06:29:12.
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      1
+RNS9305: Modul CPYSRC2IFS in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 10/10/23 um 06:20:59.
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      1
   Befehl . . . . . . . . . . . . . :   CRTRPGMOD
     Ausgegeben von . . . . . . . . :     PROUZAT1
   Modul  . . . . . . . . . . . . . :   CPYSRC2IFS
@@ -44,7 +44,7 @@ RNS9305: Modul CPYSRC2IFS in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsst
     Bibliothek . . . . . . . . . . :     QTEMP
   Ausgabequellenteildatei  . . . . :   CPYSRC2IFS
   REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      2
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      2
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
 Q u e l l e n l i s t e
@@ -103,7 +103,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
     44                                                                                                                      000033
     45     dcl-s l_lib varchar(10);                                                                                         000034
     46     dcl-s l_file varchar(10);                                                                                        000035
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      3
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      3
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
     47     dcl-s l_file_tmp varchar(10);                                                                                    000036
@@ -168,7 +168,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    106     ENDDO;                                                                                                           000095
    107                                                                                                                      000096
    108     exec sql close c_cpy;                                                                                            000097
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      4
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      4
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    109                                                                                                                      000098
@@ -181,16 +181,16 @@ Zeile  Src  RPG-Name   <-------- Externer Name -------> CCSID  <- Letzte Änd. -
 Nummer ID              Bibliothek Datei      Teildatei         Datum    Uhrzeit
      5    1 errhdlsql+ ./prouzalib/qcpysrc/errhdlsql.r+  1208  27/07/23 17:54:11
 * * * * *   E N D E   D E R   / C O P Y - T E I L D A T E I E N   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      5
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      5
 Zeil.- <---------------------- Datensätze ---------------------------------------------------------------->      Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10      Datum  ID  nummer
 U m w a n d l u n g s z e i t d a t e n
 * * * * *   E N D E   D E R   U M W A N D L U N G S Z E I T D A T E N   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      6
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      6
 N a c h r i c h t e n z u s a m m e n f a s s u n g
  Msg-ID  Sv Nummer Nachrichtentext
 * * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      7
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      7
 E n d z u s a m m e n f a s s u n g
   Nachrichtenübersicht:
     Information (00)  . . . . . . . :        0
@@ -207,7 +207,7 @@ E n d z u s a m m e n f a s s u n g
 * * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
 Diagnoseprüfung der Quelle ist beendet. Höchste Bewertungsstufe ist 00.
 * * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      1
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      1
   Befehl . . . . . . . . . . . . . :   CRTRPGMOD
     Ausgegeben von . . . . . . . . :     PROUZAT1
   Modul  . . . . . . . . . . . . . :   CPYSRC2IFS
@@ -217,7 +217,7 @@ Diagnoseprüfung der Quelle ist beendet. Höchste Bewertungsstufe ist 00.
     CCSID  . . . . . . . . . . . . :     1141
   Ziel-CCSID . . . . . . . . . . . :   *JOB (1141)
   Text 'Beschreibung'  . . . . . . :
-  Letzte Änderung  . . . . . . . . :   10/10/23  06:29:11
+  Letzte Änderung  . . . . . . . . :   10/10/23  06:20:58
   Generierungsbewertungsstufe  . . :   10
   Umwandlungsprogrammauswahlmögl.  :   *XREF      *GEN       *NOSECLVL  *SHOWCPY
                                        *EXPDDS    *EXT       *NOSHOWSKP *NOSRCSTMT
@@ -246,7 +246,7 @@ Diagnoseprüfung der Quelle ist beendet. Höchste Bewertungsstufe ist 00.
   Verzeichnis einschließen . . . . :   ./prouzalib/
   Vorprozessoroptionen . . . . . . :   *NONE
   REQUIRE PROTOTYPE FOR EXPORT . . :   *NO
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      2
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      2
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
 Q u e l l e n l i s t e
@@ -303,7 +303,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
     47        END-DS SQLCA;                                                            //SQL                                000047
     48        DCL-PR SQLROUTE_CALL EXTPGM(SQLROUTE);                                   //SQL                                000048
     49          CA LIKEDS(SQLCA);                                                      //SQL                                000049
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      3
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      3
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
     50          *N BINDEC(4) OPTIONS(*NOPASS);                                         //SQL                                000050
@@ -364,7 +364,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    105 dcl-proc main;                                                                                                       000105
    106     dcl-pi *n;                                                                                                       000106
    107         p_lib                     char(10) const;                                                                    000107
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      4
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      4
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    108         p_root_dir                char(100) const;                                                                   000108
@@ -419,7 +419,7 @@ Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+...
    147 D  SQL_00018              9      9A   INZ('0') CCSID(*JOBRUNMIX)           data is okay                              000147
    148 D  SQL_00019             10    128A   CCSID(*JOBRUNMIX)                    end of header                             000148
    149 D  SQL_00020            129    140A   VARYING CCSID(*JOBRUNMIX)            L_LIB                                     000149
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      5
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      5
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------><-- Bemerkungen -->  Do  S.    Änd.-  Src Folge-
 Nummer ....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10 Num Z.    Datum  ID  nummer
    150 D  SQL_00021            141    152A   VARYING CCSID(*JOBRUNMIX)            L_FILE                                    000150
@@ -476,7 +476,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    195           OR %SUBST(SQLSTT:1:2) = '01';                                         //SQL                B01             000195
    196           SQLWARNING();                                                         //SQL                 01             000196
    197           ENDIF;                                                                //SQL                E01             000197
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      6
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      6
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    198 //*    exec sql fetch c_cpy into :l_lib, :l_file, :l_mbr, :l_ext;                                                    000198
@@ -541,7 +541,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    257                SQLCA                                                            //SQL                 01             000257
    258              : SQL_00015                                                        //SQL                 01             000258
    259           );                                                                    //SQL                 01             000259
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      7
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      7
 Zeil.- <---------------------- Quellenbestimmungen ------------------------------------------------------->  Do  Änd.-  Src Folge-
 Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7....+....8....+....9....+...10  Num Datum  ID  nummer
    260           IF SQL_00018 = '1';                                                   //SQL                B02             000260
@@ -586,7 +586,7 @@ Nummer ....+....1....+....2....+....3....+....4....+....5....+....6....+....7...
    299                                                                                                                      000299
    300 end-proc;                                                                                                            000300
 * * * * *   E N D E   D E R   Q U E L L E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      8
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      8
 Z u s ä t z l i c h e   D i a g n o s e n a c h r i c h t e n
  Msg-ID  Sv Nummer Folge   Nachrichtentext
 *RNF5409 00    172 000172  Der Prototypaufruf gibt einen Wert zurück, der verloren
@@ -610,7 +610,7 @@ Z u s ä t z l i c h e   D i a g n o s e n a c h r i c h t e n
 *RNF5409 00    250 000250  Der Prototypaufruf gibt einen Wert zurück, der verloren
                            geht, wenn CALLP verwendet wird.
 * * * * *   E N D E   D E R   Z U S Ä T Z L I C H E N   D I A G N O S E N A C H R I C H T E N   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite      9
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite      9
 Q u e r v e r w e i s l i s t e
       Datei- und Satzverweise:
          Datei             Einheit            Verweise (D=Definiert)
@@ -670,7 +670,7 @@ Q u e r v e r w e i s l i s t e
          SQLOPEN           KONSTANTE              53      67D
          SQLOPEN_CALL      PROTOTYPE              53D    185M
          SQLROUTE          KONSTANTE              48      66D
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite     10
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite     10
          SQLROUTE_CALL     PROTOTYPE              48D    180M    200M    256M
                                                  279M
          SQLSTATE          A(5)                   45D     46
@@ -734,7 +734,7 @@ Q u e r v e r w e i s l i s t e
                            CCSID(JOBRUNMIX)
          L_MBR             A(10)                 114D    207M    243     244
                            VARYING(2)            263M
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite     11
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite     11
                            CCSID(JOBRUNMIX)
          L_ROOT_DIR        A(100)                118D    219M    224     232
                            VARYING(2)
@@ -799,13 +799,13 @@ Q u e r v e r w e i s l i s t e
                            CCSID(JOBRUNMIX)
 *RNF7031 SQL_00028         A(118)                160D
                            CCSID(JOBRUNMIX)
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite     12
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite     12
 *RNF7031 SQL_00029         A(1)                  161D
                            CCSID(JOBRUNMIX)
       Bezugszahlen-/Anzeigerverweise:
          Bez./Anz.                            Verweise (D=Definiert M=Modifiz.)
 * * * * *   E N D E   D E R   Q U E R V E R W E I S L I S T E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite     13
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite     13
 E x t e r n e   V e r w e i s e
       Statisch gebundene Prozeduren:
          Prozedur                             Verweise
@@ -824,7 +824,7 @@ E x t e r n e   V e r w e i s e
          Feld              Attribute          Definiert
          Keine Verweise in der Quelle.
 * * * * *   E N D E   D E R   E X T E R N E N   V E R W E I S E   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite     14
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite     14
 N a c h r i c h t e n z u s a m m e n f a s s u n g
  Msg-ID  Sv Nummer Nachrichtentext
 *RNF5409 00     10 Der Prototypaufruf gibt einen Wert zurück, der verloren geht,
@@ -832,7 +832,7 @@ N a c h r i c h t e n z u s a m m e n f a s s u n g
 *RNF7031 00     39 Kein Verweis auf den Namen oder die Bezugszahl/den Anzeiger
                    vorhanden.
 * * * * *   E N D E   D E R   N A C H R I C H T E N Z U S A M M E N F A S S U N G   * * * * *
- 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:29:11       Seite     15
+ 5770WDS V7R5M0  220415 RN        IBM ILE RPG             PROUZAT1/CPYSRC2IFS      SPGV74     10/10/23 06:20:58       Seite     15
 E n d z u s a m m e n f a s s u n g
   Nachrichtenübersicht:
     Information (00)  . . . . . . . :       49
@@ -847,13 +847,13 @@ E n d z u s a m m e n f a s s u n g
     Datensätze  . . . . . . . . . . :        0
     Bemerkungen . . . . . . . . . . :       53
 * * * * *   E N D E   D E R   E N D Z U S A M M E N F A S S U N G   * * * * *
-Modul CPYSRC2IFS in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 10/10/23 um 06:29:12.
+Modul CPYSRC2IFS in Bibliothek PROUZAT1 gestellt. Höchste Bewertungsstufe ist 00. Erstellt am 10/10/23 um 06:20:59.
 * * * * *   E N D E   D E R   U M S E T Z U N G   * * * * *
 Command is > CRTPGM PGM(PROUZAT1/cpysrc2ifs) ACTGRP(PROUZAGRP) REPLACE(*YES) TGTRLS(*CURRENT) STGMDL(*SNGLVL) DETAIL(*BASIC) BNDDIR(*LIBL/PROUZADIR) <
 CPD000D: Befehl *LIBL/CRTPGM nicht sicher für Job mit mehreren Threads.
 CPC5D07: Programm CPYSRC2IFS in Bibliothek PROUZAT1 erstellt.
                                                 Programm erstellen                                                     Seite     1
-5770SS1 V7R5M0  220415                                                    PROUZAT1/CPYSRC2IFS    SPGV74    10/10/23  06:29:12 CEST
+5770SS1 V7R5M0  220415                                                    PROUZAT1/CPYSRC2IFS    SPGV74    10/10/23  06:20:59 CEST
  Programm . . . . . . . . . . . . . . . . . . . . . :   CPYSRC2IFS
    Bibliothek . . . . . . . . . . . . . . . . . . . :     PROUZAT1
  Modul der Programmeingangsprozedur . . . . . . . . :   *FIRST
@@ -876,14 +876,14 @@ CPC5D07: Programm CPYSRC2IFS in Bibliothek PROUZAT1 erstellt.
  Modul       Bibliothek           Modul       Bibliothek           Modul       Bibliothek           Modul       Bibliothek
  CPYSRC2IFS  PROUZAT1
                                                 Programm erstellen                                                     Seite     2
-5770SS1 V7R5M0  220415                                                    PROUZAT1/CPYSRC2IFS    SPGV74    10/10/23  06:29:12 CEST
+5770SS1 V7R5M0  220415                                                    PROUZAT1/CPYSRC2IFS    SPGV74    10/10/23  06:20:59 CEST
  Service-                                    Service-                                    Service-
  programm    Bibliothek  Aktivierung         programm    Bibliothek  Aktivierung         programm    Bibliothek  Aktivierung
  *NONE
  Binderverzeichnis  Bibliothek    Binderverzeichnis  Bibliothek    Binderverzeichnis  Bibliothek    Binderverzeichnis  Bibliothek
     PROUZADIR       *LIBL
                                                 Programm erstellen                                                     Seite     3
-5770SS1 V7R5M0  220415                                                    PROUZAT1/CPYSRC2IFS    SPGV74    10/10/23  06:29:12 CEST
+5770SS1 V7R5M0  220415                                                    PROUZAT1/CPYSRC2IFS    SPGV74    10/10/23  06:20:59 CEST
                                                            Kurzübersicht
  Programmeingangsprozeduren . . . . . . . . . . :   1
    Symbol    Art       Bibliothek  Objekt      Gebunden    Kennung
@@ -893,16 +893,16 @@ CPC5D07: Programm CPYSRC2IFS in Bibliothek PROUZAT1 erstellt.
  Aktivierungsgruppe . . . . . . . . . . . . . . :   PROUZAGRP
                                 * * * * *   E N D E  D E R  K U R Z Ü B E R S I C H T   * * * * *
                                                 Programm erstellen                                                     Seite     4
-5770SS1 V7R5M0  220415                                                    PROUZAT1/CPYSRC2IFS    SPGV74    10/10/23  06:29:12 CEST
+5770SS1 V7R5M0  220415                                                    PROUZAT1/CPYSRC2IFS    SPGV74    10/10/23  06:20:59 CEST
                                                            Bindestatistik
  CPU-Zeit für Symbolsammlung  . . . . . . . . . . . . . . . . :                .000
  CPU-Zeit für Symbolauflösung . . . . . . . . . . . . . . . . :                .000
- CPU-Zeit für Auflösung des Binderverzeichnisses  . . . . . . :                .000
+ CPU-Zeit für Auflösung des Binderverzeichnisses  . . . . . . :                .001
  CPU-Zeit für Compilierung der Bindersprache  . . . . . . . . :                .000
  CPU-Zeit für Erstellung der Liste  . . . . . . . . . . . . . :                .000
  CPU-Zeit für Erstellung des Programms/Serviceprogramms . . . :                .002
- Gesamte CPU-Zeit . . . . . . . . . . . . . . . . . . . . . . :                .009
- Gesamte abgelaufene Zeit . . . . . . . . . . . . . . . . . . :                .059
+ Gesamte CPU-Zeit . . . . . . . . . . . . . . . . . . . . . . :                .010
+ Gesamte abgelaufene Zeit . . . . . . . . . . . . . . . . . . :                .102
                                  * * * * *   E N D E  D E R  B I N D E S T A T I S T I K      * * * * *
 *CPC5D07 - Programm CPYSRC2IFS in Bibliothek PROUZAT1 erstellt.
               * * * * *   E N D E  D E R  L I S T E  Z U R  E R S T E L L U N G  D E S  P R O G R A M M S   * * * * *

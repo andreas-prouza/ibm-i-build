@@ -101,10 +101,10 @@ if [[ "$error" != null ]]; then
   exit 1
 fi
 
-new_release=$(jq -r '.meta_file.general.release_branch' <<< $response)
-deployment_version=$(jq -r '.meta_file.general.deploy_version' <<< $response)
-project=$(jq -r '.meta_file.general.project' <<< $response)
-file_name=$(jq -r '.meta_file.general.file_name' <<< $response)
+new_release=$(jq -r '.general.release_branch' <<< $response)
+deployment_version=$(jq -r '.general.deploy_version' <<< $response)
+project=$(jq -r '.general.project' <<< $response)
+file_name=$(jq -r '.general.file_name' <<< $response)
 
 echo -e "$COLOR_GREEN Created new deployment $COLOR_END"
 echo -e "$COLOR_GREEN Workflow: $DEPLOYMENT_UAT_WORKFLOW $COLOR_END"

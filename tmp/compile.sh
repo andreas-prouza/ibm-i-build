@@ -15,6 +15,21 @@ mkdir -p ./build/prouzalib
 mkdir -p ./build/prouzalib2
 rm -rf ./tmp
 mkdir -p ./tmp
+(   cl "CHGATR OBJ('"'prouzalib//qrpglesrc/logger.sqlrpgle'"') ATR(*CCSID) VALUE(1208)" | iconv -f IBM-1252 -t utf-8 
+#  
+)
+( liblist -a PROUZAT1 2> /dev/null; cl  -v  "CRTSQLRPGI OBJ("PROUZAT1/logger") SRCSTMF('./prouzalib//qrpglesrc/"logger".sqlrpgle') OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS(*CURRENT) DBGVIEW(*SOURCE) REPLACE(*YES) COMPILEOPT('TGTCCSID(*JOB) INCDIR(''./prouzalib/'')')"    2>> './logs/prouzalib/logger.sqlrpgle.srvpgm.error.log'  >> './logs/prouzalib/logger.sqlrpgle.srvpgm.splf.log' ; cl -v  "DSPJOBLOG" >> './logs/prouzalib/logger.sqlrpgle.srvpgm.joblog.log' )
+if [ -s './logs/prouzalib/logger.sqlrpgle.srvpgm.error.log' ]; then
+echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/logger.sqlrpgle\033[0m' 1>&2
+exit 1
+fi
+( liblist -a PROUZAT1 2> /dev/null; liblist -a PROUZAT1 2> /dev/null; cl  -v  -q "RMVBNDDIRE BNDDIR(*LIBL/PROUZADIR) OBJ("*LIBL/logger")"   2>> './logs/prouzalib/logger.sqlrpgle.srvpgm.error.log'  >> './logs/prouzalib/logger.sqlrpgle.srvpgm.splf.log' ; cl -v  "DSPJOBLOG" >> './logs/prouzalib/logger.sqlrpgle.srvpgm.joblog.log' )
+( liblist -a PROUZAT1 2> /dev/null; liblist -a PROUZAT1 2> /dev/null; cl  -v  "CRTSRVPGM SRVPGM("PROUZAT1/logger") MODULE("PROUZAT1/logger") EXPORT(*ALL) ACTGRP(PROUZAGRP) BNDDIR(*LIBL/PROUZADIR) REPLACE(*YES) TGTRLS(*CURRENT) STGMDL(*SNGLVL)"    2>> './logs/prouzalib/logger.sqlrpgle.srvpgm.error.log'  >> './logs/prouzalib/logger.sqlrpgle.srvpgm.splf.log' ; cl -v  "DSPJOBLOG" >> './logs/prouzalib/logger.sqlrpgle.srvpgm.joblog.log' )
+( liblist -a PROUZAT1 2> /dev/null; liblist -a PROUZAT1 2> /dev/null; cl  -v  "ADDBNDDIRE BNDDIR(*LIBL/PROUZADIR) OBJ("*LIBL/logger")"   2>> './logs/prouzalib/logger.sqlrpgle.srvpgm.error.log'  >> './logs/prouzalib/logger.sqlrpgle.srvpgm.splf.log' ; cl -v  "DSPJOBLOG" >> './logs/prouzalib/logger.sqlrpgle.srvpgm.joblog.log' )
+if [ -s './logs/prouzalib/logger.sqlrpgle.srvpgm.error.log' ]; then
+echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/logger.sqlrpgle\033[0m' 1>&2
+exit 1
+fi && touch './build/prouzalib/logger.sqlrpgle.srvpgm'; date > './build/prouzalib/logger.sqlrpgle.srvpgm'; echo 'prouzalib/logger.sqlrpgle.srvpgm|'`date` >> ./tmp/compiled.txt
 (   cl "CHGATR OBJ('"'prouzalib//qrpglesrc/errhdlsql.sqlrpgle'"') ATR(*CCSID) VALUE(1208)" | iconv -f IBM-1252 -t utf-8 
 #  
 )
@@ -58,6 +73,21 @@ if [ -s './logs/prouzalib/date.sqlrpgle.srvpgm.error.log' ]; then
 echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/date.sqlrpgle\033[0m' 1>&2
 exit 1
 fi && touch './build/prouzalib/date.sqlrpgle.srvpgm'; date > './build/prouzalib/date.sqlrpgle.srvpgm'; echo 'prouzalib/date.sqlrpgle.srvpgm|'`date` >> ./tmp/compiled.txt
+(   cl "CHGATR OBJ('"'prouzalib//qrpglesrc/testmod.rpgle'"') ATR(*CCSID) VALUE(1208)" | iconv -f IBM-1252 -t utf-8 
+#  
+)
+( liblist -a PROUZAT1 2> /dev/null; cl  -v  "CRTRPGMOD MODULE("PROUZAT1/testmod") SRCSTMF('./prouzalib//qrpglesrc/"testmod".rpgle') DBGVIEW(*SOURCE) REPLACE(*YES) TGTCCSID(*JOB) INCDIR('./prouzalib/')"    2>> './logs/prouzalib/testmod.rpgle.srvpgm.error.log'  >> './logs/prouzalib/testmod.rpgle.srvpgm.splf.log' ; cl -v  "DSPJOBLOG" >> './logs/prouzalib/testmod.rpgle.srvpgm.joblog.log' )
+if [ -s './logs/prouzalib/testmod.rpgle.srvpgm.error.log' ]; then
+echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/testmod.rpgle\033[0m' 1>&2
+exit 1
+fi
+( liblist -a PROUZAT1 2> /dev/null; liblist -a PROUZAT1 2> /dev/null; cl  -v  -q "RMVBNDDIRE BNDDIR(*LIBL/PROUZADIR) OBJ("*LIBL/testmod")"   2>> './logs/prouzalib/testmod.rpgle.srvpgm.error.log'  >> './logs/prouzalib/testmod.rpgle.srvpgm.splf.log' ; cl -v  "DSPJOBLOG" >> './logs/prouzalib/testmod.rpgle.srvpgm.joblog.log' )
+( liblist -a PROUZAT1 2> /dev/null; liblist -a PROUZAT1 2> /dev/null; cl  -v  "CRTSRVPGM SRVPGM("PROUZAT1/testmod") MODULE("PROUZAT1/testmod") EXPORT(*ALL) ACTGRP(PROUZAGRP) BNDDIR(*LIBL/PROUZADIR) REPLACE(*YES) TGTRLS(*CURRENT) STGMDL(*SNGLVL)"    2>> './logs/prouzalib/testmod.rpgle.srvpgm.error.log'  >> './logs/prouzalib/testmod.rpgle.srvpgm.splf.log' ; cl -v  "DSPJOBLOG" >> './logs/prouzalib/testmod.rpgle.srvpgm.joblog.log' )
+( liblist -a PROUZAT1 2> /dev/null; liblist -a PROUZAT1 2> /dev/null; cl  -v  "ADDBNDDIRE BNDDIR(*LIBL/PROUZADIR) OBJ("*LIBL/testmod")"   2>> './logs/prouzalib/testmod.rpgle.srvpgm.error.log'  >> './logs/prouzalib/testmod.rpgle.srvpgm.splf.log' ; cl -v  "DSPJOBLOG" >> './logs/prouzalib/testmod.rpgle.srvpgm.joblog.log' )
+if [ -s './logs/prouzalib/testmod.rpgle.srvpgm.error.log' ]; then
+echo -e '\033[101;31mfailed: prouzalib//qrpglesrc/testmod.rpgle\033[0m' 1>&2
+exit 1
+fi && touch './build/prouzalib/testmod.rpgle.srvpgm'; date > './build/prouzalib/testmod.rpgle.srvpgm'; echo 'prouzalib/testmod.rpgle.srvpgm|'`date` >> ./tmp/compiled.txt
 touch './build/prouzalib/prouzadir.bnddir'; date > './build/prouzalib/prouzadir.bnddir'; echo 'prouzalib/prouzadir.bnddir|'`date` >> ./tmp/compiled.txt
 (   cl "CHGATR OBJ('"'prouzalib//qrpglesrc/testlog.rpgle'"') ATR(*CCSID) VALUE(1208)" | iconv -f IBM-1252 -t utf-8 
 #  
