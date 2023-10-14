@@ -6,6 +6,7 @@ make/scripts/get-prod-object-timestamp.sh
 make/scripts/create_build_script.sh summary
 git add .
 git commit -m "Deployment preperation"
+git push
 
 
 # Import global config
