@@ -116,6 +116,9 @@ prouzalib/logger.sqlrpgle.srvpgm:	\
 prouzalib/logger.sqlrpgle.srvpgm:	private BNDDIR=*LIBL/PROUZADIR
 prouzalib/logger.sqlrpgle.srvpgm:	private TGT_BNDDIR=*LIBL/PROUZADIR
 
+prouzalib/logger_hist.sqltable.file:	\
+		prouzalib/logger.sqltable.file
+
 prouzalib/cpysrc2ifs.sqlrpgle.pgm: \
 		prouzalib/errhdlsql.sqlrpgle.srvpgm
 

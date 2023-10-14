@@ -19,7 +19,7 @@
         "Show Change Object":  "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change-object",
         "Create Prod Object List": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh create-object-list ",
         "Create build script": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh summary ",
-        "Reset Build Timestamp": "make/scripts/cleanup.sh   &&   make/scripts/reset.sh",
+        "Reset Build Timestamp": "make/scripts/cleanup.sh   &&   make/scripts/get-prod-object-timestamp.sh",
         "Create deployment": "make/scripts/cleanup.sh   &&  make/scripts/create_deployment.sh",
         "Merge with production": "git pull && git -c 'core.editor=code --wait --reuse-window' merge main && git push && echo 'Done' && git rev-parse HEAD >> commit.log ",
         "Merge cancel": "git merge --abort"
@@ -40,7 +40,7 @@
             },
             {
                 "name": "🪟 Builds from prod",
-                "command": "make/scripts/cleanup.sh   &&   make/scripts/reset.sh",
+                "command": "make/scripts/cleanup.sh   &&   make/scripts/get-prod-object-timestamp.sh",
             },
             {
                 "name": "♻️ Clean builds",

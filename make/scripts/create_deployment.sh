@@ -1,9 +1,17 @@
 #!/bin/bash 
 
 #set -x
+git pull
+make/scripts/get-prod-object-timestamp.sh
+make/scripts/create_build_script.sh summary
+git add .
+git commit -m "Deployment preperation"
+
 
 # Import global config
 source $(dirname $(realpath "$0"))/init.sh
+
+exit 1
 
 
 git_checkout_release_branch () {

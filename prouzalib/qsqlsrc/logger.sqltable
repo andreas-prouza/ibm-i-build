@@ -8,6 +8,7 @@ Create or replace table logger (
       text      varchar(1000),
       extref    varchar(200),
       program   varchar(200),
+      sp2       int,
       chgtime   timestamp for each row on update as row change timestamp
                 not null,
       job       varchar(28) generated always as (qsys2.job_name),
