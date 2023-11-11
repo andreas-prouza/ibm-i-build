@@ -1,8 +1,7 @@
 {
     "workbench.editorAssociations": {   
-        "*.md": "vscode.markdown.preview.editor",
+        "*.md": "vscode.markdown.preview.editor"
     },
-    "makefile.extensionOutputFolder": "./.vscode",
     "command-runner.terminal.name": "Sync project",
     "command-runner.terminal.autoClear": true,
     "command-runner.terminal.autoFocus": true,
@@ -13,7 +12,7 @@
         "Run build (detailed output)": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh detailed   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh;   make/scripts/sync_back_from_ibmi.sh; make/scripts/git-cache-meta.sh --store",
         "Run build (debug)": "make/scripts/cleanup.sh debug   &&   make/scripts/create_build_script.sh debug   &&   make/scripts/sync2ibmi.sh debug   &&   make/scripts/run_build.sh debug;   make/scripts/sync_back_from_ibmi.sh debug; make/scripts/git-cache-meta.sh --store",
         "Simulate build": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh simulate",
-        "CleanUp Build": "make/scripts/cleanup.sh   &&   make clean",
+        "CleanUp Build": "make/scripts/cleanup.sh   &&   make --makefile=make/makefile clean",
         "Show Change Debug": "make/scripts/cleanup.sh debug   &&   make/scripts/create_build_script.sh show-change-debug  ",
         "Show Change Compile": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh schow-change-compile ",
         "Show Change Object":  "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change-object",
@@ -25,13 +24,6 @@
         "Merge cancel": "git merge --abort"
     },
     "workbench.editor.enablePreview": true,
-    "ShortcutMenuBar.beautify": false,
-    "ShortcutMenuBar.navigateBack": false,
-    "ShortcutMenuBar.navigateForward": false,
-    "ShortcutMenuBar.openFilesList": false,
-    "ShortcutMenuBar.toggleTerminal": false,
-    "ShortcutMenuBar.showCommands": true,
-    "ShortcutMenuBar.userButton01Command": "command-runner.run",
     "actionButtons": {
         "commands": [
             {
@@ -40,13 +32,13 @@
             },
             {
                 "name": "🪟 Builds from prod",
-                "command": "make/scripts/cleanup.sh   &&   make/scripts/get-prod-object-timestamp.sh",
+                "command": "make/scripts/cleanup.sh   &&   make/scripts/get-prod-object-timestamp.sh"
             },
             {
                 "name": "♻️ Clean builds",
 				"color": "white",
 				"useVsCodeApi": false,
-                "command": "make/scripts/cleanup.sh  &&   make clean"
+                "command": "make/scripts/cleanup.sh  &&   make --makefile=make/makefile clean"
             },
             {
                 "name": "♻️ Clean logs",
@@ -73,5 +65,18 @@
                 "command": "make/scripts/cleanup.sh   &&  make/scripts/create_deployment.sh"
             }
         ]
-        }
+    },
+    "files.associations": {
+        "*.rpg.pgm": "rpg",
+        "*.rpgle.pgm": "rpgle",
+        "*.rpgle.srvpgm": "rpgle",
+        "*.sqlrpgle.pgm": "rpgle",
+        "*.sqlrpgle.srvpgm": "rpgle",
+        "*.clle.srvpgm": "cl",
+        "*.clle.pgm": "cl",
+        "*.clp.pgm": "cl",
+        "*.sqltable.file": "sql",
+        "*.sqlview.file": "sql",
+        "*.sqlproc.file": "sql"
+    }
 }

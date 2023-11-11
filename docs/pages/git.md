@@ -20,7 +20,7 @@ Add following code in ```.git/hooks/post-checkout```:
 #!/bin/sh
 
 # Import global config
-source make/global.cfg
+source etc/global.cfg
 
 # Only when checkout a branch not a single file or directory
 if [ -s "$GIT_CACHE_META_FILE" ] && [ "$3" == '1' ]; then

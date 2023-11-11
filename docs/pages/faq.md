@@ -25,3 +25,13 @@ Just uncomment these variables and change the iconv parameters:
 * CONVERT_STDERR_LOG
 * CONVERT_STDOUT_LOG
 * CONVERT_JOBLOG_LOG
+
+
+# Compile problems
+
+## Continue dependencies in the chain after a broken compile
+Imagine you change a DB object that depends on many objects.
+
+Now, during the compilation process some objects (including the DB object) were built successfully, but one program fails.
+
+When you restart the build process, 'make' automatically detects that there are still some missing dependent objects that need to be compiled.

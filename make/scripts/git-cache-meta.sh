@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 #git-cache-meta -- simple file meta data caching and applying.
 #Simpler than etckeeper, metastore, setgitperms, etc.
@@ -10,7 +10,7 @@
 # 2012-03-05 - added filetime, andris9
 
 # Import global config
-source $(dirname $(realpath "$0"))/../global.cfg
+source etc/global.cfg
 
 case $@ in
     --store|--stdout)

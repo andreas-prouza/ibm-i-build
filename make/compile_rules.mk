@@ -6,7 +6,7 @@ CL_FLAG=-v # Print command
 #########################################################
 # Find the correct target lib for the source
 #########################################################
-TGTLIB_SRC = $(call upper_case,$(patsubst %/,%,$(dir $@)))
+TGTLIB_SRC = $(call upper_case,$(shell echo $@ | cut -d "/" -f1 ))
 
 OBJLIB_UPPER=$(call upper_case,$(OBJLIB))
 
@@ -30,16 +30,21 @@ NEW_LIB = $(NEW_LIB_TMP4)
 
 # character convertion
 #PGM_NEW=$(notdir $(subst §,$$$$'\247',$(subst $$,'$$$$',$(subst #,\#,$*))))
-PGM_NEW=$(notdir $(subst $$,'$$$$',$(subst #,\#,$*)))
+PGM_NEW=$(notdir $(notdir $(subst $$,$$$$,$(subst #,\#,$*))))
+#PGM_NEW=$(notdir $(notdir $*))
 
 # Specified target library + character convertion
-LIBOBJ_NEW= $(NEW_LIB)/$(PGM_NEW)
+LIBOBJ_NEW= '$(NEW_LIB)/$(PGM_NEW)'
 
 
 #SOURCE_NAME_NEW=$$(notdir $$(subst §,$$$$'\247',$$(subst $$,'$$$$',$$(subst \#,\\\#,$$*))))
-SOURCE_NAME_NEW=$$(notdir $$(subst $$,'$$$$',$$(subst \#,\\\#,$$*)))
+SOURCE_NAME_NEW='$(basename $(subst $$,$$$$,$(subst #,\#,$@)))'
 
-LOG_FILE_NAME=$@
+SOURCE_NAME_OTHERS=$(basename $@)
+SOURCE_NAME_MBR='$(basename $(basename $(basename $(subst $$,$$$$,$(subst #,\#,$(@F))))))'
+#SOURCE_NAME_OTHERS=$(subst \#,#,$(subst $$,\$$,$(subst $$$$,$$,$(SOURCE_NAME_NEW))))
+
+LOG_FILE_NAME=$(SOURCE_NAME_OTHERS)
 
 #########################################################
 # Special characters in source name
@@ -60,7 +65,7 @@ LOG_FILE_NAME=$@
 # So we need to convert the unix variant to the IBM i variant:
 #       mv $'\302\247'test.mbr $'\247'test.mbr
 
-CHG_ATTR=$(EXC) "CHGATR OBJ('"'$<'"') ATR(*CCSID) VALUE(1208)"
+CHG_ATTR=$(EXC) $(CL_FLAG) "CHGATR OBJ('"'$(SOURCE_NAME_OTHERS)'"') ATR(*CCSID) VALUE(1208)"
 define DOLLAR_SH_REPLACE
   $(CHG_ATTR) $(CCSID_CONV)
 # $(if $(findstring §,$*),\
@@ -87,11 +92,12 @@ CL_LOG_STDOUT='$(LOG_DIR)/$(LOG_FILE_NAME).splf.log'
 CL_LOG_JOBLOG='$(LOG_DIR)/$(LOG_FILE_NAME).joblog.log'
 
 # Redirect STDERR and STDOUT and generate Joblog
-CL_LOG= 2>> $(CL_LOG_ERROR)  >> $(CL_LOG_STDOUT)
+CL_LOG= 2> >(tee -a $(CL_LOG_ERROR))  >> $(CL_LOG_STDOUT)
 
 
 # Create build file to remember last build timestamp
-TOUCH=touch '$(TGT_DIR)/$(LOG_FILE_NAME)'; date > '$(TGT_DIR)/$(LOG_FILE_NAME)'; echo '$(LOG_FILE_NAME)|'`date` >> $(COMPILED_FILE)
+BUILD_DUMMY_NAME=$(SOURCE_NAME_OTHERS).obj
+TOUCH=touch '$(TGT_DIR)/$(BUILD_DUMMY_NAME)'; date > '$(TGT_DIR)/$(BUILD_DUMMY_NAME)'; echo "$(BUILD_DUMMY_NAME)|"`date` >> $(COMPILED_FILE)
 
 
 # Check if the STDERR (redirected file) is empty
@@ -99,7 +105,8 @@ TOUCH=touch '$(TGT_DIR)/$(LOG_FILE_NAME)'; date > '$(TGT_DIR)/$(LOG_FILE_NAME)';
 # 	Not empty:	Error
 define CHECK_ERROR
 if [ -s $(CL_LOG_ERROR) ]; then
- echo -e '$(COLOR_RED)failed: $<$(COLOR_END)' 1>&2
+ echo -en "$(COLOR_RED)$$(cat $(CL_LOG_ERROR))$(COLOR_END)" 1>&2
+ echo    '\n\nSource: $<\n\nSpool: $(CL_LOG_STDOUT)\nJoblog: $(CL_LOG_JOBLOG)' 1>&2
  exit 1
 fi
 endef
@@ -108,15 +115,22 @@ endef
 PRINT_JOBLOG=$(EXC) $(CL_FLAG) "DSPJOBLOG" >> $(CL_LOG_JOBLOG)
 
 # Combine all to one
+# the very last ")" is necessary because the whole command will be in brackets "(...)"
 define POST_COMPILE
-  $(CL_LOG) ; $(PRINT_JOBLOG)
+  $(CL_LOG) ; $(PRINT_JOBLOG) )
 endef
 define POST_COMPILE_FINAL
-  $(CL_LOG) ; $(PRINT_JOBLOG)
+  $(CL_LOG) ; $(PRINT_JOBLOG) )
 endef
 define FINALY
   $(CONVERT_STDERR_LOG)  $(CONVERT_STDOUT_LOG)  $(CONVERT_JOBLOG_LOG)  $(CHECK_ERROR) && $(TOUCH)
 	$(info crtcmd|prod_obj|$@|$(LIBOBJ_NEW)|$(PROD_LIBOBJ))
+endef
+
+# This is only a variable containing a "new line"
+define newline
+
+
 endef
 
 # Set Library List
@@ -124,7 +138,8 @@ endef
 LIBLIST_UNIQUE=$(call uniq,$(LIBLIST))
 
 SET_LIBL=$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST_UNIQUE))
-PRE_COMPILE=$(SET_LIBL)
+PRE_COMPILE=echo "$(cmd)"$(newline) ( $(SET_LIBL)
+INIT_CMD=mkdir -p `dirname $(LOG_DIR)/$(LOG_FILE_NAME)` ; mkdir -p `dirname $(TGT_DIR)/$(LOG_FILE_NAME)` 
 
 
 #########################################################
@@ -133,19 +148,16 @@ PRE_COMPILE=$(SET_LIBL)
 
 .SECONDEXPANSION:
 RMVBNDDIR_CMD=RMVBNDDIRE BNDDIR($(TGT_BNDDIR)) OBJ("*LIBL/$(PGM_NEW)")
-RMVBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
-	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) -q "$(RMVBNDDIR_CMD)" $(POST_COMPILE)
+RMVBNDDIR=	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) -q "$(RMVBNDDIR_CMD)" $(POST_COMPILE)
 
 .SECONDEXPANSION:
 CRTSRVPGM_CMD= CRTSRVPGM SRVPGM("$(LIBOBJ_NEW)") MODULE("$(LIBOBJ_NEW)") EXPORT(*ALL) ACTGRP($(ACTGRP)) \
 			BNDDIR($(INCLUDE_BNDDIR)) REPLACE(*YES) TGTRLS($(TGTRLS)) STGMDL($(STGMDL))
-CRTSRVPGM=  $(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
-	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(CRTSRVPGM_CMD)"  $(POST_COMPILE)
+CRTSRVPGM=  $(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(CRTSRVPGM_CMD)"  $(POST_COMPILE)
 
 .SECONDEXPANSION:
 ADDBNDDIR_CMD=ADDBNDDIRE BNDDIR($(TGT_BNDDIR)) OBJ("*LIBL/$(PGM_NEW)")
-ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
-	 $(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(ADDBNDDIR_CMD)" $(POST_COMPILE_FINAL)
+ADDBNDDIR=	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(ADDBNDDIR_CMD)" $(POST_COMPILE_FINAL)
 
 
 
@@ -190,13 +202,15 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 .SECONDEXPANSION:
-%.sqlrpgle.srvpgm: $(SQLRPGLE_PREREQ).sqlrpgle
+%.sqlrpgle.srvpgm.obj: $(SRC_PREREQ)
+
+	$(call bash_call,$(INIT_CMD))
 
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
-	$(eval cmd :=CRTSQLRPGI OBJ("$(LIBOBJ_NEW)") SRCSTMF('$(SQLRPGLE_SRCF)/"$(SOURCE_NAME_NEW)".sqlrpgle') \
+	$(eval cmd :=CRTSQLRPGI OBJ("$(LIBOBJ_NEW)") SRCSTMF('"$(SOURCE_NAME_NEW)"') \
 							OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS($(TGTRLS)) DBGVIEW($(DBGVIEW)) REPLACE(*YES) \
-							COMPILEOPT('TGTCCSID($(TGTCCSID)) INCDIR(''$(INC_DIR)'')'))
+							COMPILEOPT('TGTCCSID($(TGTCCSID)) INCDIR($(subst ','',$(INC_DIR)))'))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 
@@ -204,11 +218,16 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(CHECK_ERROR)
 
-	$(info crtcmd|$@|$(RMVBNDDIR_CMD))
+	$(eval cmd:=$(subst \,,$(RMVBNDDIR_CMD)))
+	$(info crtcmd|$@|$(cmd))
 	$(call bash_call,$(RMVBNDDIR))
-	$(info crtcmd|$@|$(CRTSRVPGM_CMD))
+
+	$(eval cmd:=$(subst \,,$(CRTSRVPGM_CMD)))
+	$(info crtcmd|$@|$(cmd))
 	$(call bash_call,$(CRTSRVPGM))
-	$(info crtcmd|$@|$(ADDBNDDIR_CMD))
+
+	$(eval cmd:=$(subst \,,$(ADDBNDDIR_CMD)))
+	$(info crtcmd|$@|$(cmd))
 	$(call bash_call,$(ADDBNDDIR))
 
 	$(FINALY)
@@ -219,12 +238,14 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 .SECONDEXPANSION:
-%.rpgle.srvpgm: $(RPGLE_PREREQ).rpgle
+%.rpgle.srvpgm.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
-	$(eval cmd :=CRTRPGMOD MODULE("$(LIBOBJ_NEW)") SRCSTMF('$(RPGLE_SRCF)/"$(SOURCE_NAME_NEW)".rpgle') \
-							DBGVIEW($(DBGVIEW)) REPLACE(*YES) TGTCCSID($(TGTCCSID)) INCDIR('$(INC_DIR)'))
+	$(eval cmd :=CRTRPGMOD MODULE("$(LIBOBJ_NEW)") SRCSTMF('"$(SOURCE_NAME_NEW)"') \
+							DBGVIEW($(DBGVIEW)) REPLACE(*YES) TGTCCSID($(TGTCCSID)) INCDIR($(INC_DIR)))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 
@@ -232,11 +253,16 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(CHECK_ERROR)
 
-	$(info crtcmd|$@|$(RMVBNDDIR_CMD))
+	$(eval cmd:=$(subst \,,$(RMVBNDDIR_CMD)))
+	$(info crtcmd|$@|$(cmd))
 	$(call bash_call,$(RMVBNDDIR))
-	$(info crtcmd|$@|$(CRTSRVPGM_CMD))
+
+	$(eval cmd:=$(subst \,,$(CRTSRVPGM_CMD)))
+	$(info crtcmd|$@|$(cmd))
 	$(call bash_call,$(CRTSRVPGM))
-	$(info crtcmd|$@|$(ADDBNDDIR_CMD))
+
+	$(eval cmd:=$(subst \,,$(ADDBNDDIR_CMD)))
+	$(info crtcmd|$@|$(cmd))
 	$(call bash_call,$(ADDBNDDIR))
 	
 	$(FINALY)
@@ -247,11 +273,13 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 .SECONDEXPANSION:
-%.clle.srvpgm: $(CLLE_PREREQ).clle
+%.clle.srvpgm.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
-	$(eval cmd :=CRTCLMOD MODULE("$(LIBOBJ_NEW)") SRCSTMF('$(CLLE_SRCF)/"$(SOURCE_NAME_NEW)".clle') DBGVIEW($(DBGVIEW)))
+	$(eval cmd :=CRTCLMOD MODULE("$(LIBOBJ_NEW)") SRCSTMF('"$(SOURCE_NAME_NEW)"') DBGVIEW($(DBGVIEW)))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 
@@ -259,11 +287,16 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 	$(CHECK_ERROR)
 
-	$(info crtcmd|$@|$(RMVBNDDIR_CMD))
+	$(eval cmd:=$(subst \,,$(RMVBNDDIR_CMD)))
+	$(info crtcmd|$@|$(cmd))
 	$(call bash_call,$(RMVBNDDIR))
-	$(info crtcmd|$@|$(CRTSRVPGM_CMD))
+
+	$(eval cmd:=$(subst \,,$(CRTSRVPGM_CMD)))
+	$(info crtcmd|$@|$(cmd))
 	$(call bash_call,$(CRTSRVPGM))
-	$(info crtcmd|$@|$(ADDBNDDIR_CMD))
+
+	$(eval cmd:=$(subst \,,$(ADDBNDDIR_CMD)))
+	$(info crtcmd|$@|$(cmd))
 	$(call bash_call,$(ADDBNDDIR))
 	
 	$(FINALY)
@@ -274,12 +307,14 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 .SECONDEXPANSION:
-%.clle.pgm: $(CLLE_PREREQ).clle
+%.clle.pgm.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
 # Create command string
-	$(eval cmd :=CRTBNDCL PGM("$(LIBOBJ_NEW)")  SRCSTMF('$(CLLE_SRCF)/"$(SOURCE_NAME_NEW)".clle') \
+	$(eval cmd :=CRTBNDCL PGM("$(LIBOBJ_NEW)")  SRCSTMF('"$(SOURCE_NAME_NEW)"') \
 							ACTGRP($(ACTGRP)) REPLACE(*YES) TGTRLS($(TGTRLS)) STGMDL($(STGMDL)) DFTACTGRP(*NO))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
@@ -293,7 +328,7 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 .SECONDEXPANSION:
-%.rpg.pgm: $(RPG_PREREQ).rpg
+%.rpg.pgm.obj: $(SRC_PREREQ)
 	$(warning crtcmd|$@|Not yes implemented)
 
 	$(FINALY)
@@ -305,16 +340,18 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 .SECONDEXPANSION:
-%.clp.pgm: $(CLP_PREREQ).clp
+%.clp.pgm.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
 	$(eval cpystmf = $(EXC) $(CL_FLAG) "CRTSRCPF FILE(QTEMP/QSRC) RCDLEN(112)"; \
-		$(EXC) $(CL_FLAG) "CPYFRMSTMF FROMSTMF('$(CLLE_SRCF)/"$(SOURCE_NAME_NEW)".clp') TOMBR('/QSYS.LIB/QTEMP.LIB/QSRC.FILE/"$(SOURCE_NAME_NEW)".MBR') MBROPT(*replace)";)
+		$(EXC) $(CL_FLAG) "CPYFRMSTMF FROMSTMF('"$(SOURCE_NAME_NEW)"') TOMBR('/QSYS.LIB/QTEMP.LIB/QSRC.FILE/"$(SOURCE_NAME_MBR)".MBR') MBROPT(*replace)";)
 	$(info crtcmd|$@|$(cpystmf))
 
   # Create object
-	$(eval cmd=$(EXC) $(CL_FLAG) "CRTCLPGM PGM("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_NEW)") REPLACE(*YES) TGTRLS($(TGTRLS)) " $(CL_LOG))
+	$(eval cmd=$(EXC) $(CL_FLAG) "CRTCLPGM PGM("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_MBR)") REPLACE(*YES) TGTRLS($(TGTRLS)) " $(CL_LOG))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(cpystmf) $(PRE_COMPILE) $(cmd)  $(POST_COMPILE_FINAL)
@@ -327,12 +364,19 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 .SECONDEXPANSION:
-%.rpgle.pgm:$(RPGLE_PREREQ).rpgle
+%.rpgle.pgm.obj: $(SRC_PREREQ)
 
+#	$(info crtcmd|summary PreReq $@ xx  $< yyy)
+#	$(info crtcmd|summary SRC_PREREQ $(SRC_PREREQ) yyy)
+#	$(info crtcmd|summary SOURCE_NAME_NEW $(SOURCE_NAME_NEW) zzz)
+#	$(info crtcmd|summary LIBOBJ_NEW $(LIBOBJ_NEW) zzz)
+
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
-	$(eval cmd :=CRTRPGMOD MODULE("$(LIBOBJ_NEW)") SRCSTMF('$(RPGLE_SRCF)/"$(SOURCE_NAME_NEW)".rpgle') \
-							DBGVIEW($(DBGVIEW)) REPLACE(*YES) TGTCCSID($(TGTCCSID)) INCDIR('$(INC_DIR)'))
+	$(eval cmd :=CRTRPGMOD MODULE("$(LIBOBJ_NEW)") SRCSTMF('"$(SOURCE_NAME_NEW)"') \
+							DBGVIEW($(DBGVIEW)) REPLACE(*YES) TGTCCSID($(TGTCCSID)) INCDIR($(INC_DIR)))
 
 	$(info crtcmd|$@|$(cmd))
 
@@ -354,13 +398,15 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 .SECONDEXPANSION:
-%.sqlrpgle.pgm: $(SQLRPGLE_PREREQ).sqlrpgle
+%.sqlrpgle.pgm.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
-	$(eval cmd :=CRTSQLRPGI OBJ("$(LIBOBJ_NEW)") SRCSTMF('$(SQLRPGLE_SRCF)/"$(SOURCE_NAME_NEW)".sqlrpgle') \
+	$(eval cmd :=CRTSQLRPGI OBJ("$(LIBOBJ_NEW)") SRCSTMF('"$(SOURCE_NAME_NEW)"') \
 							OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS($(TGTRLS)) DBGVIEW($(DBGVIEW)) REPLACE(*YES) \
-							COMPILEOPT('TGTCCSID($(TGTCCSID)) INCDIR(''$(INC_DIR)'')'))
+							COMPILEOPT('TGTCCSID($(TGTCCSID)) INCDIR($(subst ','',$(INC_DIR)))'))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 
@@ -382,18 +428,20 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 # Create and change physical file
 .SECONDEXPANSION:
-%.dspf.file: $(DSPF_PREREQ).dspf
+%.dspf.file.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
 	$(eval cpystmf = $(EXC) $(CL_FLAG) "CRTSRCPF FILE(QTEMP/QSRC) RCDLEN(112)"; \
-		$(EXC) $(CL_FLAG) "CPYFRMSTMF FROMSTMF('$(PF_SRCF)/"$(SOURCE_NAME_NEW)".dspf') TOMBR('/QSYS.LIB/QTEMP.LIB/QSRC.FILE/"$(SOURCE_NAME_NEW)".MBR') MBROPT(*replace)";)
+		$(EXC) $(CL_FLAG) "CPYFRMSTMF FROMSTMF('"$(SOURCE_NAME_NEW)"') TOMBR('/QSYS.LIB/QTEMP.LIB/QSRC.FILE/"$(SOURCE_NAME_MBR)".MBR') MBROPT(*replace)";)
 	$(info crtcmd|$@|$(cpystmf))
 
 # Save file
 
 # Create object
-	$(eval cmd=$(EXC) $(CL_FLAG) "CRTDSPF FILE("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_NEW)") REPLACE(*YES)" $(CL_LOG))
+	$(eval cmd=$(EXC) $(CL_FLAG) "CRTDSPF FILE("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_MBR)") REPLACE(*YES)" $(CL_LOG))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(cpystmf) $(PRE_COMPILE) $(cmd)  $(POST_COMPILE_FINAL)
@@ -407,18 +455,20 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 # Create and change physical file
 .SECONDEXPANSION:
-%.prtf.file: $(PRTF_PREREQ).prtf
+%.prtf.file.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
 	$(eval cpystmf = $(EXC) $(CL_FLAG) "CRTSRCPF FILE(QTEMP/QSRC) RCDLEN(112)"; \
-		$(EXC) $(CL_FLAG) "CPYFRMSTMF FROMSTMF('$(PF_SRCF)/"$(SOURCE_NAME_NEW)".prtf') TOMBR('/QSYS.LIB/QTEMP.LIB/QSRC.FILE/"$(SOURCE_NAME_NEW)".MBR') MBROPT(*replace)";)
+		$(EXC) $(CL_FLAG) "CPYFRMSTMF FROMSTMF('"$(SOURCE_NAME_NEW)"') TOMBR('/QSYS.LIB/QTEMP.LIB/QSRC.FILE/"$(SOURCE_NAME_MBR)".MBR') MBROPT(*replace)";)
 	$(info crtcmd|$@|$(cpystmf))
 
   # Save file
 
   # Create object
-	$(eval cmd=$(EXC) $(CL_FLAG) "CRTPRTF FILE("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_NEW)") REPLACE(*YES)" $(CL_LOG))
+	$(eval cmd=$(EXC) $(CL_FLAG) "CRTPRTF FILE("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_MBR)") REPLACE(*YES)" $(CL_LOG))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(cpystmf) $(PRE_COMPILE) $(cmd)  $(POST_COMPILE_FINAL)
@@ -432,19 +482,21 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 # Create and change physical file
 .SECONDEXPANSION:
-%.pf.file: $(PF_PREREQ).pf
+%.pf.file.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
 	$(eval cpystmf = $(EXC) $(CL_FLAG) "CRTSRCPF FILE(QTEMP/QSRC) RCDLEN(112)"; \
-		$(EXC) $(CL_FLAG) "CPYFRMSTMF FROMSTMF('$(PF_SRCF)/"$(SOURCE_NAME_NEW)".pf') TOMBR('/QSYS.LIB/QTEMP.LIB/QSRC.FILE/"$(SOURCE_NAME_NEW)".MBR') MBROPT(*replace)";)
+		$(EXC) $(CL_FLAG) "CPYFRMSTMF FROMSTMF('"$(SOURCE_NAME_NEW)"') TOMBR('/QSYS.LIB/QTEMP.LIB/QSRC.FILE/"$(SOURCE_NAME_MBR)".MBR') MBROPT(*replace)";)
 	$(info crtcmd|$@|$(cpystmf))
 
 # Save file
 
 # Create object
-	$(eval cmd=$(EXC) $(CL_FLAG) -q "CRTPF FILE("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_NEW)")" $(CL_LOG); \
-		$(EXC) $(CL_FLAG) "CHGPF FILE("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_NEW)")")
+	$(eval cmd=$(EXC) $(CL_FLAG) -q "CRTPF FILE("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_MBR)")" $(CL_LOG); \
+		$(EXC) $(CL_FLAG) "CHGPF FILE("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_MBR)")")
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(cpystmf) $(PRE_COMPILE) $(cmd)  $(POST_COMPILE_FINAL)
@@ -458,12 +510,14 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 .SECONDEXPANSION:
 # Delete and create logical file
-%.lf.file: $(LF_PREREQ).lf
+%.lf.file.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
 	$(eval cpystmf = $(EXC) $(CL_FLAG) "CRTSRCPF FILE(QTEMP/QSRC) RCDLEN(112)"; \
-	$(EXC) $(CL_FLAG) "CPYFRMSTMF FROMSTMF('$(LF_SRCF)/"$(SOURCE_NAME_NEW)".lf') TOMBR('/QSYS.LIB/QTEMP.LIB/QSRC.FILE/"$(SOURCE_NAME_NEW)".MBR') MBROPT(*replace)";)
+	$(EXC) $(CL_FLAG) "CPYFRMSTMF FROMSTMF('"$(SOURCE_NAME_NEW)"') TOMBR('/QSYS.LIB/QTEMP.LIB/QSRC.FILE/"$(SOURCE_NAME_MBR)".MBR') MBROPT(*replace)";)
 
 # Create object
 	$(eval cmd :=DLTF FILE("$(LIBOBJ_NEW)"))
@@ -471,7 +525,7 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 	$(eval cmd:=$(subst \,,$(cmd)))
 	-$(EXC) $(CL_FLAG) -v "$(cmd)"
 
-	$(eval cmd :=CRTLF FILE("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_NEW)"))
+	$(eval cmd :=CRTLF FILE("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_MBR)"))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(cpystmf) $(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL)
@@ -485,11 +539,13 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 # SQL Table
 .SECONDEXPANSION:
-%.sqltable.file: $(SQL_PREREQ).sqltable
+%.sqltable.file.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqltable') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
+	$(eval cmd:=RUNSQLSTM SRCSTMF('"$(SOURCE_NAME_NEW)"') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL))
@@ -501,11 +557,13 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 # SQL View
-%.sqlview.file: $(SQL_PREREQ).sqlview
+%.sqlview.file.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqlview') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
+	$(eval cmd:=RUNSQLSTM SRCSTMF('"$(SOURCE_NAME_NEW)"') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL))
@@ -517,11 +575,13 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 # SQL Index
-%.sqlindex.file: $(SQL_PREREQ).sqlindex
+%.sqlindex.file.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqlindex') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
+	$(eval cmd:=RUNSQLSTM SRCSTMF('"$(SOURCE_NAME_NEW)"') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL))
@@ -533,11 +593,13 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 # SQL Function
-%.sqlfunc.srvpgm: $(SQL_PREREQ).sqlfunc
+%.sqlfunc.srvpgm.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqlfunc') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
+	$(eval cmd:=RUNSQLSTM SRCSTMF('"$(SOURCE_NAME_NEW)"') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL))
@@ -549,11 +611,13 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 # SQL Procedure
-%.sqlproc.pgm: $(SQL_PREREQ).sqlproc
+%.sqlproc.pgm.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqlproc') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
+	$(eval cmd:=RUNSQLSTM SRCSTMF('"$(SOURCE_NAME_NEW)"') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL))
@@ -565,11 +629,13 @@ ADDBNDDIR=	$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST)) \
 
 
 # SQL Trigger
-%.sqltrig.pgm: $(SQL_PREREQ).sqltrig
+%.sqltrig.pgm.obj: $(SRC_PREREQ)
 
+	$(call bash_call,$(INIT_CMD))
+	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
-	$(eval cmd:=RUNSQLSTM SRCSTMF('$(SQL_SRCF)/"$(SOURCE_NAME_NEW)".sqltrig') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
+	$(eval cmd:=RUNSQLSTM SRCSTMF('"$(SOURCE_NAME_NEW)"') DFTRDBCOL($(NEW_LIB)) COMMIT(*NONE) ERRLVL(21))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 	$(call bash_call,$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(cmd)"  $(POST_COMPILE_FINAL))

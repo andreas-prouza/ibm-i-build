@@ -6,11 +6,8 @@ SCRIPT_VARS2=/tmp/script-variables2.txt
 
 
 # Only to clean up the output file
-source $(dirname $(realpath "$0"))/../global.cfg
+source etc/global.cfg
 echo '' > $STD_OUTPUT_TMP
-
-# Import global config
-source $(dirname $(realpath "$0"))/init.sh
 
 
 # Print all script variables
@@ -24,8 +21,13 @@ echo WORKSPACE_FOLDER $WORKSPACE_FOLDER
 mkdir -p $WORKSPACE_FOLDER/logs
 mkdir -p $WORKSPACE_FOLDER/build
 
-find $WORKSPACE_FOLDER/logs -maxdepth 1 -type f -delete
-rm $WORKSPACE_FOLDER/logs/**/* || true 2>/dev/null
+find $WORKSPACE_FOLDER/logs -maxdepth 2 -type f -delete
+rm -rf $WORKSPACE_FOLDER/logs/**/**/* || true 2>/dev/null
 rm -rf $WORKSPACE_FOLDER/tmp/* || true 2>/dev/null
 
 mkdir -p $WORKSPACE_FOLDER/tmp/logs
+
+cat $STD_OUTPUT_TMP >> $STD_OUTPUT
+
+# Import global config
+source $(dirname $(realpath "$0"))/init.sh 0

@@ -1,6 +1,0 @@
-**free
-
-dsply 'OK $t§§x#y ';
-
-
-return;

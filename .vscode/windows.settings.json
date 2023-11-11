@@ -1,30 +1,3 @@
 {
-    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)" ,
-    "makefile.extensionOutputFolder": "./.vscode",
-    "emeraldwalk.runonsave": {
-        "commands": [
-            {
-                "match": ".*/ibm-i-build.*/.*$",
-                "isAsync": true,
-                "cmd": "if [[ \"${workspaceFolder}\" == '' ]]; then \n echo 'Wrong local workspace folder \"${workspaceFolder}\"!!'\nelse\n rsync -av --rsync-path=/QOpenSys/pkgs/bin/rsync --exclude={'.git','.vscode','.project','.gitignore'} --delete $(wslpath \"${workspaceFolder}\")/ academy:~/myproject/ \nfi"
-            }
-        ]
-    },
-    "command-runner.terminal.name": "Sync project",
-    "command-runner.terminal.autoClear": true,
-    "command-runner.terminal.autoFocus": true,
-    "command-runner.commands": {
-        "Sync source to IBM i": "make/scripts/sync2ibmi.sh debug",
-        "Sync logs back": "make/scripts/sync_back_from_ibmi.sh debug",
-        "Run build (summary output)": "make/scripts/create_build_script.sh summary; make/scripts/sync2ibmi.sh; make/scripts/run_build.sh; make/scripts/sync_back_from_ibmi.sh",
-        "Run build (detailed output)": "make/scripts/create_build_script.sh detailed; make/scripts/sync2ibmi.sh; make/scripts/run_build.sh; make/scripts/sync_back_from_ibmi.sh",
-        "Run build (debug)": "make/scripts/create_build_script.sh debug; make/scripts/sync2ibmi.sh debug; make/scripts/run_build.sh debug; make/scripts/sync_back_from_ibmi.sh debug",
-        "Simulate build": "make/scripts/create_build_script.sh simulate",
-        "Reset ALL": "make clean",
-        "Show Change Debug": "make/scripts/create_build_script.sh show-change-debug  ",
-        "Show Change Compile": "make/scripts/create_build_script.sh schow-change-compile ",
-        "Show Change Object":  "make/scripts/create_build_script.sh show-change-object",
-        "Create Prod Object List": "make/scripts/create_build_script.sh create-object-list "
-    }
-
+    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)"
 }

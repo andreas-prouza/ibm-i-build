@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 # Import global config
-source $(dirname $(realpath "$0"))/init.sh
+source $(dirname $(realpath "$0"))/init.sh 0
 
 #set -o xtrace
 

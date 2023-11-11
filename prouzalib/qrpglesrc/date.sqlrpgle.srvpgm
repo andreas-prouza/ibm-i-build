@@ -1,0 +1,99 @@
+**free
+ctl-opt nomain;
+
+exec sql set option commit=*none;
+
+/copy 'qcpysrc/date'
+/copy 'qcpysrc/logger'
+
+/copy 'qcpysrc/errhdlsql'
+
+// ***********************************************
+// Generates date in format:
+//        {dayname}, {day}. {monthname} {year}
+// ***********************************************
+
+
+dcl-proc get_date_by_name         export;
+
+    dcl-pi get_date_by_name       varchar(100);
+        p_date                    date options(*nopass);
+    end-pi;
+
+    dcl-s l_date                  like(p_date);
+    dcl-s l_date_text             like(get_date_by_name);
+
+
+    l_date = %date;
+    if %parms >= %Parmnum(p_date);
+        l_date = p_date;
+    endif;
+
+    exec sql set :l_date_text = dayname(:l_date) || ', ' || 
+                    DAY(:l_date) || '. ' || MONTHNAME(:l_date) || 
+                    ' ' || YEAR(:l_date);
+
+    return l_date_text;
+
+end-proc;
+
+
+
+// ***********************************************
+// Retrieves next working day
+// ***********************************************
+
+dcl-proc get_next_working_day     export;
+
+    dcl-pi get_next_working_day   date;
+        p_date                    date const;
+    end-pi;
+
+    dcl-s l_daynum                int(10);
+    dcl-s l_add_days              int(10);
+    dcl-s l_new_date              date;
+
+    logdebug('Input Date: ' + %char(p_date));
+
+    l_add_days = 1;
+    exec sql set :l_daynum = dayofweek_iso(:p_date);
+
+    logdebug('Day of Week: ' + %char(l_daynum));
+
+    // Skip weekends
+    if l_daynum >= 5;
+        l_add_days = (7 - l_daynum) + 1;
+        logdebug('Weekend + ' + %char(l_add_days) + ' days');
+    endif;
+    
+    exec sql set :l_new_date = :p_date + :l_add_days days;
+
+    logdebug('New date: ' + %char(l_new_date));
+
+    return l_new_date;
+
+on-exit;
+
+    logdebug('get_next_working_day ende');
+    return %date;
+
+end-proc;
+
+
+// ***********************************************
+// Convert date from data type INT to DATE
+//     Input date format must be: yyyymmdd
+// ***********************************************
+
+dcl-proc int_2_date               export;
+    dcl-pi  int_2_date            date;
+        p_date                    int(10) const;
+    end-pi;
+
+    dcl-s l_date                 date;
+
+    exec sql set :l_date = date(regexp_replace(char(:p_date), 
+                                    '(....)(..)(..)', '$1-$2-$3'));
+
+    return l_date;
+end-proc;

@@ -129,13 +129,16 @@ Therefore I am using the following extensions:
 ### Project settings
 
 You can just use the ```.vscode/settings.json``` from this project.<br/>
-Rename the ```windows.settings.json``` to ```settings.json``` to get the Windows settings.<br/>
-Rename the ```linux.settings.json``` to ```settings.json``` to get the Linux settings.
 
-**Notice for Windows:**<br/>
+**Notice for Windows:**
+
+For Windows it's necessary to add the single config line from ```windows.settings.json``` to the ```settings.json``` file.<br/>
+Because in Windows we use the WSL environment, we need to run all our script in that terminal.
+
 The standard terminal is set to ```Ubuntu (WSL)``` for this project in the ```.vscode/settings.json```.<br/>
-If you prefere Cygwin, you need to change the terminal property there.<br/>
-You may need to exit the current Windows terminal in vscode to get the config in action.
+If you prefere Cygwin, you need to change the terminal property there.
+
+You may need to exit the current running terminal in vscode to get the config in action.
 
 
 ### Let's run the build
