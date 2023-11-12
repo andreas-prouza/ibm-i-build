@@ -11,23 +11,37 @@
 # Quick Start
 
 ## Prerequesits
-* [Build process](build_process.md#gnu-make.md) to create compile commands
-  * Install it on that machine which should handle this
-  * Could be on IBM i
-  * Could be on your PC
-* Your prefered IDE (RDi or VSCode)
-* [SSH](SSH.md#ssh) with key based authentication
 
 Because we need some tools on our PC (rsync and gnu-make) ...
 
-* for [Windows](integration_in_your_ide.md#windows) you need one of these:
-  * Windows Subsystem for Linus (WSL)<br/>
-    This is recommended for flexiblity and compatibility 
-  * or Cygwin
-* for [Linux](integration_in_your_ide.md#linux) install
-  * ```rsync```
-  * ```make```
-  * ```jq```
+* [Set up for build process](build_process.md#gnu-make.md) to create compile commands
+  * Install gnu-make on that machine which should handle this
+    * Could be on IBM i
+    * Could be on your PC
+      * for [Windows](integration_in_your_ide.md#on-windows) you need one of these:
+        * Windows Subsystem for Linus (WSL)<br/>
+          This is recommended for flexiblity and compatibility 
+        * or Cygwin
+      * for [Linux](integration_in_your_ide.md#on-linux) install
+        * ```rsync```
+        * ```make```
+        * ```jq```
+* Your prefered IDE (RDi or VSCode)
+* [SSH](SSH.md#ssh) with key based authentication
+* Get all your sources to the IFS in the folloging structure:
+  * {lib}/{SRC-PF}/{member}.{attribute}.{type} ... like:
+    * prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm
+    * prouzalib/qsqlsrc/logger.sqltable.file
+    * prouzalib/qcllesrc/testfile.pf.file
+* Download this project
+
+
+## Git configuration
+
+* [hooks](git.md#hooks)
+  * This will set the correct source "last modified timestamp"
+* [config](git.md#git-config)
+  * To handle special caracters in file names
 
 
 ## Change build settings
@@ -49,11 +63,11 @@ Modify makefiles to your own settings
 
 ### [Adapt global settings](build_process.md#global-settings)
 
-```etc/global.cfg```
+The ```etc/global.cfg``` contains all settings for our scripts:
 * Target system (IBM i)
 * Directory in the IFS
 * Git branch names
-* etc
+* etc.
 
 ## [Initiate your dummy build files](build_process.md#prepare-for-first-build)
 
@@ -77,5 +91,5 @@ gmake all --touch --directory=/home/prouza/myproject/build --makefile=/home/prou
 ## RDi as IDE
 
 1. Import the Git Repo as new project
-2. Add ```External Tools Configurations```
+2. Add build commands in ```External Tools Configurations```
 3. Run the build

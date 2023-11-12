@@ -54,20 +54,5 @@ TGTLIB_PROUZA2 := PROUZAT3
 #TGTLIB_OBJ_GLOBAL=Hansi
 
 
-OBJS:= $(shell find prouzalib* -type f \( -iname \*.pgm -o -iname \*.srvpgm -o -iname \*.file \) | sed 's/$$/.obj/' | sed 's/\$$/\$$\$$/' )
 
-prouzalib2/sqltest1.sqlproc.pgm: prouzalib2/sqltest1.sqlrpgle.pgm
-prouzalib2/sqltest2.sqlproc.pgm: prouzalib2/sqltest2.sqlrpgle.pgm
-prouzalib2/sqlsrv1.sqlproc.pgm: prouzalib2/sqlsrv1.sqlrpgle.srvpgm
-
-
-
-
-prouzalib2/test.rpgle.pgm: prouzalib/test.rpgle.pgm
-
-prouzalib/testlog.rpgle.pgm: private OBJLIB=prouza2
-
-prouzalib/\#test.rpgle.pgm:	private OBJLIB=*SOURCE
-prouzalib/\#test2.rpgle.pgm:	private OBJLIB=PROUZA4
-prouzalib/§test.rpgle.pgm:	private OBJLIB=PROUZA2
 

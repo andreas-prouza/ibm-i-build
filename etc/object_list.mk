@@ -54,6 +54,8 @@ OBJS:= prouzalib/qrpglesrc/cpysrc2ifs.sqlrpgle.pgm.obj \
 # Dynamically
 #------------------
 
+# Currently we search for all SRVPGM, PGM, FILE
+
 OBJS:= $(shell find prouzalib* -type f \( -iname \*.pgm -o -iname \*.srvpgm -o -iname \*.file \) | sed 's/$$/.obj/' | sed 's/\$$/\$$\$$/' )
 
 
@@ -73,7 +75,7 @@ OBJS:= $(shell find prouzalib* -type f \( -iname \*.pgm -o -iname \*.srvpgm -o -
 # Also if testmod.rpgle.srvpgm.obj will be changed, GNU make automatically builds test1.rpgle.pgm.obj to.
 #########################################################
 
-prouzalib/qrpglesrc/prouzadir.bnddir: \
+prouzalib/qrpglesrc/prouzadir.bnddir.obj: \
 		prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
 		prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj \
 		prouzalib/qrpglesrc/errhdlrpg.rpgle.srvpgm.obj \
@@ -92,7 +94,7 @@ prouzalib/qrpglesrc/testsqlerr.sqlrpgle.pgm.obj: \
 # Pro: No need to check detailed dependencies, can't forget it if they are all in the same BNDDIR
 # Cons: If you change a single SRVPGM in BNDDIR, all programs which depend on the BNDDIR will be compiled
 #prouzalib/qrpglesrc/testlog.rpgle.pgm.obj: \
-		prouzalib/qrpglesrc/prouzadir.bnddir
+		prouzalib/qrpglesrc/prouzadir.bnddir.obj
 #
 # You can also define all used modules (=srvpgm) you are using.
 # This brings better performance for compiling because of direct dependency
@@ -119,7 +121,6 @@ prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj:	private TGT_BNDDIR=*LIBL/PROU
 # Dependency list
 #########################################################
 #
-prouzalib2/sqltest1.sqlproc.pgm.obj: prouzalib2/sqltest1.sqlrpgle.pgm.obj
 
 prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:	\
 		prouzalib/qsqlsrc/logger.sqltable.file
@@ -150,3 +151,20 @@ prouzalib/qrpglesrc/testmod.rpgle.srvpgm.obj: \
 prouzalib/qrpglesrc/testsqlerr.sqlrpgle.pgm.obj: \
 		prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
 		prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj
+
+
+prouzalib2/sqltest1.sqlproc.pgm: prouzalib2/sqltest1.sqlrpgle.pgm
+
+prouzalib2/sqltest2.sqlproc.pgm: prouzalib2/sqltest2.sqlrpgle.pgm
+
+prouzalib2/sqlsrv1.sqlproc.pgm: prouzalib2/sqlsrv1.sqlrpgle.srvpgm
+
+prouzalib2/test.rpgle.pgm: prouzalib/test.rpgle.pgm
+
+prouzalib/testlog.rpgle.pgm: private OBJLIB=prouza2
+
+prouzalib/\#test.rpgle.pgm:	private OBJLIB=*SOURCE
+
+prouzalib/\#test2.rpgle.pgm:	private OBJLIB=PROUZA4
+
+prouzalib/§test.rpgle.pgm:	private OBJLIB=PROUZA2
