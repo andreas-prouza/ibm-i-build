@@ -26,12 +26,12 @@
 #############################################################
 ### Directory for compile logs
 #############################################################
-#LOG_DIR=$(SRC_DIR)/logs
+#LOG_DIR=./logs
 
 #############################################################
 ### Directory to create a dummy file for each object. (For source timestamp change check)
 #############################################################
-#TGT_DIR=$(SRC_DIR)/build
+#TGT_DIR=./build
 
 #############################################################
 ### Target library - Global

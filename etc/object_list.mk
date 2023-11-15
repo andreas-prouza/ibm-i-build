@@ -56,7 +56,7 @@ OBJS:= prouzalib/qrpglesrc/cpysrc2ifs.sqlrpgle.pgm.obj \
 
 # Currently we search for all SRVPGM, PGM, FILE
 
-OBJS:= $(shell find prouzalib* -type f \( -iname \*.pgm -o -iname \*.srvpgm -o -iname \*.file \) | sed 's/$$/.obj/' | sed 's/\$$/\$$\$$/' )
+OBJS:= $(shell cd src; find * -type f \( -iname \*.pgm -o -iname \*.srvpgm -o -iname \*.file \) | sed 's/$$/.obj/' | sed 's/\$$/\$$\$$/' )
 
 
 

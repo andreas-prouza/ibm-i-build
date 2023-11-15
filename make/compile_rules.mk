@@ -38,7 +38,7 @@ LIBOBJ_NEW= '$(NEW_LIB)/$(PGM_NEW)'
 
 
 #SOURCE_NAME_NEW=$$(notdir $$(subst §,$$$$'\247',$$(subst $$,'$$$$',$$(subst \#,\\\#,$$*))))
-SOURCE_NAME_NEW='$(basename $(subst $$,$$$$,$(subst #,\#,$@)))'
+SOURCE_NAME_NEW='$(SRC_DIR)/$(basename $(subst $$,$$$$,$(subst #,\#,$@)))'
 
 SOURCE_NAME_OTHERS=$(basename $@)
 SOURCE_NAME_MBR='$(basename $(basename $(basename $(subst $$,$$$$,$(subst #,\#,$(@F))))))'
@@ -65,7 +65,7 @@ LOG_FILE_NAME=$(SOURCE_NAME_OTHERS)
 # So we need to convert the unix variant to the IBM i variant:
 #       mv $'\302\247'test.mbr $'\247'test.mbr
 
-CHG_ATTR=$(EXC) $(CL_FLAG) "CHGATR OBJ('"'$(SOURCE_NAME_OTHERS)'"') ATR(*CCSID) VALUE(1208)"
+CHG_ATTR=$(EXC) $(CL_FLAG) "CHGATR OBJ('"'$(SOURCE_NAME_NEW)'"') ATR(*CCSID) VALUE(1208)"
 define DOLLAR_SH_REPLACE
   $(CHG_ATTR) $(CCSID_CONV)
 # $(if $(findstring §,$*),\

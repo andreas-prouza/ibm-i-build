@@ -1,7 +1,7 @@
-# Source directory (!full path!)
-SRC_DIR=.
+# Source directory
+SRC_DIR=./src
 
-# Include DIR (e.g. to search for /copy members in RPG sources) (!full path!)
+# Include DIR (e.g. to search for /copy members in RPG sources)
 #INC_DIR=$(SRC_DIR)/$$(dir $$@)
 INC_DIR='$(SRC_DIR)/$$(dir $$(patsubst %/,%,$$(dir $$(subst ',,$$@))))' '$(SRC_DIR)/prouzalib/'
 

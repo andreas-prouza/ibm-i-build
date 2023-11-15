@@ -26,16 +26,16 @@ include $(MAKE_CONFIG_DIR)/object_list.mk
 
 
 # Directory for compile logs
-LOG_DIR=$(SRC_DIR)/logs
+LOG_DIR=./logs
 # Directory to create a dummy file for each object. (For source timestamp change check)
-TGT_DIR=$(SRC_DIR)/build
+TGT_DIR=./build
 # Directory to create a dummy file for each object which has been compiled successfully
-COMPILED_DIR=$(SRC_DIR)/tmp
+COMPILED_DIR=./tmp
 COMPILED_FILE=$(COMPILED_DIR)/compiled.txt
 
 # Directory/SRC-PF
 #SRC_PREREQ=$(subst $$,'$$$$',$(basename $^))
-SRC_PREREQ=$$(basename $$@)
+SRC_PREREQ=$(SRC_DIR)/$$(basename $$@)
 #SRC_PREREQ=prouzalib/qrpglesrc/$$$$t§§x\#y.rpgle.pgm
 
 #########################################################
