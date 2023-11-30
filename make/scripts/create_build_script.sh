@@ -48,6 +48,9 @@ case $MODE in
   show-change-object)
     make --makefile=make/makefile all -n  2> $ERROR_OUTPUT  |grep crtcmd | cut -d '|' --output-delimiter ': ' -f 2
     ;;
+  show-change)
+    make --makefile=make/makefile all -n  2> $ERROR_OUTPUT  |grep summary
+    ;;
   create-object-list)
     create_object_list
     ;;

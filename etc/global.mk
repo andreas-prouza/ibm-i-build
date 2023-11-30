@@ -1,9 +1,15 @@
+
 # Source directory
-SRC_DIR=./src
+SRC_DIR=~/projekte/opensource/ibm-i-build/src
+
+# Remote IBM i directory
+# Attantion!!!
+# Don't use tilde (~) in your path. The compile can't handle this
+SRC_DIR_REMOTE=/home/prouzat1/ibm-i-build/src
 
 # Include DIR (e.g. to search for /copy members in RPG sources)
 #INC_DIR=$(SRC_DIR)/$$(dir $$@)
-INC_DIR='$(SRC_DIR)/$$(dir $$(patsubst %/,%,$$(dir $$(subst ',,$$@))))' '$(SRC_DIR)/prouzalib/'
+INC_DIR='$(SRC_DIR_REMOTE)/$$(dir $$(patsubst %/,%,$$(dir $$(subst ',,$$@))))' '$(SRC_DIR_REMOTE)/prouzalib/'
 
 
 # Target libraries

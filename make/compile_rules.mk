@@ -38,7 +38,7 @@ LIBOBJ_NEW= '$(NEW_LIB)/$(PGM_NEW)'
 
 
 #SOURCE_NAME_NEW=$$(notdir $$(subst §,$$$$'\247',$$(subst $$,'$$$$',$$(subst \#,\\\#,$$*))))
-SOURCE_NAME_NEW='$(SRC_DIR)/$(basename $(subst $$,$$$$,$(subst #,\#,$@)))'
+SOURCE_NAME_NEW='$(SRC_DIR_REMOTE)/$(basename $(subst $$,$$$$,$(subst #,\#,$@)))'
 
 SOURCE_NAME_OTHERS=$(basename $@)
 SOURCE_NAME_MBR='$(basename $(basename $(basename $(subst $$,$$$$,$(subst #,\#,$(@F))))))'
@@ -124,7 +124,6 @@ define POST_COMPILE_FINAL
 endef
 define FINALY
   $(CONVERT_STDERR_LOG)  $(CONVERT_STDOUT_LOG)  $(CONVERT_JOBLOG_LOG)  $(CHECK_ERROR) && $(TOUCH)
-	$(info crtcmd|prod_obj|$@|$(LIBOBJ_NEW)|$(PROD_LIBOBJ))
 endef
 
 # This is only a variable containing a "new line"

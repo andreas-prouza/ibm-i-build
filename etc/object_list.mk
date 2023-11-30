@@ -38,14 +38,13 @@ OBJS:= prouzalib/qrpglesrc/cpysrc2ifs.sqlrpgle.pgm.obj \
 			 prouzalib/qrpglesrc/errhdlrpg.rpgle.srvpgm.obj \
 			 prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj \
 			 prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
-			 prouzalib/qrpglesrc/logger.sqltable.file \
+			 prouzalib/qrpglesrc/logger.sqltable.file.obj \
 			 prouzalib/qrpglesrc/testlog.rpgle.pgm.obj \
 			 prouzalib/qrpglesrc/testlog2.sqlrpgle.pgm.obj \
 			 prouzalib/qrpglesrc/testmod.rpgle.srvpgm.obj \
 			 prouzalib/qrpglesrc/testsqlerr.sqlrpgle.pgm.obj \
 			 prouzalib/qrpglesrc/prouzadir.bnddir \
 			 prouzalib/qrpglesrc/testcl.clle.pgm.obj \
-			 prouzalib2/test.rpgle \
 			 prouzalib2/sqltest1.sqlrpgle.pgm.obj \
 			 prouzalib2/sqltest1.sqlproc.pgm.obj
 
@@ -123,12 +122,12 @@ prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj:	private TGT_BNDDIR=*LIBL/PROU
 #
 
 prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:	\
-		prouzalib/qsqlsrc/logger.sqltable.file
+		prouzalib/qsqlsrc/logger.sqltable.file.obj
 prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:	private BNDDIR=*LIBL/PROUZADIR
 prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:	private TGT_BNDDIR=*LIBL/PROUZADIR
 
-prouzalib/qsqlsrc/logger_hist.sqltable.file.obj:	\
-		prouzalib/qsqlsrc/logger.sqltable.file.obj
+prouzalib/qsqlsrc/lager_hist.sqltable.file.obj:	\
+		prouzalib/qsqlsrc/lager.sqltable.file.obj
 
 prouzalib/qrpglesrc/cpysrc2ifs.sqlrpgle.pgm.obj: \
 		prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj

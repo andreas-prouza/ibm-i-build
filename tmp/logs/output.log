@@ -11,7 +11,7 @@
 > COLOR_GREEN_BACKGROUND='\e[102;97m'
 > COLOR_MAGENTA_BOLD='\e[1;95m'
 > COLOR_RED='\e[101;31m'
-> COLUMNS=103
+> COLUMNS=62
 > COMPILE_OBJECT_LIST=tmp/prod_obj.txt
 > COMPILE_SCRIPT=tmp/compile.sh
 15a26,31
@@ -26,7 +26,7 @@
 28a46
 > GIT_CACHE_META_FILE=build/.git_cache_meta
 47a66
-> LINES=17
+> LINES=18
 59a79
 > OS_CMD_2_OPEN_URL=xdg-open
 66a87,92

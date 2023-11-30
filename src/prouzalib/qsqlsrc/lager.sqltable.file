@@ -1,0 +1,21 @@
+
+-- ALTER TABLE lager DROP VERSIONING;
+
+
+Create or replace table lager (
+  id           bigint generated always as identity (cycle),
+  location     char(10),
+  description  varchar(1000),
+  extref       varchar(200),
+  program      varchar(200),
+  chgtime      timestamp for each row on update as row change timestamp
+               not null,
+  job          varchar(28) generated always as (qsys2.job_name),
+  action       CHAR(1) GENERATED ALWAYS AS (DATA CHANGE OPERATION),
+  start        TIMESTAMP(12) NOT NULL GENERATED ALWAYS AS ROW BEGIN, 
+  end          TIMESTAMP(12) NOT NULL GENERATED ALWAYS AS ROW END,
+  transId      TIMESTAMP(12) GENERATED ALWAYS AS TRANSACTION START ID,
+  PERIOD       SYSTEM_TIME (start, end),
+  primary key (id)
+);
+

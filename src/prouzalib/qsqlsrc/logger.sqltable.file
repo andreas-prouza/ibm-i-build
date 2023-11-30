@@ -1,22 +1,14 @@
 
-ALTER TABLE logger DROP VERSIONING;
-
 
 Create or replace table logger (
-      id        bigint generated always as identity (cycle),
-      loglevel  char(10),
-      text      varchar(1000),
-      extref    varchar(200),
-      program   varchar(200),
-      sp2       int,
-      chgtime   timestamp for each row on update as row change timestamp
-                not null,
-      job       varchar(28) generated always as (qsys2.job_name),
-      action   CHAR(1) 	GENERATED ALWAYS AS (DATA CHANGE OPERATION),
-      start     TIMESTAMP(12) NOT NULL GENERATED ALWAYS AS ROW BEGIN, 
-      end       TIMESTAMP(12) NOT NULL GENERATED ALWAYS AS ROW END,
-      transId TIMESTAMP(12) GENERATED ALWAYS AS TRANSACTION START ID,
-      PERIOD SYSTEM_TIME (start, end),
-      primary key (id)
-     );
+  id        bigint generated always as identity (cycle),
+  loglevel  char(10),
+  text      varchar(1000),
+  extref    varchar(200),
+  program   varchar(200),
+  chgtime   timestamp for each row on update as row change timestamp
+            not null,
+  job       varchar(28) generated always as (qsys2.job_name),
+  primary key (id)
+);
 

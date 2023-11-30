@@ -60,11 +60,12 @@ dcl-proc logging export;
   else;
     Exec Sql Select
             Program_Library_name || '/' ||
-            Program_name || '(' || coalesce(Procedure_name, '*none') || ')'
+            Program_name || '(' || coalesce(Procedure_name, '*none') || '):' ||
+            char(int(statement_identifiers))
           Into :l_program
           From table(qsys2.stack_info()) t1
           Where Program_library_name not like 'Q%'
-          and   Program_name not in ('LOGGER', 'SQLERROR', '')
+          and   Program_name not in ('LOGGER', 'SQLERROR', 'ERRHDLSQL', '')
           Order by ordinal_position desc
           Fetch first Row Only;
   ENDIF;

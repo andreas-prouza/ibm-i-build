@@ -53,10 +53,10 @@
                 "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh debug;   make/scripts/sync_back_from_ibmi.sh;  make/scripts/git-cache-meta.sh --store"
             },
             {
-                "name": "$(telescope) Show Change Object",
+                "name": "$(telescope) Show Changes",
 				"color": "white",
 				"useVsCodeApi": false,
-                "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change-object   &&   make/scripts/git-cache-meta.sh --store"
+                "command": "make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change   &&   make/scripts/git-cache-meta.sh --store"
             },
             {
                 "name": "$(pass-filled) $(rocket)  Deploy",
@@ -78,5 +78,13 @@
         "*.sqltable.file": "sql",
         "*.sqlview.file": "sql",
         "*.sqlproc.file": "sql"
+    },
+    "files.exclude": {
+        "**/.git*": true,
+        ".vscode": true,
+        "build": true,
+        "docs": true,
+        "make": true,
+        "**/Thumbs.db": true
     }
 }
