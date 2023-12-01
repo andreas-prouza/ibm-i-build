@@ -113,6 +113,7 @@ prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj:	prouzalib/qrpglesrc/logger.sq
 # You can also define custom parameters for an object
 prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj:	private INCLUDE_BNDDIR=*LIBL/PROUZADIR
 prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj:	private TGT_BNDDIR=*LIBL/PROUZADIR
+prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj:	private ACTGRP=ERRHDL
 #
 #########################################################
 
@@ -125,6 +126,7 @@ prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:	\
 		prouzalib/qsqlsrc/logger.sqltable.file.obj
 prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:	private BNDDIR=*LIBL/PROUZADIR
 prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:	private TGT_BNDDIR=*LIBL/PROUZADIR
+prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:	private ACTGRP=LOGGER
 
 prouzalib/qsqlsrc/lager_hist.sqltable.file.obj:	\
 		prouzalib/qsqlsrc/lager.sqltable.file.obj
@@ -150,6 +152,7 @@ prouzalib/qrpglesrc/testmod.rpgle.srvpgm.obj: \
 prouzalib/qrpglesrc/testsqlerr.sqlrpgle.pgm.obj: \
 		prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
 		prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj
+prouzalib/qrpglesrc/testsqlerr.sqlrpgle.pgm.obj:	private ACTGRP=*NEW
 
 
 prouzalib2/sqltest1.sqlproc.pgm: prouzalib2/sqltest1.sqlrpgle.pgm

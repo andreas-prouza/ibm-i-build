@@ -227,20 +227,20 @@ dcl-proc Send_Program_Message export;
   l_msgf_ds.file = 'QCPFMSG';
   l_msgf_ds.lib = '*LIBL';
 
-  if (%parms < %parmnum(p_msgid) and p_msgid <> *blank);
+  if (%parms >= %parmnum(p_msgid) and p_msgid <> *blank);
     l_msgid = p_msgid;
   endif;
 
-  if (%parms < %parmnum(p_msgf) and p_msgf <> *blank);
+  if (%parms >= %parmnum(p_msgf) and p_msgf <> *blank);
     l_msgf_ds.file = p_msgf;
   endif;
 
-  if (%parms < %parmnum(p_msgf_lib) and p_msgf_lib <> *blank);
+  if (%parms >= %parmnum(p_msgf_lib) and p_msgf_lib <> *blank);
     l_msgf_ds.lib = p_msgf_lib;
   endif;
 
 
-  if (%parms < %parmnum(p_log) Or p_log = *on);
+  if (%parms >= %parmnum(p_log) Or p_log = *on);
     log('Send_Program_Message (' + %trim(p_type) + '): ' +
          %trim(p_msg));
   endif;

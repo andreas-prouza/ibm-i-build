@@ -1,24 +1,20 @@
 #!/bin/bash 
 
-SCRIPT_VARS=/tmp/script-variables.txt
-SCRIPT_VARS2=/tmp/script-variables2.txt
-( set -o posix ; set ) > $SCRIPT_VARS
-
 # Import global config
-source $(dirname $(realpath "$0"))/init.sh
+source $(dirname $(realpath "$0"))/init.sh 0
 
-( set -o posix ; set ) > $SCRIPT_VARS2
-diff $SCRIPT_VARS $SCRIPT_VARS2
+REMOTE_WORKSPACE_FOLDER_NAME=' /  '
+#REMOTE_WORKSPACE_FOLDER_NAME=${REMOTE_WORKSPACE_FOLDER_NAME%%*( )}
+REMOTE_WORKSPACE_FOLDER_NAME="${REMOTE_WORKSPACE_FOLDER_NAME#"${REMOTE_WORKSPACE_FOLDER_NAME%%[![:space:]]*}"}"
+REMOTE_WORKSPACE_FOLDER_NAME="${REMOTE_WORKSPACE_FOLDER_NAME%"${REMOTE_WORKSPACE_FOLDER_NAME##*[![:space:]]}"}"
+
+if [ "$REMOTE_WORKSPACE_FOLDER_NAME" = "" ] || [ "$REMOTE_WORKSPACE_FOLDER_NAME" = "/" ] || [ "$REMOTE_WORKSPACE_FOLDER_NAME" == "." ]
+then
+  echo "Remote workspace folder '$REMOTE_WORKSPACE_FOLDER_NAME' is not allowed!" > $ERROR_OUTPUT
+  error_handler
+  exit -1
+fi
 
 
-echo -e "$COLOR_GREEN $MODE $COLOR_END"
-echo WORKSPACE_FOLDER: $WORKSPACE_FOLDER
-echo Script: $SCRIPT
-echo SCRIPT_PATH: $SCRIPT_PATH
-echo REMOTE_WORKSPACE_FOLDER_NAME: $REMOTE_WORKSPACE_FOLDER_NAME
+echo "End $REMOTE_WORKSPACE_FOLDER_NAME"
 
-
-
-echo "output log $TEMP_DIR/SYNC2REMOTE_LOG.log"
-
-cat "$TEMP_DIR/SYNC2REMOTE_LOG.log"

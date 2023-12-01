@@ -14,8 +14,12 @@ dcl-proc main;
 
   loginfo('My PGM starts ...' : 'LOG_TEST_CASE_2');
   
-  // SQL error will be issued here:
-  exec sql Select count(*) Into :l_count from doesnt_exist;
+  monitor;
+    // SQL error will be issued here:
+    exec sql Select count(*) Into :l_count from doesnt_exist;
+  on-error;
+    Send_Program_Message('Fehler beim SQL': '*ESCAPE');
+  endmon;
 
   loginfo('Number of records: ' + %char(l_count) : 'LOG_TEST_CASE_2');
 

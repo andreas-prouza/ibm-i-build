@@ -138,6 +138,7 @@ LIBLIST_UNIQUE=$(call uniq,$(LIBLIST))
 
 SET_LIBL=$(patsubst %,liblist -a % 2> /dev/null;,$(LIBLIST_UNIQUE))
 PRE_COMPILE=echo "$(cmd)"$(newline) ( $(SET_LIBL)
+PRE_COMPILE_NO_ECHO=$(newline) ( $(SET_LIBL)
 INIT_CMD=mkdir -p `dirname $(LOG_DIR)/$(LOG_FILE_NAME)` ; mkdir -p `dirname $(TGT_DIR)/$(LOG_FILE_NAME)` 
 
 
@@ -498,7 +499,7 @@ ADDBNDDIR=	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(ADDBNDDIR_CMD)" $(POST_COMPILE_F
 		$(EXC) $(CL_FLAG) "CHGPF FILE("$(LIBOBJ_NEW)") SRCFILE(QTEMP/QSRC) SRCMBR("$(SOURCE_NAME_MBR)")")
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
-	$(cpystmf) $(PRE_COMPILE) $(cmd)  $(POST_COMPILE_FINAL)
+	$(PRE_COMPILE_NO_ECHO) $(cpystmf) $(cmd)  $(POST_COMPILE_FINAL)
 
 	$(FINALY)
 	

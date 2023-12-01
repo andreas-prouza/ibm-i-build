@@ -47,7 +47,7 @@ dcl-proc handle_sql;
 
   logerror('SQL ' + p_type + ' (' + %char(l_sqlcode) + '/' + l_sqlstate + '): ' + l_msgtext);
 
-  Send_Program_Message(l_msgtext : '*ESCAPE' : l_msgid : 'QSQLMSG');
+  Send_Program_Message(l_msgid + ': ' + l_msgtext : '*ESCAPE');
 
   return;
 

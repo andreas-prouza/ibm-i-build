@@ -28,6 +28,30 @@ print_debug() {
 #trap 'on_exit' EXIT
 #trap 'error_handler' ERR
 
+# Remove trim leading & trailing blanks
+REMOTE_WORKSPACE_FOLDER_NAME="${REMOTE_WORKSPACE_FOLDER_NAME#"${REMOTE_WORKSPACE_FOLDER_NAME%%[![:space:]]*}"}"
+REMOTE_WORKSPACE_FOLDER_NAME="${REMOTE_WORKSPACE_FOLDER_NAME%"${REMOTE_WORKSPACE_FOLDER_NAME##*[![:space:]]}"}"
+
+# Check if a correct remote path is set
+if [ "$REMOTE_WORKSPACE_FOLDER_NAME" = "" ] || [ "$REMOTE_WORKSPACE_FOLDER_NAME" = "/" ] || [ "$WORKSPACE_FOLDER" = "C:\\" ] || [ "$REMOTE_WORKSPACE_FOLDER_NAME" == "." ] || [ "$REMOTE_WORKSPACE_FOLDER_NAME" == "~" ] || [ "$REMOTE_WORKSPACE_FOLDER_NAME" == "~/" ]
+then
+  echo "Remote workspace folder '$REMOTE_WORKSPACE_FOLDER_NAME' is not allowed!" > $ERROR_OUTPUT
+  error_handler
+  exit -1
+fi
+
+# Remove trim leading & trailing blanks
+WORKSPACE_FOLDER="${WORKSPACE_FOLDER#"${WORKSPACE_FOLDER%%[![:space:]]*}"}"
+WORKSPACE_FOLDER="${WORKSPACE_FOLDER%"${WORKSPACE_FOLDER##*[![:space:]]}"}"
+
+# Check if a correct remote path is set
+if [ "$WORKSPACE_FOLDER" = "" ] || [ "$WORKSPACE_FOLDER" = "/" ] || [ "$WORKSPACE_FOLDER" = "C:\\" ] || [ "$WORKSPACE_FOLDER" == "." ] || [ "$WORKSPACE_FOLDER" == "~" ] || [ "$WORKSPACE_FOLDER" == "~/" ]
+then
+  echo "Local workspace folder '$WORKSPACE_FOLDER' is not allowed!" > $ERROR_OUTPUT
+  error_handler
+  exit -1
+fi
+
 exec > >(tee -a $STD_OUTPUT)
 
 if [ -z "$MODE" ] # argument has not been passed

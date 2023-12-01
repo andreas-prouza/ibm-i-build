@@ -11,7 +11,7 @@
 > COLOR_GREEN_BACKGROUND='\e[102;97m'
 > COLOR_MAGENTA_BOLD='\e[1;95m'
 > COLOR_RED='\e[101;31m'
-> COLUMNS=62
+> COLUMNS=87
 > COMPILE_OBJECT_LIST=tmp/prod_obj.txt
 > COMPILE_SCRIPT=tmp/compile.sh
 15a26,31
@@ -26,12 +26,12 @@
 28a46
 > GIT_CACHE_META_FILE=build/.git_cache_meta
 47a66
-> LINES=18
+> LINES=15
 59a79
 > OS_CMD_2_OPEN_URL=xdg-open
 66a87,92
 > REMOTE_ERROR_OUTPUT=logs/error.log
-> REMOTE_HOST=academy-test
+> REMOTE_HOST=logsolution-test
 > REMOTE_WORKSPACE_FOLDER_NAME='~/ibm-i-build'
 > RUN_BUILD_LOG=/home/andreas/projekte/opensource/ibm-i-build/tmp/logs/run_build.log
 > SCRIPT=cleanup.sh

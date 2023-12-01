@@ -9,7 +9,7 @@ SRC_DIR_REMOTE=/home/prouzat1/ibm-i-build/src
 
 # Include DIR (e.g. to search for /copy members in RPG sources)
 #INC_DIR=$(SRC_DIR)/$$(dir $$@)
-INC_DIR='$(SRC_DIR_REMOTE)/$$(dir $$(patsubst %/,%,$$(dir $$(subst ',,$$@))))' '$(SRC_DIR_REMOTE)/prouzalib/'
+INC_DIR='$(SRC_DIR_REMOTE)/$$(dir $$(patsubst %/,%,$$(dir $$(subst ',,$$@))))' '$(SRC_DIR_REMOTE)/prouzalib/' '$(SRC_DIR_REMOTE)'
 
 
 # Target libraries
