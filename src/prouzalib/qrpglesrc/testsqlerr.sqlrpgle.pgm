@@ -8,6 +8,7 @@ exec sql Set Option COMMIT=*none;
 /include 'qcpysrc/errhdlsql'
 
 
+
 dcl-proc main;
 
   dcl-s l_count                     int(10);

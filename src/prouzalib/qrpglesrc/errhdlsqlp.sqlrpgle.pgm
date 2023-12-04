@@ -1,0 +1,32 @@
+**free
+
+ctl-opt main(main) bnddir('PROUZADIR');
+
+exec sql Set Option COMMIT=*none;
+
+/include 'qcpysrc/logger'
+
+
+dcl-proc main;
+
+  dcl-s l_count                     int(10);
+
+  dcl-s l_msgtext                 varchar(1000);
+  dcl-s l_msgid                   char(7);
+  dcl-s l_sqlcode                 like(sqlcode) inz(0);
+  dcl-s l_sqlstate                like(sqlstate) inz('');
+
+  Exec sql GET DIAGNOSTICS CONDITION 1
+             :l_msgtext  = MESSAGE_TEXT,
+             :l_msgid    = DB2_MESSAGE_ID,
+             :l_sqlcode  = DB2_RETURNED_SQLCODE,
+             :l_sqlstate = RETURNED_SQLSTATE;
+
+  logerror('SQL ERROR/WARNING - ' + ' (' + %char(l_sqlcode) + '/' + l_sqlstate + '): ' + l_msgtext);
+
+  Send_Program_Message(l_msgid + ': ' + l_msgtext : '*ESCAPE');
+
+  return;
+
+end-proc;
+
