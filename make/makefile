@@ -68,8 +68,9 @@ BUILD_DB=
 
 .PHONY: help
 help:
-	echo "$(ALL_OBJS)"
-	echo "$(ALL_SRCS)"
+	echo "All objects:"
+	echo "$(OBJS)"
+	echo ""
 	echo "Build help."
 	echo ""
 	echo "\tgmake all                 - Build all objects into $(TGTLIB_OBJ_GLOBAL)"

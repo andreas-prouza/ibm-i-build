@@ -1,7 +1,7 @@
 #########################################################
 # List obj all objects to build
 #
-# The target is based on {source-type}.{object-type}
+# The target is based on {source-type}.{object-type}.obj
 # 
 # Extensions:
 # |------------------------------------------------------------------|
@@ -64,25 +64,25 @@ OBJS:= $(shell cd $(SRC_DIR); find . -type f \( -iname \*.pgm -o -iname \*.srvpg
 #
 # {target object}: {list of dependencies} 
 #
-# With this list GMAKE is able to know which objects needs to build first.
+# With this list GNU make is able to know which objects needs to build first.
 # Also which object depends on each other.
 #
 # Example:
 # prouzalib/qrpglesrc/test1.rpgle.pgm.obj: prouzalib/qrpglesrc/testmod.rpgle.srvpgm.obj
 #
 # testmod needs to be build first.
-# Also if testmod.rpgle.srvpgm.obj will be changed, GNU make automatically builds test1.rpgle.pgm.obj to.
+# Also if testmod.rpgle.srvpgm.obj will be changed, GNU make automatically builds test1.rpgle.pgm.obj too.
 #########################################################
 
 prouzalib/qrpglesrc/prouzadir.bnddir.obj: \
-		prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
-		prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj \
-		prouzalib/qrpglesrc/errhdlrpg.rpgle.srvpgm.obj \
-		prouzalib/qrpglesrc/testmod.rpgle.srvpgm.obj \
-		prouzalib/qrpglesrc/date.sqlrpgle.srvpgm.obj
+																										prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
+																										prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj \
+																										prouzalib/qrpglesrc/errhdlrpg.rpgle.srvpgm.obj \
+																										prouzalib/qrpglesrc/testmod.rpgle.srvpgm.obj \
+																										prouzalib/qrpglesrc/date.sqlrpgle.srvpgm.obj
 
 prouzalib/qrpglesrc/testsqlerr.sqlrpgle.pgm.obj: \
-		prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj
+																										prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj
 
 #########################################################
 # Dependency to BNDDIR or single SRVPGM?
@@ -97,10 +97,9 @@ prouzalib/qrpglesrc/testsqlerr.sqlrpgle.pgm.obj: \
 #
 # You can also define all used modules (=srvpgm) you are using.
 # This brings better performance for compiling because of direct dependency
-prouzalib/qrpglesrc/testlog2.sqlrpgle.pgm.obj: \
-		prouzalib/qrpglesrc/testmod.rpgle.srvpgm.obj \
-		prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
-		prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj
+prouzalib/qrpglesrc/testlog2.sqlrpgle.pgm.obj:			prouzalib/qrpglesrc/testmod.rpgle.srvpgm.obj \
+																										prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
+																										prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj
 #
 #########################################################
 
@@ -122,51 +121,64 @@ prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj:	private ACTGRP=ERRHDL
 #########################################################
 #
 
-prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:	\
-		prouzalib/qsqlsrc/logger.sqltable.file.obj
-prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:	private BNDDIR=*LIBL/PROUZADIR
-prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:	private TGT_BNDDIR=*LIBL/PROUZADIR
-prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:	private ACTGRP=LOGGER
+# Dependencies of ERRHDLSQLP
+prouzalib/qrpglesrc/errhdlsqlp.sqlrpgle.pgm.obj:	prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj
 
-prouzalib/qsqlsrc/lager_hist.sqltable.file.obj:	\
-		prouzalib/qsqlsrc/lager.sqltable.file.obj
+# Dependencies of LOGGER
+prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:		prouzalib/qsqlsrc/logger.sqltable.file.obj
+# Individual settings of LOGGER
+prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:		private BNDDIR=*LIBL/PROUZADIR
+prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:		private TGT_BNDDIR=*LIBL/PROUZADIR
+prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj:		private ACTGRP=LOGGER
 
-prouzalib/qrpglesrc/cpysrc2ifs.sqlrpgle.pgm.obj: \
-		prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj
+# Dependencies of LAGER_HIST
+prouzalib/qsqlsrc/lager_hist.sqltable.file.obj:		prouzalib/qsqlsrc/lager.sqltable.file.obj
 
-prouzalib/qrpglesrc/date.sqlrpgle.srvpgm.obj: \
-		prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
-		prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj
+# Dependencies of CPYSRC2IFS
+prouzalib/qrpglesrc/cpysrc2ifs.sqlrpgle.pgm.obj:	prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj
 
-prouzalib/qrpglesrc/testlog.rpgle.pgm.obj: \
-		prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj
+# Dependencies of DATE
+prouzalib/qrpglesrc/date.sqlrpgle.srvpgm.obj: 		prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
+																									prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj
 
-prouzalib/qrpglesrc/testlog2.sqlrpgle.pgm.obj: \
-		prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
-		prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj \
-		prouzalib/qrpglesrc/testmod.rpgle.srvpgm.obj
+# Dependencies of TESTLOG
+prouzalib/qrpglesrc/testlog.rpgle.pgm.obj: 				prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj
 
-prouzalib/qrpglesrc/testmod.rpgle.srvpgm.obj: \
-		prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj
+# Dependencies of TESTLOG2
+prouzalib/qrpglesrc/testlog2.sqlrpgle.pgm.obj:		prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
+																									prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj \
+																									prouzalib/qrpglesrc/testmod.rpgle.srvpgm.obj
 
-prouzalib/qrpglesrc/testsqlerr.sqlrpgle.pgm.obj: \
-		prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
-		prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj
+# Dependencies of TESTMOD
+prouzalib/qrpglesrc/testmod.rpgle.srvpgm.obj:			prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj
+
+# Dependencies of TESTSQLERR
+prouzalib/qrpglesrc/testsqlerr.sqlrpgle.pgm.obj:	prouzalib/qrpglesrc/logger.sqlrpgle.srvpgm.obj \
+																									prouzalib/qrpglesrc/errhdlsql.sqlrpgle.srvpgm.obj
+# Individual settings of TESTSQLERR
 prouzalib/qrpglesrc/testsqlerr.sqlrpgle.pgm.obj:	private ACTGRP=*NEW
 
 
-prouzalib2/sqltest1.sqlproc.pgm: prouzalib2/sqltest1.sqlrpgle.pgm
+# Dependencies of SQLTEST1
+prouzalib2/sqltest1.sqlproc.pgm:									prouzalib2/sqltest1.sqlrpgle.pgm
 
-prouzalib2/sqltest2.sqlproc.pgm: prouzalib2/sqltest2.sqlrpgle.pgm
+# Dependencies of SQLTEST2
+prouzalib2/sqltest2.sqlproc.pgm:									prouzalib2/sqltest2.sqlrpgle.pgm
 
-prouzalib2/sqlsrv1.sqlproc.pgm: prouzalib2/sqlsrv1.sqlrpgle.srvpgm
+# Dependencies of SQLSRV1
+prouzalib2/sqlsrv1.sqlproc.pgm:										prouzalib2/sqlsrv1.sqlrpgle.srvpgm
 
-prouzalib2/test.rpgle.pgm: prouzalib/test.rpgle.pgm
+# Dependencies of TEST
+prouzalib2/test.rpgle.pgm:												prouzalib/test.rpgle.pgm
 
-prouzalib/testlog.rpgle.pgm: private OBJLIB=prouza2
+# Individual settings of TESTLOG
+prouzalib/testlog.rpgle.pgm:											private OBJLIB=prouza2
 
-prouzalib/\#test.rpgle.pgm:	private OBJLIB=*SOURCE
+# Individual settings of #TEST
+prouzalib/\#test.rpgle.pgm:												private OBJLIB=*SOURCE
 
-prouzalib/\#test2.rpgle.pgm:	private OBJLIB=PROUZA4
+# Individual settings of #TEST2
+prouzalib/\#test2.rpgle.pgm:											private OBJLIB=PROUZA4
 
-prouzalib/§test.rpgle.pgm:	private OBJLIB=PROUZA2
+# Individual settings of §TEST
+prouzalib/§test.rpgle.pgm:												private OBJLIB=PROUZA2
