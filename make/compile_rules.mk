@@ -404,9 +404,10 @@ ADDBNDDIR=	$(PRE_COMPILE) $(EXC)  $(CL_FLAG) "$(ADDBNDDIR_CMD)" $(POST_COMPILE_F
 	
 	$(call bash_call,$(DOLLAR_SH_REPLACE))
 
+#	PPMINOUTLN(500): sets the minimum line length for the output file
 	$(eval cmd :=CRTSQLRPGI OBJ("$(LIBOBJ_NEW)") SRCSTMF('"$(SOURCE_NAME_NEW)"') \
 							OBJTYPE(*MODULE) RPGPPOPT(*LVL2) TGTRLS($(TGTRLS)) DBGVIEW($(DBGVIEW)) REPLACE(*YES) \
-							COMPILEOPT('TGTCCSID($(TGTCCSID)) INCDIR($(subst ','',$(INC_DIR)))'))
+							COMPILEOPT('TGTCCSID($(TGTCCSID)) INCDIR($(subst ','',$(INC_DIR))) PPMINOUTLN(500)'))
 	$(info crtcmd|$@|$(cmd))
 	$(eval cmd:=$(subst \,,$(cmd)))
 
