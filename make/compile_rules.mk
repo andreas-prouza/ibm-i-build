@@ -65,7 +65,7 @@ LOG_FILE_NAME=$(SOURCE_NAME_OTHERS)
 # So we need to convert the unix variant to the IBM i variant:
 #       mv $'\302\247'test.mbr $'\247'test.mbr
 
-CHG_ATTR=$(EXC) $(CL_FLAG) "CHGATR OBJ('"'$(SOURCE_NAME_NEW)'"') ATR(*CCSID) VALUE(1208)"
+CHG_ATTR=$(EXC) $(CL_FLAG) "CHGATR OBJ('"'$(SRC_DIR_REMOTE)/$(SOURCE_NAME_OTHERS)'"') ATR(*CCSID) VALUE(1208)"
 define DOLLAR_SH_REPLACE
   $(CHG_ATTR) $(CCSID_CONV)
 # $(if $(findstring §,$*),\

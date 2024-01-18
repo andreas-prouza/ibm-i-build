@@ -1,5 +1,5 @@
 
--- ALTER TABLE lager DROP VERSIONING;
+ ALTER TABLE lager DROP VERSIONING;
 
 
 Create or replace table lager (
