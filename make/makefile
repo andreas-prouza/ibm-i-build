@@ -12,16 +12,20 @@ SHELL=/usr/bin/bash
 #########################################################
 MAKEFILE_DIR=$(shell dirname $(abspath $(firstword $(MAKEFILE_LIST))))
 MAKE_CONFIG_DIR=$(MAKEFILE_DIR)/../etc
+SRC_DIR=$(MAKEFILE_DIR)/../
+
+#########################################################
 
 include $(MAKE_CONFIG_DIR)/global.mk
+
+# Override settings individually
+-include $(MAKE_CONFIG_DIR)/.makeprofile.mk
 
 #########################################################
 
 # Object list and their dependencies
 include $(MAKE_CONFIG_DIR)/object_list.mk
 
-# Override settings individually
--include $(MAKE_CONFIG_DIR)/.makeprofile.mk
 #########################################################
 
 

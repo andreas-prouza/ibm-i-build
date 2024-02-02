@@ -1,6 +1,6 @@
 
-# Source directory
-SRC_DIR=~/projekte/opensource/ibm-i-build/src
+# Source directory - Default is current folder
+#SRC_DIR=~/projekte/opensource/ibm-i-build/src
 
 # Remote IBM i directory
 # Attantion!!!
