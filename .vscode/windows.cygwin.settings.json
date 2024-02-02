@@ -1,0 +1,91 @@
+{
+    "terminal.integrated.defaultProfile.windows": "Cygwin",
+    "workbench.editorAssociations": {   
+        "*.md": "vscode.markdown.preview.editor"
+    },
+    "command-runner.terminal.name": "Sync project",
+    "command-runner.terminal.autoClear": true,
+    "command-runner.terminal.autoFocus": true,
+    "command-runner.commands": {
+        "Sync source to IBM i": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make/scripts/sync2ibmi.sh ",
+        "Sync logs back": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make/scripts/sync_back_from_ibmi.sh ",
+        "Run build (summary output)": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh    &&   make/scripts/create_build_script.sh summary   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh;   make/scripts/sync_back_from_ibmi.sh; make/scripts/git-cache-meta.sh --store",
+        "Run build (detailed output)": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh detailed   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh;   make/scripts/sync_back_from_ibmi.sh; make/scripts/git-cache-meta.sh --store",
+        "Run build (debug)": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh debug   &&   make/scripts/create_build_script.sh debug   &&   make/scripts/sync2ibmi.sh debug   &&   make/scripts/run_build.sh debug;   make/scripts/sync_back_from_ibmi.sh debug; make/scripts/git-cache-meta.sh --store",
+        "Simulate build": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh simulate",
+        "CleanUp Build": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make --makefile=make/makefile clean",
+        "Show Change Debug": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh debug   &&   make/scripts/create_build_script.sh show-change-debug  ",
+        "Show Change Compile": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh schow-change-compile ",
+        "Show Change Object":  "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change-object",
+        "Create Prod Object List": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh create-object-list ",
+        "Create build script": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh summary ",
+        "Reset Build Timestamp": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make/scripts/get-prod-object-timestamp.sh",
+        "Create deployment": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&  make/scripts/create_deployment.sh",
+        "Merge with production": "cd $(cygpath --unix -a '${workspaceFolder}'); git pull && git -c 'core.editor=code --wait --reuse-window' merge main && git push && echo 'Done' && git rev-parse HEAD >> commit.log ",
+        "Merge cancel": "cd $(cygpath --unix -a '${workspaceFolder}'); git merge --abort"
+    },
+    "workbench.editor.enablePreview": true,
+    "actionButtons": {
+        "commands": [
+            {
+                "name": "$(symbol-property) Reset all",
+                "command": "cd $(cygpath --unix -a '${workspaceFolder}'); git restore .  &&  git reset  &&  git clean -fd  &&  make/scripts/git-cache-meta.sh --apply "
+            },
+            {
+                "name": "🪟 Builds from prod",
+                "command": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make/scripts/get-prod-object-timestamp.sh"
+            },
+            {
+                "name": "♻️ Clean builds",
+				"color": "white",
+				"useVsCodeApi": false,
+                "command": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh  &&   make --makefile=make/makefile clean"
+            },
+            {
+                "name": "♻️ Clean logs",
+				"color": "white",
+				"useVsCodeApi": false,
+                "command": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh "
+            },
+            {
+                "name": "$(run-all) Build all",
+				"color": "white",
+				"useVsCodeApi": false,
+                "command": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh   &&   make/scripts/sync2ibmi.sh   &&   make/scripts/run_build.sh debug;   make/scripts/sync_back_from_ibmi.sh;  make/scripts/git-cache-meta.sh --store"
+            },
+            {
+                "name": "$(telescope) Show Changes",
+				"color": "white",
+				"useVsCodeApi": false,
+                "command": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&   make/scripts/create_build_script.sh show-change   &&   make/scripts/git-cache-meta.sh --store"
+            },
+            {
+                "name": "$(pass-filled) $(rocket)  Deploy",
+				"color": "",
+				"useVsCodeApi": false,
+                "command": "cd $(cygpath --unix -a '${workspaceFolder}'); make/scripts/cleanup.sh   &&  make/scripts/create_deployment.sh"
+            }
+        ]
+    },
+    "files.associations": {
+        "*.rpg.pgm": "rpg",
+        "*.rpgle.pgm": "rpgle",
+        "*.rpgle.srvpgm": "rpgle",
+        "*.sqlrpgle.pgm": "rpgle",
+        "*.sqlrpgle.srvpgm": "rpgle",
+        "*.clle.srvpgm": "cl",
+        "*.clle.pgm": "cl",
+        "*.clp.pgm": "cl",
+        "*.sqltable.file": "sql",
+        "*.sqlview.file": "sql",
+        "*.sqlproc.file": "sql"
+    },
+    "files.exclude": {
+        "**/.git*": true,
+        ".vscode": true,
+        "build": true,
+        "docs": true,
+        "make": true,
+        "**/Thumbs.db": true
+    }
+}
