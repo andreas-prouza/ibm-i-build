@@ -1,3 +1,15 @@
+
+> [!IMPORTANT]
+> A new project of this tool has been published under the new project [IBM i Build with OBI](https://github.com/andreas-prouza/ibm-i-build-obi).
+> 
+> I replaced GNU Make by [OBI](https://github.com/andreas-prouza/obi) ([Object Builder for i](https://github.com/andreas-prouza/obi)), for this project.  
+> This has many advantages:
+> * Much better performance
+> * Fewer issues with special characters in filenames and console output
+> * Easier configuration settings
+> * No WSL needed for Windows clients
+
+
 # Documentation
 
 - [Overview](/docs/pages/overview.md)
@@ -8,10 +20,8 @@
 - [Integration in your IDE](/docs/pages/integration_in_your_ide.md)
 - [FAQ](/docs/pages/faq.md)
 
-
-# 
-
 **This project should help to make our deployment process automated:**
+
 
 ## Features
 * Check for changes
