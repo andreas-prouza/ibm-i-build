@@ -42,9 +42,9 @@ Home- & ```.ssh``` directory for your user profile should exist.
 You also need the correct permission set for both directories because of security reasons
 
 ```sh
-mkdir -p /home/prouza/.ssh
-chmod 755 /home/prouza
-chmod 700 /home/prouza/.ssh
+mkdir -p /home/$USER/.ssh
+chmod 755 /home/$USER
+chmod 700 /home/$USER/.ssh
 ```
 
 ### User profile set up
