@@ -49,11 +49,15 @@ chmod 700 /home/$USER/.ssh
 
 ### User profile set up
 
-Define ```~/.profile``` file:
+Define ```~/.profile```, ```~/.bashrc``` and ```~/.bash_profile``` file:
 
 ```sh
-echo 'export PATH="/QOpenSys/pkgs/bin:$PATH"' > ~/.profile
-cp ~/.profile ~/.bashrc # .bashrc is necessary for rsync
+echo 'export PATH="/QOpenSys/pkgs/bin:$PATH"' >> ~/.profile
+echo 'export TERM=xterm' >> ~/.profile
+echo 'export PATH="/QOpenSys/pkgs/bin:$PATH"' >> ~/.bashrc
+echo 'export TERM=xterm' >> ~/.bashrc
+echo 'export PATH="/QOpenSys/pkgs/bin:$PATH"' >> ~/.bash_profile
+echo 'export TERM=xterm' >> ~/.bash_profile
 ```
 
 This is neseccary to have the correct ```PATH``` in the IBM i shell.
