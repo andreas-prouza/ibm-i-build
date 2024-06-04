@@ -1,0 +1,89 @@
+
+4c4
+< BASH_ARGC=()
+---
+> BASH_ARGC=([0]="0")
+13a14,23
+> COLOR_CYAN='\e[96m'
+> COLOR_CYAN_BOLD='\e[1;96m'
+> COLOR_END='\e[0m'
+> COLOR_GREEN='\e[92m'
+> COLOR_GREEN_BACKGROUND='\e[102;97m'
+> COLOR_MAGENTA_BOLD='\e[1;95m'
+> COLOR_RED='\e[101;31m'
+> COLUMNS=84
+> COMPILE_OBJECT_LIST=tmp/prod_obj.txt
+> COMPILE_SCRIPT=tmp/compile.sh
+15a26,31
+> DEPLOYMENT_AUTH_TOKEN=6d54f9982f343876cf320c07291dcc0b9310e24f8a286a8fd165bb0cf9013320
+> DEPLOYMENT_UAT_MAIN_BRANCH=main
+> DEPLOYMENT_UAT_PATH=/home/PROUZAT1/ibm-i-build-test
+> DEPLOYMENT_UAT_REMOTE_HOST=academy-test
+> DEPLOYMENT_UAT_URL=http://academy:2005
+> DEPLOYMENT_UAT_WORKFLOW=academy_test_build
+18a35
+> ERROR_OUTPUT=tmp/logs/error.log
+26a44
+> GIT_CACHE_META_FILE=build/.git_cache_meta
+45a64
+> LINES=15
+57a77
+> OS_CMD_2_OPEN_URL=xdg-open
+64a85,90
+> REMOTE_ERROR_OUTPUT=logs/error.log
+> REMOTE_HOST=academy-test
+> REMOTE_WORKSPACE_FOLDER_NAME='~/ibm-i-build'
+> RUN_BUILD_LOG=/home/andreas/projekte/opensource/ibm-i-build/tmp/logs/run_build.log
+> SCRIPT=cleanup.sh
+> SCRIPT_PATH=/home/andreas/projekte/opensource/ibm-i-build/make/scripts
+71a98,101
+> STD_OUTPUT=tmp/logs/output.log
+> STD_OUTPUT_TMP=/tmp/build-output.log
+> SYNC2REMOTE_LOG=/home/andreas/projekte/opensource/ibm-i-build/tmp/logs/sync2ibmi.log
+> SYNC_BACK_LOG=/home/andreas/projekte/opensource/ibm-i-build/tmp/logs/sync_back.log
+72a103
+> TEMP_DIR=/tmp
+83a115,116
+> WORKSPACE_FOLDER=/home/andreas/projekte/opensource/ibm-i-build
+> WORKSPACE_FOLDER_NAME=ibm-i-build
+
+[1;95m###################################################  [0m
+[1;96m2024-06-04 16:01:59.394 ... get-prod-object-timestamp.sh [0m
+[1;95m################################################### [0m
+
+#DEBUG-get-prod-object-timestamp.sh: git checkout remotes/origin/production -- build
+#DEBUG-get-prod-object-timestamp.sh: ls -d $WORKSPACE_FOLDER/build/*/
+#DEBUG-get-prod-object-timestamp.sh: xargs -I {} find {} -type f
+#DEBUG-get-prod-object-timestamp.sh: echo -e "$COLOR_GREEN finished clean up of folder: \n`ls -d $WORKSPACE_FOLDER/build/*/` $COLOR_END"
+[92m finished clean up of folder: 
+/home/andreas/projekte/opensource/ibm-i-build/build/prouzalib/
+/home/andreas/projekte/opensource/ibm-i-build/build/prouzalib2/ [0m
+
+[1;95m###################################################  [0m
+[1;96m2024-06-04 16:01:59.440 ... create_build_script.sh [0m summary
+[1;95m################################################### [0m
+
+#DEBUG-create_build_script.sh: printf '#!/bin/bash'"\\n\\n" > $COMPILE_SCRIPT
+#DEBUG-create_build_script.sh: chmod +x $COMPILE_SCRIPT
+#DEBUG-create_build_script.sh: printf "print_debug() {\\n"' echo \"#DEBUG-Remote \"`date +"%%F %%T.%%3N"`\": \"$BASH_COMMAND '"\\n}\\n\\n" >> $COMPILE_SCRIPT
+#DEBUG-create_build_script.sh: printf "trap 'print_debug' DEBUG\\n\\n" >> $COMPILE_SCRIPT
+#DEBUG-create_build_script.sh: printf "cl -v \"dspjob\"\\n\\n" >> $COMPILE_SCRIPT
+#DEBUG-create_build_script.sh: case $MODE in
+#DEBUG-create_build_script.sh: make --makefile=make/makefile all -n 2> $ERROR_OUTPUT
+#DEBUG-create_build_script.sh: tee >(grep -ivE 'crtcmd|prod_obj' >> $COMPILE_SCRIPT)
+#DEBUG-create_build_script.sh: tee -a $STD_OUTPUT_TMP
+#DEBUG-create_build_script.sh: grep -i 'crtcmd|summary'
+#DEBUG-create_build_script.sh: cut -d '|' --output-delimiter ": " -f 2
+summary time start 16:01:59.483
+summary ===============================================================
+summary Build RPG: 29 'BUILD/testsqlerr' 'BUILD/test' 'BUILD/#test' 'BUILD/est' 'BUILD/§§x#y' 'BUILD/testlog2' 'BUILD/testlog' 'BUILD/#test2' 'BUILD/cpysrc2ifs' 'BUILD/§test' 'BUILD/test' 'BUILD/test1' 'BUILD/sqltest2' 'BUILD/sqltest1' 'SRC/testsqlerr' 'SRC/test' 'SRC/errhdlsqlp' 'SRC/§test1' 'SRC/§§x#y' 'SRC/testlog2' 'SRC/est11' 'SRC/testlog' 'SRC/#test2' 'SRC/#test3' 'SRC/cpysrc2ifs' 'SRC/test' 'SRC/test1' 'SRC/sqltest2' 'SRC/sqltest1'
+summary Build CL: 2 'BUILD/testcl' 'SRC/testcl'
+summary Build DSPF: 0 
+summary Build SRVPGM: 14 'BUILD/errhdlsql' 'BUILD/logger' 'BUILD/testmod' 'BUILD/errhdlrpg' 'BUILD/date' 'BUILD/sqlsrv1' 'BUILD/sqltest3' 'SRC/errhdlsql' 'SRC/logger' 'SRC/testmod' 'SRC/errhdlrpg' 'SRC/date' 'SRC/sqlsrv1' 'SRC/sqltest3'
+summary Build DB: 10 'BUILD/file1' 'BUILD/logger_hist' 'BUILD/logger' 'BUILD/sqltest1' 'BUILD/sqltest2' 'BUILD/sqlsrv1' 'SRC/lager_hist' 'SRC/lager' 'SRC/logger' 'SRC/file1'
+summary ===============================================================
+summary time end 16:02:09.711
+#DEBUG-create_build_script.sh: [[ -s "$ERROR_OUTPUT" ]]
+#DEBUG-create_build_script.sh: echo -e "$COLOR_GREEN \n finished creation of build script $COLOR_END"
+[92m 
+ finished creation of build script [0m

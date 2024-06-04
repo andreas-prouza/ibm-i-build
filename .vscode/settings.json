@@ -81,10 +81,10 @@
     },
     "files.exclude": {
         "**/.git*": true,
-        ".vscode": true,
-        "build": true,
-        "docs": true,
-        "make": true,
+        ".vscode": false,
+        "build": false,
+        "docs": false,
+        "make": false,
         "**/Thumbs.db": true
     }
 }
