@@ -21,7 +21,10 @@ Because we need some tools on our PC (rsync and gnu-make) ...
       * for [Windows](integration_in_your_ide.md#on-windows) you need one of these:
         * Windows Subsystem for Linus (WSL)<br/>
           This is recommended for flexiblity and compatibility 
-        * or Cygwin
+        * Cygwin
+        * SSH mount
+          You can mount your IBM i directly to your PC via SSHFS:
+          https://github.com/winfsp/sshfs-win
       * for [Linux](integration_in_your_ide.md#on-linux) install
         * ```rsync```
         * ```make```
